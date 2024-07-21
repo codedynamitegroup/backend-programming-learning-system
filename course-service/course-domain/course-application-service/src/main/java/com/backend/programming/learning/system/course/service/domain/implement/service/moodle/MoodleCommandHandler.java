@@ -11,6 +11,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.coure_type.CourseTypeModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.ListCourseModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.module.ModuleDetailResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.module.ModuleModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.section.ListSectionModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.section.SectionModel;
@@ -124,9 +125,9 @@ public class MoodleCommandHandler {
         String moodleUrl = organization.get().getMoodleUrl();
         Page<Course> courses = courseRepository.findAllByOrganizationId(organizationId,"",null,0,999);
         List<Course> courseList = courses.getContent();
-//        createSection(courseList,apiKey, moodleUrl);
-//        createAssignment(courseList,apiKey, moodleUrl);
+        createAssignment(courseList,apiKey, moodleUrl);
         createCourseExam(courseList,apiKey, moodleUrl);
+        createSection(courseList,apiKey, moodleUrl);
         return "Sync resource success";
     }
 
@@ -210,7 +211,7 @@ public class MoodleCommandHandler {
             }
 
             allSection.forEach(sectionModel -> {
-                Optional<Section> checkSection = sectionRepository.findBySectionMoodleId(Integer.valueOf(sectionModel.getId()));
+                Optional<Section> checkSection = sectionRepository.findBySectionMoodleIdAndCourseId(Integer.valueOf(sectionModel.getId()),course.getId().getValue());
                 if(checkSection.isPresent())
                 {
                     Section sectionUpdate = moodleDataMapper.updateSection(course, sectionModel, checkSection.get());
@@ -218,14 +219,15 @@ public class MoodleCommandHandler {
                     // create module
                     for (ModuleModel module : sectionModel.getModules()) {
                         if (module.getModplural().equals("Assignments")) {
-                            Optional<Module> checkModule = moduleRepository.findByCmid(Integer.valueOf(module.getId()));
+                            Optional<Module> checkModule = moduleRepository.findByCmidAndSectionId(Integer.valueOf(module.getId()),sectionUpdate.getId().getValue());
                             if(checkModule.isPresent())
                             {
                                 Module moduleUpdate = moodleDataMapper.updateModule(sectionUpdate, module, checkModule.get());
                                 moduleRepository.save(moduleUpdate);
                             }
                             else {
-                                Module moduleCreate = moodleDataMapper.createModule(sectionUpdate, module);
+                                Assignment assignment = assignmentRepository.findByAssignmentIdMoodle(Integer.valueOf(module.getInstance())).get();
+                                Module moduleCreate = moodleDataMapper.createModule(sectionUpdate, module,assignment);
                                 moduleRepository.save(moduleCreate);
                             }
 
@@ -243,7 +245,8 @@ public class MoodleCommandHandler {
 //                            module.getModplural().equals("URLs")||
 //                            module.getModplural().equals("Files"))
                         {
-                            Module moduleCreate = moodleDataMapper.createModule(section, module);
+                            Assignment assignment = assignmentRepository.findByAssignmentIdMoodle(Integer.valueOf(module.getInstance())).get();
+                            Module moduleCreate = moodleDataMapper.createModule(section, module,assignment);
                             moduleRepository.save(moduleCreate);
                         }
                     }
@@ -251,6 +254,27 @@ public class MoodleCommandHandler {
             });
         });
     }
+
+    @Transactional
+    public ModuleDetailResponse getModuleDetail(String moduleId,String apiKey, String moodleUrl) {
+        String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&cmid=%s",
+                moodleUrl,apiKey, GET_MODULE, moduleId);
+        RestTemplate restTemplate = new RestTemplate();
+        String model = restTemplate.getForObject(apiURL, String.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        ModuleDetailResponse moduleDetailResponse = null;
+        if (model.equals("{}"))
+            return null;
+        try {
+            moduleDetailResponse = objectMapper.readValue(model, ModuleDetailResponse.class);
+            log.info("Course model: {}", moduleDetailResponse);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return moduleDetailResponse;
+    }
+
+
 
     @Transactional
     public List<SubmissionAssignmentUser> getAssignmentUser(Integer assignmentId) {
@@ -441,6 +465,31 @@ public class MoodleCommandHandler {
             throw new RuntimeException(e);
         }
         return listAssignmentCourseModel.getCourses();
+    }
+
+    @Transactional
+    public void createAssignment(List<AssignmentModel> assignments,Course course,Integer instanceId){
+        Optional<AssignmentModel> assignmentModel = assignments.stream().filter(
+                assignment -> assignment.getId().equals(instanceId.toString())
+        ).findFirst();
+        if(assignmentModel.isPresent())
+        {
+            Assignment assignment = moodleDataMapper.createAssignment(course,assignmentModel.get());
+            assignmentRepository.saveAssignment(assignment);
+        }
+    }
+
+    @Transactional
+    public void updateAssignment(List<AssignmentModel> assignments,Course course,Integer instanceId){
+        Optional<AssignmentModel> assignmentModel = assignments.stream().filter(
+                assignment -> assignment.getId().equals(instanceId.toString())
+        ).findFirst();
+        if(assignmentModel.isPresent())
+        {
+            Assignment assignment = assignmentRepository.findByAssignmentIdMoodle(Integer.valueOf(assignmentModel.get().getId())).get();
+            Assignment assignmentUpdate = moodleDataMapper.updateAssignment(course,assignmentModel.get(),assignment);
+            assignmentRepository.saveAssignment(assignmentUpdate);
+        }
     }
 
     @Transactional

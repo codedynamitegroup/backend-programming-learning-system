@@ -1,5 +1,8 @@
 package com.backend.programming.learning.system.course.service.domain.dto.method.create.module;
 
+import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
+import com.backend.programming.learning.system.course.service.domain.valueobject.TypeModule;
+import com.backend.programming.learning.system.dataaccess.validator.EnumValidator;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,9 +15,9 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CreateModuleCommand {
     private UUID sectionId;
-    @NotNull(message = "Module name is required")
-    private String name;
-    private Integer visible;
-    private ZonedDateTime timeOpen;
-    private ZonedDateTime timeClose;
+    private UUID assignmentId;
+    private UUID examId;
+    private Integer cmid;
+    @EnumValidator(enumClass = TypeModule.class, message = "Type is invalid")
+    private final String type;
 }

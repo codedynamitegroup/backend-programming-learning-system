@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam.CreateExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.CreateExamQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.module.CreateExamModuleCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_bank_category.CreateQuestionBankCategoryCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.calendarevent.DeleteCalendarEventCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.course.DeleteCourseResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.exam.DeleteExamCommand;
@@ -22,15 +23,26 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.entity.CalendarEvent;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamQuestion;
+import com.backend.programming.learning.system.course.service.domain.entity.Module;
 import com.backend.programming.learning.system.course.service.domain.entity.Question;
+import com.backend.programming.learning.system.course.service.domain.entity.QuestionBankCategory;
+import com.backend.programming.learning.system.course.service.domain.entity.Section;
+import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.implement.service.calendarevent.CalendarEventCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.implement.service.exam_question.ExamQuestionCreateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.exam_question.ExamQuestionDeleteHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.module.ModuleCreateHelper;
+import com.backend.programming.learning.system.course.service.domain.implement.service.module.ModuleQueryHelper;
+import com.backend.programming.learning.system.course.service.domain.implement.service.question_bank_category.QuestionBankCategoryCommandHandler;
+import com.backend.programming.learning.system.course.service.domain.implement.service.question_bank_category.QuestionBankCategoryCreateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.section.SectionCreateHelper;
+import com.backend.programming.learning.system.course.service.domain.implement.service.section.SectionQueryHelper;
+import com.backend.programming.learning.system.course.service.domain.implement.service.user.UserQueryHelper;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam.ExamDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamQuestionRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.*;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -58,7 +70,10 @@ public class ExamCommandHandler {
     private final ExamQuestionDeleteHelper examQuestionDeleteHelper;
     private final CalendarEventCommandHandler calendarEventCommandHandler;
     private final ModuleCreateHelper moduleCreateHelper;
+    private final ModuleQueryHelper moduleQueryHelper;
+    private final QuestionBankCategoryCreateHelper questionBankCategoryCreateHelper;
     private final ExamQuestionRepository examQuestionRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public CreateExamResponse createExam(CreateExamCommand createExamCommand) {
@@ -72,8 +87,18 @@ public class ExamCommandHandler {
                 .sectionId(createExamCommand.sectionId())
                 .examId(examCreated.getId().getValue())
                 .build();
-
         moduleCreateHelper.createExamModule(createExamModuleCommand);
+
+        User user = userRepository.findById(new UserId(createExamCommand.createdBy()))
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        CreateQuestionBankCategoryCommand createQuestionBankCategoryCommand = CreateQuestionBankCategoryCommand.builder()
+                .organizationId(user.getOrganization().getId().getValue())
+                .name(examCreated.getName())
+                .description(examCreated.getIntro())
+                .isOrgQuestionBank(true)
+                .createdBy(createExamCommand.createdBy())
+                .build();
+        QuestionBankCategory category = questionBankCategoryCreateHelper.createQuestionBankCategory(createQuestionBankCategoryCommand);
 
         CreateCalendarEventCommand createCalendarEventCommand = CreateCalendarEventCommand.builder()
                 .name(examCreated.getName())
@@ -89,12 +114,13 @@ public class ExamCommandHandler {
         calendarEventCommandHandler.createCalendarEvent(createCalendarEventCommand);
 
         log.info("Exam is created with id: {}", examCreated.getId());
-        return examDataMapper.examToCreateExamResponse(examCreated, "Exam created successfully");
+        return examDataMapper.examToCreateExamResponse(examCreated, category, "Exam created successfully");
     }
 
     @Transactional(readOnly = true)
     public ExamResponseEntity findBy(QueryExamCommand queryExamCommand) {
         Exam exam = examQueryHelper.findBy(new ExamId(queryExamCommand.getExamId()));
+        Module module = moduleQueryHelper.findByExamId(queryExamCommand.getExamId());
         List<ExamQuestion> examQuestions = examQuestionRepository
                 .findByExamId(new ExamId(queryExamCommand.getExamId()));
         Float totalMark = examQuestions.stream()
@@ -102,7 +128,7 @@ public class ExamCommandHandler {
                 .map(Question::getDefaultMark)
                 .reduce(0F, Float::sum);
         log.info("Returning exam: {}", exam);
-        return examDataMapper.examToQueryExamResponse(exam, totalMark);
+        return examDataMapper.examToQueryExamResponse(exam, totalMark, module);
     }
 
     @Transactional(readOnly = true)
@@ -133,7 +159,7 @@ public class ExamCommandHandler {
     @Transactional
     public UpdateExamResponse updateExam(ExamId examId, UpdateExamCommand updateExamCommand) {
         Exam exam = examUpdateHelper.updateExam(examId, updateExamCommand);
-        examQuestionDeleteHelper.deleteByExamId(examId);
+//        examQuestionDeleteHelper.deleteByExamId(examId);
         examQuestionCreateHelper.assignExamToQuestions(
                 CreateExamQuestionCommand.builder()
                         .examId(examId.getValue())

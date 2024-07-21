@@ -43,6 +43,7 @@ public record CreateExamCommand(
         @NotNull(message = "Question ids are required")
         List<CreateQuestionExamCommand> questionIds,
         @NotNull(message = "SectionId are required")
-        UUID sectionId
+        UUID sectionId,
+        UUID createdBy
 ) {
 }

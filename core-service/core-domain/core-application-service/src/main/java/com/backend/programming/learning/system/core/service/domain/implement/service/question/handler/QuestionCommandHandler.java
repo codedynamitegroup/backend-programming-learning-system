@@ -153,4 +153,9 @@ public class QuestionCommandHandler {
                 queryAllQuestionPaginationCommand.pageSize()
         );
     }
+
+    @Transactional
+    public void updateCategoryOfQuestions(QuestionBankCommand questionBankCommand) {
+        questionCreateHelper.updateCategoryOfQuestions(questionBankCommand);
+    }
 }

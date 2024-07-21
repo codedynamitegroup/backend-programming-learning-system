@@ -7,6 +7,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.exam.ExamResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
+import com.backend.programming.learning.system.course.service.domain.entity.Module;
+import com.backend.programming.learning.system.course.service.domain.entity.QuestionBankCategory;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -42,7 +44,7 @@ public class ExamDataMapper {
                 .build();
     }
 
-    public CreateExamResponse examToCreateExamResponse(Exam examCreated, String message) {
+    public CreateExamResponse examToCreateExamResponse(Exam examCreated, QuestionBankCategory category, String message) {
         return CreateExamResponse.builder()
                 .id(examCreated.getId().getValue())
                 .courseId(examCreated.getCourse().getId())
@@ -61,6 +63,7 @@ public class ExamDataMapper {
                 .createdAt(examCreated.getCreatedAt())
                 .updatedAt(examCreated.getUpdatedAt())
                 .maxPage(examCreated.getMaxPage())
+                .categoryId(category.getId().getValue())
                 .message(message)
                 .build();
     }
@@ -147,7 +150,7 @@ public class ExamDataMapper {
                 .build();
     }
 
-    public ExamResponseEntity examToQueryExamResponse(Exam exam, Float totalMark) {
+    public ExamResponseEntity examToQueryExamResponse(Exam exam, Float totalMark, Module module) {
         return ExamResponseEntity.builder()
                 .id(exam.getId().getValue())
                 .courseId(exam.getCourse().getId().getValue())
@@ -170,6 +173,7 @@ public class ExamDataMapper {
                 .createdAt(exam.getCreatedAt())
                 .updatedAt(exam.getUpdatedAt())
                 .maxPage(exam.getMaxPage())
+                .sectionId(module.getSection().getId().getValue())
                 .build();
     }
 }

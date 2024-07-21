@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.auth.service.application.rest.we
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.webhook.WebhookCommand;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.webhook.WebhookApplicationService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,7 @@ public class WebhookController {
     private final WebhookApplicationService webhookApplicationService;
 
     @PostMapping("/receive")
-    public void receiveWebhook(@RequestBody WebhookCommand webhookCommand) {
+    public void receiveWebhook(@RequestBody WebhookCommand webhookCommand) throws JsonProcessingException {
         log.info("Received webhook");
         webhookApplicationService.receiveWebhook(webhookCommand);
     }

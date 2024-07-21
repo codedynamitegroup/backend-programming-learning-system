@@ -34,6 +34,7 @@ public record ExamResponseEntity(
         String gradeMethod,
         ZonedDateTime createdAt,
         ZonedDateTime updatedAt,
-        Integer maxPage
+        Integer maxPage,
+        UUID sectionId
 ) {
 }

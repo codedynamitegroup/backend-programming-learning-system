@@ -10,12 +10,13 @@ import com.backend.programming.learning.system.course.service.domain.entity.Webh
 import com.backend.programming.learning.system.course.service.domain.implement.service.moodle.MoodleCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.mapper.section.SectionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SectionRepository;
+import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
 @Component
 @Slf4j
@@ -25,16 +26,18 @@ public class SectionCreateHelper {
     private final SectionDataMapper sectionDataMapper;
     private final CourseDomainService courseDomainService;
     private final MoodleCommandHandler moodleCommandHandler;
+    private final SectionUpdateHelper sectionUpdateHelper;
 
 
     public SectionCreateHelper(SectionRepository sectionRepository,
                                SectionDataMapper sectionDataMapper,
                                CourseDomainService courseDomainService,
-                               MoodleCommandHandler moodleCommandHandler) {
+                               MoodleCommandHandler moodleCommandHandler, SectionUpdateHelper sectionUpdateHelper) {
         this.sectionRepository = sectionRepository;
         this.sectionDataMapper = sectionDataMapper;
         this.courseDomainService = courseDomainService;
         this.moodleCommandHandler = moodleCommandHandler;
+        this.sectionUpdateHelper = sectionUpdateHelper;
     }
 
     @Transactional
@@ -47,29 +50,29 @@ public class SectionCreateHelper {
     }
 
     @Transactional
-    public void createSection(WebhookMessage webhookMessage, Course course) {
+    public Boolean createSection(WebhookMessage webhookMessage, Course course) {
         Organization organization = course.getOrganization();
         String apiKey = organization.getApiKey();
         String moodleUrl = organization.getMoodleUrl();
         List<SectionModel> sectionModels = moodleCommandHandler.getAllSection(webhookMessage.getCourseId(),apiKey, moodleUrl);
         // lay phan tu cuoi cung
         SectionModel sectionModel = sectionModels.get(sectionModels.size() - 1);
-        Integer topic = Integer.valueOf(sectionModel.getSection()) + 1;
-        SectionModel newSectionModel= SectionModel.builder()
-                .id(String.valueOf(Integer.valueOf(sectionModel.getId())+1))
-                .name("Topic "+topic)
-                .visible(1)
-                .uservisible(true)
-                .summaryformat("1")
-                .summary("")
-                .section(sectionModel.getSection()+1)
-                .hiddenbynumsections("0")
-                .modules(List.of())
-                .build();
-        Section section = sectionDataMapper.sectionModelToSection(newSectionModel, course);
-
+        Section section = sectionDataMapper.sectionModelToSection(sectionModel, course);
         courseDomainService.createSection(section);
         Section createResult = sectionRepository.save(section);
+        List<Section> sections = sectionRepository.findByCourseId(new CourseId(course.getId().getValue()));
+//        sectionModels.forEach(sectionModel1 -> {
+//           if(!sectionModel1.getId().equals(sectionModel.getId())){
+//                Optional<Section> sectionOptional = sections.stream().filter(section1 -> section1.getSectionMoodleId().equals(Integer.valueOf(sectionModel1.getId()))).findFirst();
+//                if(sectionOptional.isPresent()){
+//                     Section section1 = sectionOptional.get();
+//                     sectionDataMapper.setSection(section1,sectionModel1);
+//                     sectionRepository.save(section1);
+//                }
+//           }
+//        }
+//        );
         log.info("Section is created with id: {}", createResult.getId());
+        return true;
     }
 }

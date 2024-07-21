@@ -2,13 +2,16 @@ package com.backend.programming.learning.system.course.service.domain.mapper.cou
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryAllCourseByUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryAllCourseUserResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryAllUsersAreAbleToAssignToCourseResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.UserCourseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course_user.CourseUserResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.mapper.course.CourseDataMapper;
+import com.backend.programming.learning.system.course.service.domain.mapper.user.UserDataMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -23,9 +26,11 @@ import java.util.List;
 @Component
 public class CourseUserDataMapper {
     private final CourseDataMapper courseDataMapper;
+    private final UserDataMapper userDataMapper;
 
-    public CourseUserDataMapper(CourseDataMapper courseDataMapper) {
+    public CourseUserDataMapper(CourseDataMapper courseDataMapper, UserDataMapper userDataMapper) {
         this.courseDataMapper = courseDataMapper;
+        this.userDataMapper = userDataMapper;
     }
 
     public List<CourseUser> createCourseUserCommandToCourseUser(Course course, List<User> users) {
@@ -95,6 +100,18 @@ public class CourseUserDataMapper {
                 .currentPage(courseUsers.getNumber())
                 .totalItems(courseUsers.getTotalElements())
                 .totalPages(courseUsers.getTotalPages())
+                .build();
+    }
+
+    public QueryAllUsersAreAbleToAssignToCourseResponse usersToQueryAllUsersAreAbleToAssignToCourseResponse(Page<User> users) {
+        List<UserResponseEntity> userEntityResponses = users.getContent().stream()
+                .map(userDataMapper::userToUserResponseEntity)
+                .toList();
+        return QueryAllUsersAreAbleToAssignToCourseResponse.builder()
+                .users(userEntityResponses)
+                .currentPage(users.getNumber())
+                .totalPages(users.getTotalPages())
+                .totalItems(users.getTotalElements())
                 .build();
     }
 }
