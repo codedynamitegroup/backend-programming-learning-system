@@ -15,4 +15,6 @@ public interface SubmissionAssignmentFileJpaRepository extends JpaRepository<Sub
     List<SubmissionAssignmentFileEntity> findBySubmissionAssignmentId(UUID submissionAssignmentId);
 
     Optional<SubmissionAssignmentFileEntity> findBySubmissionAssignmentIdAndFileName(UUID submissionAssignmentId, String fileName);
+
+    void deleteBySubmissionAssignmentId(UUID submissionAssignmentId);
 }

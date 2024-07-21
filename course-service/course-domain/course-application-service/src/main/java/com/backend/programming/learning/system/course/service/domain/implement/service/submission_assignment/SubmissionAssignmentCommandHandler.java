@@ -11,7 +11,9 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.SubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.submission_assignment.UpdateSubmissionAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.submission_assignment.UpdateSubmissionAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignment;
+import com.backend.programming.learning.system.course.service.domain.entity.WebhookMessage;
 import com.backend.programming.learning.system.course.service.domain.mapper.submission_assignment.SubmissionAssignmentDataMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -89,6 +91,12 @@ public class SubmissionAssignmentCommandHandler {
     public Integer countAllByAssignmentId(UUID assignmentId) {
         log.info("Count all submission by assignment id command received");
         return submissionAssignmentQueryHelper.countAllByAssignmentId(assignmentId);
+    }
+
+    @Transactional
+    public Boolean createSubmissionAssignment(WebhookMessage webhookMessage, Organization organization) {
+        log.info("Create submission assignment command received");
+        return submissionAssignmentCreateHelper.createSubmissionAssignment(webhookMessage, organization);
     }
 
 

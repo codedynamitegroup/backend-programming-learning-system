@@ -78,4 +78,6 @@ public interface CourseUserJpaRepository extends JpaRepository<CourseUserEntity,
     )
                 """)
     Page<UserEntity> findAllUsersAreAbleToAssign(UUID courseId, UUID organizationId, String search, Pageable pageable);
+
+
 }

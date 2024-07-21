@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.repository;
 
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.SubmissionAssignmentEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.course.service.domain.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -39,5 +41,15 @@ public interface SubmissionAssignmentJpaRepository extends JpaRepository<Submiss
 
 
     List<SubmissionAssignmentEntity> findAllByAssignmentId(UUID assignmentId);
+
+//    @Query("SELECT DISTINCT u.id as userId, u.firstName, u.lastName, sa.id as submissionAssignmentId, sa.content, sa.feedback " +
+//            "FROM UserEntity u " +
+//            "JOIN CourseUserEntity cu ON cu.user.id = u.id " +
+//            "JOIN CourseEntity c ON cu.course.id = c.id " +
+//            "LEFT JOIN SubmissionAssignmentEntity sa ON sa.user.id = u.id AND sa.assignment.id = :assignmentId")
+//    Page<UserEntity> findAllSubmissionAssignment(
+//           UUID assignmentId,
+//            Pageable pageable
+//    );
 
 }

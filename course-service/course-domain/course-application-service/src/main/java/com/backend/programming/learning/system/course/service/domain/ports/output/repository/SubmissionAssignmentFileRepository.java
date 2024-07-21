@@ -15,4 +15,6 @@ public interface SubmissionAssignmentFileRepository {
 
     Optional<SubmissionAssignmentFile> findBySubmissionAssignmentIdAndFileName(UUID submissionAssignmentId, String fileName);
     void deleteById(UUID id);
+
+    void deleteSubmissionAssignmentFile(UUID submissionAssignmentId);
 }

@@ -2,11 +2,11 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.CourseDomainService;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.submission_assignment.CreateSubmissionAssignmentCommand;
-import com.backend.programming.learning.system.course.service.domain.entity.Assignment;
-import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignment;
-import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.module.ModuleDetailResponse;
+import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.exception.AssignmentNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.exception.UserNotFoundException;
+import com.backend.programming.learning.system.course.service.domain.implement.service.moodle.MoodleCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.mapper.submission_assignment.SubmissionAssignmentDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.AssignmentRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionAssignmentRepository;
@@ -28,6 +28,7 @@ public class SubmissionAssignmentCreateHelper {
     private final SubmissionAssignmentDataMapper submissionAssignmentDataMapper;
     private final UserRepository userRepository;
     private final AssignmentRepository assignmentRepository;
+    private final MoodleCommandHandler moodleCommandHandler;
 
     @Transactional
     public SubmissionAssignment persistSubmission(CreateSubmissionAssignmentCommand createSubmissionAssignmentCommand) {
@@ -68,5 +69,24 @@ public class SubmissionAssignmentCreateHelper {
             throw new AssignmentNotFoundException("Could not find assignment with id: " + assignmentId);
         }
         return assignment.get();
+    }
+
+    @Transactional
+    public Boolean createSubmissionAssignment(WebhookMessage webhookMessage, Organization organization) {
+        String apiKey = organization.getApiKey();
+        String moodleUrl = organization.getMoodleUrl();
+
+        ModuleDetailResponse moduleDetailResponse = moodleCommandHandler.getModuleDetail(webhookMessage.getContextInstanceId(), apiKey, moodleUrl);
+        if(moduleDetailResponse.getCm()==null)
+            return false;
+        Optional<Assignment> assignment = assignmentRepository.findByAssignmentIdMoodle(moduleDetailResponse.getCm().getInstance());
+
+        if(assignment.isEmpty()) {
+            log.warn("Assignment with id: {} not found", moduleDetailResponse.getCm().getInstance());
+            throw new AssignmentNotFoundException("Could not find assignment with id: " + moduleDetailResponse.getCm().getInstance());
+        }
+
+        moodleCommandHandler.createSubmissionAssignment(assignment.get(), webhookMessage.getUserId(),apiKey, moodleUrl);
+        return true;
     }
 }

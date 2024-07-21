@@ -57,4 +57,9 @@ public class SubmissionAssignmentFileRepositoryImpl implements SubmissionAssignm
         submissionAssignmentFileJpaRepository.deleteById(id);
 
     }
+
+    @Override
+    public void deleteSubmissionAssignmentFile(UUID submissionAssignmentId) {
+        submissionAssignmentFileJpaRepository.deleteBySubmissionAssignmentId(submissionAssignmentId);
+    }
 }

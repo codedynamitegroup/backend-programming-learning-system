@@ -13,6 +13,13 @@ public enum WebhookEventName {
     COURSE_MODULE_UPDATED("\\core\\event\\course_module_updated"),
     COURSE_MODULE_DELETED("\\core\\event\\course_module_deleted"),
 
+
+    ASSIGN_SUBMISSION_FILE_CREATED("\\assignsubmission_file\\event\\submission_created"),
+    ASSIGN_SUBMISSION_FILE_UPDATED("\\assignsubmission_file\\event\\submission_updated"),
+
+    ASSIGN_SUBMISSION_ONLINETEXT_CREATED("\\assignsubmission_onlinetext\\event\\submission_created"),
+    ASSIGN_SUBMISSION_ONLINETEXT_UPDATED("\\assignsubmission_onlinetext\\event\\submission_updated"),
+
     USER_CREATED("\\core\\event\\user_created"),
     USER_UPDATED("\\core\\event\\user_updated"),
     USER_DELETED("\\core\\event\\user_deleted"),
