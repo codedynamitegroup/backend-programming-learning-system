@@ -74,7 +74,7 @@ public class CodeSubmissionCommandHandler {
 
         codeSubmissionUpdateOutboxHelper.saveCodeSubmissionUpdateOutboxMessage(
                 codeSubmissionDataMapper.codeSubmissionUpdatedEventToCodeSubmissionUpdatePayload(
-                        event, createCodeSubmissionCommand.getCertificateCourseId(), createCodeSubmissionCommand.getContestId(), CopyState.CREATING
+                        event, createCodeSubmissionCommand.getCertificateCourseId(), createCodeSubmissionCommand.getContestId(), CopyState.CREATING, null
                 ),
                 event.getCodeSubmission().getCopyState(),
                 generalSagaHelper.copyStateToSagaStatus(CopyState.CREATING),
@@ -115,6 +115,8 @@ public class CodeSubmissionCommandHandler {
         CodeSubmission codeSubmission = codeSubmissionHelper.getCodeSubmissionsById(command);
         GetCodeSubmissionResponseItem item = codeSubmissionDataMapper.codeSubmissionToGetCodeSubmissionResponseItem(codeSubmission);
         CodeSubmissionTestCase cstc = codeSubmissionHelper.findFirstNonAcceptedTestCase(new CodeSubmissionId(command.getCodeSubmissionId()));
+        Integer countNonAcceptedTestCase = codeSubmissionHelper.countNonAcceptedTestCase(new CodeSubmissionId(command.getCodeSubmissionId()));
+        item.setNumOfTestCaseFailed(countNonAcceptedTestCase);
         item.setFirstFailTestCase(codeSubmissionDataMapper.codeSubmissionTestCaseToFirstFailTestCase(cstc));
         return item;
     }

@@ -11,11 +11,21 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
+import com.backend.programming.learning.system.course.service.domain.exception.CourseDomainException;
+import com.backend.programming.learning.system.course.service.domain.outbox.model.code_submission_sender.CodeSubmissionEventPayload;
+import com.backend.programming.learning.system.course.service.domain.outbox.model.code_submission_sender.CodeSubmissionSenderOutboxMessage;
 import com.backend.programming.learning.system.course.service.domain.valueobject.Status;
+import com.backend.programming.learning.system.outbox.OutboxStatus;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * com.backend.programming.learning.system.mapper.exam_submission
@@ -24,7 +34,10 @@ import java.util.List;
  * Description: ...
  */
 @Component
+@Slf4j
+@RequiredArgsConstructor
 public class ExamSubmissionDataMapper {
+    private final ObjectMapper objectMapper;
     public ExamSubmission createExamSubmissionCommandToExamSubmission(
             Exam exam, User user,
             Integer submissionCount,
@@ -203,4 +216,32 @@ public class ExamSubmissionDataMapper {
                 .build();
     }
 
+    public CodeSubmissionSenderOutboxMessage codeQuestionSubmissionToCodeSubmissionSenderOutboxMessage(QuestionSubmission codeQuestionSubmission) {
+        CodeSubmissionEventPayload payload = CodeSubmissionEventPayload.builder()
+                .submissionId(codeQuestionSubmission.getId().getValue().toString())
+                .questionId(codeQuestionSubmission.getQuestion().getId().getValue().toString())
+                .userId(codeQuestionSubmission.getUser().getId().getValue().toString())
+                .content(codeQuestionSubmission.getContent())
+                .build();
+
+        return CodeSubmissionSenderOutboxMessage.builder()
+                .id(UUID.randomUUID())
+                .sagaId(UUID.randomUUID())
+                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .processedAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .sendStatus(false)
+                .outboxStatus(OutboxStatus.STARTED)
+                .payload(createPayload(payload))
+                .build();
+    }
+    private String createPayload(CodeSubmissionEventPayload payload) {
+        try {
+            return objectMapper.writeValueAsString(payload);
+        } catch (JsonProcessingException e) {
+            log.error("Could not create CodeSubmissionEventPayload object for id: {}",
+                    payload.getSubmissionId(), e);
+            throw new CourseDomainException("Could not create CodeSubmissionEventPayload object for id: " +
+                    payload.getSubmissionId(), e);
+        }
+    }
 }

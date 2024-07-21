@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.code.assessment.service.messaging
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.message.listener.CodeQuestionUpdateResponseMessageListener;
 import com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel;
 import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -18,18 +19,12 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class CodeQuestionsUpdateResponseKafkaListener
         implements KafkaConsumer<CodeQuestionUpdateResponseAvroModel> {
 
     private final CodeQuestionUpdateResponseMessageListener codeQuestionUpdateResponseMessageListener;
     private final CodeQuestionMessagingDataMapper codeQuestionMessagingDataMapper;
-
-    public CodeQuestionsUpdateResponseKafkaListener
-            (CodeQuestionUpdateResponseMessageListener codeQuestionUpdateResponseMessageListener,
-             CodeQuestionMessagingDataMapper codeQuestionMessagingDataMapper) {
-        this.codeQuestionUpdateResponseMessageListener = codeQuestionUpdateResponseMessageListener;
-        this.codeQuestionMessagingDataMapper = codeQuestionMessagingDataMapper;
-    }
 
     @Override
     @KafkaListener(id = "${kafka-consumer-config.create-code-question-consumer-group-id}",

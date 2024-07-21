@@ -30,6 +30,8 @@ public class CreateCodeSubmissionCommand {
     @NotNull(message = "languageId must not be null")
     private UUID languageId;
 
+    private UUID codeSubmissionId;
+
 //    @NotNull(message = "headCode must not be null")
 //    @Pattern(regexp = "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
 //    message = "headCode must be base64 encoded")

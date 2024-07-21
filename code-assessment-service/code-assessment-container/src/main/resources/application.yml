@@ -28,6 +28,8 @@ code-assessment-service:
   question-request-code-assessment-topic-name: core-question-request
   question-response-code-assessment-topic-name: core-question-response-code-assessment
 
+  code-submission-sender-request-topic-name: code-submission-sender-request
+
   auth-service-user-request-to-code-assessment-service-topic-name: auth-service-user-request-to-code-assessment-service
   any-services-user-response-to-auth-service-topic-name: any-services-user-response-to-auth-service
 
@@ -38,6 +40,11 @@ code-assessment-service:
 
   assessment-external-service-ip: 62.171.185.208
   assessment-external-service-port: 80
+
+#  assessment_callback_url: http://gnkjb06l-8183.asse.devtunnels.ms/code-assessment/code-submission/test-case-token
+
+# use this when deploy instead of the above value
+#  assessment_callback_url: https://api.codedynamite.click/code-assessment/code-submission/test-case-token
 
   accepted-status-description: Accepted
 
@@ -96,6 +103,7 @@ kafka-consumer-config:
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
   create-code-question-consumer-group-id: create-code-question-topic-consumer
   question-request-consumer-group-id: question-request-topic-consumer-2
+  code-assessment-service-group-id: code-assessment-service-group
   auth-service-to-code-assessment-service-user-request-group-id: auth-service-to-code-assessment-service-user-request-topic
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader

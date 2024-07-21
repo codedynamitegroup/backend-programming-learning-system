@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class CodeSubmissionUpdateRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 4728329221652751298L;
+  private static final long serialVersionUID = -5275879058295654697L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CodeSubmissionUpdateRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.code.assessment.code.submission.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"codeSubmisisonId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"codeQuestionId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"programmingLanguageId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"bodyCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"grade\",\"type\":[\"null\",\"float\"]},{\"name\":\"pass\",\"type\":[\"null\",\"boolean\"]},{\"name\":\"cerCourseId\",\"type\":[\"null\",{\"type\":\"string\",\"logicalType\":\"uuid\"}]},{\"name\":\"contestId\",\"type\":[\"null\",{\"type\":\"string\",\"logicalType\":\"uuid\"}]},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"CREATE_PROPAGATING\",\"UPDATE_PROPAGATING\",\"DELETE_PROPAGATING\",\"CREATE_ROLLBACKING\",\"UPDATE_ROLLBACKING\",\"DELETE_ROLLBACKING\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CodeSubmissionUpdateRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.code.assessment.code.submission.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"codeSubmisisonId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"codeQuestionId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"programmingLanguageId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"bodyCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"grade\",\"type\":[\"null\",\"float\"]},{\"name\":\"pass\",\"type\":[\"null\",\"boolean\"]},{\"name\":\"cerCourseId\",\"type\":[\"null\",{\"type\":\"string\",\"logicalType\":\"uuid\"}]},{\"name\":\"contestId\",\"type\":[\"null\",{\"type\":\"string\",\"logicalType\":\"uuid\"}]},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"result\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"CREATE_PROPAGATING\",\"UPDATE_PROPAGATING\",\"DELETE_PROPAGATING\",\"CREATE_ROLLBACKING\",\"UPDATE_ROLLBACKING\",\"DELETE_ROLLBACKING\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -89,6 +89,7 @@ public class CodeSubmissionUpdateRequestAvroModel extends org.apache.avro.specif
   private java.util.UUID cerCourseId;
   private java.util.UUID contestId;
   private java.time.Instant createdAt;
+  private java.lang.String result;
   private com.backend.programming.learning.system.kafka.code.assessment.code.submission.avro.model.CopyState copyState;
 
   /**
@@ -112,9 +113,10 @@ public class CodeSubmissionUpdateRequestAvroModel extends org.apache.avro.specif
    * @param cerCourseId The new value for cerCourseId
    * @param contestId The new value for contestId
    * @param createdAt The new value for createdAt
+   * @param result The new value for result
    * @param copyState The new value for copyState
    */
-  public CodeSubmissionUpdateRequestAvroModel(java.util.UUID id, java.util.UUID codeSubmisisonId, java.util.UUID codeQuestionId, java.util.UUID userId, java.util.UUID programmingLanguageId, java.util.UUID sagaId, java.lang.String bodyCode, java.lang.Float grade, java.lang.Boolean pass, java.util.UUID cerCourseId, java.util.UUID contestId, java.time.Instant createdAt, com.backend.programming.learning.system.kafka.code.assessment.code.submission.avro.model.CopyState copyState) {
+  public CodeSubmissionUpdateRequestAvroModel(java.util.UUID id, java.util.UUID codeSubmisisonId, java.util.UUID codeQuestionId, java.util.UUID userId, java.util.UUID programmingLanguageId, java.util.UUID sagaId, java.lang.String bodyCode, java.lang.Float grade, java.lang.Boolean pass, java.util.UUID cerCourseId, java.util.UUID contestId, java.time.Instant createdAt, java.lang.String result, com.backend.programming.learning.system.kafka.code.assessment.code.submission.avro.model.CopyState copyState) {
     this.id = id;
     this.codeSubmisisonId = codeSubmisisonId;
     this.codeQuestionId = codeQuestionId;
@@ -127,6 +129,7 @@ public class CodeSubmissionUpdateRequestAvroModel extends org.apache.avro.specif
     this.cerCourseId = cerCourseId;
     this.contestId = contestId;
     this.createdAt = createdAt.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
+    this.result = result;
     this.copyState = copyState;
   }
 
@@ -152,7 +155,8 @@ public class CodeSubmissionUpdateRequestAvroModel extends org.apache.avro.specif
     case 9: return cerCourseId;
     case 10: return contestId;
     case 11: return createdAt;
-    case 12: return copyState;
+    case 12: return result;
+    case 13: return copyState;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -171,6 +175,7 @@ public class CodeSubmissionUpdateRequestAvroModel extends org.apache.avro.specif
       null,
       null,
       new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
+      null,
       null,
       null
   };
@@ -197,7 +202,8 @@ public class CodeSubmissionUpdateRequestAvroModel extends org.apache.avro.specif
     case 9: cerCourseId = (java.util.UUID)value$; break;
     case 10: contestId = (java.util.UUID)value$; break;
     case 11: createdAt = (java.time.Instant)value$; break;
-    case 12: copyState = (com.backend.programming.learning.system.kafka.code.assessment.code.submission.avro.model.CopyState)value$; break;
+    case 12: result = value$ != null ? value$.toString() : null; break;
+    case 13: copyState = (com.backend.programming.learning.system.kafka.code.assessment.code.submission.avro.model.CopyState)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -407,6 +413,23 @@ public class CodeSubmissionUpdateRequestAvroModel extends org.apache.avro.specif
   }
 
   /**
+   * Gets the value of the 'result' field.
+   * @return The value of the 'result' field.
+   */
+  public java.lang.String getResult() {
+    return result;
+  }
+
+
+  /**
+   * Sets the value of the 'result' field.
+   * @param value the value to set.
+   */
+  public void setResult(java.lang.String value) {
+    this.result = value;
+  }
+
+  /**
    * Gets the value of the 'copyState' field.
    * @return The value of the 'copyState' field.
    */
@@ -476,6 +499,7 @@ public class CodeSubmissionUpdateRequestAvroModel extends org.apache.avro.specif
     private java.util.UUID cerCourseId;
     private java.util.UUID contestId;
     private java.time.Instant createdAt;
+    private java.lang.String result;
     private com.backend.programming.learning.system.kafka.code.assessment.code.submission.avro.model.CopyState copyState;
 
     /** Creates a new Builder */
@@ -537,9 +561,13 @@ public class CodeSubmissionUpdateRequestAvroModel extends org.apache.avro.specif
         this.createdAt = data().deepCopy(fields()[11].schema(), other.createdAt);
         fieldSetFlags()[11] = other.fieldSetFlags()[11];
       }
-      if (isValidValue(fields()[12], other.copyState)) {
-        this.copyState = data().deepCopy(fields()[12].schema(), other.copyState);
+      if (isValidValue(fields()[12], other.result)) {
+        this.result = data().deepCopy(fields()[12].schema(), other.result);
         fieldSetFlags()[12] = other.fieldSetFlags()[12];
+      }
+      if (isValidValue(fields()[13], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[13].schema(), other.copyState);
+        fieldSetFlags()[13] = other.fieldSetFlags()[13];
       }
     }
 
@@ -597,9 +625,13 @@ public class CodeSubmissionUpdateRequestAvroModel extends org.apache.avro.specif
         this.createdAt = data().deepCopy(fields()[11].schema(), other.createdAt);
         fieldSetFlags()[11] = true;
       }
-      if (isValidValue(fields()[12], other.copyState)) {
-        this.copyState = data().deepCopy(fields()[12].schema(), other.copyState);
+      if (isValidValue(fields()[12], other.result)) {
+        this.result = data().deepCopy(fields()[12].schema(), other.result);
         fieldSetFlags()[12] = true;
+      }
+      if (isValidValue(fields()[13], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[13].schema(), other.copyState);
+        fieldSetFlags()[13] = true;
       }
     }
 
@@ -1083,6 +1115,46 @@ public class CodeSubmissionUpdateRequestAvroModel extends org.apache.avro.specif
     }
 
     /**
+      * Gets the value of the 'result' field.
+      * @return The value.
+      */
+    public java.lang.String getResult() {
+      return result;
+    }
+
+
+    /**
+      * Sets the value of the 'result' field.
+      * @param value The value of 'result'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.code.assessment.code.submission.avro.model.CodeSubmissionUpdateRequestAvroModel.Builder setResult(java.lang.String value) {
+      validate(fields()[12], value);
+      this.result = value;
+      fieldSetFlags()[12] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'result' field has been set.
+      * @return True if the 'result' field has been set, false otherwise.
+      */
+    public boolean hasResult() {
+      return fieldSetFlags()[12];
+    }
+
+
+    /**
+      * Clears the value of the 'result' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.code.assessment.code.submission.avro.model.CodeSubmissionUpdateRequestAvroModel.Builder clearResult() {
+      result = null;
+      fieldSetFlags()[12] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'copyState' field.
       * @return The value.
       */
@@ -1097,9 +1169,9 @@ public class CodeSubmissionUpdateRequestAvroModel extends org.apache.avro.specif
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.submission.avro.model.CodeSubmissionUpdateRequestAvroModel.Builder setCopyState(com.backend.programming.learning.system.kafka.code.assessment.code.submission.avro.model.CopyState value) {
-      validate(fields()[12], value);
+      validate(fields()[13], value);
       this.copyState = value;
-      fieldSetFlags()[12] = true;
+      fieldSetFlags()[13] = true;
       return this;
     }
 
@@ -1108,7 +1180,7 @@ public class CodeSubmissionUpdateRequestAvroModel extends org.apache.avro.specif
       * @return True if the 'copyState' field has been set, false otherwise.
       */
     public boolean hasCopyState() {
-      return fieldSetFlags()[12];
+      return fieldSetFlags()[13];
     }
 
 
@@ -1118,7 +1190,7 @@ public class CodeSubmissionUpdateRequestAvroModel extends org.apache.avro.specif
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.submission.avro.model.CodeSubmissionUpdateRequestAvroModel.Builder clearCopyState() {
       copyState = null;
-      fieldSetFlags()[12] = false;
+      fieldSetFlags()[13] = false;
       return this;
     }
 
@@ -1139,7 +1211,8 @@ public class CodeSubmissionUpdateRequestAvroModel extends org.apache.avro.specif
         record.cerCourseId = fieldSetFlags()[9] ? this.cerCourseId : (java.util.UUID) defaultValue(fields()[9]);
         record.contestId = fieldSetFlags()[10] ? this.contestId : (java.util.UUID) defaultValue(fields()[10]);
         record.createdAt = fieldSetFlags()[11] ? this.createdAt : (java.time.Instant) defaultValue(fields()[11]);
-        record.copyState = fieldSetFlags()[12] ? this.copyState : (com.backend.programming.learning.system.kafka.code.assessment.code.submission.avro.model.CopyState) defaultValue(fields()[12]);
+        record.result = fieldSetFlags()[12] ? this.result : (java.lang.String) defaultValue(fields()[12]);
+        record.copyState = fieldSetFlags()[13] ? this.copyState : (com.backend.programming.learning.system.kafka.code.assessment.code.submission.avro.model.CopyState) defaultValue(fields()[13]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;

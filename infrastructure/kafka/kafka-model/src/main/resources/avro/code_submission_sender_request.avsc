@@ -1,0 +1,32 @@
+{
+  "name": "CodeSubmissionSenderRequestAvroModel",
+  "namespace": "com.backend.programming.learning.system.kafka.course.code_submission_sender.avro_model",
+  "type": "record",
+  "fields": [
+    {
+      "name": "submissionId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "userId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "sagaId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "content",
+      "type": "string"
+    }
+  ]
+}

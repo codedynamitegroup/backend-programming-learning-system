@@ -38,7 +38,10 @@ course-service:
   calendar-event-update-request-topic-name: calendar-event-update-request
   calendar-event-update-response-topic-name: calendar-event-update-response
 
+  code-submission-sender-request-topic-name: code-submission-sender-request
+
   code-question-update-request-to-core-service-topic-name: code-question-update-request-to-core-service
+  code-submission-update-request-to-core-service-topic-name: code-submission-update-request-to-core-service
 
   outbox-scheduler-fixed-rate: 2000
   outbox-scheduler-initial-delay: 2000
@@ -115,6 +118,7 @@ kafka-consumer-config:
   course-service-organization-request-group-id: course-service-organization-request-topic
 
   code-question-update-consumer-group-id: code-question-update-topic-consumer-2
+  course-group-id: course-group-id
 
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader

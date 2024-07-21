@@ -14,17 +14,20 @@ import com.backend.programming.learning.system.course.service.domain.exception.E
 import com.backend.programming.learning.system.course.service.domain.exception.ExamSubmissionConflictException;
 import com.backend.programming.learning.system.course.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam_submission.ExamSubmissionDataMapper;
+import com.backend.programming.learning.system.course.service.domain.outbox.model.code_submission_sender.CodeSubmissionSenderOutboxMessage;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.AnswerOfQuestionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.outbox.CodeSubmissionSenderOutboxRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamSubmissionId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.Status;
 import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import com.backend.programming.learning.system.domain.valueobject.QuestionType;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -51,6 +54,7 @@ public class ExamSubmissionCreateHelper {
     private final UserRepository userRepository;
     private final AnswerOfQuestionRepository answerOfQuestionRepository;
     private final ExamSubmissionDataMapper examSubmissionDataMapper;
+    private final CodeSubmissionSenderOutboxRepository codeSubmissionSenderOutboxRepository;
 
     public ExamSubmission createExamSubmission(CreateExamSubmissionCommand createExamSubmissionCommand) {
         log.info("Create exam submission");
@@ -189,6 +193,7 @@ public class ExamSubmissionCreateHelper {
                 .isAfter(ZonedDateTime.now());
     }
 
+    @Transactional
     public void gradingExam(CreateExamSubmissionEndCommand createExamSubmissionEndCommand) {
         Exam exam = examRepository.findBy(new ExamId(createExamSubmissionEndCommand.examId()));
         User user = userRepository.findUser(createExamSubmissionEndCommand.userId())
@@ -200,53 +205,64 @@ public class ExamSubmissionCreateHelper {
         AtomicReference<Float> mark = new AtomicReference<>(0F);
         AtomicReference<Float> totleMark = new AtomicReference<>(0F);
 
-        questionSubmissions.forEach(question -> {
-            Optional<Question> questionExam = questionRepository.findById(question.getQuestion().getId().getValue());
+        questionSubmissions.forEach(questionSubmission -> {
+            Optional<Question> questionExamOpt = questionRepository.findById(questionSubmission.getQuestion().getId().getValue());
 
-            if (questionExam.isEmpty()) {
-                log.error("Question not found with id: {}", question.getQuestion().getId().getValue());
-                throw new QuestionNotFoundException("Question not found with id: " + question.getQuestion().getId().getValue());
+            if (questionExamOpt.isEmpty()) {
+                log.error("Question not found with id: {}", questionSubmission.getQuestion().getId().getValue());
+                throw new QuestionNotFoundException("Question not found with id: " + questionSubmission.getQuestion().getId().getValue());
             }
+            Question question = questionExamOpt.get();
 
             List<AnswerOfQuestion> answerOfQuestion = answerOfQuestionRepository
-                    .findAllByQuestionId(question.getQuestion().getId().getValue());
+                    .findAllByQuestionId(questionSubmission.getQuestion().getId().getValue());
 
-            Float defaultMark = questionExam.get().getDefaultMark();
+            Float defaultMark = question.getDefaultMark();
             AtomicReference<Float> grade = new AtomicReference<>(0F);
-            String contentStudent = question.getContent();
+            String contentStudent = questionSubmission.getContent();
 
-            if (questionExam.get().getQtype().equals(QuestionType.SHORT_ANSWER)) {
+            QuestionType currentType = question.getQtype();
+
+            if (currentType.equals(QuestionType.SHORT_ANSWER)) {
                 answerOfQuestion.forEach(answer -> {
                     String answerText = answer.getAnswer().replaceAll("<p>|</p>", "");
                     if (answerText.equals(contentStudent)) {
                         grade.set(defaultMark * answer.getFraction());
                     }
                 });
-            } else if (questionExam.get().getQtype().equals(QuestionType.MULTIPLE_CHOICE)) {
+            } else if (currentType.equals(QuestionType.MULTIPLE_CHOICE)) {
                 answerOfQuestion.forEach(answer -> {
                     String answerText = answer.getAnswer().replaceAll("<p>|</p>", "");
                     if (answer.getId().getValue().toString().equals(contentStudent)) {
                         grade.updateAndGet(v -> v + defaultMark * answer.getFraction());
                     }
                 });
-            } else if (questionExam.get().getQtype().equals(QuestionType.TRUE_FALSE)) {
+            } else if (currentType.equals(QuestionType.TRUE_FALSE)) {
                 answerOfQuestion.forEach(answer -> {
                     String answerText = answer.getAnswer().replaceAll("<p>|</p>", "");
                     if (answerText.equals(contentStudent)) {
                         grade.set(defaultMark * answer.getFraction());
                     }
                 });
+            }else if (currentType.equals(QuestionType.CODE)){
+                saveCodeSubmissionSenderOutbox(questionSubmission);
             }
 
             mark.updateAndGet(v -> v + grade.get());
             totleMark.updateAndGet(v -> v + defaultMark);
-            question.setGrade(grade.get());
-            questionSubmissionRepository.save(question);
+            questionSubmission.setGrade(grade.get());
+            questionSubmissionRepository.save(questionSubmission);
         });
 
         examSubmissionLast.setScore(mark.get());
 
         examSubmissionRepository.save(examSubmissionLast);
+    }
+
+    @Transactional
+    private void saveCodeSubmissionSenderOutbox(QuestionSubmission codeQuestionSubmission) {
+        CodeSubmissionSenderOutboxMessage message = examSubmissionDataMapper.codeQuestionSubmissionToCodeSubmissionSenderOutboxMessage(codeQuestionSubmission);
+        codeSubmissionSenderOutboxRepository.save(message);
     }
 
     public void updateStatusGrade(ExamSubmissionId examSubmissionId) {

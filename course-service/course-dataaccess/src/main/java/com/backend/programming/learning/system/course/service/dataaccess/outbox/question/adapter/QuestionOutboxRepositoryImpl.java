@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.course.service.dataaccess.outbox.
 import com.backend.programming.learning.system.course.service.dataaccess.outbox.question.mapper.QuestionOutboxDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.outbox.question.repository.QuestionOutboxJpaRepository;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.question.QuestionOutboxMessage;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionOutboxRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.outbox.QuestionOutboxRepository;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import org.springframework.stereotype.Component;
 

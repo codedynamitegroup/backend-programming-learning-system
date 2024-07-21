@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.kafka.core.calendar.event.avro.mo
 import com.backend.programming.learning.system.kafka.producer.KafkaMessageHelper;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -16,22 +17,12 @@ import java.util.function.BiConsumer;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class CalendarEventUpdatedEventKafkaPublisher implements CalendarEventUpdatedMessagePublisher {
-
     private final CalendarEventMessagingDataMapper calendarEventMessagingDataMapper;
     private final KafkaProducer<String, CalendarEventUpdateResponseAvroModel> kafkaProducer;
     private final CourseServiceConfigData courseServiceConfigData;
     private final KafkaMessageHelper kafkaMessageHelper;
-
-    public CalendarEventUpdatedEventKafkaPublisher(CalendarEventMessagingDataMapper calendarEventMessagingDataMapper,
-                                                   KafkaProducer<String, CalendarEventUpdateResponseAvroModel> kafkaProducer,
-                                                   CourseServiceConfigData courseServiceConfigData,
-                                                   KafkaMessageHelper kafkaMessageHelper) {
-        this.calendarEventMessagingDataMapper = calendarEventMessagingDataMapper;
-        this.kafkaProducer = kafkaProducer;
-        this.courseServiceConfigData = courseServiceConfigData;
-        this.kafkaMessageHelper = kafkaMessageHelper;
-    }
 
     @Override
     public void publish(CalendarEventUpdateOutboxMessage calendarEventUpdateOutboxMessage,

@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.ports.output.repository;
+package com.backend.programming.learning.system.course.service.domain.ports.output.repository.outbox;
 
 import com.backend.programming.learning.system.course.service.domain.outbox.model.organization.OrganizationOutboxMessage;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;

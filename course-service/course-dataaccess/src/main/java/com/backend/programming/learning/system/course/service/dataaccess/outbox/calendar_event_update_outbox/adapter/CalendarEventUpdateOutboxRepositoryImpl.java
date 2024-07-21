@@ -3,9 +3,8 @@ package com.backend.programming.learning.system.course.service.dataaccess.outbox
 import com.backend.programming.learning.system.course.service.dataaccess.outbox.calendar_event_update_outbox.exception.CalendarEventUpdateOutboxNotFoundException;
 import com.backend.programming.learning.system.course.service.dataaccess.outbox.calendar_event_update_outbox.mapper.CalendarEventUpdateOutboxDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.outbox.calendar_event_update_outbox.repository.CalendarEventUpdateOutboxJpaRepository;
-import com.backend.programming.learning.system.course.service.domain.entity.CalendarEvent;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.calendarevent.CalendarEventUpdateOutboxMessage;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CalendarEventUpdateOutboxRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.outbox.CalendarEventUpdateOutboxRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.UpdateState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import org.springframework.stereotype.Component;

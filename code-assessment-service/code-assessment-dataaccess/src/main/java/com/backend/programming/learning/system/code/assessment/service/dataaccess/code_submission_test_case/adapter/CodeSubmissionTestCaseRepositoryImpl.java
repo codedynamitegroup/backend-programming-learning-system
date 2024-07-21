@@ -71,5 +71,14 @@ public class CodeSubmissionTestCaseRepositoryImpl implements CodeSubmissionTestC
                 .map(dataAccessMapper::entityToCodeSubmissionTestCase);
     }
 
+    @Override
+    public Integer countNonAcceptedByCodeSubmissionId(CodeSubmissionId id) {
+        return jpaRepository
+                .findAllByCodeSubmissionIdAndStatusDescriptionNot
+                        (id.getValue(),
+                                codeAssessmentServiceConfigData
+                                        .getAcceptedStatusDescription()).size();
+    }
+
 
 }
