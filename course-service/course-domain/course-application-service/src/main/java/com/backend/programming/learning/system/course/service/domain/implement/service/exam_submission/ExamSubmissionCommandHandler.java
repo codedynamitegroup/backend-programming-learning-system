@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryAllStudentExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryStudentExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam_submission.ExamSubmissionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
@@ -82,5 +83,9 @@ public class ExamSubmissionCommandHandler {
     @Transactional
     public void updateStatusGrade(ExamSubmissionId examSubmissionId) {
         examSubmissionCreateHelper.updateStatusGrade(examSubmissionId);
+    }
+
+    public QueryStudentExamSubmissionResponse findByExamIdAndSubmissionId(ExamId examId, ExamSubmissionId examSubmissionId) {
+        return examSubmissionQueryHelper.findByExamIdAndSubmissionId(examId, examSubmissionId);
     }
 }

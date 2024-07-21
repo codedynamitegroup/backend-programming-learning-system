@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryAllStudentExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryStudentExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.exam_submission.ExamSubmissionApplicationService;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamSubmissionId;
@@ -73,6 +74,11 @@ public class ExamSubmissionApplicationImpl implements ExamSubmissionApplicationS
     @Override
     public void updateStatusGrade(ExamSubmissionId examSubmissionId) {
         examSubmissionCommandHandler.updateStatusGrade(examSubmissionId);
+    }
+
+    @Override
+    public QueryStudentExamSubmissionResponse findByExamIdAndSubmissionId(ExamId examId, ExamSubmissionId examSubmissionId) {
+        return examSubmissionCommandHandler.findByExamIdAndSubmissionId(examId, examSubmissionId);
     }
 
 }

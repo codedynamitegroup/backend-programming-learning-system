@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryAllStudentExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryStudentExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamSubmissionId;
 import jakarta.validation.Valid;
@@ -42,4 +43,6 @@ public interface ExamSubmissionApplicationService {
             @Valid QueryAllStudentExamSubmissionCommand queryAllStudentExamSubmissionCommand);
 
     void updateStatusGrade(ExamSubmissionId examSubmissionId);
+
+    QueryStudentExamSubmissionResponse findByExamIdAndSubmissionId(ExamId examId, ExamSubmissionId examSubmissionId);
 }

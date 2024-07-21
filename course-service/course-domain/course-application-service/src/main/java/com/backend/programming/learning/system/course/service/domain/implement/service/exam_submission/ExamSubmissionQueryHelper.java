@@ -17,6 +17,7 @@ import com.backend.programming.learning.system.course.service.domain.ports.outpu
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamSubmissionId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -159,5 +160,39 @@ public class ExamSubmissionQueryHelper {
                 .totalPages(courseUsers.getTotalPages())
                 .totalItems(courseUsers.getTotalElements())
                 .build();
+    }
+
+    public QueryStudentExamSubmissionResponse findByExamIdAndSubmissionId(ExamId examId, ExamSubmissionId examSubmissionId) {
+        Exam exam = examRepository.findBy(examId);
+        Double maxGrade = Double.valueOf(exam.getMaxScore());
+
+        ExamSubmission examSubmission = examSubmissionRepository.findBy(examSubmissionId.getValue());
+        List<QuestionSubmission> questionSubmissions = questionSubmissionRepository.findAllByExamSubmissionId(examSubmissionId.getValue());
+        Double mark = questionSubmissions.stream()
+                .filter(questionSubmission -> questionSubmission.getGrade() != null)
+                .mapToDouble(QuestionSubmission::getGrade)
+                .sum();
+        Double totalMark = questionSubmissions.stream()
+                .filter(questionSubmission -> questionSubmission.getQuestion() != null)
+                .mapToDouble(value -> value.getQuestion().getDefaultMark())
+                .sum();
+        Double grade = Math.round((mark / totalMark) * maxGrade * 100.0) / 100.0;
+
+        QueryStudentExamSubmissionResponse queryStudentExamSubmissionResponse = QueryStudentExamSubmissionResponse.builder()
+                .examSubmissionId(examSubmissionId.getValue())
+                .examId(examId.getValue())
+                .userId(examSubmission.getUser().getId().getValue())
+                .firstName(examSubmission.getUser().getFirstName())
+                .lastName(examSubmission.getUser().getLastName())
+                .email(examSubmission.getUser().getEmail())
+                .status("SUBMITTED")
+                .statusGrade("GRADED")
+                .mark(mark)
+                .totalMark(totalMark)
+                .grade(grade)
+                .totalGrade(maxGrade)
+                .build();
+
+        return queryStudentExamSubmissionResponse;
     }
 }
