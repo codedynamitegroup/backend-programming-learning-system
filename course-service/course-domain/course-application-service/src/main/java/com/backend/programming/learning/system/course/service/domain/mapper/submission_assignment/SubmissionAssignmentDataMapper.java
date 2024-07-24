@@ -5,7 +5,9 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.submission_assignment.DeleteSubmissionAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QueryAllSubmissionAssignmentAIGradeEssayResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QueryAllSubmissionAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QueryAllUserSubmissionAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.AIGradeEssaySubmissionAssignmentResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.AllSubmissionAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.SubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.SubmissionAssignmentUserResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment_file.SubmissionAssignmentFileResponseEntity;
@@ -27,6 +29,7 @@ public class SubmissionAssignmentDataMapper {
 
     private final SubmissionAssignmentFileDataMapper submissionAssignmentFileDataMapper;
     private final SubmissionAssignmentFileRepository submissionAssignmentFileRepository;
+
 
 
     private final SubmissionGradeDataMapper submissionGradeDataMapper;
@@ -162,6 +165,53 @@ public class SubmissionAssignmentDataMapper {
                                 .build()
                 ).toList())
                 .totalItems(queryAllSubmissionAssignmentResponse.getTotalItems())
+                .build();
+    }
+
+    public QueryAllUserSubmissionAssignmentResponse allSubmissionAssignmentResponsesToQueryAllUserSubmissionAssignmentResponse(Page<AllSubmissionAssignmentResponse> allSubmissionAssignmentResponses) {
+        allSubmissionAssignmentResponses.getContent().forEach(allSubmissionAssignmentResponse -> {
+            List<SubmissionAssignmentFile> submissionAssignmentFiles = submissionAssignmentFileRepository.findBySubmissionAssignmentId(allSubmissionAssignmentResponse.getId());
+            allSubmissionAssignmentResponse.setSubmissionAssignmentFiles(submissionAssignmentFileDataMapper.submissionAssignmentFilesToSubmissionAssignmentFileResponseEntities(submissionAssignmentFiles));
+
+            SubmissionGrade submissionGrade = submissionGradeRepository.findBySubmissionAssignmentId(allSubmissionAssignmentResponse.getId()).orElse(null);
+            if(submissionGrade != null){
+                allSubmissionAssignmentResponse.setSubmissionGrade(submissionGradeDataMapper.submissionGradeToSubmissionGradeResponseEntity(submissionGrade));
+            }
+        });
+        return QueryAllUserSubmissionAssignmentResponse.builder()
+                .submissionAssignments(allSubmissionAssignmentResponses.getContent())
+                .currentPage(allSubmissionAssignmentResponses.getNumber())
+                .totalItems(allSubmissionAssignmentResponses.getTotalElements())
+                .totalPages(allSubmissionAssignmentResponses.getTotalPages())
+                .build();
+    }
+
+    public AllSubmissionAssignmentResponse submissionAssignmentToAllSubmissionAssignmentResponse(SubmissionAssignment submissionAssignment) {
+        List<SubmissionAssignmentFile> submissionAssignmentFiles = submissionAssignmentFileRepository.findBySubmissionAssignmentId(submissionAssignment.getId().getValue());
+        List<SubmissionAssignmentFileResponseEntity> submissionAssignmentFileResponseEntity = null;
+        submissionAssignmentFileResponseEntity = submissionAssignmentFileDataMapper.submissionAssignmentFilesToSubmissionAssignmentFileResponseEntities(submissionAssignmentFiles);
+
+        SubmissionGrade submissionGrade = submissionGradeRepository.findBySubmissionAssignmentId(submissionAssignment.getId().getValue()).orElse(null);
+        SubmissionGradeResponseEntity submissionGradeResponseEntity =null;
+        if(submissionGrade != null){
+            submissionGradeResponseEntity = submissionGradeDataMapper.submissionGradeToSubmissionGradeResponseEntity(submissionGrade);
+        }
+
+
+
+        return AllSubmissionAssignmentResponse.builder()
+                .id(submissionAssignment.getId().getValue())
+                .assignmentName(submissionAssignment.getAssignment().getTitle())
+                .userId(submissionAssignment.getUser().getId().getValue())
+                .fullName(submissionAssignment.getUser().getFirstName() + " " + submissionAssignment.getUser().getLastName())
+                .email(submissionAssignment.getUser().getEmail())
+                .submissionAssignmentFiles(submissionAssignmentFileResponseEntity)
+                .submissionGrade(submissionGradeResponseEntity)
+                .content(submissionAssignment.getContent())
+                .feedback(submissionAssignment.getFeedback())
+                .isGraded(submissionAssignment.getGradedStatus())
+                .submitTime(submissionAssignment.getSubmittedAt())
+                .timemodified(submissionAssignment.getTimemodified())
                 .build();
     }
 }

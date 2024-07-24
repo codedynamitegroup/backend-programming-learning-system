@@ -4,10 +4,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.submission_assignment.CreateSubmissionAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.submission_assignment.DeleteSubmissionAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.submission_assignment.DeleteSubmissionAssignmentResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QueryAllSubmissionAssignmentResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QueryAllSubmissionnAssignmentCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QuerySubmissionAssignmentCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QuerySubmissionAssignmentUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.*;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.AllSubmissionAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.SubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.submission_assignment.UpdateSubmissionAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.submission_assignment.UpdateSubmissionAssignmentResponse;
@@ -32,7 +30,7 @@ public class SubmissionAssignmentApplicationServiceImpl implements SubmissionAss
     }
 
     @Override
-    public SubmissionAssignmentResponseEntity querySubmissionAssignmentById(QuerySubmissionAssignmentCommand querySubmissionAssignmentCommand) {
+    public AllSubmissionAssignmentResponse querySubmissionAssignmentById(QuerySubmissionAssignmentCommand querySubmissionAssignmentCommand) {
         return submissionAssignmentCommandHandler.querySubmissionAssignmentById(querySubmissionAssignmentCommand);
     }
 
@@ -52,7 +50,7 @@ public class SubmissionAssignmentApplicationServiceImpl implements SubmissionAss
     }
 
     @Override
-    public SubmissionAssignmentResponseEntity queryByAssignmentIdAndUserId(QuerySubmissionAssignmentUserCommand querySubmissionAssignmentCommand) {
+    public AllSubmissionAssignmentResponse queryByAssignmentIdAndUserId(QuerySubmissionAssignmentUserCommand querySubmissionAssignmentCommand) {
         return submissionAssignmentCommandHandler.queryByAssignmentIdAndUserId(querySubmissionAssignmentCommand);
     }
 
@@ -64,5 +62,11 @@ public class SubmissionAssignmentApplicationServiceImpl implements SubmissionAss
     @Override
     public Integer countAllByAssignmentId(UUID assignmentId) {
         return submissionAssignmentCommandHandler.countAllByAssignmentId(assignmentId);
+    }
+
+    @Override
+    public QueryAllUserSubmissionAssignmentResponse queryAllSubmissionAssignment(QueryAllSubmissionnAssignmentCommand queryAllSubmissionnAssignmentCommand) {
+        return
+                submissionAssignmentCommandHandler.queryAllSubmissionAssignment(queryAllSubmissionnAssignmentCommand);
     }
 }

@@ -30,4 +30,6 @@ public interface UserRepository {
     void deleteByUserMoodleId(Integer userIdMoodle);
 
     Page<User> findAllByCourseId(UUID courseId, Integer page, Integer size, String searchName);
+
+
 }

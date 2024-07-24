@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.repository;
 
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.SubmissionAssignmentEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.projection.AllSubmissionAssignmentProjection;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import org.springframework.data.domain.Page;
@@ -42,14 +43,40 @@ public interface SubmissionAssignmentJpaRepository extends JpaRepository<Submiss
 
     List<SubmissionAssignmentEntity> findAllByAssignmentId(UUID assignmentId);
 
-//    @Query("SELECT DISTINCT u.id as userId, u.firstName, u.lastName, sa.id as submissionAssignmentId, sa.content, sa.feedback " +
-//            "FROM UserEntity u " +
-//            "JOIN CourseUserEntity cu ON cu.user.id = u.id " +
-//            "JOIN CourseEntity c ON cu.course.id = c.id " +
-//            "LEFT JOIN SubmissionAssignmentEntity sa ON sa.user.id = u.id AND sa.assignment.id = :assignmentId")
-//    Page<UserEntity> findAllSubmissionAssignment(
-//           UUID assignmentId,
-//            Pageable pageable
-//    );
+    @Query("""
+    SELECT u.id as userId,
+           MAX(sa.id) as submissionAssignmentId,
+           CONCAT(u.firstName, ' ', u.lastName) as fullName,
+           u.email as email,
+           MAX(sa.submitTime) as submitTime,
+           MAX(sa.timemodified) as timeModified,
+           MAX(sa.content) as content,
+           MAX(sa.feedback) as feedback,
+           sa.isGraded as isGraded
+    FROM UserEntity u
+    JOIN CourseUserEntity cu ON cu.user.id = u.id AND cu.roleMoodle.id = 5
+    JOIN CourseEntity c ON cu.course.id = c.id
+    LEFT JOIN SubmissionAssignmentEntity sa ON sa.user.id = u.id AND sa.assignment.id = :assignmentId
+    WHERE (UPPER(u.email) LIKE UPPER(CONCAT('%', :search, '%'))
+           OR UPPER(u.firstName) LIKE UPPER(CONCAT('%', :search, '%'))
+           OR UPPER(u.lastName) LIKE UPPER(CONCAT('%', :search, '%')))
+      AND (:isGraded IS NULL OR sa.isGraded = :isGraded)
+    GROUP BY u.id, u.firstName, u.lastName, u.email, sa.isGraded
+""")
+    Page<AllSubmissionAssignmentProjection> findAllSubmissionAssignment(
+            UUID assignmentId,
+            String search,
+            Boolean isGraded,
+            Pageable pageable
+    );
+
+
+
+
+
+
+
+
+
 
 }

@@ -4,10 +4,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.submission_assignment.CreateSubmissionAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.submission_assignment.DeleteSubmissionAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.submission_assignment.DeleteSubmissionAssignmentResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QueryAllSubmissionAssignmentResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QueryAllSubmissionnAssignmentCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QuerySubmissionAssignmentCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QuerySubmissionAssignmentUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.*;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.AllSubmissionAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.SubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.submission_assignment.UpdateSubmissionAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.submission_assignment.UpdateSubmissionAssignmentResponse;
@@ -20,7 +18,7 @@ public interface SubmissionAssignmentApplicationService {
 
     CreateSubmissionAssignmentResponse createSubmissionAssignment(@Valid CreateSubmissionAssignmentCommand createSubmissionAssignmentCommand);
 
-    SubmissionAssignmentResponseEntity querySubmissionAssignmentById(@Valid QuerySubmissionAssignmentCommand querySubmissionAssignmentCommand);
+    AllSubmissionAssignmentResponse querySubmissionAssignmentById(@Valid QuerySubmissionAssignmentCommand querySubmissionAssignmentCommand);
 
     QueryAllSubmissionAssignmentResponse queryAllByAssignmentId(@Valid QueryAllSubmissionnAssignmentCommand queryAllSubmissionnAssignmentCommand);
 
@@ -29,9 +27,12 @@ public interface SubmissionAssignmentApplicationService {
     UpdateSubmissionAssignmentResponse updateSubmissionAssignmentById(@Valid UpdateSubmissionAssignmentCommand updateSubmissionAssignmentCommand,UUID id);
 
 
-    SubmissionAssignmentResponseEntity queryByAssignmentIdAndUserId(QuerySubmissionAssignmentUserCommand querySubmissionAssignmentUserCommand);
+    AllSubmissionAssignmentResponse queryByAssignmentIdAndUserId(QuerySubmissionAssignmentUserCommand querySubmissionAssignmentUserCommand);
 
     Integer countSubmissionGraded(UUID assignmentId);
 
     Integer countAllByAssignmentId(UUID assignmentId);
+
+    QueryAllUserSubmissionAssignmentResponse queryAllSubmissionAssignment(
+            @Valid QueryAllSubmissionnAssignmentCommand queryAllSubmissionnAssignmentCommand);
 }

@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.submission_assignment;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QueryAllSubmissionnAssignmentCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.AllSubmissionAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignment;
 import com.backend.programming.learning.system.course.service.domain.exception.SubmissionAssignmentNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionAssignmentRepository;
@@ -62,5 +63,17 @@ public class SubmissionAssignmentQueryHelper {
     @Transactional(readOnly=true)
     public List<SubmissionAssignment> queryAllByAssignmentId(UUID assignmentId) {
         return submissionAssignmentRepository.findAllByAssignmentId(assignmentId);
+    }
+
+
+    @Transactional(readOnly=true)
+    public Page<AllSubmissionAssignmentResponse> queryAllSubmissionAssignment(QueryAllSubmissionnAssignmentCommand queryAllSubmissionnAssignmentCommand) {
+        Page<AllSubmissionAssignmentResponse> submissionAssignments = submissionAssignmentRepository.findAllSubmissionAssignment(queryAllSubmissionnAssignmentCommand.getAssignmentId(),
+                queryAllSubmissionnAssignmentCommand.getSearchName(),
+                queryAllSubmissionnAssignmentCommand.getIsGraded(),
+                queryAllSubmissionnAssignmentCommand.getPageNo(),
+                queryAllSubmissionnAssignmentCommand.getPageSize());
+        log.info("SubmissionAssignment queried with assignment id: {}", queryAllSubmissionnAssignmentCommand.getAssignmentId());
+        return submissionAssignments;
     }
 }

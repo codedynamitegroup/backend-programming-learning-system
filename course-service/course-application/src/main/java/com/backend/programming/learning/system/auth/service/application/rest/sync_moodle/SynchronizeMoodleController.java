@@ -23,7 +23,7 @@ public class SynchronizeMoodleController {
 
     private final SynchronizeStateApplicationService synchronizeStateApplicationService;
 
-    @PostMapping("/{organizationId}")
+    @GetMapping("/{organizationId}")
     @Operation(summary = "Sync organization.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
@@ -33,10 +33,11 @@ public class SynchronizeMoodleController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<String> syncDataMoodle(
-            @PathVariable UUID organizationId
+            @PathVariable UUID organizationId,
+            @RequestParam UUID userId
     ) {
         String response = synchronizeStateApplicationService.
-                syncDataMoodle(organizationId);
+                syncDataMoodle(organizationId,userId);
         return  ResponseEntity.ok(response);
     }
 

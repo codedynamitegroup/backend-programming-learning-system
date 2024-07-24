@@ -829,6 +829,7 @@ DROP TABLE IF EXISTS "public".synchronize_state CASCADE;
 CREATE TABLE "public".synchronize_state
 (
     id          uuid DEFAULT gen_random_uuid() NOT NULL,
+    user_id uuid NOT NULL,
     status synchronize_status,
     org_id uuid NOT NULL,
     step step,
@@ -838,7 +839,11 @@ CREATE TABLE "public".synchronize_state
     CONSTRAINT synchronize_state_org_id_fkey FOREIGN KEY (org_id)
         REFERENCES "public".organization (id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+     CONSTRAINT synchronize_state_detail_user_id_fkey FOREIGN KEY (user_id)
+         REFERENCES "public".user (id) MATCH SIMPLE
+         ON UPDATE CASCADE
+         ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS "public".synchronize_state_detail CASCADE;

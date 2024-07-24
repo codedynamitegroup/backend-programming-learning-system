@@ -11,6 +11,8 @@ import java.util.UUID;
 public class SynchronizeState extends AggregateRoot<SynchronizeStateId>{
     private SynchronizeStatus status;
 
+    private User user;
+
     private Organization organization;
 
     private SynchronizeStep step;
@@ -24,6 +26,7 @@ public class SynchronizeState extends AggregateRoot<SynchronizeStateId>{
         setStatus(builder.status);
         setOrganization(builder.organization);
         setStep(builder.step);
+        setUser(builder.user);
         setSyncCount(builder.syncCount);
         setTimeCreated(builder.timeCreated);
 
@@ -33,6 +36,14 @@ public class SynchronizeState extends AggregateRoot<SynchronizeStateId>{
         setId(new SynchronizeStateId(UUID.randomUUID()));
         timeCreated = ZonedDateTime.now();
         syncCount = 0;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Integer getSyncCount() {
@@ -81,6 +92,7 @@ public class SynchronizeState extends AggregateRoot<SynchronizeStateId>{
 
     public static final class Builder {
         private SynchronizeStateId id;
+        private User user;
         private SynchronizeStatus status;
         private Organization organization;
         private SynchronizeStep step;
@@ -96,6 +108,11 @@ public class SynchronizeState extends AggregateRoot<SynchronizeStateId>{
 
         public Builder id(SynchronizeStateId val) {
             id = val;
+            return this;
+        }
+
+        public Builder user(User val) {
+            user = val;
             return this;
         }
 

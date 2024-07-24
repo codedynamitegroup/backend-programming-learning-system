@@ -1,8 +1,10 @@
 package com.backend.programming.learning.system.course.service.domain.ports.output.repository;
 
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.AllSubmissionAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignment;
 import com.backend.programming.learning.system.course.service.domain.valueobject.AssignmentId;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,4 +29,7 @@ public interface SubmissionAssignmentRepository {
     Integer countAllByAssignmentId(UUID assignmentId);
 
     List<SubmissionAssignment> findAllByAssignmentId(UUID assignmentId);
+
+
+    Page<AllSubmissionAssignmentResponse> findAllSubmissionAssignment(UUID assignmentId,String search,Boolean isGraded, Integer page, Integer size);
 }

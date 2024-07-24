@@ -4,12 +4,15 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.synchronize_state.QuerySynchronizeStateResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import com.backend.programming.learning.system.course.service.domain.entity.SynchronizeState;
+import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.implement.service.moodle.MoodleCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.synchronize_state.SynchronizeStateApplicationService;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.OrganizationRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SynchronizeStateRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.SynchronizeStatus;
 import com.backend.programming.learning.system.domain.valueobject.SynchronizeStep;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -28,6 +31,7 @@ public class SynchronizeStateApplicationServiceImpl implements SynchronizeStateA
     private final OrganizationRepository organizationRepository;
     private final SynchronizeStateRepository synchronizeStateRepository;
     private final SynchronizeStateCommandHandler synchronizeStateCommandHandler;
+    private final UserRepository userRepository;
 
 
     private Organization getOrganization(UUID organizationId) {
@@ -40,8 +44,13 @@ public class SynchronizeStateApplicationServiceImpl implements SynchronizeStateA
         return organization.get();
     }
     @Override
-    public String syncDataMoodle(UUID organizationId) {
+    public String syncDataMoodle(UUID organizationId,UUID userId) {
         Organization organization = getOrganization(organizationId);
+        Optional<User> user=userRepository.findById(new UserId(userId));
+        if(!user.isPresent()){
+            log.error("User is not found");
+            throw new RuntimeException("User is not found");
+        }
         for(SynchronizeStep synchronizeStep : SynchronizeStep.values()){
             SynchronizeState synchronizeState = SynchronizeState.builder().build();
             synchronizeState.initializeSynchronizeState();
@@ -51,6 +60,7 @@ public class SynchronizeStateApplicationServiceImpl implements SynchronizeStateA
             else {
                 synchronizeState.setStatus(SynchronizeStatus.PENDING);
             }
+            synchronizeState.setUser(user.get());
             synchronizeState.setOrganization(organization);
             synchronizeState.setStep(synchronizeStep);
             synchronizeStateRepository.save(synchronizeState);

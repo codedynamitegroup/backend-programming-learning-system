@@ -14,7 +14,7 @@ public interface SynchronizeStateApplicationService {
 
     Boolean syncResource(UUID organizationId);
 
-    String syncDataMoodle(UUID organizationId);
+    String syncDataMoodle(UUID organizationId,UUID userId);
 
     QuerySynchronizeStateResponse querySynchronizeByOrganizationIdAndStep(QuerySynchronizeStateCommand querySynchronizeStateCommand);
 }

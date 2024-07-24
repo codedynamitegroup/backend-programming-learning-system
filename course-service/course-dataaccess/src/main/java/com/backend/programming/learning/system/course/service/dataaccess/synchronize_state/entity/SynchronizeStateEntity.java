@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.dataaccess.synchronize_state.entity;
 
 import com.backend.programming.learning.system.course.service.dataaccess.organization.entity.OrganizationEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.domain.valueobject.SynchronizeStatus;
 import com.backend.programming.learning.system.domain.valueobject.SynchronizeStep;
 import jakarta.persistence.*;
@@ -26,6 +27,10 @@ public class SynchronizeStateEntity {
     @OneToOne
     @JoinColumn(name = "org_id", referencedColumnName = "id")
     private OrganizationEntity organization;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private UserEntity user;
 
     @Enumerated(EnumType.STRING)
     private SynchronizeStatus status;

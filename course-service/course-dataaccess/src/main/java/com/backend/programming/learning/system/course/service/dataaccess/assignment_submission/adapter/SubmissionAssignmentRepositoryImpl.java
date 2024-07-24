@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.assign
 
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.mapper.SubmissionAssignmentDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.repository.SubmissionAssignmentJpaRepository;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.AllSubmissionAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignment;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionAssignmentRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.AssignmentId;
@@ -81,4 +82,14 @@ public class SubmissionAssignmentRepositoryImpl implements SubmissionAssignmentR
     public List<SubmissionAssignment> findAllByAssignmentId(UUID assignmentId) {
         return submissionAssignmentDataAccessMapper.assignmentSubmissionEntityListToAssignmentSubmissionList(submissionAssignmentJpaRepository.findAllByAssignmentId(assignmentId));
     }
+
+    @Override
+    public Page<AllSubmissionAssignmentResponse> findAllSubmissionAssignment(UUID assignmentId,String search, Boolean isGraded, Integer page, Integer size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return submissionAssignmentJpaRepository.
+                findAllSubmissionAssignment(assignmentId,search,isGraded, pageRequest).
+                map(submissionAssignmentDataAccessMapper::allSubmissionAssignmentProjectionToAllSubmissionAssignmentResponse);
+    }
+
+
 }

@@ -42,7 +42,7 @@ public class UserDataMapper {
     public UserResponseEntity userToUserResponseEntity(User user) {
         return UserResponseEntity.builder()
                 .userId(user.getId().getValue())
-                .roleMoodleId(user.getRoleMoodle().getId().getValue().toString())
+                .roleMoodleId(user.getRoleMoodle() == null ? null : user.getRoleMoodle().getId().getValue().toString())
                 .avatarUrl(user.getAvatarUrl())
                 .fullName(user.getFirstName() + " " + user.getLastName())
                 .firstName(user.getFirstName())

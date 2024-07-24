@@ -5,10 +5,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.submission_assignment_file.CreateSubmissionAssignmentFileResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.submission_assignment.DeleteSubmissionAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.submission_assignment.DeleteSubmissionAssignmentResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QueryAllSubmissionAssignmentResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QueryAllSubmissionnAssignmentCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QuerySubmissionAssignmentCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QuerySubmissionAssignmentUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.*;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.AllSubmissionAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.SubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.submission_assignment.UpdateSubmissionAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.submission_assignment.UpdateSubmissionAssignmentResponse;
@@ -55,15 +53,15 @@ public class SubmissionAssignmentController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = SubmissionAssignmentResponseEntity.class))
+                            schema = @Schema(implementation = AllSubmissionAssignmentResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<SubmissionAssignmentResponseEntity> querySubmissionAssignmentById(
+    public ResponseEntity<AllSubmissionAssignmentResponse> querySubmissionAssignmentById(
             @PathVariable UUID submissionId
     ) {
         log.info("Querying submission assignment by id");
-        SubmissionAssignmentResponseEntity response = submissionAssignmentApplicationService
+        AllSubmissionAssignmentResponse response = submissionAssignmentApplicationService
                 .querySubmissionAssignmentById(new QuerySubmissionAssignmentCommand(submissionId));
         return ResponseEntity.ok(response);
     }
@@ -136,16 +134,16 @@ public class SubmissionAssignmentController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = SubmissionAssignmentResponseEntity.class))
+                            schema = @Schema(implementation = AllSubmissionAssignmentResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<SubmissionAssignmentResponseEntity> queryByAssignmentIdAndUserId(
+    public ResponseEntity<AllSubmissionAssignmentResponse> queryByAssignmentIdAndUserId(
             @RequestParam UUID assignmentId,
             @RequestParam UUID userId
     ) {
         log.info("Querying submission assignment by assignment id and user id");
-        SubmissionAssignmentResponseEntity response = submissionAssignmentApplicationService
+        AllSubmissionAssignmentResponse response = submissionAssignmentApplicationService
                 .queryByAssignmentIdAndUserId(new QuerySubmissionAssignmentUserCommand(assignmentId, userId));
         return ResponseEntity.ok(response);
     }
@@ -181,6 +179,28 @@ public class SubmissionAssignmentController {
     ) {
         log.info("Counting all submission by assignment id");
         Integer response = submissionAssignmentApplicationService.countAllByAssignmentId(assignmentId);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/all")
+    @Operation(summary = "Query all submission assignment by assignment id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllUserSubmissionAssignmentResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllUserSubmissionAssignmentResponse> queryAllSubmissionAssignment(
+            @RequestParam UUID assignmentId,
+            @RequestParam(defaultValue = "") String searchName,
+            @RequestParam(required = false) Boolean isGraded,
+            @RequestParam(defaultValue = "0") int pageNo,
+            @RequestParam(defaultValue = "10") int pageSize
+    ) {
+        log.info("Querying all submission assignment by assignment id");
+        QueryAllUserSubmissionAssignmentResponse response = submissionAssignmentApplicationService
+                .queryAllSubmissionAssignment(new QueryAllSubmissionnAssignmentCommand(assignmentId, pageNo, pageSize, searchName, isGraded));
         return ResponseEntity.ok(response);
     }
 
