@@ -245,11 +245,41 @@ public class AssignmentDataMapper {
 
         studentGrades.forEach(studentGrade -> {
             exams.forEach(exam -> {
-                ExamSubmission examSubmission = examSubmissionRepository
-                        .findLatestExamSubmissionByExamIdAndUserId(exam.getId().getValue(), studentGrade.getStudentId())
-                        .orElse(null);
-                if (examSubmission != null) studentGrade.getGrades().add(examSubmission.getScore());
-                else studentGrade.getGrades().add(null);
+                if (exam.getGradeMethod().equals("QUIZ_GRADEHIGHEST")) {
+                    List<ExamSubmission> examSubmissions = examSubmissionRepository
+                            .findAllByExamIdAndUserId(exam.getId().getValue(), studentGrade.getStudentId());
+                    if (examSubmissions != null) {
+                        Float maxScore = examSubmissions.stream()
+                                .map(ExamSubmission::getScore)
+                                .max(Float::compareTo)
+                                .orElse(null);
+                        studentGrade.getGrades().add(maxScore);
+                    } else studentGrade.getGrades().add(null);
+                }
+                if (exam.getGradeMethod().equals("QUIZ_GRADEAVERAGE")) {
+                    List<ExamSubmission> examSubmissions = examSubmissionRepository
+                            .findAllByExamIdAndUserId(exam.getId().getValue(), studentGrade.getStudentId());
+                    if (examSubmissions != null) {
+                        Float averageScore = examSubmissions.stream()
+                                .map(ExamSubmission::getScore)
+                                .reduce(0f, Float::sum) / examSubmissions.size();
+                        studentGrade.getGrades().add(averageScore);
+                    } else studentGrade.getGrades().add(null);
+                }
+                if (exam.getGradeMethod().equals("QUIZ_ATTEMPTFIRST")) {
+                    ExamSubmission examSubmission = examSubmissionRepository
+                            .findFirstExamSubmissionByExamIdAndUserId(exam.getId().getValue(), studentGrade.getStudentId())
+                            .orElse(null);
+                    if (examSubmission != null) studentGrade.getGrades().add(examSubmission.getScore());
+                    else studentGrade.getGrades().add(null);
+                }
+                if (exam.getGradeMethod().equals("QUIZ_ATTEMPTLAST")) {
+                    ExamSubmission examSubmission = examSubmissionRepository
+                            .findLatestExamSubmissionByExamIdAndUserId(exam.getId().getValue(), studentGrade.getStudentId())
+                            .orElse(null);
+                    if (examSubmission != null) studentGrade.getGrades().add(examSubmission.getScore());
+                    else studentGrade.getGrades().add(null);
+                }
             });
         });
 

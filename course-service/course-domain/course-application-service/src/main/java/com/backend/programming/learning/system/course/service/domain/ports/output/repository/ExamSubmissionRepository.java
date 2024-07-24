@@ -32,4 +32,6 @@ public interface ExamSubmissionRepository {
     List<ExamSubmission> findByCourseIdAndUserId(UUID courseId, UUID userId, String searchName);
 
     void updateExamSubmissionScore(ExamSubmissionId id, Float grade);
+
+    Optional<ExamSubmission> findFirstExamSubmissionByExamIdAndUserId(UUID examId, UUID userId);
 }

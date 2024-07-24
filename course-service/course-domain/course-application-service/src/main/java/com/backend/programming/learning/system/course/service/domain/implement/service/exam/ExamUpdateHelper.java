@@ -48,6 +48,7 @@ public class ExamUpdateHelper {
         exam.setTimeLimit(updateExamCommand.timeLimit());
         exam.setTimeLimitUnit(updateExamCommand.timeLimitUnit());
         exam.setUnit(updateExamCommand.unit());
+        exam.setGradeMethod(updateExamCommand.gradeMethod());
         exam.setOverdueHanding(updateExamCommand.overdueHandling());
 
         moduleRepository.save(module);

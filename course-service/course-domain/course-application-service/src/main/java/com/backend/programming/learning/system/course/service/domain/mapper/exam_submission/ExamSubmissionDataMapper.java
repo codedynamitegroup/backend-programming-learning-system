@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryStudentExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.exception.CourseDomainException;

@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryAllStudentExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryStudentExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.exam_submission.ExamSubmissionApplicationService;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamSubmissionId;
@@ -133,6 +134,25 @@ public class ExamSubmissionController {
         QueryAllStudentExamSubmissionResponse response = examSubmissionApplicationService.findByExamId(
                 new ExamId(examId),
                 queryAllStudentExamSubmissionCommand);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("{examId}/student/submission/{submissionId}")
+    @Operation(summary = "Get student exam submission by exam id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllStudentExamSubmissionResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryStudentExamSubmissionResponse> findByExamIdAndSubmissionId(
+            @PathVariable(name = "examId") UUID examId,
+            @PathVariable(name = "submissionId") UUID submissionId) {
+        log.info("Getting exam submission with exam id: {}", examId);
+        QueryStudentExamSubmissionResponse response = examSubmissionApplicationService.findByExamIdAndSubmissionId(
+                new ExamId(examId),
+                new ExamSubmissionId(submissionId));
         return ResponseEntity.ok(response);
     }
 
