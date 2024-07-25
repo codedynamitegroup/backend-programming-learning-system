@@ -118,6 +118,7 @@ public class ExamQueryHelper {
             }
 
             ZonedDateTime lastSubmitAt = examSubmissions.stream()
+                    .filter(examSubmission -> Objects.nonNull(examSubmission.getSubmitTime()))
                     .map(ExamSubmission::getSubmitTime)
                     .reduce((first, second) -> second)
                     .orElse(null);
