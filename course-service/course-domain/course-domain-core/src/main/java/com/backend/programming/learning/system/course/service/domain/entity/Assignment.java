@@ -26,7 +26,6 @@ public class Assignment extends AggregateRoot<AssignmentId> {
     private ZonedDateTime time_close;
 
     private Boolean allowSubmitLate;
-    private ZonedDateTime time_limit;
     private ZonedDateTime createdAt;
     private Type type;
     private Boolean visible;
@@ -45,7 +44,6 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         maxScores = builder.maxScores;
         time_open = builder.time_open;
         time_close = builder.time_close;
-        time_limit = builder.time_limit;
         type = builder.type;
         visible = builder.visible;
         createdAt = builder.createdAt;
@@ -135,10 +133,6 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         return time_close;
     }
 
-    public ZonedDateTime getTime_limit() {
-        return time_limit;
-    }
-
     public Type getType() {
         return type;
     }
@@ -165,10 +159,6 @@ public class Assignment extends AggregateRoot<AssignmentId> {
 
     public void setTime_close(ZonedDateTime time_close) {
         this.time_close = time_close;
-    }
-
-    public void setTime_limit(ZonedDateTime time_limit) {
-        this.time_limit = time_limit;
     }
 
     public void setType(Type type) {
@@ -205,7 +195,6 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         private ZonedDateTime time_open;
         private ZonedDateTime createdAt;
         private ZonedDateTime time_close;
-        private ZonedDateTime time_limit;
         private Type type;
         private Boolean visible;
 
@@ -289,10 +278,6 @@ public class Assignment extends AggregateRoot<AssignmentId> {
             return this;
         }
 
-        public Builder time_limit(ZonedDateTime val) {
-            time_limit = val;
-            return this;
-        }
 
         public Builder type(Type val) {
             type = val;

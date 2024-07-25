@@ -17,7 +17,7 @@ public interface UserRepository {
 
     Optional<User> findUserByEmail(String email);
 
-    Optional<User> findByUserIdMoodle(Integer userIdMoodle);
+    Optional<User> findByUserIdMoodleAndOrganizationId(Integer userIdMoodle,UUID organizationId);
 
     List<User> findAll();
 

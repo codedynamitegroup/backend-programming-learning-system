@@ -25,7 +25,7 @@ public interface CourseJpaRepository extends JpaRepository<CourseEntity, UUID> {
     """)
     Page<CourseEntity> findAll(String search,String[] courseType, Pageable pageable);
 
-    Optional<CourseEntity> findByCourseIdMoodle(Integer courseIdMoodle);
+    Optional<CourseEntity> findByCourseIdMoodleAndOrganizationId(Integer courseIdMoodle,UUID organizationId);
 
     @Query("""
     SELECT c

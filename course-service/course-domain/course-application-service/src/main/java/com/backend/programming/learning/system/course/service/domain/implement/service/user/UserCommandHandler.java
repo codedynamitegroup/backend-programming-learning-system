@@ -55,12 +55,12 @@ public class UserCommandHandler {
     public UpdateUserResponse updateUser(UpdateUserCommand updateUserCommand) {
         UserUpdatedEvent userUpdatedEvent = userUpdateHelper.persistUser(updateUserCommand);
 
-        userOutboxHelper.saveUserOutboxMessage(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME,
-                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
-                CopyState.UPDATING,
-                OutboxStatus.STARTED,
-                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
-                UUID.randomUUID());
+//        userOutboxHelper.saveUserOutboxMessage(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME,
+//                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
+//                CopyState.UPDATING,
+//                OutboxStatus.STARTED,
+//                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
+//                UUID.randomUUID());
 
         log.info("User is updated with id: {}", userUpdatedEvent.getUser().getId().getValue());
         return userDataMapper.userToUpdateUserResponse(userUpdatedEvent.getUser(), "User updated successfully");

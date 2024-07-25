@@ -72,21 +72,21 @@ public class SubmissionAssignmentCreateHelper {
     }
 
     @Transactional
-    public Boolean createSubmissionAssignment(WebhookMessage webhookMessage, Organization organization) {
+    public Boolean createSubmissionAssignment(WebhookMessage webhookMessage, Organization organization,Course course) {
         String apiKey = organization.getApiKey();
         String moodleUrl = organization.getMoodleUrl();
 
         ModuleDetailResponse moduleDetailResponse = moodleCommandHandler.getModuleDetail(webhookMessage.getContextInstanceId(), apiKey, moodleUrl);
         if(moduleDetailResponse.getCm()==null)
             return false;
-        Optional<Assignment> assignment = assignmentRepository.findByAssignmentIdMoodle(moduleDetailResponse.getCm().getInstance());
+        Optional<Assignment> assignment = assignmentRepository.findByAssignmentIdMoodleAndCourseId(moduleDetailResponse.getCm().getInstance(), course.getId().getValue());
 
         if(assignment.isEmpty()) {
             log.warn("Assignment with id: {} not found", moduleDetailResponse.getCm().getInstance());
             throw new AssignmentNotFoundException("Could not find assignment with id: " + moduleDetailResponse.getCm().getInstance());
         }
 
-        moodleCommandHandler.createSubmissionAssignment(assignment.get(), webhookMessage.getUserId(),apiKey, moodleUrl);
+        moodleCommandHandler.createSubmissionAssignment(assignment.get(), webhookMessage.getUserId(),organization);
         return true;
     }
 }

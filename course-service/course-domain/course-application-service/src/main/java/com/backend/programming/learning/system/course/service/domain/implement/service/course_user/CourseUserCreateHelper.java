@@ -2,10 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.CourseDomainService;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserCommand;
-import com.backend.programming.learning.system.course.service.domain.entity.Course;
-import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
-import com.backend.programming.learning.system.course.service.domain.entity.User;
-import com.backend.programming.learning.system.course.service.domain.entity.WebhookMessage;
+import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.mapper.course_user.CourseUserDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseUserRepository;
@@ -56,10 +53,10 @@ public class CourseUserCreateHelper {
         courseDomainService.createCourseUsers(courseUsers);
         courseUserRepository.saveAll(courseUsers);
     }
-    public void enrollUserToCourse(WebhookMessage webhookMessage) {
+    public void enrollUserToCourse(WebhookMessage webhookMessage, Organization organization) {
         log.info("Enroll user to course");
-        User user = getUser(Integer.valueOf(webhookMessage.getRelatedUserId()));
-        Course course = getCourse(Integer.valueOf(webhookMessage.getCourseId()));
+        User user = getUser(Integer.valueOf(webhookMessage.getRelatedUserId()),organization.getId().getValue());
+        Course course = getCourse(Integer.valueOf(webhookMessage.getCourseId()),organization.getId().getValue());
         CourseUser courseUser = courseUserDataMapper.buildCourseUser(course, user);
 
         courseDomainService.createCourseUser(courseUser);
@@ -91,8 +88,8 @@ public class CourseUserCreateHelper {
         return course;
     }
 
-    private User getUser(Integer userMoodleId) {
-        Optional<User> user = userRepository.findByUserIdMoodle(userMoodleId);
+    private User getUser(Integer userMoodleId,UUID organizationId) {
+        Optional<User> user = userRepository.findByUserIdMoodleAndOrganizationId(userMoodleId,organizationId);
 
         if (user.isEmpty()) {
             log.warn("User with moodle id: {} not found", userMoodleId);
@@ -101,8 +98,8 @@ public class CourseUserCreateHelper {
 
         return user.get();
     }
-    private Course getCourse(Integer courseIdMoodle) {
-        Optional<Course> course = courseRepository.findByCourseIdMoodle(courseIdMoodle);
+    private Course getCourse(Integer courseIdMoodle,UUID organizationId) {
+        Optional<Course> course = courseRepository.findByCourseIdMoodleAndOrganizationId(courseIdMoodle,organizationId);
 
         if (course.isEmpty()) {
             log.warn("Course with moodle id: {} not found", courseIdMoodle);

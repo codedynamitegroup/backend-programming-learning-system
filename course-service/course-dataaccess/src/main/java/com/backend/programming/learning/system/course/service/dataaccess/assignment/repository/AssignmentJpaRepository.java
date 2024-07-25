@@ -18,7 +18,7 @@ public interface AssignmentJpaRepository extends JpaRepository<AssignmentEntity,
 
     List<AssignmentEntity> findAllByCourseId(UUID courseId);
 
-    Optional<AssignmentEntity> findByAssignmentIdMoodle(Integer assignmentIdMoodle);
+    Optional<AssignmentEntity> findByAssignmentIdMoodleAndCourseId(Integer assignmentIdMoodle, UUID courseId);
 
     @Query("""
             SELECT a

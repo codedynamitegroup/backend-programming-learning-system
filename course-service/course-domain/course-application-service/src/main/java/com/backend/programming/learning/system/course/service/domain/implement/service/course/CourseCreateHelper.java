@@ -71,8 +71,8 @@ public class CourseCreateHelper {
     @Transactional
     public Course createCourse(WebhookMessage webhookMessage, Organization organization) {
         CourseModel courseModel = moodleCommandHandler.getCourse(webhookMessage.getCourseId());
-        User user = getUser(Integer.valueOf(webhookMessage.getUserId()));
-        CourseType courseType = findCourseType(courseModel.getCategoryid());
+        User user = getUser(Integer.valueOf(webhookMessage.getUserId()), organization.getId().getValue());
+        CourseType courseType = findCourseType(courseModel.getCategoryid(), organization.getId().getValue());
         Course course = courseDataMapper.courseModelToCourse(courseModel, user, organization, courseType );
 
         courseDomainService.createCourse(course);
@@ -113,8 +113,8 @@ public class CourseCreateHelper {
         return user.get();
     }
 
-    private User getUser(Integer moodleUserId) {
-        Optional<User> user = userRepository.findByUserIdMoodle(moodleUserId);
+    private User getUser(Integer moodleUserId, UUID organizationId) {
+        Optional<User> user = userRepository.findByUserIdMoodleAndOrganizationId(moodleUserId, organizationId);
 
         if (user.isEmpty()) {
             log.warn("User with moodleUserId: {} not found", moodleUserId);
@@ -124,8 +124,8 @@ public class CourseCreateHelper {
         return user.get();
     }
 
-    private CourseType findCourseType(Integer courseTypeMoodleId) {
-        Optional<CourseType> courseType = courseTypeRepository.findByMoodleId(courseTypeMoodleId);
+    private CourseType findCourseType(Integer courseTypeMoodleId,UUID organizationId) {
+        Optional<CourseType> courseType = courseTypeRepository.findByMoodleIdAndOrganizationId(courseTypeMoodleId, organizationId);
 
         if (courseType.isEmpty()) {
             log.warn("Course type not found with moodle id: {}", courseTypeMoodleId);

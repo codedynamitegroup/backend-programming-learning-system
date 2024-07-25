@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.course_user.DeleteCourseUserCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
+import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.entity.WebhookMessage;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * com.backend.programming.learning.system.implement.course_user
@@ -40,9 +42,9 @@ public class CourseUserDeleteHelper {
     }
 
     @Transactional
-    public void unenrollUserToCourse(WebhookMessage webhookMessage) {
-        User user = getUser(Integer.valueOf(webhookMessage.getRelatedUserId()));
-        Course course = getCourse(Integer.valueOf(webhookMessage.getCourseId()));
+    public void unenrollUserToCourse(WebhookMessage webhookMessage, Organization organization) {
+        User user = getUser(Integer.valueOf(webhookMessage.getRelatedUserId()),organization.getId().getValue());
+        Course course = getCourse(Integer.valueOf(webhookMessage.getCourseId()), organization.getId().getValue());
 
         courseUserRepository.deleteByCourseIdAndUserId(course.getId().getValue(), user.getId().getValue());
 
@@ -50,8 +52,8 @@ public class CourseUserDeleteHelper {
                 webhookMessage.getRelatedUserId(), user.getId(), course.getId());
     }
 
-    private User getUser(Integer userMoodleId) {
-        Optional<User> user = userRepository.findByUserIdMoodle(userMoodleId);
+    private User getUser(Integer userMoodleId, UUID organizationId) {
+        Optional<User> user = userRepository.findByUserIdMoodleAndOrganizationId(userMoodleId, organizationId);
 
         if (user.isEmpty()) {
             log.warn("User with moodle id: {} not found", userMoodleId);
@@ -60,8 +62,8 @@ public class CourseUserDeleteHelper {
 
         return user.get();
     }
-    private Course getCourse(Integer courseIdMoodle) {
-        Optional<Course> course = courseRepository.findByCourseIdMoodle(courseIdMoodle);
+    private Course getCourse(Integer courseIdMoodle, UUID organizationId) {
+        Optional<Course> course = courseRepository.findByCourseIdMoodleAndOrganizationId(courseIdMoodle, organizationId);
 
         if (course.isEmpty()) {
             log.warn("Course with moodle id: {} not found", courseIdMoodle);

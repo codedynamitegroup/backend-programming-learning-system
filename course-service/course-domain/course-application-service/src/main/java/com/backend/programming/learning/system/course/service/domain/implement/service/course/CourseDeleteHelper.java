@@ -30,8 +30,8 @@ public class CourseDeleteHelper {
         courseRepository.deleteById(courseId);
     }
 
-    public void deleteCourse(Integer courseMoodleId) {
-        courseRepository.deleteByMoodleId(courseMoodleId);
+    public void deleteCourse(Integer courseMoodleId, UUID organizationId) {
+        courseRepository.deleteByMoodleIdAndOrganizationId(courseMoodleId, organizationId);
         log.info("Course deleted with course moodle id: {}", courseMoodleId);
     }
 }
