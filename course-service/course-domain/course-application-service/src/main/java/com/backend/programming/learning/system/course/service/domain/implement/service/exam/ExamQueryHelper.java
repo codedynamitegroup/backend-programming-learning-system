@@ -90,24 +90,28 @@ public class ExamQueryHelper {
                     .findAllByExamIdAndUserId(examId.getValue(), courseUser.getUser().getId().getValue());
             if (exam.getGradeMethod().equals("QUIZ_GRADEHIGHEST")){
                 grade = examSubmissions.stream()
+                        .filter(examSubmission -> examSubmission.getScore() != null)
                         .mapToDouble(ExamSubmission::getScore)
                         .max()
                         .orElse(0.0);
             }
             if (exam.getGradeMethod().equals("QUIZ_GRADEAVERAGE")){
                 grade = examSubmissions.stream()
+                        .filter(examSubmission -> examSubmission.getScore() != null)
                         .mapToDouble(ExamSubmission::getScore)
                         .average()
                         .orElse(0.0);
             }
             if (exam.getGradeMethod().equals("QUIZ_ATTEMPTFIRST")){
                 grade = examSubmissions.stream()
+                        .filter(examSubmission -> examSubmission.getScore() != null)
                         .mapToDouble(ExamSubmission::getScore)
                         .findFirst()
                         .orElse(0.0);
             }
             if (exam.getGradeMethod().equals("QUIZ_ATTEMPTLAST")){
                 grade = examSubmissions.stream()
+                        .filter(examSubmission -> examSubmission.getScore() != null)
                         .mapToDouble(ExamSubmission::getScore)
                         .reduce((first, second) -> second)
                         .orElse(0.0);
