@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.cr
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.message.user.UserRequest;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserByAdminCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.organization.OrganizationEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
@@ -21,10 +22,12 @@ import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -49,6 +52,21 @@ public class UserDataMapper {
                                 .id(new OrganizationId(createUserCommand.getOrganizationId()))
                                 .build())
                 .phone(createUserCommand.getPhone())
+                .build();
+    }
+
+
+    public UpdateUserByAdminCommand userCommandToUpdateUserByAdminCommand(User user, String roleName) {
+        return UpdateUserByAdminCommand.builder()
+                .userId(user.getId().getValue())
+                .dob(user.getDob())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .phone(user.getPhone())
+                .address(user.getAddress())
+                .roleName(roleName)
+                .avatarUrl(user.getAvatarUrl())
+                .isDeleted(user.getDeleted())
                 .build();
     }
 
@@ -143,6 +161,25 @@ public class UserDataMapper {
                 .updatedAt(user.getUpdatedAt())
                 .copyState(CopyState.UPDATING.name())
                 .isDeleted(user.getDeleted())
+                .build();
+    }
+
+    public UserEventPayload userUpdatedEventToUserEventPayloadWithRoleName(
+            UserUpdatedEvent userUpdatedEvent, String roleName) {
+        User user = userUpdatedEvent.getUser();
+        return UserEventPayload.builder()
+                .userId(user.getId().getValue().toString())
+                .organizationId(user.getOrganization() == null ? null : user.getOrganization().getId().getValue().toString())
+                .dob(user.getDob())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .phone(user.getPhone())
+                .address(user.getAddress())
+                .avatarUrl(user.getAvatarUrl())
+                .updatedAt(user.getUpdatedAt())
+                .copyState(CopyState.UPDATING.name())
+                .isDeleted(user.getDeleted())
+                .roleName(roleName)
                 .build();
     }
 

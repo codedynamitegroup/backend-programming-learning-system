@@ -91,6 +91,9 @@ public class UserDataMapper {
                 .dob(userUpdateRequest.getDob().atZone(ZoneId.of(DomainConstants.UTC)))
                 .phone(userUpdateRequest.getPhone())
                 .updatedAt(userUpdateRequest.getUpdatedAt().atZone(ZoneId.of(DomainConstants.UTC)))
+                .roleMoodle(RoleMoodle.builder()
+                        .id(new RoleMoodleId(userUpdateRequest.getRoleName().equals(ROLE_STUDENT_NAME) ? ROLE_STUDENT : ROLE_LECTURER))
+                        .build())
                 .isDeleted(userUpdateRequest.getIsDeleted())
                 .build();
     }
