@@ -36,6 +36,7 @@ public class UserMessagingDataMapper {
                 .setAvatarUrl(userEventPayload.getAvatarUrl())
                 .setUpdatedAt(userEventPayload.getUpdatedAt().toInstant())
                 .setCopyState(CopyState.UPDATING)
+                .setRoleName(com.backend.programming.learning.system.kafka.auth.avro.model.user.RoleName.valueOf(userEventPayload.getRoleName()))
                 .setServiceName(
                         com.backend.programming.learning.system.kafka.auth.avro.model.user.ServiceName.valueOf(serviceName.name()))
                 .build();

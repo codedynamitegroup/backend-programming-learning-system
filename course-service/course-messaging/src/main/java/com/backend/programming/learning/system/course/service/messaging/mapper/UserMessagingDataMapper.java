@@ -46,6 +46,7 @@ public class UserMessagingDataMapper {
                 .phone(userUpdateRequestAvroModel.getPhone())
                 .updatedAt(userUpdateRequestAvroModel.getUpdatedAt())
                 .isDeleted(userUpdateRequestAvroModel.getIsDeleted())
+                .roleName(userUpdateRequestAvroModel.getRoleName().name())
                 .build();
     }
 
