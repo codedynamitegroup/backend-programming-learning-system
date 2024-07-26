@@ -118,7 +118,7 @@ CREATE TABLE "public".user
     user_id_moodle int,
     org_id    uuid                     ,
     role_moodle_id integer,
-    username  text UNIQUE,
+    username  text,
     email      text UNIQUE NOT NULL,
     dob        date,
     first_name text,
@@ -213,11 +213,12 @@ CREATE TABLE "public".answer_of_question
 );
 
 DROP TABLE IF EXISTS "public".course_type CASCADE;
+
 CREATE TABLE "public".course_type
 (
     id          uuid    DEFAULT gen_random_uuid() NOT NULL,
     moodle_id integer,
-    name        text UNIQUE,
+    name        text,
     org_id uuid,
     CONSTRAINT course_type_pkey PRIMARY KEY (id),
     CONSTRAINT course_type_org_id_fkey FOREIGN KEY (org_id)
@@ -225,6 +226,9 @@ CREATE TABLE "public".course_type
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
+
+CREATE UNIQUE INDEX course_type_org_id_name_key ON "public".course_type (org_id, name);
+
 
 
 DROP TABLE IF EXISTS "public".course CASCADE;
@@ -234,7 +238,7 @@ CREATE TABLE "public".course
     course_id_moodle integer,
     course_type_id uuid,
     org_id uuid,
-    name        text UNIQUE,
+    name        text,
     visible     boolean DEFAULT '1',
     created_at  TIMESTAMP WITH TIME ZONE,
     updated_at  TIMESTAMP WITH TIME ZONE,
@@ -248,6 +252,8 @@ CREATE TABLE "public".course
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
+
+CREATE UNIQUE INDEX course_org_id_name_key ON "public".course (org_id,course_type_id,name);
 
 
 DROP TABLE IF EXISTS "public".assignment CASCADE;

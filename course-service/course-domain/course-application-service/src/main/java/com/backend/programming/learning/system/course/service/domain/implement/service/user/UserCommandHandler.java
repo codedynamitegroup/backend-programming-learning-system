@@ -41,12 +41,14 @@ public class UserCommandHandler {
         CreateUserResponse createUserResponse = userDataMapper.userToCreateUserResponse(userCreatedEvent.getUser(),
                 "User created successfully");
 
-//        userOutboxHelper.saveUserOutboxMessage(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME,
-//                        userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
-//                        CopyState.CREATING,
-//                        OutboxStatus.STARTED,
-//                        userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
-//                                UUID.randomUUID());
+        userOutboxHelper.saveUserOutboxMessage(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME,
+                        userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent,
+                                createOrderCommand.getRoleMoodleId(),
+                                createOrderCommand.getUserIdMoodle()),
+                        CopyState.CREATING,
+                        OutboxStatus.STARTED,
+                        userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                                UUID.randomUUID());
 
         return createUserResponse;
     }
@@ -56,7 +58,7 @@ public class UserCommandHandler {
         UserUpdatedEvent userUpdatedEvent = userUpdateHelper.persistUser(updateUserCommand);
 
         userOutboxHelper.saveUserOutboxMessage(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME,
-                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
+                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent, updateUserCommand.getRoleMoodleId()),
                 CopyState.UPDATING,
                 OutboxStatus.STARTED,
                 userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),

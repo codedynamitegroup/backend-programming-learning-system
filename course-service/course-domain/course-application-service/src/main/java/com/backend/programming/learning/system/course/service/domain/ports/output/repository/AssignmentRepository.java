@@ -14,7 +14,7 @@ public interface AssignmentRepository {
     Optional<Assignment> findById(UUID assignmentId);
     List<Assignment> findAllByCourseId(CourseId courseId);
 
-    Optional<Assignment> findByAssignmentIdMoodle(Integer assignmentIdMoodle);
+    Optional<Assignment> findByAssignmentIdMoodleAndCourseId(Integer assignmentIdMoodle, UUID courseId);
 
     void deleteAssignmentById(UUID assignmentId);
 

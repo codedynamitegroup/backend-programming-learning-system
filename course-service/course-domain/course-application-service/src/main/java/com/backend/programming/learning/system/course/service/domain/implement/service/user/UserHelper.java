@@ -55,9 +55,9 @@ public class UserHelper {
     }
 
     @Transactional
-    public void updateUser(WebhookMessage webhookMessage) {
+    public void updateUser(WebhookMessage webhookMessage, Organization organization) {
         UserModel userModel = moodleCommandHandler.getUser(webhookMessage.getRelatedUserId());
-        User prevUser = getUser(Integer.valueOf(webhookMessage.getRelatedUserId()));
+        User prevUser = getUser(Integer.valueOf(webhookMessage.getRelatedUserId()),organization.getId().getValue());
         User user = userDataMapper.setUserWithOtherPayload(userModel, prevUser);
 
         UserUpdatedEvent userUpdatedEvent =courseDomainService.updateUser(user);
@@ -73,8 +73,8 @@ public class UserHelper {
     }
 
     @Transactional
-    public void deleteUser(WebhookMessage webhookMessage) {
-        User user = getUser(Integer.valueOf(webhookMessage.getRelatedUserId()));
+    public void deleteUser(WebhookMessage webhookMessage, Organization organization) {
+        User user = getUser(Integer.valueOf(webhookMessage.getRelatedUserId()),organization.getId().getValue());
 
         userRepository.deleteByUserMoodleId(user.getUserIdMoodle());
         log.info("User deleted with moodle id: {}", webhookMessage.getRelatedUserId());
@@ -91,8 +91,8 @@ public class UserHelper {
                 UUID.randomUUID());
     }
 
-    private User getUser(Integer moodleId) {
-        Optional<User> user = userRepository.findByUserIdMoodle(moodleId);
+    private User getUser(Integer moodleId, UUID organizationId) {
+        Optional<User> user = userRepository.findByUserIdMoodleAndOrganizationId(moodleId, organizationId);
 
         if (user.isEmpty()) {
             log.info("User not found with moodle id: {}", moodleId);

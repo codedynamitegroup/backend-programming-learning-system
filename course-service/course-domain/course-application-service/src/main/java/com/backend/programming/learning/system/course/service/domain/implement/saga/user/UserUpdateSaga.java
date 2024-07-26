@@ -33,8 +33,8 @@ public class UserUpdateSaga implements SagaStep<UserResponse> {
     @Transactional
     public void process(UserResponse userResponse) {
         Optional<UserOutboxMessage> userOutboxMessageResponse =
-                userOutboxHelper.getUserOutboxMessageBySagaIdAndCopyState(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME,
-                        UUID.fromString(userResponse.getSagaId()), userResponse.getState());
+                userOutboxHelper.findByTypeAndSagaIdAndSagaStatus(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME,
+                        UUID.fromString(userResponse.getSagaId()), SagaStatus.STARTED);
         if (userOutboxMessageResponse.isEmpty()) {
             log.info("An outbox message with saga id: {} is already processed!", userResponse.getSagaId());
             return;

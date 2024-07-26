@@ -42,7 +42,7 @@ public class MoodleDataMapper {
     }
 
     public Course createCourse(CourseModel courseModel,Organization organization) {
-        Optional<CourseType> courseType = courseTypeRepository.findByMoodleId(Integer.valueOf(courseModel.getCategoryid()));
+        Optional<CourseType> courseType = courseTypeRepository.findByMoodleIdAndOrganizationId(Integer.valueOf(courseModel.getCategoryid()),organization.getId().getValue());
         return Course.builder()
                 .id(new CourseId(UUID.randomUUID()))
                 .courseIdMoodle(Integer.valueOf(courseModel.getId()))
@@ -146,7 +146,6 @@ public class MoodleDataMapper {
                 .type(type.get())
                 .time_open(Instant.ofEpochSecond(assignmentModel.getAllowsubmissionsfromdate()).atZone(ZoneId.of("UTC")))
                 .time_close(Instant.ofEpochSecond(assignmentModel.getDuedate()).atZone(ZoneId.of("UTC")))
-                .time_limit(Instant.ofEpochSecond(assignmentModel.getTimelimit()).atZone(ZoneId.of("UTC")))
                 .visible(false)
                 .createdAt(ZonedDateTime.now())
                 .build();
@@ -220,19 +219,6 @@ public class MoodleDataMapper {
     }
 
     public Module createModule(Section section, ModuleModel module,Assignment assignment) {
-        ZonedDateTime timeOpen=null;
-        ZonedDateTime timeClose=null;
-        if(module.getDates().size()!=0)
-        {
-            timeOpen=Instant.ofEpochSecond(module.getDates().get(0).getTimestamp()).atZone(ZoneId.of("UTC"));
-            timeClose=Instant.ofEpochSecond(module.getDates().get(1).getTimestamp()).atZone(ZoneId.of("UTC"));
-        }
-        String content=null;
-        if (module.getContents() != null && !module.getContents().isEmpty()) { // Sửa lỗi ở đây
-            content = module.getContents().get(0).getFileurl();
-            content=content.replace("/webservice","");
-        }
-
         return Module.builder()
                 .id(new ModuleId(UUID.randomUUID()))
                 .cmid(Integer.valueOf(module.getId()))
@@ -390,9 +376,6 @@ public class MoodleDataMapper {
                         ZoneId.of("UTC")))
                 .time_close(ZonedDateTime.ofInstant(
                         Instant.ofEpochSecond(assignmentModel.getDuedate()),
-                        ZoneId.of("UTC")))
-                .time_limit(ZonedDateTime.ofInstant(
-                        Instant.ofEpochSecond(assignmentModel.getTimelimit()),
                         ZoneId.of("UTC")))
                 .visible(false)
                 .build();

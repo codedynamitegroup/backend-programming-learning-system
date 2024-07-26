@@ -39,9 +39,29 @@ public class CourseUserRepositoryImpl implements CourseUserRepository {
 
     @Override
     public Optional<CourseUser> findByCourseIdAndUserId(UUID courseId, UUID userId) {
-        return courseUserJpaRepository.findByCourseIdAndUserId(courseId, userId)
-                .map(courseUserDataAccessMapper::courseUserEntityToCourseUser);
+        if (courseId == null || userId == null) {
+            System.err.println("courseId or userId is null. courseId: " + courseId + ", userId: " + userId);
+            return Optional.empty();
+        }
+
+        try {
+            System.out.println("Finding CourseUserEntity with courseId: " + courseId + " and userId: " + userId);
+            Optional<CourseUserEntity> courseUserEntityOptional = courseUserJpaRepository.findByCourseIdAndUserId(courseId, userId);
+
+            if (courseUserEntityOptional.isEmpty()) {
+                System.out.println("No CourseUserEntity found for courseId: " + courseId + " and userId: " + userId);
+            } else {
+                System.out.println("Found CourseUserEntity: " + courseUserEntityOptional.get());
+            }
+
+            return courseUserEntityOptional.map(courseUserDataAccessMapper::courseUserEntityToCourseUser);
+        } catch (Exception e) {
+            System.err.println("Exception occurred while finding CourseUserEntity" + e.getMessage());
+            e.printStackTrace();
+            return Optional.empty();
+        }
     }
+
 
     @Override
     public List<CourseUser> findAll() {

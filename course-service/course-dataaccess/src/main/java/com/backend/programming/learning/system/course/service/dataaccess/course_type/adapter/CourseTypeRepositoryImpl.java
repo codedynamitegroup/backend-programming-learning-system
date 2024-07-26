@@ -55,10 +55,11 @@ public class CourseTypeRepositoryImpl implements CourseTypeRepository {
     }
 
     @Override
-    public Optional<CourseType> findByMoodleId(Integer moodleId) {
-        return courseJpaRepository.findByMoodleId(moodleId)
+    public Optional<CourseType> findByMoodleIdAndOrganizationId(Integer moodleId, UUID organizationId) {
+        return courseJpaRepository.findByMoodleIdAndOrganizationId(moodleId, organizationId)
                 .map(courseTypeDataAccessMapper::courseTypeEntityToCourseType);
     }
+
 
     @Override
     public Page<CourseType> findAllByOrganizationId(UUID organizationId, Integer page, Integer size, String searchName) {

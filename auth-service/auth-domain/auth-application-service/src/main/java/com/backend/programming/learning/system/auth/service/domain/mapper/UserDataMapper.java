@@ -32,6 +32,7 @@ import java.util.stream.Collectors;
 @Component
 public class UserDataMapper {
     private final RoleDataMapper roleDataMapper;
+    private final String DEFAULT_PASSWORD = "123456789oO#";
 
     public UserDataMapper(RoleDataMapper roleDataMapper) {
         this.roleDataMapper = roleDataMapper;
@@ -48,6 +49,19 @@ public class UserDataMapper {
                                 .id(new OrganizationId(createUserCommand.getOrganizationId()))
                                 .build())
                 .phone(createUserCommand.getPhone())
+                .build();
+    }
+
+    public CreateUserCommand userCommandToCreateUserCommand(User user, String roleName) {
+        return CreateUserCommand.builder()
+                .email(user.getEmail())
+                .username(user.getUsername())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .password(DEFAULT_PASSWORD)
+                .organizationId(user.getOrganization() == null ? null : user.getOrganization().getId().getValue())
+                .phone(user.getPhone())
+                .roleName(roleName)
                 .build();
     }
 
@@ -93,6 +107,25 @@ public class UserDataMapper {
                 .updatedAt(user.getUpdatedAt())
                 .isDeleted(user.getDeleted())
                 .copyState(CopyState.CREATING.name())
+                .build();
+    }
+
+    public UserEventPayload userCreatedEventToUserEventPayloadWithRoleName(UserCreatedEvent userCreatedEvent, String roleName, Integer userIdMoodle) {
+        User user = userCreatedEvent.getUser();
+        return UserEventPayload.builder()
+                .userId(user.getId().getValue().toString())
+                .organizationId(user.getOrganization() == null ? null : user.getOrganization().getId().getValue().toString())
+                .email(user.getEmail())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .phone(user.getPhone())
+                .username(user.getUsername())
+                .createdAt(user.getCreatedAt())
+                .updatedAt(user.getUpdatedAt())
+                .isDeleted(user.getDeleted())
+                .copyState(CopyState.CREATING.name())
+                .roleName(roleName)
+                .userIdMoodle(userIdMoodle)
                 .build();
     }
 
@@ -193,6 +226,10 @@ public class UserDataMapper {
     public User userCreateRequestToUser(UserRequest userRequest) {
         return User.builder()
                 .id(new UserId(UUID.fromString(userRequest.getUserId())))
+                .organization(userRequest.getOrganizationId() == null ? null :
+                        Organization.builder()
+                                .id(new OrganizationId(userRequest.getOrganizationId()))
+                                .build())
                 .email(userRequest.getEmail())
                 .username(userRequest.getUsername())
                 .firstName(userRequest.getFirstName())

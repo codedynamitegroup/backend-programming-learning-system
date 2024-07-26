@@ -24,10 +24,16 @@ public class CourseRepositoryImpl implements CourseRepository {
 
     @Override
     public Course save(Course course) {
-        return courseDataAccessMapper.courseEntityToCourse(courseJpaRepository
-                .save(courseDataAccessMapper
-                        .courseToCourseEntity(course)));
+        try {
+            return courseDataAccessMapper.courseEntityToCourse(courseJpaRepository
+                    .save(courseDataAccessMapper
+                            .courseToCourseEntity(course)));
+        } catch (Exception e) {
+            log.error("Error while saving course: {}", e.getMessage());
+            throw new RuntimeException("Error while saving course");
+        }
     }
+
 
 
 
@@ -58,8 +64,8 @@ public class CourseRepositoryImpl implements CourseRepository {
     }
 
     @Override
-    public Optional<Course> findByCourseIdMoodle(Integer courseIdMoodle) {
-        return courseJpaRepository.findByCourseIdMoodle(courseIdMoodle)
+    public Optional<Course> findByCourseIdMoodleAndOrganizationId(Integer courseIdMoodle, UUID organizationId) {
+        return courseJpaRepository.findByCourseIdMoodleAndOrganizationId(courseIdMoodle,organizationId)
                 .map(courseDataAccessMapper::courseEntityToCourse);
     }
 
@@ -76,8 +82,8 @@ public class CourseRepositoryImpl implements CourseRepository {
     }
 
     @Override
-    public void deleteByMoodleId(Integer courseMoodleId) {
-        courseJpaRepository.findByCourseIdMoodle(courseMoodleId)
+    public void deleteByMoodleIdAndOrganizationId(Integer courseMoodleId,UUID organizationId) {
+        courseJpaRepository.findByCourseIdMoodleAndOrganizationId(courseMoodleId,organizationId)
                 .ifPresent(courseJpaRepository::delete);
     }
 

@@ -97,34 +97,34 @@ public class WebhookHelper {
 
         switch (webhookMessage.getEventName()) {
             case COURSE_CREATED -> createCourse(webhookMessage, organization);
-            case COURSE_UPDATED -> updateCourse(webhookMessage);
-            case COURSE_DELETED -> deleteCourse(webhookMessage);
+            case COURSE_UPDATED -> updateCourse(webhookMessage, organization);
+            case COURSE_DELETED -> deleteCourse(webhookMessage, organization);
             case USER_CREATED -> createUser(webhookMessage, organization);
-            case USER_UPDATED -> updateUser(webhookMessage);
-            case USER_DELETED -> deleteUser(webhookMessage);
+            case USER_UPDATED -> updateUser(webhookMessage, organization);
+            case USER_DELETED -> deleteUser(webhookMessage, organization);
             case COURSE_SECTION_CREATED -> createSynchronizeStateDetail(webhookMessage, organization, TypeSynchronize.SECTION);
-            case COURSE_SECTION_UPDATED -> updateSection(webhookMessage, findCourse(Integer.valueOf(webhookMessage.getCourseId())));
-            case COURSE_SECTION_DELETED -> deleteSection(webhookMessage, getCourseIdByMoodleId(webhookMessage));
+            case COURSE_SECTION_UPDATED -> updateSection(webhookMessage, findCourse(Integer.valueOf(webhookMessage.getCourseId()), organization.getId().getValue()));
+            case COURSE_SECTION_DELETED -> deleteSection(webhookMessage, getCourseIdByMoodleId(webhookMessage, organization));
             case COURSE_MODULE_CREATED -> createSynchronizeStateDetail(webhookMessage, organization, TypeSynchronize.MODULE);
             case COURSE_MODULE_UPDATED -> updateModule(webhookMessage, organization);
-            case ASSIGN_SUBMISSION_FILE_CREATED, ASSIGN_SUBMISSION_FILE_UPDATED, ASSIGN_SUBMISSION_ONLINETEXT_CREATED, ASSIGN_SUBMISSION_ONLINETEXT_UPDATED -> createSubmissionAssignment(webhookMessage, organization);
-            case USER_ENROLLMENT_CREATED -> enrollUserToCourse(webhookMessage);
-            case USER_ENROLLMENT_DELETED -> unenrollUserToCourse(webhookMessage);
+            case ASSIGN_SUBMISSION_FILE_CREATED, ASSIGN_SUBMISSION_FILE_UPDATED, ASSIGN_SUBMISSION_ONLINETEXT_CREATED, ASSIGN_SUBMISSION_ONLINETEXT_UPDATED -> createSubmissionAssignment(webhookMessage, organization, findCourse(Integer.valueOf(webhookMessage.getCourseId()), organization.getId().getValue()));
+            case USER_ENROLLMENT_CREATED -> enrollUserToCourse(webhookMessage, organization);
+            case USER_ENROLLMENT_DELETED -> unenrollUserToCourse(webhookMessage, organization);
             case ROLE_ASSIGNED, USER_ENROLLMENT_UPDATED -> log.info("Event not handled: {}", webhookMessage.getEventName());
             default -> log.info("Event not found: {}", webhookMessage.getEventName());
         }
     }
 
-    private void updateCourse(WebhookMessage webhookMessage) {
-        courseUpdateHelper.updateCourse(webhookMessage);
+    private void updateCourse(WebhookMessage webhookMessage, Organization organization) {
+        courseUpdateHelper.updateCourse(webhookMessage, organization);
     }
 
     private void createCourse(WebhookMessage webhookMessage, Organization organization) {
         courseCreateHelper.createCourse(webhookMessage, organization);
     }
 
-    private void deleteCourse(WebhookMessage webhookMessage) {
-        courseDeleteHelper.deleteCourse(Integer.valueOf(webhookMessage.getCourseId()));
+    private void deleteCourse(WebhookMessage webhookMessage, Organization organization) {
+        courseDeleteHelper.deleteCourse(Integer.valueOf(webhookMessage.getCourseId()), organization.getId().getValue());
     }
 
     private void updateSection(WebhookMessage webhookMessage, Course course) {
@@ -139,28 +139,28 @@ public class WebhookHelper {
         moduleUpdateHelper.updateModule(webhookMessage, organization);
     }
 
-    private void createSubmissionAssignment(WebhookMessage webhookMessage, Organization organization) {
-        submissionAssignmentCreateHelper.createSubmissionAssignment(webhookMessage, organization);
+    private void createSubmissionAssignment(WebhookMessage webhookMessage, Organization organization,Course course) {
+        submissionAssignmentCreateHelper.createSubmissionAssignment(webhookMessage, organization,course);
     }
 
-    private void enrollUserToCourse(WebhookMessage webhookMessage) {
-        courseUserCreateHelper.enrollUserToCourse(webhookMessage);
+    private void enrollUserToCourse(WebhookMessage webhookMessage,Organization organization) {
+        courseUserCreateHelper.enrollUserToCourse(webhookMessage,organization);
     }
 
-    private void unenrollUserToCourse(WebhookMessage webhookMessage) {
-        courseUserDeleteHelper.unenrollUserToCourse(webhookMessage);
+    private void unenrollUserToCourse(WebhookMessage webhookMessage,Organization organization) {
+        courseUserDeleteHelper.unenrollUserToCourse(webhookMessage,organization);
     }
 
     private void createUser(WebhookMessage webhookMessage, Organization organization) {
         userHelper.createUser(webhookMessage, organization);
     }
 
-    private void updateUser(WebhookMessage webhookMessage) {
-        userHelper.updateUser(webhookMessage);
+    private void updateUser(WebhookMessage webhookMessage, Organization organization) {
+        userHelper.updateUser(webhookMessage, organization);
     }
 
-    private void deleteUser(WebhookMessage webhookMessage) {
-        userHelper.deleteUser(webhookMessage);
+    private void deleteUser(WebhookMessage webhookMessage, Organization organization) {
+        userHelper.deleteUser(webhookMessage, organization);
     }
 
     private Organization findOrganization(String moodleUrl) {
@@ -171,16 +171,16 @@ public class WebhookHelper {
                 });
     }
 
-    private Course findCourse(Integer courseId) {
-        return courseRepository.findByCourseIdMoodle(courseId)
+    private Course findCourse(Integer courseId,UUID organizationId) {
+        return courseRepository.findByCourseIdMoodleAndOrganizationId(courseId, organizationId)
                 .orElseThrow(() -> {
                     log.info(COURSE_NOT_FOUND + courseId);
                     return new CourseNotFoundException(COURSE_NOT_FOUND + courseId);
                 });
     }
 
-    private UUID getCourseIdByMoodleId(WebhookMessage webhookMessage) {
-        return courseRepository.findByCourseIdMoodle(Integer.valueOf(webhookMessage.getCourseId()))
+    private UUID getCourseIdByMoodleId(WebhookMessage webhookMessage,Organization organization) {
+        return courseRepository.findByCourseIdMoodleAndOrganizationId(Integer.valueOf(webhookMessage.getCourseId()), organization.getId().getValue())
                 .orElseThrow(() -> new CourseNotFoundException(COURSE_NOT_FOUND + webhookMessage.getCourseId()))
                 .getId()
                 .getValue();

@@ -7,13 +7,17 @@ import com.backend.programming.learning.system.course.service.dataaccess.role_mo
 import com.backend.programming.learning.system.course.service.dataaccess.role_moodle.mapper.RoleMoodleDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.mapper.UserDataAccessMapper;
+import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
+import com.backend.programming.learning.system.course.service.domain.entity.RoleMoodle;
+import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseUserId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -32,11 +36,14 @@ public class CourseUserDataAccessMapper {
     }
 
     public CourseUser courseUserEntityToCourseUser(CourseUserEntity courseUserEntity) {
+        User user = userDataAccessMapper.userEntityToUser(courseUserEntity.getUser());
+        Course course = courseDataAccessMapper.courseEntityToCourse(courseUserEntity.getCourse());
+        RoleMoodle roleMoodle = roleMoodleDataAccessMapper.roleMoodleEntityToRoleMoodle(courseUserEntity.getRoleMoodle());
         return CourseUser.builder()
                 .id(new CourseUserId(courseUserEntity.getId()))
-                .user(userDataAccessMapper.userEntityToUser(courseUserEntity.getUser()))
-                .course(courseDataAccessMapper.courseEntityToCourse(courseUserEntity.getCourse()))
-                .roleMoodle(roleMoodleDataAccessMapper.roleMoodleEntityToRoleMoodle(courseUserEntity.getRoleMoodle()))
+                .user(user)
+                .course(course)
+                .roleMoodle(roleMoodle)
                 .createdAt(courseUserEntity.getCreatedAt())
                 .build();
     }

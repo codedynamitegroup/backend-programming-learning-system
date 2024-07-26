@@ -27,7 +27,7 @@ public class UserRequestCourseToAuthKafkaListener implements KafkaConsumer<UserR
     private final UserMessagingDataMapper userMessagingDataMapper;
 
     @Override
-    @KafkaListener(id = "${kafka-consumer-config.course-service-user-response-to-auth-service-group-id}",
+    @KafkaListener(id = "${kafka-consumer-config.course-service-user-request-to-auth-service-group-id}",
             topics = "${auth-service.course-service-user-request-to-auth-service-topic-name}")
     public void receive(@Payload List<UserRequestAvroModel> messages,
                         @Header(KafkaHeaders.RECEIVED_KEY) List<String> keys,

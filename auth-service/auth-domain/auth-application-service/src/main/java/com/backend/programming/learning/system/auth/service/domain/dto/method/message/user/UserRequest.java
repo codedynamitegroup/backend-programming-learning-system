@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.auth.service.domain.dto.method.message.user;
 
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.RoleName;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,4 +32,6 @@ public class UserRequest {
     private Instant createdAt;
     private Instant updatedAt;
     private Boolean isDeleted;
+    private RoleName roleName;
+    private Integer userIdMoodle;
 }

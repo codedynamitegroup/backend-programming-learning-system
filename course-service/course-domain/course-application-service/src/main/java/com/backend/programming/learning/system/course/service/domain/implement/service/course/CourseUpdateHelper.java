@@ -62,12 +62,12 @@ public class CourseUpdateHelper {
     }
 
     @Transactional
-    public Course updateCourse(WebhookMessage webhookMessage) {
+    public Course updateCourse(WebhookMessage webhookMessage,Organization organization) {
         CourseModel courseModel = moodleCommandHandler.getCourse(webhookMessage.getCourseId());
-        User user = getUser(Integer.valueOf(webhookMessage.getUserId()));
-        CourseType courseType = findCourseType(courseModel.getCategoryid());
+        User user = getUser(Integer.valueOf(webhookMessage.getUserId()),organization.getId().getValue());
+        CourseType courseType = findCourseType(courseModel.getCategoryid(),organization.getId().getValue());
 
-        Course previousCourse = findCourse(Integer.valueOf(courseModel.getId()));
+        Course previousCourse = findCourse(Integer.valueOf(courseModel.getId()),organization.getId().getValue());
         courseDataMapper.setCourse(previousCourse, courseModel, user, courseType);
 
         Course saveResult = courseRepository.save(previousCourse);
@@ -85,8 +85,8 @@ public class CourseUpdateHelper {
         return user.get();
     }
 
-    private User getUser(Integer moodleUserId) {
-        Optional<User> user = userRepository.findByUserIdMoodle(moodleUserId);
+    private User getUser(Integer moodleUserId,UUID organizationId) {
+        Optional<User> user = userRepository.findByUserIdMoodleAndOrganizationId(moodleUserId, organizationId);
 
         if (user.isEmpty()) {
             log.warn("User with moodleUserId: {} not found", moodleUserId);
@@ -95,8 +95,8 @@ public class CourseUpdateHelper {
 
         return user.get();
     }
-    private CourseType findCourseType(Integer courseTypeMoodleId) {
-        Optional<CourseType> courseType = courseTypeRepository.findByMoodleId(courseTypeMoodleId);
+    private CourseType findCourseType(Integer courseTypeMoodleId, UUID organizationId) {
+        Optional<CourseType> courseType = courseTypeRepository.findByMoodleIdAndOrganizationId(courseTypeMoodleId, organizationId);
 
         if (courseType.isEmpty()) {
             log.warn("Course type not found with moodle id: {}", courseTypeMoodleId);
@@ -115,8 +115,8 @@ public class CourseUpdateHelper {
         return courseType.get();
     }
 
-    private Course findCourse(Integer courseIdMoodle) {
-        Optional<Course> course = courseRepository.findByCourseIdMoodle(courseIdMoodle);
+    private Course findCourse(Integer courseIdMoodle,UUID organizationId) {
+        Optional<Course> course = courseRepository.findByCourseIdMoodleAndOrganizationId(courseIdMoodle,organizationId);
 
         if (course.isEmpty()) {
             log.warn("Course not found with courseIdMoodle: {}", courseIdMoodle);

@@ -66,7 +66,7 @@ public class ModuleUpdateHelper {
                 getModuleDetail(webhookMessage.getObjectId(), apiKey, moodleUrl);
         if(moduleDetailResponse.getCm()==null)
             return false;
-        Optional<Course> course = courseRepository.findByCourseIdMoodle(moduleDetailResponse.getCm().getCourse());
+        Optional<Course> course = courseRepository.findByCourseIdMoodleAndOrganizationId(moduleDetailResponse.getCm().getCourse(), organization.getId().getValue());
 
         if(moduleDetailResponse.getCm().getModname().equals("assign")){
             List<AssignmentCourseModel> assignmentCourseModels = moodleCommandHandler.getAllAssignments(moduleDetailResponse.getCm().getCourse().toString(),apiKey,moodleUrl);
@@ -75,7 +75,7 @@ public class ModuleUpdateHelper {
         }
 
 
-        Optional<Assignment> assignment = assignmentRepository.findByAssignmentIdMoodle(moduleDetailResponse.getCm().getInstance());
+        Optional<Assignment> assignment = assignmentRepository.findByAssignmentIdMoodleAndCourseId(moduleDetailResponse.getCm().getInstance(), course.get().getId().getValue());
         Optional<Section> section = sectionRepository.findBySectionMoodleIdAndCourseId(moduleDetailResponse.getCm().getSection(),course.get().getId().getValue());
         if (assignment.isPresent() && section.isPresent()) {
             Optional<Module> module = moduleRepository.findByCmidAndSectionId(moduleDetailResponse.getCm().getId(),section.get().getId().getValue());

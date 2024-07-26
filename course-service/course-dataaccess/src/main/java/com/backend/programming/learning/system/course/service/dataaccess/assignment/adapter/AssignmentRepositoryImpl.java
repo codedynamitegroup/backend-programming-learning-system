@@ -46,8 +46,8 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
     }
 
     @Override
-    public Optional<Assignment> findByAssignmentIdMoodle(Integer assignmentIdMoodle) {
-        return assignmentJpaRepository.findByAssignmentIdMoodle(assignmentIdMoodle)
+    public Optional<Assignment> findByAssignmentIdMoodleAndCourseId(Integer assignmentIdMoodle, UUID courseId) {
+        return assignmentJpaRepository.findByAssignmentIdMoodleAndCourseId(assignmentIdMoodle, courseId)
                 .map(assignmentDataAccessMapper::assignmentEntityToAssignment);
     }
 

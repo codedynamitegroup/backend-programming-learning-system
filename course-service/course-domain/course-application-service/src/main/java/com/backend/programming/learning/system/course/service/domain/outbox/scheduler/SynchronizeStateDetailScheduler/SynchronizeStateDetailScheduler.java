@@ -28,6 +28,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -65,7 +66,7 @@ public class SynchronizeStateDetailScheduler {
             }
             else if(synchronizeStateDetail.getTypeSynchronize().equals(TypeSynchronize.SECTION)) {
 
-                Course course = findCourse(Integer.valueOf(webhookMessage.getCourseId()));
+                Course course = findCourse(Integer.valueOf(webhookMessage.getCourseId()), synchronizeStateDetail.getOrganization().getId().getValue());
 
                 Boolean success = sectionCommandHandler.createSection(webhookMessage,course);
                 if (success) {
@@ -77,8 +78,8 @@ public class SynchronizeStateDetailScheduler {
         });
     }
 
-    private Course findCourse(Integer courseId) {
-        Optional<Course> course = courseRepository.findByCourseIdMoodle(courseId);
+    private Course findCourse(Integer courseId, UUID organizationId){
+        Optional<Course> course = courseRepository.findByCourseIdMoodleAndOrganizationId(courseId,organizationId);
         if(course.isEmpty()){
             log.info("Course not found with courseId: {}", courseId);
             throw new CourseNotFoundException("Course not found with courseId: " + courseId);

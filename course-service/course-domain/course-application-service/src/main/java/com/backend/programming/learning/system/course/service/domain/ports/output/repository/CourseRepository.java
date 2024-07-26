@@ -17,13 +17,13 @@ public interface CourseRepository {
     Optional<Course> findByName(String courseName);
 
     Page<Course> findAllByOrganizationId(UUID organizationId, String search, String[] courseType, Integer page, Integer size);
-    Optional<Course> findByCourseIdMoodle(Integer courseIdMoodle);
+    Optional<Course> findByCourseIdMoodleAndOrganizationId(Integer courseIdMoodle,UUID organizationId);
 
     Course findById(UUID courseId);
 
     void deleteById(UUID courseId);
 
-    void deleteByMoodleId(Integer courseMoodleId);
+    void deleteByMoodleIdAndOrganizationId(Integer courseMoodleId,UUID organizationId);
 
     Optional<Course> findCourseById(UUID courseId);
 }

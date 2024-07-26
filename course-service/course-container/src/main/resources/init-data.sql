@@ -1,6 +1,6 @@
-INSERT INTO public.organization(id, description, name, created_at, updated_at, is_deleted, moodle_url)
+INSERT INTO public.organization(id, description, name,api_key, created_at, updated_at, is_deleted, moodle_url)
 VALUES
-	 ('cb69c0bf-c454-4f15-be10-791f6749dac7','Moodle description','Moodle 2','2024-04-15 18:09:29.488151+07','2024-04-15 18:09:29.488151+07',false, 'http://20.2.248.138/webservice/rest/server.php');
+	 ('cb69c0bf-c454-4f15-be10-791f6749dac7','Moodle description','Moodle 2','9db5726ffba9f26d155880d77b414cf0','2024-04-15 18:09:29.488151+07','2024-04-15 18:09:29.488151+07',false, 'http://20.2.248.138/webservice/rest/server.php');
 INSERT INTO public.organization
 (id, description, "name", api_key, moodle_url, created_at, updated_at, is_deleted)
 VALUES ('08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'moodle', 'Moodle', 'cdf90b5bf53bcae577c60419702dbee7',
