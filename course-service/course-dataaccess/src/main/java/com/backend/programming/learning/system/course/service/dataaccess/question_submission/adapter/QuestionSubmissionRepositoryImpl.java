@@ -30,7 +30,7 @@ public class QuestionSubmissionRepositoryImpl implements QuestionSubmissionRepos
 
     @Override
     public void saveAll(List<QuestionSubmission> questionSubmissions) {
-        if(questionSubmissions.isEmpty()) {
+        if (questionSubmissions.isEmpty()) {
             return;
         }
 
@@ -51,18 +51,23 @@ public class QuestionSubmissionRepositoryImpl implements QuestionSubmissionRepos
     public void markQuestion(List<MarkQuestionSubmissionCommand> markQuestionSubmissionCommandList) {
         List<QuestionSubmissionEntity> questionSubmissionEntities = new ArrayList<>();
         markQuestionSubmissionCommandList.forEach(markQuestionSubmissionCommand -> {
-                    QuestionSubmissionEntity entity = questionSubmissionJpaRepository.findByExamSubmissionIdAndQuestionId(
-                            markQuestionSubmissionCommand.examSubmissionId(),
-                            markQuestionSubmissionCommand.questionId()
-                    ).orElse(null);
-                    if (Objects.nonNull(entity)) {
-                        entity.setGrade(markQuestionSubmissionCommand.grade());
-                        entity.setRightAnswer(markQuestionSubmissionCommand.rightAnswer());
-                        entity.setFeedback(markQuestionSubmissionCommand.feedback());
-                    }
-                    questionSubmissionEntities.add(entity);
-                });
+            QuestionSubmissionEntity entity = questionSubmissionJpaRepository.findByExamSubmissionIdAndQuestionId(
+                    markQuestionSubmissionCommand.examSubmissionId(),
+                    markQuestionSubmissionCommand.questionId()
+            ).orElse(null);
+            if (Objects.nonNull(entity)) {
+                entity.setGrade(markQuestionSubmissionCommand.grade());
+                if (checkNullAndEmpty(markQuestionSubmissionCommand.rightAnswer()))
+                    entity.setRightAnswer(markQuestionSubmissionCommand.rightAnswer());
+                entity.setFeedback(markQuestionSubmissionCommand.feedback());
+            }
+            questionSubmissionEntities.add(entity);
+        });
         questionSubmissionJpaRepository.saveAll(questionSubmissionEntities);
+    }
+
+    private Boolean checkNullAndEmpty(String value) {
+        return value != null && !value.isEmpty();
     }
 
     @Override
