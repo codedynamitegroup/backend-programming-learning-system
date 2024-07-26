@@ -35,6 +35,8 @@ public class SocketIOServerComponent {
         config.setHostname(socketConfigData.getHost());
         config.setPort(socketConfigData.getPort());
         config.setOrigin("*");
+        config.setAllowHeaders("*");
+        config.setAllowCustomRequests(true);
         try {
             // Port
             environment.getProperty("server.port");
