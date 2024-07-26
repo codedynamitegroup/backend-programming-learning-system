@@ -33,6 +33,7 @@ public interface ExamSubmissionJpaRepository extends JpaRepository<ExamSubmissio
             SELECT es
             FROM ExamSubmissionEntity es
             WHERE es.exam.id = :examId AND es.user.id = :userId
+                AND es.status <> 'NOT_SUBMITTED'
             ORDER BY es.submitCount
             """)
     List<ExamSubmissionEntity> findByExamIdAndUserId(UUID examId, UUID userId);
