@@ -5,7 +5,8 @@
   "fields": [
     {
       "name": "id",
-      "type": "string"
+      "type": ["null", "string"],
+      "default": null
     },
     {
       "name": "organizationId",
@@ -56,6 +57,11 @@
       "default": null
     },
     {
+      "name": "userIdMoodle",
+      "type": ["null", "int"],
+      "default": null
+    },
+    {
       "name": "dob",
       "type": {
         "type": "long",
@@ -76,6 +82,18 @@
           "BACKGROUND_SERVICE"
         ]
       }
+    },
+    {
+      "name": "roleName",
+      "type": {
+        "type": "enum",
+        "name": "RoleName",
+        "symbols": [
+          "LECTURER",
+          "STUDENT"
+        ]
+      },
+      "default": "STUDENT"
     },
     {
       "name": "copyState",

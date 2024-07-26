@@ -73,6 +73,7 @@ public class MoodleCommandHandler {
     private final RestTemplate restTemplate = new RestTemplate();
 
     Map<String, Course> courseIdsMap = new HashMap<>();
+    private Integer ROLE_STUDENT = 5;
     private String GET_COURSES = "core_course_get_courses";
     private String GET_QUIZZES = "mod_quiz_get_quizzes_by_courses";
 
@@ -888,31 +889,42 @@ public class MoodleCommandHandler {
                     .filter(userModel -> !userModel.getId().equals("1"))
                     .forEach(userModel -> {
                         Optional<User> userResult = userRepository.findByEmail(userModel.getEmail());
-                        Integer roleId = userModel.getRoles().isEmpty() ? 5 : userModel.getRoles().get(0).getRoleid();
+                        Integer roleId = userModel.getRoles().isEmpty() ? ROLE_STUDENT : userModel.getRoles().get(0).getRoleid();
                         RoleMoodle roleMoodle = roleMoodleRepository.findById(roleId).orElse(null);
 
                         if (userResult.isPresent()) {
                             UpdateUserCommand userUpdate = moodleDataMapper.updateUser(userModel, userResult.get());
-                            UpdateUserResponse updateUserResponse = userApplicationService.updateUser(userUpdate);
-
-                            User user = userResult.get();
-                            user.setRoleMoodle(roleMoodle);
-                            userRepository.save(user);
+                            if (roleMoodle == null) {
+                                return;
+                            } else if (!userResult.get().getRoleMoodle().getId().equals(roleMoodle.getId())) {
+                                userUpdate.setRoleMoodleId(roleMoodle.getId().getValue());
+                                UpdateUserResponse updateUserResponse = userApplicationService.updateUser(userUpdate);
+                            }
+//
+//                            User user = userResult.get();
+//                            user.setRoleMoodle(roleMoodle);
+//                            userRepository.save(user);
                         } else {
                             CreateUserCommand user = moodleDataMapper.createUser(userModel);
-                            CreateUserResponse createUserResponse = userApplicationService.createUser(user);
+                            user.setOrganizationId(organizationId);
+                            if (roleMoodle != null) {
+                                user.setRoleMoodleId(roleMoodle.getId().getValue());
+                            } else {
+                                user.setRoleMoodleId(ROLE_STUDENT);
+                            }
+                            userApplicationService.createUser(user);
 
-                            userRepository.save(User.builder()
-                                    .id(new UserId(UUID.randomUUID()))
-                                    .organization(organization.get())
-                                    .roleMoodle(roleMoodle)
-                                    .username(user.getUsername())
-                                    .email(user.getEmail())
-                                    .userIdMoodle(user.getUserIdMoodle())
-                                    .firstName(user.getFirstName())
-                                    .lastName(user.getLastName())
-                                    .phone(user.getPhone())
-                                    .build());
+//                            userRepository.save(User.builder()
+//                                    .id(new UserId(UUID.randomUUID()))
+//                                    .organization(organization.get())
+//                                    .roleMoodle(roleMoodle)
+//                                    .username(user.getUsername())
+//                                    .email(user.getEmail())
+//                                    .userIdMoodle(user.getUserIdMoodle())
+//                                    .firstName(user.getFirstName())
+//                                    .lastName(user.getLastName())
+//                                    .phone(user.getPhone())
+//                                    .build());
                         }
                     });
         } catch (Exception e) {

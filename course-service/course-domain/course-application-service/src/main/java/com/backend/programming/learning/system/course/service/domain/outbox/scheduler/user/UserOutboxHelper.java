@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.course.service.domain.outbox.mode
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.outbox.UserOutboxRepository;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -36,6 +37,13 @@ public class UserOutboxHelper {
                                                                                 CopyState copyState) {
         return userOutboxRepository.findByTypeAndSagaIdAndCopyStateAndOutboxStatus(type, sagaId,
                 copyState, OutboxStatus.COMPLETED);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<UserOutboxMessage> findByTypeAndSagaIdAndSagaStatus(String type,
+                                                                                      UUID sagaId,
+                                                                                      SagaStatus sagaStatus) {
+        return userOutboxRepository.findByTypeAndSagaIdAndSagaStatus(type, sagaId, sagaStatus);
     }
 
     @Transactional(readOnly = true)

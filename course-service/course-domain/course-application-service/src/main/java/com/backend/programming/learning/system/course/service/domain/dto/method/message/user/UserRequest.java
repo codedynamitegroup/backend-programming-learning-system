@@ -29,4 +29,6 @@ public class UserRequest {
     private Instant createdAt;
     private Instant updatedAt;
     private Boolean isDeleted;
+    private String roleName;
+    private Integer userIdMoodle;
 }

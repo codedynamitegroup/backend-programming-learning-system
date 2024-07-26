@@ -97,7 +97,7 @@ kafka-consumer-config:
   course-service-user-request-group-id: course-service-user-request-topic
 
   any-services-user-response-to-auth-service-group-id: any-services-user-response-auth-service-topic
-  course-service-user-response-to-auth-service-group-id: course-service-user-response-auth-service-topic
+  course-service-user-request-to-auth-service-group-id: course-service-user-request-auth-service-topic
 
   service-organization-response-group-id: service-organization-response-topic
   auto-offset-reset: earliest
