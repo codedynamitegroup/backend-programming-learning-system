@@ -65,7 +65,8 @@ public class QuestionRequestMessageListenerImpl implements QuestionRequestMessag
         User user = validateHelper.validateUser(UUID.fromString(request.getCreatedBy()));
         CodeQuestion codeQuestion = questionDataMapper.questionRequestToCodeQuestion(request, user);
         codeQuestionRepository.save(codeQuestion);
-        codeQuestionRepository.saveCategory(codeQuestion.getId(), request.getCategoryId());
+        if(request.getCategoryId() != null)
+            codeQuestionRepository.saveCategory(codeQuestion.getId(), request.getCategoryId());
 
     }
 

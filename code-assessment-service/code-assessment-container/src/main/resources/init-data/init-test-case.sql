@@ -615,3 +615,22 @@ VALUES ('0668fbc4-85f0-4786-bb27-5a5df6543fb3', '219cafcd-d4fe-4fb0-81fd-be2da86
 -- Case: input '2024-02-29' which is a Thursday (Leap year)
 INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
 VALUES ('3a645e59-063c-4e05-b2e8-b866b04abe9b', '219cafcd-d4fe-4fb0-81fd-be2da867f9d4', '2024-02-29', 'Thursday', false);
+
+--27 copy of 6
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES
+    ('d8383655-d5a9-4daa-8261-9f97c56ebeb9', '9922c45b-fe25-4539-8c4b-4d247473b127', '7', '1 7', true),
+    ('4a4eefe8-77c5-4851-bd27-8b86145c2bd9', '9922c45b-fe25-4539-8c4b-4d247473b127', '10', '1 2 5 10', true),
+    ('242af056-6886-44d2-b397-df1c14c23e66', '9922c45b-fe25-4539-8c4b-4d247473b127', '15', '1 3 5 15', false),
+    ('f071cde6-4dbc-45d9-bd75-d630efc7124d', '9922c45b-fe25-4539-8c4b-4d247473b127', '100', '1 2 4 5 10 20 25 50 100', false),
+    ('b638f778-879f-4022-8dce-eba1b217ea8e', '9922c45b-fe25-4539-8c4b-4d247473b127', '99', '1 3 9 11 33 99', false),
+    ('16244fb7-f920-4613-8529-5ad19f3883f0', '9922c45b-fe25-4539-8c4b-4d247473b127', '9973', '1 9973', false),
+    ('97e87a20-6728-462c-954b-2b9fefa7adb5', '9922c45b-fe25-4539-8c4b-4d247473b127', '99991', '1 99991', false),
+    ('445b9d32-4a0d-47f2-876d-069f84caa780', '9922c45b-fe25-4539-8c4b-4d247473b127', '360', '1 2 3 4 5 6 8 9 10 12 15 18 20 24 30 36 40 45 60 72 90 120 180 360', false),
+    ('babb9a33-338f-452a-9a86-bcf2b0af2a5c', '9922c45b-fe25-4539-8c4b-4d247473b127', '49', '1 7 49', false),
+    ('945394c3-faeb-49fd-8956-b3b857d3c3ac', '9922c45b-fe25-4539-8c4b-4d247473b127', '60', '1 2 3 4 5 6 10 12 15 20 30 60', false),
+    ('7c2c08e6-2321-42d7-879b-62afa71f0eaf', '9922c45b-fe25-4539-8c4b-4d247473b127', '91', '1 7 13 91', false),
+    ('d90c3f56-8a11-4398-bf5b-b149f990591a', '9922c45b-fe25-4539-8c4b-4d247473b127', '81', '1 3 9 27 81', false),
+    ('6bd0b423-0694-45d6-9a7a-c1cfd8993cfa', '9922c45b-fe25-4539-8c4b-4d247473b127', '21', '1 3 7 21', false),
+    ('b78b286b-dca0-4a6a-ac85-acf129ce33a7', '9922c45b-fe25-4539-8c4b-4d247473b127', '99999', '1 3 9 11 33 101 303 909 1111 3333 9091 27273 99999', false)
+    ;

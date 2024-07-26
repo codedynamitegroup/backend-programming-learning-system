@@ -206,9 +206,16 @@ INSERT INTO programming_language_code_question(programming_language_id,code_ques
 VALUES
     ('cba00cd8-8114-4bc4-84e6-499c27467978', '219cafcd-d4fe-4fb0-81fd-be2da867f9d4', 1, 512000, true, '', 'I2luY2x1ZGUgPGlvc3RyZWFtPgojaW5jbHVkZSA8c3RyaW5nPgpzdGQ6OnN0cmluZyBnZXREYXlPZldlZWsoc3RkOjpzdHJpbmcgZGF0ZSkgewogICAgLy95b3VyIGNvZGUgZ29lcyBoZXJlCn0KaW50IG1haW4oKSB7CiAgICBzdGQ6OnN0cmluZyBkYXRhOwogICAgc3RkOjpjaW4gPj4gZGF0ZTsKICAgIAogICAgc3RkOjpzdHJpbmcgZGF5T2ZXZWVrID0gZ2V0RGF5T2ZXZWVrKGRhdGUpOwogICAgc3RkOjpjb3V0IDw8IGRheU9mV2VlazsKICAgIAogICAgcmV0dXJuIDA7Cn0=', '');
 
-INSERT INTO public.qtype_code_questions(user_id, id, question_id ,dsl_template , name ,problem_statement ,input_format ,output_format ,copy_state ,failure_messages ,constraints, max_grade, difficulty)
+--27 copy of 6
+INSERT INTO public.qtype_code_questions(org_id, is_question_bank,
+                                        user_id, id, question_id ,dsl_template , name ,problem_statement ,input_format ,output_format ,copy_state ,failure_messages ,constraints, max_grade, difficulty)
 VALUES
-    ('b029f559-52a8-4699-b595-71161498ed8c', '9922c45b-fe25-4539-8c4b-4d247473b127', 'b6484e21-6937-489c-b031-b71767994764', 'template', 'code question name da9800a0', 'code question statement', 'input format', 'output format', 'CREATED', '', 'None', 10, 'EASY');
+    ('08b65a39-394f-4977-a5fa-3fe145b620f8', true,
+    '64412e27-169e-44ea-a101-74ebf8cb82d9', '9922c45b-fe25-4539-8c4b-4d247473b127', 'b6484e21-6937-489c-b031-b71767994764', 'template', 'List divisor', E'<p>List all divisor of number <code>n</code></p><p>Example:</p><pre class=\"ql-syntax\" spellcheck=\"false\">Input:\n10\nOutput:\n1 2 5 10\n</pre>', '<p>A number <code>n</code></p>', E'<p>A list of n\'s divisor in ascending order</p>', 'CREATED', '', '<p>1&lt; <code>n</code> &lt; 100000</p>', 10, 'EASY');
+INSERT INTO programming_language_code_question(programming_language_id,code_question_id,time_limit,memory_limit,active, head_code, body_code, tail_code)
+VALUES
+    ('cba00cd8-8114-4bc4-84e6-499c27467978', '9922c45b-fe25-4539-8c4b-4d247473b127', 1, 409600, true, '', 'I2luY2x1ZGUgPGlvc3RyZWFtPgojaW5jbHVkZSA8dmVjdG9yPgp1c2luZyBuYW1lc3BhY2Ugc3RkOwp2ZWN0b3I8aW50PiBsaWV0S2VVb2NTbyhpbnQgbikgewovL3lvdXIgY29kZSBnb2VzIGhlcmUKfQppbnQgbWFpbigpIHsKICAgIGludCBuOwogICAgY2luID4+IG47CiAgCiAgICB2ZWN0b3I8aW50PiB1b2NTbyA9IGxpZXRLZVVvY1NvKG4pOwoKICAgIGZvciAoaW50IHVvYyA6IHVvY1NvKSB7CiAgICAgICAgY291dCA8PCB1b2MgPDwgIiAiOwogICAgfQoKICAgIHJldHVybiAwOwp9', '');
+
 INSERT INTO public.qtype_code_questions(user_id, id, question_id ,dsl_template , name ,problem_statement ,input_format ,output_format ,copy_state ,failure_messages ,constraints, max_grade, difficulty)
 VALUES
     ('b029f559-52a8-4699-b595-71161498ed8c', 'bdc0ef30-46e2-407d-84a8-91462d1de97a', 'b6484e21-6937-489c-b031-b71767994765', 'template', 'code question name e1860d53', 'code question statement', 'input format', 'output format', 'CREATED', '', 'None', 10, 'HARD');
