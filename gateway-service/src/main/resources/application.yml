@@ -18,7 +18,7 @@ eureka:
     preferIpAddress: true
 
 gateway-service:
-  timeout-ms: 20000
+  timeout-ms: 60000
   failure-rate-threshold: 80
   slow-call-rate-threshold: 90
   slow-call-duration-threshold: 14000
