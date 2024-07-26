@@ -43,5 +43,9 @@ public class UserEventPayload {
     private Boolean isDeleted;
     @JsonProperty
     private String copyState;
+    @JsonProperty
+    private String roleName;
+    @JsonProperty
+    private Integer userIdMoodle;
     private List<String> failureMessages;
 }

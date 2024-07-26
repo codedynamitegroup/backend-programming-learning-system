@@ -1,18 +1,24 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.message.listener.user.course_to_auth;
 
 import com.backend.programming.learning.system.auth.service.domain.AuthDomainService;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.message.user.UserRequest;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
+import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.course_to_auth.UserCreatedFailEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.course_to_auth.UserCreatedSuccessEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.course_to_auth.UserUpdatedFailEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.course_to_auth.UserUpdatedSuccessEvent;
+import com.backend.programming.learning.system.auth.service.domain.implement.saga.user.UserUpdateSagaHelper;
+import com.backend.programming.learning.system.auth.service.domain.implement.service.user.UserCreateHelper;
+import com.backend.programming.learning.system.auth.service.domain.implement.service.user_role.UserRoleCreateHelper;
 import com.backend.programming.learning.system.auth.service.domain.mapper.UserDataMapper;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserOutboxMessage;
 import com.backend.programming.learning.system.auth.service.domain.outbox.scheduler.user.UserOutboxHelper;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.user.UserRequestAuthToAnyServicesMessagePublisher;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.RoleName;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.domain.valueobject.UserOutboxServiceType;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
@@ -28,6 +34,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.backend.programming.learning.system.saga.user.SagaConstants.AUTH_TO_ANY_SERVICES_USER_SAGA_NAME;
 import static com.backend.programming.learning.system.saga.user.SagaConstants.COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME;
 
 @Slf4j
@@ -39,6 +46,8 @@ public class UserRequestCourseToAuthServiceHelper {
     private final AuthDomainService authDomainService;
     private final UserOutboxHelper userOutboxHelper;
     private final UserRequestAuthToAnyServicesMessagePublisher userRequestAuthToAnyServicesMessagePublisher;
+    private final UserCreateHelper userCreateHelper;
+    private final UserUpdateSagaHelper userSagaHelper;
 
     @Transactional
     public void createdUser(UserRequest userRequest) {
@@ -66,31 +75,51 @@ public class UserRequestCourseToAuthServiceHelper {
             return;
         }
 
-        //Save user
-        User userSaved = userRepository.save(user);
-        if (userSaved == null) {
-            log.error("Could not create user with id: {}", user.getId().getValue().toString());
-            failureMessages.add("Could not create user with id: " + user.getId().getValue().toString());
-            UserCreatedFailEvent userCreatedFailEvent = authDomainService.createdUserFail(user, failureMessages);
-            userOutboxHelper.saveUserOutboxMessage(
-                    COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME,
-                    userDataMapper.userEventToUserEventPayload(userCreatedFailEvent, CopyState.CREATE_FAILED),
-                    ServiceName.AUTH_SERVICE,
-                    CopyState.CREATE_FAILED,
-                    OutboxStatus.STARTED,
-                    SagaStatus.STARTED,
-                    UUID.fromString(userRequest.getSagaId()));
-            return;
+        String roleName;
+        if (userRequest.getRoleName().equals(RoleName.LECTURER)) {
+            roleName = "lecturer_moodle";
+        } else if (userRequest.getRoleName().equals(RoleName.STUDENT)) {
+            roleName = "student_moodle";
+        } else {
+            roleName = "user";
         }
+        UserCreatedEvent userCreatedEvent = userCreateHelper.createUser(userDataMapper.userCommandToCreateUserCommand(user, roleName));
+        log.info("User is created with id: {}", userCreatedEvent.getUser().getId().getValue());
+        userDataMapper.userToCreateUserResponse(userCreatedEvent.getUser(),
+                "User created successfully");
 
-        log.info("User is created with id: {}", userSaved.getId().getValue());
-        UserCreatedSuccessEvent userCreatedSuccessEvent = authDomainService.createdUserSuccess(user);
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userCreatedEventToUserEventPayloadWithRoleName(userCreatedEvent, userRequest.getRoleName().name(), userRequest.getUserIdMoodle()),
+                ServiceName.CORE_SERVICE,
+                CopyState.CREATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                UUID.randomUUID());
+
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userCreatedEventToUserEventPayloadWithRoleName(userCreatedEvent, userRequest.getRoleName().name(), userRequest.getUserIdMoodle()),
+                ServiceName.COURSE_SERVICE,
+                CopyState.CREATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                UUID.randomUUID());
+
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userCreatedEventToUserEventPayloadWithRoleName(userCreatedEvent, userRequest.getRoleName().name(), userRequest.getUserIdMoodle()),
+                ServiceName.CODE_ASSESSMENT_SERVICE,
+                CopyState.CREATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                UUID.randomUUID());
 
         userOutboxHelper.saveUserOutboxMessage(
                 COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME,
-                userDataMapper.userEventToUserEventPayload(userCreatedSuccessEvent, CopyState.CREATED),
+                userDataMapper.userEventToUserEventPayload(userCreatedEvent, CopyState.CREATED),
                 ServiceName.AUTH_SERVICE,
-                CopyState.CREATING,
+                CopyState.CREATED,
                 OutboxStatus.STARTED,
                 SagaStatus.STARTED,
                 UUID.fromString(userRequest.getSagaId()));
@@ -147,8 +176,8 @@ public class UserRequestCourseToAuthServiceHelper {
             userUpdated.setAvatarUrl(user.getAvatarUrl());
         }
 
-        //Save user
         User userSaved = userRepository.save(userUpdated);
+
         if (userSaved == null) {
             log.error("Could not update user with id: {}", user.getId().getValue());
             failureMessages.add("Could not update user with id: " + user.getId().getValue());

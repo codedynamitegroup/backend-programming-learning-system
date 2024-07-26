@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.ports.outp
 import com.backend.programming.learning.system.course.service.domain.outbox.model.user.UserOutboxMessage;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
+import com.backend.programming.learning.system.saga.SagaStatus;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,4 +18,7 @@ public interface UserOutboxRepository {
                                                                  CopyState copyState,
                                                                  OutboxStatus outboxStatus);
     void deleteByTypeAndOutboxStatus(String type, OutboxStatus outboxStatus);
+    Optional<UserOutboxMessage> findByTypeAndSagaIdAndSagaStatus(String type,
+                                                                 UUID sagaId,
+                                                                 SagaStatus sagaStatus);
 }

@@ -62,6 +62,8 @@ public class UserMessagingDataMapper {
         return UserRequestAvroModel.newBuilder()
                 .setId(UUID.randomUUID().toString())
                 .setSagaId(sagaId)
+                .setUsername(userEventPayload.getUsername())
+                .setOrganizationId(userEventPayload.getOrganizationId())
                 .setUserId(userEventPayload.getUserId())
                 .setEmail(userEventPayload.getEmail())
                 .setFirstName(userEventPayload.getFirstName())
@@ -71,6 +73,8 @@ public class UserMessagingDataMapper {
                 .setUpdatedAt(userEventPayload.getUpdatedAt().toInstant())
                 .setIsDeleted(userEventPayload.getIsDeleted())
                 .setCopyState(CopyState.CREATING)
+                .setRoleName(com.backend.programming.learning.system.kafka.auth.avro.model.user.RoleName.valueOf(userEventPayload.getRoleName()))
+                .setUserIdMoodle(userEventPayload.getUserIdMoodle())
                 .setServiceName(
                         com.backend.programming.learning.system.kafka.auth.avro.model.user.ServiceName.valueOf(serviceName.name()))
                 .build();
@@ -105,7 +109,10 @@ public class UserMessagingDataMapper {
                 .createdAt(userCreateRequestAvroModel.getCreatedAt())
                 .updatedAt(userCreateRequestAvroModel.getUpdatedAt())
                 .isDeleted(userCreateRequestAvroModel.getIsDeleted())
+                .userIdMoodle(userCreateRequestAvroModel.getUserIdMoodle())
+                .roleName(com.backend.programming.learning.system.domain.valueobject.RoleName.valueOf(userCreateRequestAvroModel.getRoleName().name()))
                 .copyState(com.backend.programming.learning.system.domain.valueobject.CopyState.CREATING)
+                .serviceName(com.backend.programming.learning.system.domain.valueobject.ServiceName.valueOf(userCreateRequestAvroModel.getServiceName().name()))
                 .build();
     }
 
@@ -133,6 +140,8 @@ public class UserMessagingDataMapper {
                 .phone(userUpdateRequestAvroModel.getPhone())
                 .updatedAt(userUpdateRequestAvroModel.getUpdatedAt())
                 .isDeleted(userUpdateRequestAvroModel.getIsDeleted())
+                .roleName(com.backend.programming.learning.system.domain.valueobject.RoleName.valueOf(userUpdateRequestAvroModel.getRoleName().name()))
+                .serviceName(com.backend.programming.learning.system.domain.valueobject.ServiceName.valueOf(userUpdateRequestAvroModel.getServiceName().name()))
                 .build();
     }
 

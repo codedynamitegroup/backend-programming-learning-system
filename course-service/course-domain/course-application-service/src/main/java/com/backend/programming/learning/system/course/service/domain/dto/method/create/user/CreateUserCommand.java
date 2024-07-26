@@ -4,11 +4,15 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
+
+import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
+@Data
 public class CreateUserCommand {
     @NotNull
     @Email
@@ -22,6 +26,8 @@ public class CreateUserCommand {
     private final String firstName;
 
     private final String lastName;
+    private Integer roleMoodleId;
+    private UUID organizationId;
 
     private final String phone;
 }

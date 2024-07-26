@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.outbox.mode
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.outbox.UserOutboxRepository;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
+import com.backend.programming.learning.system.saga.SagaStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -56,5 +57,12 @@ public class UserOutboxRepositoryImpl implements UserOutboxRepository {
     @Override
     public void deleteByTypeAndOutboxStatus(String sagaType, OutboxStatus outboxStatus) {
         userOutboxJpaRepository.deleteByTypeAndOutboxStatus(sagaType, outboxStatus);
+    }
+    @Override
+    public Optional<UserOutboxMessage> findByTypeAndSagaIdAndSagaStatus(String type,
+                                                                 UUID sagaId,
+                                                                 SagaStatus sagaStatus) {
+        return userOutboxJpaRepository.findByTypeAndSagaIdAndSagaStatus(type, sagaId, sagaStatus)
+                .map(userOutboxDataAccessMapper::userOutboxEntityToUserOutboxMessage);
     }
 }

@@ -18,6 +18,8 @@ public class UserEventPayload {
     @JsonProperty
     private String email;
     @JsonProperty
+    private String username;
+    @JsonProperty
     private String firstName;
     @JsonProperty
     private String lastName;
@@ -37,4 +39,8 @@ public class UserEventPayload {
     private Boolean isDeleted;
     @JsonProperty
     private String copyState;
+    @JsonProperty
+    private String roleName;
+    @JsonProperty
+    private Integer userIdMoodle;
 }

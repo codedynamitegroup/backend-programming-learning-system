@@ -10,6 +10,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.user.UserSubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Organization;
+import com.backend.programming.learning.system.course.service.domain.entity.RoleMoodle;
 import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignment;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.event.user.UserCreatedEvent;
@@ -18,6 +19,7 @@ import com.backend.programming.learning.system.course.service.domain.event.user.
 import com.backend.programming.learning.system.course.service.domain.mapper.submission_assignment.SubmissionAssignmentDataMapper;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.user.UserEventPayload;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionAssignmentRepository;
+import com.backend.programming.learning.system.course.service.domain.valueobject.RoleMoodleId;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
@@ -33,6 +35,10 @@ public class UserDataMapper {
     private final SubmissionAssignmentRepository submissionAssignmentRepository;
 
     private final SubmissionAssignmentDataMapper submissionAssignmentDataMapper;
+    private final Integer ROLE_STUDENT = 5;
+    private final Integer ROLE_LECTURER = 3;
+    private final String ROLE_STUDENT_NAME = "STUDENT";
+    private final String ROLE_LECTURER_NAME = "LECTURER";
 
     public UserDataMapper(SubmissionAssignmentRepository submissionAssignmentRepository, SubmissionAssignmentDataMapper submissionAssignmentDataMapper) {
         this.submissionAssignmentRepository = submissionAssignmentRepository;
@@ -65,6 +71,10 @@ public class UserDataMapper {
                 .createdAt(userRequest.getCreatedAt().atZone(ZoneId.of(DomainConstants.UTC)))
                 .updatedAt(userRequest.getUpdatedAt().atZone(ZoneId.of(DomainConstants.UTC)))
                 .isDeleted(userRequest.getIsDeleted())
+                .roleMoodle(RoleMoodle.builder()
+                        .id(new RoleMoodleId(userRequest.getRoleName().equals(ROLE_STUDENT_NAME) ? ROLE_STUDENT : ROLE_LECTURER))
+                        .build())
+                .userIdMoodle(userRequest.getUserIdMoodle())
                 .build();
     }
 
@@ -158,7 +168,9 @@ public class UserDataMapper {
                 .build();
     }
 
-    public UserEventPayload userCreatedEventToUserEventPayload(UserCreatedEvent userCreatedEvent) {
+    public UserEventPayload userCreatedEventToUserEventPayload(UserCreatedEvent userCreatedEvent,
+                                                               Integer roleMoodleId,
+                                                               Integer userIdMoodle) {
         User user = userCreatedEvent.getUser();
         return UserEventPayload.builder()
                 .userId(user.getId().getValue().toString())
@@ -171,11 +183,13 @@ public class UserDataMapper {
                 .createdAt(user.getCreatedAt())
                 .updatedAt(user.getUpdatedAt())
                 .isDeleted(user.getDeleted())
+                .roleName(roleMoodleId.equals(ROLE_STUDENT) ? ROLE_STUDENT_NAME : ROLE_LECTURER_NAME)
+                .userIdMoodle(userIdMoodle)
                 .copyState(CopyState.CREATING.name())
                 .build();
     }
 
-    public UserEventPayload userUpdatedEventToUserEventPayload(UserUpdatedEvent userUpdatedEvent) {
+    public UserEventPayload userUpdatedEventToUserEventPayload(UserUpdatedEvent userUpdatedEvent, Integer roleMoodleId) {
         User user = userUpdatedEvent.getUser();
         return UserEventPayload.builder()
                 .userId(user.getId().getValue().toString())
@@ -189,6 +203,7 @@ public class UserDataMapper {
                 .address(user.getAddress())
                 .avatarUrl(user.getAvatarUrl())
                 .updatedAt(user.getUpdatedAt())
+                .roleName(roleMoodleId.equals(ROLE_STUDENT) ? "STUDENT" : "LECTURER")
                 .copyState(CopyState.UPDATING.name())
                 .build();
     }
