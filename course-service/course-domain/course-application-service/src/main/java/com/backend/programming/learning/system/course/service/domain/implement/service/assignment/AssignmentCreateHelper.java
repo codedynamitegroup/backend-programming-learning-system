@@ -2,9 +2,9 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.CourseDomainService;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.assignment.CreateAssignmentCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.create.submission_assignment.CreateSubmissionAssignmentCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.module.CreateModuleCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.Assignment;
-import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.implement.service.module.ModuleCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.implement.service.submission_assignment.SubmissionAssignmentCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.implement.service.submission_assignment.SubmissionAssignmentCreateHelper;
 import com.backend.programming.learning.system.course.service.domain.mapper.assignment.AssignmentDataMapper;
@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -34,6 +33,7 @@ public class AssignmentCreateHelper {
     private final SubmissionAssignmentDataMapper submissionAssignmentDataMapper;
 
     private final SubmissionAssignmentCreateHelper submissionAssignmentCreateHelper;
+    private final ModuleCommandHandler moduleCommandHandler;
 
 
     private final AssignmentDataMapper assignmentDataMapper;
@@ -41,7 +41,7 @@ public class AssignmentCreateHelper {
     public AssignmentCreateHelper(CourseDomainService coureDomainService,
                                   AssignmentRepository assignmentRepository,
                                   CourseRepository courseRepository,
-                                  UserRepository userRepository, SubmissionAssignmentCommandHandler submissionAssignmentCommandHandler, SubmissionAssignmentDataMapper submissionAssignmentDataMapper, SubmissionAssignmentCreateHelper submissionAssignmentCreateHelper, AssignmentDataMapper assignmentDataMapper) {
+                                  UserRepository userRepository, SubmissionAssignmentCommandHandler submissionAssignmentCommandHandler, SubmissionAssignmentDataMapper submissionAssignmentDataMapper, SubmissionAssignmentCreateHelper submissionAssignmentCreateHelper, ModuleCommandHandler moduleCommandHandler, AssignmentDataMapper assignmentDataMapper) {
         this.coureDomainService = coureDomainService;
         this.assignmentRepository = assignmentRepository;
         this.courseRepository = courseRepository;
@@ -49,6 +49,7 @@ public class AssignmentCreateHelper {
         this.submissionAssignmentCommandHandler = submissionAssignmentCommandHandler;
         this.submissionAssignmentDataMapper = submissionAssignmentDataMapper;
         this.submissionAssignmentCreateHelper = submissionAssignmentCreateHelper;
+        this.moduleCommandHandler = moduleCommandHandler;
         this.assignmentDataMapper = assignmentDataMapper;
     }
 
@@ -58,16 +59,23 @@ public class AssignmentCreateHelper {
         coureDomainService.createAssignment(assignment);
 //        checkCourse(createAssignmentCommand.getCourseId());
         Assignment assignmentResult = saveAssignment(assignment);
-        List<User> users = userRepository.findAllUserByAssignmentId(assignmentResult.getId().getValue());
-        for(User user : users) {
-            if(user.getRoleMoodle().getId().getValue().equals(5)) {
-                CreateSubmissionAssignmentCommand createSubmissionAssignmentCommand = CreateSubmissionAssignmentCommand.builder()
-                        .assignmentId(assignmentResult.getId().getValue())
-                        .userId(user.getId().getValue())
-                        .build();
-                submissionAssignmentCommandHandler.createSubmissionAssignment(createSubmissionAssignmentCommand);
-            }
-        }
+
+        CreateModuleCommand createModuleCommand = CreateModuleCommand.builder()
+                .sectionId(createAssignmentCommand.getSectionId())
+                .assignmentId(assignmentResult.getId().getValue())
+                .type("Assignments")
+                .build();
+        moduleCommandHandler.createModule(createModuleCommand);
+//        List<User> users = userRepository.findAllUserByAssignmentId(assignmentResult.getId().getValue());
+//        for(User user : users) {
+//            if(user.getRoleMoodle().getId().getValue().equals(5)) {
+//                CreateSubmissionAssignmentCommand createSubmissionAssignmentCommand = CreateSubmissionAssignmentCommand.builder()
+//                        .assignmentId(assignmentResult.getId().getValue())
+//                        .userId(user.getId().getValue())
+//                        .build();
+//                submissionAssignmentCommandHandler.createSubmissionAssignment(createSubmissionAssignmentCommand);
+//            }
+//        }
         return assignmentResult;
     }
 
