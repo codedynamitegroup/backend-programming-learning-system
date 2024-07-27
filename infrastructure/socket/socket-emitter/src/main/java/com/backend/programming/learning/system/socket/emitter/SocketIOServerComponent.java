@@ -49,7 +49,7 @@ public class SocketIOServerComponent {
             log.info("Remote address: {}", InetAddress.getLoopbackAddress().getHostAddress());
             log.info("Remote host name: {}", InetAddress.getLoopbackAddress().getHostName());
 
-            config.setHostname(InetAddress.getLoopbackAddress().getHostAddress());
+            config.setHostname(InetAddress.getLocalHost().getHostAddress());
         } catch (NumberFormatException | UnknownHostException e) {
             log.error("Error getting host address", e);
         }
