@@ -179,6 +179,8 @@ public class CodeSubmissionDataMapper {
         @JsonProperty
         UUID languageId;
         @JsonProperty
+        String languageName;
+        @JsonProperty
         UUID codeQuestionId;
         @JsonProperty
         String code;

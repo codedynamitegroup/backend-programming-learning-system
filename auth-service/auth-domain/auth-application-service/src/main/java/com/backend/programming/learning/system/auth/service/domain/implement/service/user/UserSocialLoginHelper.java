@@ -63,13 +63,15 @@ public class UserSocialLoginHelper {
                         .roleId(role.getId().getValue())
                         .build());
 
+                ResponseLoginAndRefreshUser keycloakLoggedResult1 = keycloakLogged(socialLoginUserCommand);
+
                 User user = userCreatedEvent.getUser();
-                user.setRefreshToken(keycloakLoggedResult.getRefresh_token());
+                user.setRefreshToken(keycloakLoggedResult1.getRefresh_token());
                 userRepository.save(user);
 
                 return LoginUserResponse.builder()
-                        .accessToken(keycloakLoggedResult.getAccess_token())
-                        .refreshToken(keycloakLoggedResult.getRefresh_token())
+                        .accessToken(keycloakLoggedResult1.getAccess_token())
+                        .refreshToken(keycloakLoggedResult1.getRefresh_token())
                         .build();
             }
 
@@ -122,13 +124,15 @@ public class UserSocialLoginHelper {
                         .roleId(role.getId().getValue())
                         .build());
 
+                ResponseLoginAndRefreshUser keycloakLoggedResult1 = keycloakLogged(socialLoginUserCommand);
+
                 User user = userCreatedEvent.getUser();
-                user.setRefreshToken(keycloakLoggedResult.getRefresh_token());
+                user.setRefreshToken(keycloakLoggedResult1.getRefresh_token());
                 userRepository.save(user);
 
                 return LoginUserResponse.builder()
-                        .accessToken(keycloakLoggedResult.getAccess_token())
-                        .refreshToken(keycloakLoggedResult.getRefresh_token())
+                        .accessToken(keycloakLoggedResult1.getAccess_token())
+                        .refreshToken(keycloakLoggedResult1.getRefresh_token())
                         .build();
             }
 
