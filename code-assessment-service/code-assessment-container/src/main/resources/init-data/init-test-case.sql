@@ -413,7 +413,7 @@ VALUES ('8c6f0bd5-a9ba-4f89-a4c8-82e8958d0795', 'd49496bb-87a5-483f-9597-564ad6e
 
 -- Case: a = -100, b = 100
 INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
-VALUES ('bc76f7dd-c88e-4a56-bf37-d7cbcfae26bf', 'd49496bb-87a5-483f-9597-564ad6ee0305', '-100 100', '-1.000', false);
+VALUES ('bc76f7dd-c88e-4a56-bf37-d7cbcfae26bf', 'd49496bb-87a5-483f-9597-564ad6ee0305', '-100 100', '1.000', false);
 
 -- Case: a = 100, b = -100
 INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
