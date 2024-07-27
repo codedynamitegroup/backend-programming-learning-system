@@ -794,3 +794,6 @@ INSERT INTO public.answer_of_question
 (id, question_id, feedback, answer, fraction)
 VALUES('43ab2d6b-a60f-4b3b-8a08-7bbab52daf19'::uuid, 'b0edc4d7-713a-48df-a9a7-8a8b411c3379'::uuid, 'Correct', 'false', 1.00);
 
+INSERT INTO public."module"
+(id, assignment_id, exam_id, cmid, section_id, "type_module")
+VALUES('ac9ba506-61ce-4766-9bcc-c774beb4759f'::uuid, NULL, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, 24, '7e89a8d4-5137-4457-81aa-1828265fc5ef'::uuid, 'QUIZ'::public."type_module");
