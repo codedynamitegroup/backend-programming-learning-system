@@ -18,6 +18,9 @@ public class CreateAssignmentCommand {
     private final UUID courseId;
 
     @NotNull
+    private final UUID sectionId;
+
+    @NotNull
     private final String title;
 
     private final String intro;
@@ -27,6 +30,7 @@ public class CreateAssignmentCommand {
     private final String wordLimit;
     private final String maxUploadFiles;
     private final String maxFileSize;
+
 
     @NotNull
     private final Float maxScore;

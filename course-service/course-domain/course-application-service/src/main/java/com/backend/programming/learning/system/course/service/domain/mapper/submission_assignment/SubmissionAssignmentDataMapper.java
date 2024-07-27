@@ -187,6 +187,9 @@ public class SubmissionAssignmentDataMapper {
     }
 
     public AllSubmissionAssignmentResponse submissionAssignmentToAllSubmissionAssignmentResponse(SubmissionAssignment submissionAssignment) {
+        if(submissionAssignment == null){
+            return null;
+        }
         List<SubmissionAssignmentFile> submissionAssignmentFiles = submissionAssignmentFileRepository.findBySubmissionAssignmentId(submissionAssignment.getId().getValue());
         List<SubmissionAssignmentFileResponseEntity> submissionAssignmentFileResponseEntity = null;
         submissionAssignmentFileResponseEntity = submissionAssignmentFileDataMapper.submissionAssignmentFilesToSubmissionAssignmentFileResponseEntities(submissionAssignmentFiles);
