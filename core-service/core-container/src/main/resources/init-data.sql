@@ -360,8 +360,18 @@ VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', 'b029f559-52a8-4699-b595-71161498ed8c'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7');
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('452371a5-2f58-4bfa-947b-af3140671057', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('452371a5-2f58-4bfa-947b-af3140671057', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('452371a5-2f58-4bfa-947b-af3140671057', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    -- add more for cer course id 452371a5-2f58-4bfa-947b-af3140671057
+    ('452371a5-2f58-4bfa-947b-af3140671057', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('452371a5-2f58-4bfa-947b-af3140671057', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    ('2d2ebd9e-2829-495e-87f7-4f050a8f3628', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('2d2ebd9e-2829-495e-87f7-4f050a8f3628', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('2d2ebd9e-2829-495e-87f7-4f050a8f3628', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7');
 
+-- each user can only review a course once
 INSERT INTO public.review(id, certificate_course_id, rating, content, created_by, updated_by)
 VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 5, 'Great course! I learned a lot from it.', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
@@ -372,7 +382,16 @@ VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 3, 'Okay course. Could be better.', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 5, 'Great course! I learned a lot from it.', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 4, 'Good course! I enjoyed it.', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 3, 'Okay course. Could be better.', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7');
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 3, 'Okay course. Could be better.', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb24', '452371a5-2f58-4bfa-947b-af3140671057', 5, 'Great course! I learned a lot from it.', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb25', '452371a5-2f58-4bfa-947b-af3140671057', 4, 'Good course! I enjoyed it.', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb26', '452371a5-2f58-4bfa-947b-af3140671057', 3, 'Okay course. Could be better.', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb27', '452371a5-2f58-4bfa-947b-af3140671057', 5, 'Excellent course', '39328bcf-8af6-44fc-9ae9-247f953ee2a2', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb28', '452371a5-2f58-4bfa-947b-af3140671057', 5, 'The best course ever!', '2d7ed5a0-fb21-4927-9a25-647c17d29668', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb29', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 5, 'Great course! I learned a lot from it.', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb30', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 4, 'Good course! I enjoyed it.', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb31', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 3, 'Okay course. Could be better.', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7');
+
 
 INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 1, 'Introduction to Python', 'This chapter introduces Python programming and covers basic concepts such as data types, control structures, and functions.', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.606514+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.606514+00');
 INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 2, 'Advanced Python Programming', 'This chapter covers advanced Python programming topics such as object-oriented programming, data structures, and algorithms.', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:51:27.606514+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:51:27.606514+00');
