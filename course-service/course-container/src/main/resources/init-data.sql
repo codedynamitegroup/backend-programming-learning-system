@@ -22,7 +22,9 @@ INSERT INTO public."user" (id,user_id_moodle,role_moodle_id,org_id,username,emai
 	 ('2d3c1e66-1835-457f-93e9-265fe483feee',5,5,'08b65a39-394f-4977-a5fa-3fe145b620f8','ngocthu','dt.ngocthw@gmail.com',NULL,'Thư','Ngọc',NULL,NULL,NULL,'2024-06-04 19:54:23.712124+07',false,'2024-06-04 19:54:23.712124+07','2024-06-04 19:54:23.712124+07'),
 	 ('a9f5487e-c0b1-4fa4-b93a-6f16bde90583',6,3,'08b65a39-394f-4977-a5fa-3fe145b620f8','giaovien','ktpm4t@gmail.com',NULL,'giáo','vien',NULL,NULL,NULL,'2024-06-04 19:54:23.73386+07',false,'2024-06-04 19:54:23.73386+07','2024-06-04 19:54:23.73386+07'),
 	 ('9ba179ed-d26d-4828-a0f6-8836c2063992',7,5,'08b65a39-394f-4977-a5fa-3fe145b620f8','quoctuan2002','nguyenquoctuan385@gmail.com',NULL,'Tuấn','Nguyễn Quốc',NULL,NULL,NULL,'2024-06-04 19:54:23.75895+07',false,'2024-06-04 19:54:23.759506+07','2024-06-04 19:54:23.759506+07'),
-	 ('ca3040f2-e173-40a5-aab7-6ef15965ce43',8,5,'08b65a39-394f-4977-a5fa-3fe145b620f8','tgt2002','truonggiatien123@gmail.com',NULL,'Tiến','Trương Gia',NULL,NULL,NULL,'2024-06-04 19:54:23.789236+07',false,'2024-06-04 19:54:23.789748+07','2024-06-04 19:54:23.789748+07');
+	 ('ca3040f2-e173-40a5-aab7-6ef15965ce43',8,5,'08b65a39-394f-4977-a5fa-3fe145b620f8','tgt2002','truonggiatien123@gmail.com',NULL,'Tiến','Trương Gia',NULL,NULL,NULL,'2024-06-04 19:54:23.789236+07',false,'2024-06-04 19:54:23.789748+07','2024-06-04 19:54:23.789748+07'),
+	 ('1e327a63-b0d6-476f-bb99-8c594560f971',null,null,'cb69c0bf-c454-4f15-be10-791f6749dac7','truonggiatien456@gmail.com','truonggiatien456@gmail.com',NULL,'Tiến','Trương Gia',NULL,NULL,NULL,'2024-06-04 19:54:23.789236+07',false,'2024-06-04 19:54:23.789748+07','2024-06-04 19:54:23.789748+07');
+
 
 INSERT INTO public.course_type (id,moodle_id,name,org_id) VALUES
 	 ('56b844c6-b59a-4135-b028-f8b1a7b68eea',3,'Tiên Tiến','08b65a39-394f-4977-a5fa-3fe145b620f8'),

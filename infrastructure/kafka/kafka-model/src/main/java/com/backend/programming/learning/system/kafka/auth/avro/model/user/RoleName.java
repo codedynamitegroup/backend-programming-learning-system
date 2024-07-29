@@ -6,8 +6,8 @@
 package com.backend.programming.learning.system.kafka.auth.avro.model.user;
 @org.apache.avro.specific.AvroGenerated
 public enum RoleName implements org.apache.avro.generic.GenericEnumSymbol<RoleName> {
-  LECTURER, STUDENT  ;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"enum\",\"name\":\"RoleName\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model.user\",\"symbols\":[\"LECTURER\",\"STUDENT\"]}");
+  LECTURER, STUDENT, USER  ;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"enum\",\"name\":\"RoleName\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model.user\",\"symbols\":[\"LECTURER\",\"STUDENT\",\"USER\"]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   @Override
