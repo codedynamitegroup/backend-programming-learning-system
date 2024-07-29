@@ -1,6 +1,6 @@
 INSERT INTO public.main_organization (id,description,name,email,phone,address,api_key,moodle_url,created_at,updated_at,updated_by,created_by,is_deleted) VALUES
 	 ('08b65a39-394f-4977-a5fa-3fe145b620f8','Moodle description','Moodle','moodle234@gmail.com','+8412345678',NULL,'cdf90b5bf53bcae577c60419702dbee7','http://62.171.185.208:8081/webservice/rest/server.php','2024-04-15 18:09:29.488151+07','2024-04-15 18:09:29.488151+07','8edbc0aa-0b91-480e-a428-23abf2109df9','8edbc0aa-0b91-480e-a428-23abf2109df9',false),
-	 ('cb69c0bf-c454-4f15-be10-791f6749dac7','Moodle description','Moodle 2','moodle123@gmail.com','+8412345694',NULL,NULL,'http://localhost:3001','2024-04-15 18:09:29.488151+07','2024-04-15 18:09:29.488151+07','05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510','05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510',false);
+	 ('cb69c0bf-c454-4f15-be10-791f6749dac7','Moodle description','Moodle 2','moodle123@gmail.com','+8412345694',NULL,'9db5726ffba9f26d155880d77b414cf0','http://20.2.248.138/webservice/rest/server.php','2024-04-15 18:09:29.488151+07','2024-04-15 18:09:29.488151+07','05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510','05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510',false);
 
 INSERT INTO public.main_user (id,organization_id,is_linked_with_google,is_linked_with_microsoft,email,username,dob,first_name,last_name,phone,address,avatar_url,refresh_token,last_login,created_at,updated_at,is_deleted) VALUES
 	 ('9ba179ed-d26d-4828-a0f6-8836c2063992','08b65a39-394f-4977-a5fa-3fe145b620f8',false,false,'nguyenquoctuan385@gmail.com','nguyenquoctuan385@gmail.com','2002-05-29','Tuan','Nguyen Quoc','+8412365478','HCM',NULL,NULL,'2024-04-12 21:33:23.371836+07','2024-04-12 21:33:23.371836+07','2024-04-12 21:33:23.371836+07',false),
@@ -14,7 +14,8 @@ INSERT INTO public.main_user (id,organization_id,is_linked_with_google,is_linked
 	 ('2d7ed5a0-fb21-4927-9a25-647c17d29668','08b65a39-394f-4977-a5fa-3fe145b620f8',false,false,'dntienes@gmail.com','dntienes@gmail.com','2002-03-29','Tiến','Đặng Ngọc','+8412365478',NULL,NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false),
 	 ('2d3c1e66-1835-457f-93e9-265fe483feee','08b65a39-394f-4977-a5fa-3fe145b620f8',false,false,'dt.ngocthw@gmail.com','dt.ngocthw@gmail.com','2002-03-29','Thư','Ngọc','+8412365478',NULL,NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false),
 	 ('a9f5487e-c0b1-4fa4-b93a-6f16bde90583','08b65a39-394f-4977-a5fa-3fe145b620f8',false,false,'ktpm4t@gmail.com','ktpm4t@gmail.com','2002-03-29','Viet','Nguyen','+8412365478',NULL,NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false),
-	 ('ca3040f2-e173-40a5-aab7-6ef15965ce43','08b65a39-394f-4977-a5fa-3fe145b620f8',false,false,'truonggiatien123@gmail.com','truonggiatien123@gmail.com','2002-03-29','Trương','Gia Tiến','+8412365478',NULL,NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false);
+	 ('ca3040f2-e173-40a5-aab7-6ef15965ce43','08b65a39-394f-4977-a5fa-3fe145b620f8',false,false,'truonggiatien123@gmail.com','truonggiatien123@gmail.com','2002-03-29','Trương','Gia Tiến','+8412365478',NULL,NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false),
+	 ('1e327a63-b0d6-476f-bb99-8c594560f971','cb69c0bf-c454-4f15-be10-791f6749dac7',false,false,'truonggiatien456@gmail.com','truonggiatien456@gmail.com','2002-03-29','Trương','Gia Tiến','+8412365478',NULL,NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false);
 
 INSERT INTO public."role"
 (id, description, name)
@@ -45,4 +46,6 @@ INSERT INTO public.user_role (id,user_id,role_id) VALUES
      ('95691943-85e3-45b6-a737-483232a43496','a9f5487e-c0b1-4fa4-b93a-6f16bde90583','9ba179ed-d26d-4828-a0f6-8836c2063992'),
      ('45483a8b-3663-4170-86bf-3b937bd2a2b5','a9f5487e-c0b1-4fa4-b93a-6f16bde90583','f705404f-5971-455e-9c34-93a0ce5b90b5'),
      ('fccdb925-763e-460d-9426-2f299f1f4a76','ca3040f2-e173-40a5-aab7-6ef15965ce43','9ba179ed-d26d-4828-a0f6-8836c2063992'),
-     ('cd2fca53-4ed5-4f41-a277-7558de2f2af5','ca3040f2-e173-40a5-aab7-6ef15965ce43','b04387d3-898f-402c-8f44-79611d6f3bee');
+     ('cd2fca53-4ed5-4f41-a277-7558de2f2af5','ca3040f2-e173-40a5-aab7-6ef15965ce43','b04387d3-898f-402c-8f44-79611d6f3bee'),
+     ('1e327a63-b0d6-476f-bb99-8c594560f971','1e327a63-b0d6-476f-bb99-8c594560f971','9ba179ed-d26d-4828-a0f6-8836c2063992'),
+     ('c2752dbe-99c5-40d2-b5eb-8cd29e87eed4','1e327a63-b0d6-476f-bb99-8c594560f971','3ead3b08-afdd-442f-b544-fdbd86eaa186');

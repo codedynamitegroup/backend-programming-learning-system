@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -2522733365575142167L;
+  private static final long serialVersionUID = 2736741308327523057L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model.user\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"organizationId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"username\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"firstName\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"lastName\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"phone\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"address\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"avatarUrl\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"userIdMoodle\",\"type\":[\"null\",\"int\"],\"default\":null},{\"name\":\"dob\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"serviceName\",\"type\":{\"type\":\"enum\",\"name\":\"ServiceName\",\"symbols\":[\"CORE_SERVICE\",\"AUTH_SERVICE\",\"COURSE_SERVICE\",\"CODE_ASSESSMENT_SERVICE\",\"BACKGROUND_SERVICE\"]}},{\"name\":\"roleName\",\"type\":{\"type\":\"enum\",\"name\":\"RoleName\",\"symbols\":[\"LECTURER\",\"STUDENT\"]},\"default\":\"STUDENT\"},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"updatedAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"isDeleted\",\"type\":[\"null\",\"boolean\"],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model.user\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"organizationId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"username\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"firstName\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"lastName\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"phone\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"address\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"avatarUrl\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"userIdMoodle\",\"type\":[\"null\",\"int\"],\"default\":null},{\"name\":\"dob\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}],\"default\":null},{\"name\":\"serviceName\",\"type\":[\"null\",{\"type\":\"enum\",\"name\":\"ServiceName\",\"symbols\":[\"CORE_SERVICE\",\"AUTH_SERVICE\",\"COURSE_SERVICE\",\"CODE_ASSESSMENT_SERVICE\",\"BACKGROUND_SERVICE\"]}],\"default\":null},{\"name\":\"roleName\",\"type\":[\"null\",{\"type\":\"enum\",\"name\":\"RoleName\",\"symbols\":[\"LECTURER\",\"STUDENT\",\"USER\"]}],\"default\":null},{\"name\":\"copyState\",\"type\":[\"null\",{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}],\"default\":null},{\"name\":\"createdAt\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}],\"default\":null},{\"name\":\"updatedAt\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}],\"default\":null},{\"name\":\"isDeleted\",\"type\":[\"null\",\"boolean\"],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -138,12 +138,12 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
     this.address = address;
     this.avatarUrl = avatarUrl;
     this.userIdMoodle = userIdMoodle;
-    this.dob = dob.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
+    this.dob = dob;
     this.serviceName = serviceName;
     this.roleName = roleName;
     this.copyState = copyState;
-    this.createdAt = createdAt.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
-    this.updatedAt = updatedAt.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
     this.isDeleted = isDeleted;
   }
 
@@ -178,35 +178,6 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
     case 18: return isDeleted;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
-  }
-
-  private static final org.apache.avro.Conversion<?>[] conversions =
-      new org.apache.avro.Conversion<?>[] {
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
-      null,
-      null,
-      null,
-      new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
-      new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
-      null,
-      null
-  };
-
-  @Override
-  public org.apache.avro.Conversion<?> getConversion(int field) {
-    return conversions[field];
   }
 
   // Used by DatumReader.  Applications should not call.
@@ -455,7 +426,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
    * @param value the value to set.
    */
   public void setDob(java.time.Instant value) {
-    this.dob = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
+    this.dob = value;
   }
 
   /**
@@ -523,7 +494,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
    * @param value the value to set.
    */
   public void setCreatedAt(java.time.Instant value) {
-    this.createdAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
+    this.createdAt = value;
   }
 
   /**
@@ -540,7 +511,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
    * @param value the value to set.
    */
   public void setUpdatedAt(java.time.Instant value) {
-    this.updatedAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
+    this.updatedAt = value;
   }
 
   /**
@@ -1290,7 +1261,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
       */
     public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setDob(java.time.Instant value) {
       validate(fields()[12], value);
-      this.dob = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
+      this.dob = value;
       fieldSetFlags()[12] = true;
       return this;
     }
@@ -1309,6 +1280,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder clearDob() {
+      dob = null;
       fieldSetFlags()[12] = false;
       return this;
     }
@@ -1449,7 +1421,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
       */
     public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setCreatedAt(java.time.Instant value) {
       validate(fields()[16], value);
-      this.createdAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
+      this.createdAt = value;
       fieldSetFlags()[16] = true;
       return this;
     }
@@ -1468,6 +1440,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder clearCreatedAt() {
+      createdAt = null;
       fieldSetFlags()[16] = false;
       return this;
     }
@@ -1488,7 +1461,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
       */
     public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setUpdatedAt(java.time.Instant value) {
       validate(fields()[17], value);
-      this.updatedAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
+      this.updatedAt = value;
       fieldSetFlags()[17] = true;
       return this;
     }
@@ -1507,6 +1480,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder clearUpdatedAt() {
+      updatedAt = null;
       fieldSetFlags()[17] = false;
       return this;
     }
