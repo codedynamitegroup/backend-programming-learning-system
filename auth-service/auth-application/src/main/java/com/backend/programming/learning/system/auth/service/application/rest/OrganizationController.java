@@ -61,7 +61,7 @@ public class OrganizationController {
                         .name(createOrganizationCommand.getName())
                         .phone(createOrganizationCommand.getPhone())
                         .address(createOrganizationCommand.getAddress())
-                        .createdBy(email)
+                        .createdBy(createOrganizationCommand.getCreatedBy())
                         .build()
         );
         log.info("Organization created with email: {}", createOrganizationResponse.getEmail());
@@ -87,6 +87,7 @@ public class OrganizationController {
                         .name(createOrganizationCommand.getName())
                         .phone(createOrganizationCommand.getPhone())
                         .address(createOrganizationCommand.getAddress())
+                        .createdBy(createOrganizationCommand.getCreatedBy())
                         .build()
         );
         log.info("Organization created with email: {}", createOrganizationResponse.getEmail());

@@ -74,9 +74,10 @@ public class UserMessagingDataMapper {
                 .setUpdatedAt(userEventPayload.getUpdatedAt().toInstant())
                 .setIsDeleted(userEventPayload.getIsDeleted())
                 .setCopyState(CopyState.CREATING)
-                .setRoleName(com.backend.programming.learning.system.kafka.auth.avro.model.user.RoleName.valueOf(userEventPayload.getRoleName()))
+                .setRoleName(userEventPayload.getRoleName() == null ? null :
+                        com.backend.programming.learning.system.kafka.auth.avro.model.user.RoleName.valueOf(userEventPayload.getRoleName()))
                 .setUserIdMoodle(userEventPayload.getUserIdMoodle())
-                .setServiceName(
+                .setServiceName(serviceName == null ? null :
                         com.backend.programming.learning.system.kafka.auth.avro.model.user.ServiceName.valueOf(serviceName.name()))
                 .build();
     }
