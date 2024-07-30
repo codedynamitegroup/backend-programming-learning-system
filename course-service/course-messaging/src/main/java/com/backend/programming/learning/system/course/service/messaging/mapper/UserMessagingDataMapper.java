@@ -27,7 +27,7 @@ public class UserMessagingDataMapper {
                 .createdAt(userCreateRequestAvroModel.getCreatedAt())
                 .updatedAt(userCreateRequestAvroModel.getUpdatedAt())
                 .isDeleted(userCreateRequestAvroModel.getIsDeleted())
-                .roleName(userCreateRequestAvroModel.getRoleName().name())
+                .roleName(userCreateRequestAvroModel.getRoleName() == null ? null : userCreateRequestAvroModel.getRoleName().name())
                 .userIdMoodle(userCreateRequestAvroModel.getUserIdMoodle())
                 .build();
     }

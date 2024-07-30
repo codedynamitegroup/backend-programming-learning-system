@@ -53,7 +53,7 @@ public class NotificationCreateScheduler {
 //    @Scheduled(fixedRateString = "${course-service.create-notification-scheduler-fixed-rate}")
     @Scheduled(fixedRateString = "15000")
     public void processCreateNotification() {
-        log.info("Start NotificationCreateScheduler at {}", ZonedDateTime.now(ZoneId.of("UTC")));
+//        log.info("Start NotificationCreateScheduler at {}", ZonedDateTime.now(ZoneId.of("UTC")));
 
         // Get all valid calendar events
         List<CalendarEvent> calendarEvents = calendarEventRepository
@@ -65,8 +65,8 @@ public class NotificationCreateScheduler {
             return;
         }
 
-        log.info("{} calendar events found after now at schedule time: {}",
-                calendarEvents.size(), ZonedDateTime.now(ZoneId.of("UTC")));
+//        log.info("{} calendar events found after now at schedule time: {}",
+//                calendarEvents.size(), ZonedDateTime.now(ZoneId.of("UTC")));
 
         // Save multiple notifications for better performance
         List<Notification> notifications = new ArrayList<>();
@@ -217,26 +217,26 @@ public class NotificationCreateScheduler {
             return;
         }
 
-        log.info("{} notifications created at schedule time: {}",
-                notifications.size(), ZonedDateTime.now(ZoneId.of("UTC")));
+//        log.info("{} notifications created at schedule time: {}",
+//                notifications.size(), ZonedDateTime.now(ZoneId.of("UTC")));
         // Save notifications
         List<Notification> savedNotifications = notificationRepository.saveAllNotifications(notifications);
 
-        log.info("Start emitting notifications at {}", ZonedDateTime.now(ZoneId.of("UTC")));
+//        log.info("Start emitting notifications at {}", ZonedDateTime.now(ZoneId.of("UTC")));
         for (Notification notificationResult : savedNotifications) {
             NotificationResponseEntity queryNotificationResponse = notificationDataMapper
                     .notificationToQueryNotificationResponse(notificationResult);
-            log.info("Emitting notification to user: {}", queryNotificationResponse);
+//            log.info("Emitting notification to user: {}", queryNotificationResponse);
             String room = "email_" + notificationResult.getUserTo().getEmail();
             notificationMessageEmitter.emit(room, "get_notification", queryNotificationResponse);
-            log.info("Notification emitted to user: {}", queryNotificationResponse);
+//            log.info("Notification emitted to user: {}", queryNotificationResponse);
         }
-        log.info("End emitting notifications at {}", ZonedDateTime.now(ZoneId.of("UTC")));
+//        log.info("End emitting notifications at {}", ZonedDateTime.now(ZoneId.of("UTC")));
 
         // Save updated calendar events
         calendarEventRepository.saveAllCalendarEvents(calendarEvents);
 
-        log.info("End NotificationCreateScheduler at {}", ZonedDateTime.now(ZoneId.of("UTC")));
+//        log.info("End NotificationCreateScheduler at {}", ZonedDateTime.now(ZoneId.of("UTC")));
     }
 
     private void handleComponentType(List<Notification> notifications,
@@ -318,36 +318,36 @@ public class NotificationCreateScheduler {
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"));
         // Check multiple cases for notificationNotifyTime
         if (time.isAfter(now)) {
-            log.info("Time is after now");
+//            log.info("Time is after now");
             if (time.isBefore(now.plusHours(1)) && notificationNotifyTime != NotificationNotifyTime.ONE_HOUR) {
-                log.info("Time is before now plus 1 hour");
+//                log.info("Time is before now plus 1 hour");
                 return NotificationNotifyTime.ONE_HOUR;
             } else if (time.isBefore(now.plusHours(3))
                     && time.isAfter(now.plusHours(1))
                     && notificationNotifyTime != NotificationNotifyTime.THREE_HOURS) {
-                log.info("Time is before now plus 3 hours and after now plus 1 hour");
+//                log.info("Time is before now plus 3 hours and after now plus 1 hour");
                 return NotificationNotifyTime.THREE_HOURS;
             } else if (time.isBefore(now.plusHours(6))
                     && time.isAfter(now.plusHours(3))
                     && notificationNotifyTime != NotificationNotifyTime.SIX_HOURS) {
-                log.info("Time is before now plus 6 hours and after now plus 3 hours");
+//                log.info("Time is before now plus 6 hours and after now plus 3 hours");
                 return NotificationNotifyTime.SIX_HOURS;
             } else if (time.isBefore(now.plusHours(12))
                     && time.isAfter(now.plusHours(6))
                     && notificationNotifyTime != NotificationNotifyTime.TWELVE_HOURS) {
-                log.info("Time is before now plus 12 hours and after now plus 6 hours");
+//                log.info("Time is before now plus 12 hours and after now plus 6 hours");
                 return NotificationNotifyTime.TWELVE_HOURS;
             } else if (time.isBefore(now.plusDays(1))
                     && time.isAfter(now.plusHours(12))
                     && notificationNotifyTime != NotificationNotifyTime.TWENTY_FOUR_HOURS) {
-                log.info("Time is before now plus 1 day and after now plus 12 hours");
+//                log.info("Time is before now plus 1 day and after now plus 12 hours");
                 return NotificationNotifyTime.TWENTY_FOUR_HOURS;
             } else {
-                log.info("Time valid check is not in any case");
+//                log.info("Time valid check is not in any case");
                 return null;
             }
         } else {
-            log.info("Time is not after now");
+//            log.info("Time is not after now");
             return null;
         }
     }
