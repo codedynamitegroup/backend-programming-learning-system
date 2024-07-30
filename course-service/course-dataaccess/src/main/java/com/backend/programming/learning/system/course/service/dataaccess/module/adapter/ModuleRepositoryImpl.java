@@ -57,4 +57,10 @@ public class ModuleRepositoryImpl implements ModuleRepository {
         return moduleJpaRepository.findByExamId(examId.getValue())
                 .map(moduleDataAccessMapper::moduleEntityToModule);
     }
+
+    @Override
+    public Optional<Module> findByAssignmentId(UUID value) {
+        return moduleJpaRepository.findByAssignmentId(value)
+                .map(moduleDataAccessMapper::moduleEntityToModule);
+    }
 }

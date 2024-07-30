@@ -20,4 +20,7 @@ public interface ModuleRepository {
 
 
     Optional<Module> findByExamId(ExamId examId);
+
+    Optional<Module> findByAssignmentId(UUID value);
+
 }

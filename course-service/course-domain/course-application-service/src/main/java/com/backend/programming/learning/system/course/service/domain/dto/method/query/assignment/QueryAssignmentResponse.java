@@ -21,6 +21,7 @@ public class QueryAssignmentResponse {
     private final String courseName;
 
     private final Integer moodleId;
+    private final UUID sectionId;
 
     @NotNull
     private final String title;

@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.SynchronizeStatus;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface SynchronizeStateApplicationService {
@@ -17,4 +18,6 @@ public interface SynchronizeStateApplicationService {
     String syncDataMoodle(UUID organizationId,UUID userId);
 
     QuerySynchronizeStateResponse querySynchronizeByOrganizationIdAndStep(QuerySynchronizeStateCommand querySynchronizeStateCommand);
+
+    List<QuerySynchronizeStateResponse> querySynchronizeByOrganizationId(UUID organizationId);
 }

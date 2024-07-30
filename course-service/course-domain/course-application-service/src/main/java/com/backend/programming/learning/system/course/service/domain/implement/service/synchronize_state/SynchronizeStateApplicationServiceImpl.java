@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -72,6 +73,11 @@ public class SynchronizeStateApplicationServiceImpl implements SynchronizeStateA
     public QuerySynchronizeStateResponse querySynchronizeByOrganizationIdAndStep(QuerySynchronizeStateCommand querySynchronizeStateCommand) {
         return
                 synchronizeStateCommandHandler.querySynchronizeByOrganizationIdAndStep(querySynchronizeStateCommand.getOrganizationId(), querySynchronizeStateCommand.getStep());
+    }
+
+    @Override
+    public List<QuerySynchronizeStateResponse> querySynchronizeByOrganizationId(UUID organizationId) {
+        return synchronizeStateCommandHandler.querySynchronizeByOrganizationId(organizationId);
     }
 
     @Override
