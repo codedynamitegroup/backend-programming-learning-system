@@ -59,6 +59,34 @@ VALUES
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
      true),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb50',
+     'Learn C#',
+     'C# is a general-purpose, multi-paradigm programming language developed by Microsoft. C# is widely used for building desktop applications, web applications, and games. It is a simple, modern, and object-oriented language that is easy to learn.',
+     'https://cdn.codechef.com/images/self-learning/icons/c-sharp.svg',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     true),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb51',
+     'Learn Kotlin',
+     'Kotlin, a modern programming language developed by JetBrains, is notably used for Android app development. It''s appreciated for its concise syntax and interoperability with Java, offering an improved development experience. Kotlin''s safety features and support for functional programming make it a favored choice for both mobile and server-side applications.',
+     'https://cdn.codechef.com/images/self-learning/icons/kotlin.svg',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     true),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb52',
+     'Learn Rust',
+     'Rust is a high-performance programming language known for its focus on safety and concurrency, making it ideal for systems programming. It''s designed to prevent common programming errors, offering memory safety without a garbage collector. Rust''s growing popularity stems from its use in software infrastructure, embedded systems, and other performance-critical applications.',
+     'https://cdn.codechef.com/images/self-learning/icons/rust.svg',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     true),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb53',
+     'Learn PHP',
+     'PHP is a popular general-purpose scripting language that is especially suited to web development. Fast, flexible and pragmatic, PHP powers everything from your blog to the most popular websites in the world.',
+     'https://www.php.net//images/logos/new-php-logo.svg',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     true),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb48',
      'Data structures and Algorithms',
      'Explore the fundamental building blocks of computer science through our comprehensive courses on Data Structures and Algorithms. Gain a solid understanding of both theory and practical application.',
@@ -141,12 +169,22 @@ VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb47', 'cc69d904-ba4e-44fb-a0b5-8170e30bac39'),
     -- GO
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb49', 'e68c5866-1435-4958-bafe-ad901ee75c8d'),
-    -- Java, C, C++, Python, Javascript
+    -- C#
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb50', '70614628-fc54-4620-b9b9-81b918cae732'),
+    -- Kotlin
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb51', 'a48c0969-16bb-4d8a-a611-751b48f72454'),
+    -- Rust
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb52', 'cac1604f-a42d-4c27-92c1-45da338220e2'),
+    -- PHP
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb53', '9c84c818-6931-4309-b669-9631d6363118'),
+    -- Java, C, C++, Python, Javascript, GO, C#
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'c95d5c7d-cadf-42cc-afdc-968211ae3720'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', '6b2f42e1-81e6-493b-9cc1-2436febc320e'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', '8794526e-f528-4ffc-b98d-320812e79c6f'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', '5413d5e9-5513-4e86-b585-b4f9149bc692'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'cc69d904-ba4e-44fb-a0b5-8170e30bac39');
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'cc69d904-ba4e-44fb-a0b5-8170e30bac39'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'e68c5866-1435-4958-bafe-ad901ee75c8d'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', '70614628-fc54-4620-b9b9-81b918cae732');
 
 
 INSERT INTO public.question(id, org_id, difficulty, name, question_text, general_feedback, default_mark, qtype, created_by, updated_by, copy_state)
