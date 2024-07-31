@@ -27,5 +27,5 @@ public class CreateOrganizationCommand {
     @NotNull
     private final String address;
 
-    private final String createdBy;
+    private final UUID createdBy;
 }

@@ -39,7 +39,7 @@ public class OrganizationUpdateHelper {
 
         if(updateOrganizationCommand.getMoodleUrl() != null)
         {
-            String moodleUrl = updateOrganizationCommand.getMoodleUrl() + ":8081/webservice/rest/server.php";
+            String moodleUrl = updateOrganizationCommand.getMoodleUrl() + "/webservice/rest/server.php";
             organization.setMoodleUrl(moodleUrl);
         }
         organizationRepository.saveOrganization(organization);

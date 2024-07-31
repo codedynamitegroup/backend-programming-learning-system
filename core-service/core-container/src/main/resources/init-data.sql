@@ -59,6 +59,34 @@ VALUES
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
      true),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb50',
+     'Learn C#',
+     'C# is a general-purpose, multi-paradigm programming language developed by Microsoft. C# is widely used for building desktop applications, web applications, and games. It is a simple, modern, and object-oriented language that is easy to learn.',
+     'https://cdn.codechef.com/images/self-learning/icons/c-sharp.svg',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     true),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb51',
+     'Learn Kotlin',
+     'Kotlin, a modern programming language developed by JetBrains, is notably used for Android app development. It''s appreciated for its concise syntax and interoperability with Java, offering an improved development experience. Kotlin''s safety features and support for functional programming make it a favored choice for both mobile and server-side applications.',
+     'https://cdn.codechef.com/images/self-learning/icons/kotlin.svg',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     true),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb52',
+     'Learn Rust',
+     'Rust is a high-performance programming language known for its focus on safety and concurrency, making it ideal for systems programming. It''s designed to prevent common programming errors, offering memory safety without a garbage collector. Rust''s growing popularity stems from its use in software infrastructure, embedded systems, and other performance-critical applications.',
+     'https://cdn.codechef.com/images/self-learning/icons/rust.svg',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     true),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb53',
+     'Learn PHP',
+     'PHP is a popular general-purpose scripting language that is especially suited to web development. Fast, flexible and pragmatic, PHP powers everything from your blog to the most popular websites in the world.',
+     'https://www.php.net//images/logos/new-php-logo.svg',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     true),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb48',
      'Data structures and Algorithms',
      'Explore the fundamental building blocks of computer science through our comprehensive courses on Data Structures and Algorithms. Gain a solid understanding of both theory and practical application.',
@@ -141,17 +169,27 @@ VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb47', 'cc69d904-ba4e-44fb-a0b5-8170e30bac39'),
     -- GO
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb49', 'e68c5866-1435-4958-bafe-ad901ee75c8d'),
-    -- Java, C, C++, Python, Javascript
+    -- C#
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb50', '70614628-fc54-4620-b9b9-81b918cae732'),
+    -- Kotlin
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb51', 'a48c0969-16bb-4d8a-a611-751b48f72454'),
+    -- Rust
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb52', 'cac1604f-a42d-4c27-92c1-45da338220e2'),
+    -- PHP
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb53', '9c84c818-6931-4309-b669-9631d6363118'),
+    -- Java, C, C++, Python, Javascript, GO, C#
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'c95d5c7d-cadf-42cc-afdc-968211ae3720'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', '6b2f42e1-81e6-493b-9cc1-2436febc320e'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', '8794526e-f528-4ffc-b98d-320812e79c6f'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', '5413d5e9-5513-4e86-b585-b4f9149bc692'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'cc69d904-ba4e-44fb-a0b5-8170e30bac39');
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'cc69d904-ba4e-44fb-a0b5-8170e30bac39'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'e68c5866-1435-4958-bafe-ad901ee75c8d'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', '70614628-fc54-4620-b9b9-81b918cae732');
 
 
 INSERT INTO public.question(id, org_id, difficulty, name, question_text, general_feedback, default_mark, qtype, created_by, updated_by, copy_state)
 VALUES
-    ('b6484e21-6937-489c-b031-b71767994233', NULL, 'EASY', 'Question Handle', 'Question Wire Text', 'Question Gold feedback', 1, 'ESSAY', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
+    ('b6484e21-6937-489c-b031-b71767994233', NULL, 'EASY', 'Khái niệm và ứng dụng của con trỏ', 'Hãy giải thích khái niệm con trỏ trong ngôn ngữ lập trình C/C++. Tại sao con trỏ lại quan trọng trong lập trình?', 'Question Gold feedback', 1, 'ESSAY', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
     ('b6484e21-6937-489c-b031-b71767994132', NULL, 'MEDIUM', 'Question hihi', 'Question Wow Text', 'Question Amazing feedback', 1, 'SHORT_ANSWER', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
     ('b6484e21-6937-489c-b031-b71767994735', NULL, 'HARD', 'Question haha', 'Question Speaker Text', 'Good Job', 1, 'MULTIPLE_CHOICE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
     ('b6484e21-6937-489c-b031-b71767994752', NULL, 'MEDIUM', 'K Divisible Elements Subarrays', 'Question Wow Text', 'Question Amazing feedback', 1, 'SHORT_ANSWER', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
@@ -360,8 +398,18 @@ VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', 'b029f559-52a8-4699-b595-71161498ed8c'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7');
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('452371a5-2f58-4bfa-947b-af3140671057', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('452371a5-2f58-4bfa-947b-af3140671057', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('452371a5-2f58-4bfa-947b-af3140671057', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    -- add more for cer course id 452371a5-2f58-4bfa-947b-af3140671057
+    ('452371a5-2f58-4bfa-947b-af3140671057', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('452371a5-2f58-4bfa-947b-af3140671057', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    ('2d2ebd9e-2829-495e-87f7-4f050a8f3628', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('2d2ebd9e-2829-495e-87f7-4f050a8f3628', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('2d2ebd9e-2829-495e-87f7-4f050a8f3628', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7');
 
+-- each user can only review a course once
 INSERT INTO public.review(id, certificate_course_id, rating, content, created_by, updated_by)
 VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 5, 'Great course! I learned a lot from it.', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
@@ -372,7 +420,16 @@ VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 3, 'Okay course. Could be better.', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 5, 'Great course! I learned a lot from it.', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 4, 'Good course! I enjoyed it.', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 3, 'Okay course. Could be better.', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7');
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 3, 'Okay course. Could be better.', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb24', '452371a5-2f58-4bfa-947b-af3140671057', 5, 'Great course! I learned a lot from it.', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb25', '452371a5-2f58-4bfa-947b-af3140671057', 4, 'Good course! I enjoyed it.', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb26', '452371a5-2f58-4bfa-947b-af3140671057', 3, 'Okay course. Could be better.', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb27', '452371a5-2f58-4bfa-947b-af3140671057', 5, 'Excellent course', '39328bcf-8af6-44fc-9ae9-247f953ee2a2', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb28', '452371a5-2f58-4bfa-947b-af3140671057', 5, 'The best course ever!', '2d7ed5a0-fb21-4927-9a25-647c17d29668', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb29', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 5, 'Great course! I learned a lot from it.', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb30', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 4, 'Good course! I enjoyed it.', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb31', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 3, 'Okay course. Could be better.', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7');
+
 
 INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 1, 'Introduction to Python', 'This chapter introduces Python programming and covers basic concepts such as data types, control structures, and functions.', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.606514+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.606514+00');
 INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 2, 'Advanced Python Programming', 'This chapter covers advanced Python programming topics such as object-oriented programming, data structures, and algorithms.', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:51:27.606514+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:51:27.606514+00');
@@ -2438,8 +2495,8 @@ VALUES
      '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
      '<p><strong>Pre-determined Challenge Scores:</strong></p><p>Each challenge you conquer has a pre-set score waiting to be claimed. The more complex the challenge, the higher the score you can rack up!</p><p><br></p><p><strong>Test Cases: Your Gateway to Glory:</strong></p><p>Each challenge comes with a battery of test cases designed to put your code through its paces. Every test case you conquer translates into points towards your final score. The more test cases you dominate, the closer you get to scoring supremacy!</p><p><br></p><p><strong>Multiple Submissions? No Problem!</strong></p><p>Feeling creative and tinkering with different solutions? No sweat! We take your highest scoring submission for each challenge into account, so fire away with your best attempts.</p><p><br></p><p><strong>The Leaderboard Beckons: It''s All About the Rank</strong></p><p>Participants are ranked on the glorious leaderboard based on their total score. But what happens when coders achieve the same score? Buckle up, because things get exciting!</p><p><br></p><p><strong>Tie-Breaker Time: Speed Demons Unite!</strong></p><p>In the thrilling case of a tie, the tie-breaker comes down to <strong>speed</strong>. The participant who submitted their highest-scoring solution in the <strong>shortest amount of time</strong> reigns supreme! So, channel your inner coding ninja and blaze through those challenges for ultimate glory.</p>',
      'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png',
-     CURRENT_TIMESTAMP + INTERVAL '5 minutes',
-     CURRENT_TIMESTAMP + INTERVAL '1 hour 5 minutes',
+     CURRENT_TIMESTAMP + INTERVAL '45 minutes',
+     CURRENT_TIMESTAMP + INTERVAL '1 hour 45 minutes',
      'b029f559-52a8-4699-b595-71161498ed8c',
      'b029f559-52a8-4699-b595-71161498ed8c',
      true,
@@ -2452,8 +2509,8 @@ VALUES
      '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
      '<p><strong>Pre-determined Challenge Scores:</strong></p><p>Each challenge you conquer has a pre-set score waiting to be claimed. The more complex the challenge, the higher the score you can rack up!</p><p><br></p><p><strong>Test Cases: Your Gateway to Glory:</strong></p><p>Each challenge comes with a battery of test cases designed to put your code through its paces. Every test case you conquer translates into points towards your final score. The more test cases you dominate, the closer you get to scoring supremacy!</p><p><br></p><p><strong>Multiple Submissions? No Problem!</strong></p><p>Feeling creative and tinkering with different solutions? No sweat! We take your highest scoring submission for each challenge into account, so fire away with your best attempts.</p><p><br></p><p><strong>The Leaderboard Beckons: It''s All About the Rank</strong></p><p>Participants are ranked on the glorious leaderboard based on their total score. But what happens when coders achieve the same score? Buckle up, because things get exciting!</p><p><br></p><p><strong>Tie-Breaker Time: Speed Demons Unite!</strong></p><p>In the thrilling case of a tie, the tie-breaker comes down to <strong>speed</strong>. The participant who submitted their highest-scoring solution in the <strong>shortest amount of time</strong> reigns supreme! So, channel your inner coding ninja and blaze through those challenges for ultimate glory.</p>',
      'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png',
-     CURRENT_TIMESTAMP + INTERVAL '10 minutes',
-     CURRENT_TIMESTAMP + INTERVAL '1 hour 10 minutes',
+     CURRENT_TIMESTAMP + INTERVAL '1 hour 20 minutes',
+     CURRENT_TIMESTAMP + INTERVAL '2 hours 20 minutes',
      'b029f559-52a8-4699-b595-71161498ed8c',
      'b029f559-52a8-4699-b595-71161498ed8c',
      true,
@@ -2480,16 +2537,16 @@ VALUES
      '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
      '<p><strong>Pre-determined Challenge Scores:</strong></p><p>Each challenge you conquer has a pre-set score waiting to be claimed. The more complex the challenge, the higher the score you can rack up!</p><p><br></p><p><strong>Test Cases: Your Gateway to Glory:</strong></p><p>Each challenge comes with a battery of test cases designed to put your code through its paces. Every test case you conquer translates into points towards your final score. The more test cases you dominate, the closer you get to scoring supremacy!</p><p><br></p><p><strong>Multiple Submissions? No Problem!</strong></p><p>Feeling creative and tinkering with different solutions? No sweat! We take your highest scoring submission for each challenge into account, so fire away with your best attempts.</p><p><br></p><p><strong>The Leaderboard Beckons: It''s All About the Rank</strong></p><p>Participants are ranked on the glorious leaderboard based on their total score. But what happens when coders achieve the same score? Buckle up, because things get exciting!</p><p><br></p><p><strong>Tie-Breaker Time: Speed Demons Unite!</strong></p><p>In the thrilling case of a tie, the tie-breaker comes down to <strong>speed</strong>. The participant who submitted their highest-scoring solution in the <strong>shortest amount of time</strong> reigns supreme! So, channel your inner coding ninja and blaze through those challenges for ultimate glory.</p>',
      'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png',
-     CURRENT_TIMESTAMP + INTERVAL '1 days',
-     CURRENT_TIMESTAMP + INTERVAL '1 days 1 hours',
+     CURRENT_TIMESTAMP + INTERVAL '1 hour 15 minutes',
+     CURRENT_TIMESTAMP + INTERVAL '2 hours 15 minutes',
      'b029f559-52a8-4699-b595-71161498ed8c',
      'b029f559-52a8-4699-b595-71161498ed8c',
      true,
      '08b65a39-394f-4977-a5fa-3fe145b620f8',
      true
     ),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb34',  'HCMUT Hackathon Contest',
-     '<h3>Welcome to the HCMUT Hackathon Contest</h3><p><br></p><p>We are thrilled to present the inaugural CodeDynamite Weekly Contest, a premier event designed to challenge your coding skills and ignite your passion for programming. Whether you''re a seasoned developer or a coding enthusiast, this contest offers a unique opportunity to showcase your talents, compete with like-minded individuals, and win exciting prizes.</p><p><br></p><p><strong>About the contest:</strong></p><ul><li><strong>Sponsored by:</strong> CodeDynamite, your go-to platform for cutting-edge coding resources and community support.</li><li><strong>When:</strong> Every week, with fresh and exciting challenges that cater to various skill levels.</li><li><strong>Who Can Participate:</strong> Open to all coding enthusiasts, regardless of experience level.</li></ul><p><br></p><p><strong>Why Join?</strong></p><ul><li><strong>Challenge Yourself:</strong> Tackle a variety of coding problems that will test your creativity and problem-solving abilities.</li><li><strong>Learn and Grow:</strong> Gain new insights and improve your coding skills through hands-on practice and real-time competition.</li><li><strong>Win Prizes:</strong> Stand a chance to win amazing rewards and earn recognition within the coding community.</li></ul><p><br></p><p><strong>How to Register:</strong></p><ul><li>Simply click the registration link below and fill out the required details to secure your spot in the contest.</li><li>Registration is quick, easy, and free!</li></ul><p><br></p><p><strong>Don’t miss out on this fantastic opportunity to connect, compete, and code with the best!</strong></p><p><br></p><p><strong>Register for the contest now and let your coding journey begin!</strong></p><p><a href="https://codedynamite.site/#/contests/d215b5f8-0249-4dc5-89a3-51fd148cfb34/information" rel="noopener noreferrer" target="_blank">Link to register</a></p><p><br></p><p><br></p>',
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb34',  'Asia Hackathon Contest',
+     '<h3>Welcome to the Asia Hackathon Contest</h3><p><br></p><p>We are thrilled to present the inaugural Asia Hackathon Contest, a premier event designed to challenge your coding skills and ignite your passion for programming. Whether you''re a seasoned developer or a coding enthusiast, this contest offers a unique opportunity to showcase your talents, compete with like-minded individuals, and win exciting prizes.</p><p><br></p><p><strong>About the contest:</strong></p><ul><li><strong>Sponsored by:</strong> CodeDynamite, your go-to platform for cutting-edge coding resources and community support.</li><li><strong>When:</strong> Every week, with fresh and exciting challenges that cater to various skill levels.</li><li><strong>Who Can Participate:</strong> Open to all coding enthusiasts, regardless of experience level.</li></ul><p><br></p><p><strong>Why Join?</strong></p><ul><li><strong>Challenge Yourself:</strong> Tackle a variety of coding problems that will test your creativity and problem-solving abilities.</li><li><strong>Learn and Grow:</strong> Gain new insights and improve your coding skills through hands-on practice and real-time competition.</li><li><strong>Win Prizes:</strong> Stand a chance to win amazing rewards and earn recognition within the coding community.</li></ul><p><br></p><p><strong>How to Register:</strong></p><ul><li>Simply click the registration link below and fill out the required details to secure your spot in the contest.</li><li>Registration is quick, easy, and free!</li></ul><p><br></p><p><strong>Don’t miss out on this fantastic opportunity to connect, compete, and code with the best!</strong></p><p><br></p><p><strong>Register for the contest now and let your coding journey begin!</strong></p><p><a href="https://codedynamite.site/#/contests/d215b5f8-0249-4dc5-89a3-51fd148cfb34/information" rel="noopener noreferrer" target="_blank">Link to register</a></p><p><br></p><p><br></p>',
      '<p><strong>🎉 Juicy Prizes Await You! 🎉</strong></p><p><br></p><p>Get ready to win some amazing rewards in the 1st CodeDynamite Weekly Contest! Here are the fantastic prizes up for grabs:</p><p><br></p><p><strong>1st Place:</strong></p><ul><li><strong>$500 Cash Prize</strong></li><li><strong>Exclusive CodeDynamite T-Shirt</strong></li><li><strong>Personalized Winner''s Certificate</strong></li></ul><p><br></p><p><strong>2nd Place:</strong></p><ul><li><strong>$250 Cash Prize</strong></li><li><strong>Exclusive CodeDynamite Hoodie</strong></li><li><strong>Personalized Runner-Up Certificate</strong></li></ul><p><br></p><p><strong>3rd Place:</strong></p><ul><li><strong>$100 Cash Prize</strong></li><li><strong>Exclusive CodeDynamite Mug</strong></li><li><strong>Personalized Certificate of Achievement</strong></li></ul><p><br></p><p>Don''t miss your chance to win these incredible prizes and gain recognition in the coding community. <a href="https://codedynamite.site/#/contests/d215b5f8-0249-4dc5-89a3-51fd148cfb16/information" rel="noopener noreferrer" target="_blank"><strong>Register now</strong></a> and let the competition begin!</p>',
      '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
      '<p><strong>Pre-determined Challenge Scores:</strong></p><p>Each challenge you conquer has a pre-set score waiting to be claimed. The more complex the challenge, the higher the score you can rack up!</p><p><br></p><p><strong>Test Cases: Your Gateway to Glory:</strong></p><p>Each challenge comes with a battery of test cases designed to put your code through its paces. Every test case you conquer translates into points towards your final score. The more test cases you dominate, the closer you get to scoring supremacy!</p><p><br></p><p><strong>Multiple Submissions? No Problem!</strong></p><p>Feeling creative and tinkering with different solutions? No sweat! We take your highest scoring submission for each challenge into account, so fire away with your best attempts.</p><p><br></p><p><strong>The Leaderboard Beckons: It''s All About the Rank</strong></p><p>Participants are ranked on the glorious leaderboard based on their total score. But what happens when coders achieve the same score? Buckle up, because things get exciting!</p><p><br></p><p><strong>Tie-Breaker Time: Speed Demons Unite!</strong></p><p>In the thrilling case of a tie, the tie-breaker comes down to <strong>speed</strong>. The participant who submitted their highest-scoring solution in the <strong>shortest amount of time</strong> reigns supreme! So, channel your inner coding ninja and blaze through those challenges for ultimate glory.</p>',
@@ -2499,21 +2556,21 @@ VALUES
      'b029f559-52a8-4699-b595-71161498ed8c',
      'b029f559-52a8-4699-b595-71161498ed8c',
      true,
-     'cb69c0bf-c454-4f15-be10-791f6749dac7',
+     null,
      true
     ),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb35',  'HCMUT Algorithm Contest',
-     '<h3>Welcome to the HCMUT Algorithm Contest</h3><p><br></p><p>We are thrilled to present the inaugural CodeDynamite Weekly Contest, a premier event designed to challenge your coding skills and ignite your passion for programming. Whether you''re a seasoned developer or a coding enthusiast, this contest offers a unique opportunity to showcase your talents, compete with like-minded individuals, and win exciting prizes.</p><p><br></p><p><strong>About the contest:</strong></p><ul><li><strong>Sponsored by:</strong> CodeDynamite, your go-to platform for cutting-edge coding resources and community support.</li><li><strong>When:</strong> Every week, with fresh and exciting challenges that cater to various skill levels.</li><li><strong>Who Can Participate:</strong> Open to all coding enthusiasts, regardless of experience level.</li></ul><p><br></p><p><strong>Why Join?</strong></p><ul><li><strong>Challenge Yourself:</strong> Tackle a variety of coding problems that will test your creativity and problem-solving abilities.</li><li><strong>Learn and Grow:</strong> Gain new insights and improve your coding skills through hands-on practice and real-time competition.</li><li><strong>Win Prizes:</strong> Stand a chance to win amazing rewards and earn recognition within the coding community.</li></ul><p><br></p><p><strong>How to Register:</strong></p><ul><li>Simply click the registration link below and fill out the required details to secure your spot in the contest.</li><li>Registration is quick, easy, and free!</li></ul><p><br></p><p><strong>Don’t miss out on this fantastic opportunity to connect, compete, and code with the best!</strong></p><p><br></p><p><strong>Register for the contest now and let your coding journey begin!</strong></p><p><a href="https://codedynamite.site/#/contests/d215b5f8-0249-4dc5-89a3-51fd148cfb35/information" rel="noopener noreferrer" target="_blank">Link to register</a></p><p><br></p><p><br></p>',
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb35',  'Pacific Algorithm Contest',
+     '<h3>Welcome to the Pacific Algorithm Contest</h3><p><br></p><p>We are thrilled to present the inaugural Pacific Algorithm Contest, a premier event designed to challenge your coding skills and ignite your passion for programming. Whether you''re a seasoned developer or a coding enthusiast, this contest offers a unique opportunity to showcase your talents, compete with like-minded individuals, and win exciting prizes.</p><p><br></p><p><strong>About the contest:</strong></p><ul><li><strong>Sponsored by:</strong> CodeDynamite, your go-to platform for cutting-edge coding resources and community support.</li><li><strong>When:</strong> Every week, with fresh and exciting challenges that cater to various skill levels.</li><li><strong>Who Can Participate:</strong> Open to all coding enthusiasts, regardless of experience level.</li></ul><p><br></p><p><strong>Why Join?</strong></p><ul><li><strong>Challenge Yourself:</strong> Tackle a variety of coding problems that will test your creativity and problem-solving abilities.</li><li><strong>Learn and Grow:</strong> Gain new insights and improve your coding skills through hands-on practice and real-time competition.</li><li><strong>Win Prizes:</strong> Stand a chance to win amazing rewards and earn recognition within the coding community.</li></ul><p><br></p><p><strong>How to Register:</strong></p><ul><li>Simply click the registration link below and fill out the required details to secure your spot in the contest.</li><li>Registration is quick, easy, and free!</li></ul><p><br></p><p><strong>Don’t miss out on this fantastic opportunity to connect, compete, and code with the best!</strong></p><p><br></p><p><strong>Register for the contest now and let your coding journey begin!</strong></p><p><a href="https://codedynamite.site/#/contests/d215b5f8-0249-4dc5-89a3-51fd148cfb35/information" rel="noopener noreferrer" target="_blank">Link to register</a></p><p><br></p><p><br></p>',
      '<p><strong>🎉 Juicy Prizes Await You! 🎉</strong></p><p><br></p><p>Get ready to win some amazing rewards in the 1st CodeDynamite Weekly Contest! Here are the fantastic prizes up for grabs:</p><p><br></p><p><strong>1st Place:</strong></p><ul><li><strong>$500 Cash Prize</strong></li><li><strong>Exclusive CodeDynamite T-Shirt</strong></li><li><strong>Personalized Winner''s Certificate</strong></li></ul><p><br></p><p><strong>2nd Place:</strong></p><ul><li><strong>$250 Cash Prize</strong></li><li><strong>Exclusive CodeDynamite Hoodie</strong></li><li><strong>Personalized Runner-Up Certificate</strong></li></ul><p><br></p><p><strong>3rd Place:</strong></p><ul><li><strong>$100 Cash Prize</strong></li><li><strong>Exclusive CodeDynamite Mug</strong></li><li><strong>Personalized Certificate of Achievement</strong></li></ul><p><br></p><p>Don''t miss your chance to win these incredible prizes and gain recognition in the coding community. <a href="https://codedynamite.site/#/contests/d215b5f8-0249-4dc5-89a3-51fd148cfb16/information" rel="noopener noreferrer" target="_blank"><strong>Register now</strong></a> and let the competition begin!</p>',
      '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
      '<p><strong>Pre-determined Challenge Scores:</strong></p><p>Each challenge you conquer has a pre-set score waiting to be claimed. The more complex the challenge, the higher the score you can rack up!</p><p><br></p><p><strong>Test Cases: Your Gateway to Glory:</strong></p><p>Each challenge comes with a battery of test cases designed to put your code through its paces. Every test case you conquer translates into points towards your final score. The more test cases you dominate, the closer you get to scoring supremacy!</p><p><br></p><p><strong>Multiple Submissions? No Problem!</strong></p><p>Feeling creative and tinkering with different solutions? No sweat! We take your highest scoring submission for each challenge into account, so fire away with your best attempts.</p><p><br></p><p><strong>The Leaderboard Beckons: It''s All About the Rank</strong></p><p>Participants are ranked on the glorious leaderboard based on their total score. But what happens when coders achieve the same score? Buckle up, because things get exciting!</p><p><br></p><p><strong>Tie-Breaker Time: Speed Demons Unite!</strong></p><p>In the thrilling case of a tie, the tie-breaker comes down to <strong>speed</strong>. The participant who submitted their highest-scoring solution in the <strong>shortest amount of time</strong> reigns supreme! So, channel your inner coding ninja and blaze through those challenges for ultimate glory.</p>',
      'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png',
-     CURRENT_TIMESTAMP + INTERVAL '1 hours',
-     CURRENT_TIMESTAMP + INTERVAL '2 hours',
+     CURRENT_TIMESTAMP + INTERVAL '40 minutes',
+     CURRENT_TIMESTAMP + INTERVAL '1 hour 40 minutes',
      'b029f559-52a8-4699-b595-71161498ed8c',
      'b029f559-52a8-4699-b595-71161498ed8c',
      true,
-     'cb69c0bf-c454-4f15-be10-791f6749dac7',
+     null,
      true
     ),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb36',  'Coding Hackathon Contest',
@@ -2522,8 +2579,8 @@ VALUES
      '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
      '<p><strong>Pre-determined Challenge Scores:</strong></p><p>Each challenge you conquer has a pre-set score waiting to be claimed. The more complex the challenge, the higher the score you can rack up!</p><p><br></p><p><strong>Test Cases: Your Gateway to Glory:</strong></p><p>Each challenge comes with a battery of test cases designed to put your code through its paces. Every test case you conquer translates into points towards your final score. The more test cases you dominate, the closer you get to scoring supremacy!</p><p><br></p><p><strong>Multiple Submissions? No Problem!</strong></p><p>Feeling creative and tinkering with different solutions? No sweat! We take your highest scoring submission for each challenge into account, so fire away with your best attempts.</p><p><br></p><p><strong>The Leaderboard Beckons: It''s All About the Rank</strong></p><p>Participants are ranked on the glorious leaderboard based on their total score. But what happens when coders achieve the same score? Buckle up, because things get exciting!</p><p><br></p><p><strong>Tie-Breaker Time: Speed Demons Unite!</strong></p><p>In the thrilling case of a tie, the tie-breaker comes down to <strong>speed</strong>. The participant who submitted their highest-scoring solution in the <strong>shortest amount of time</strong> reigns supreme! So, channel your inner coding ninja and blaze through those challenges for ultimate glory.</p>',
      'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png',
-     CURRENT_TIMESTAMP + INTERVAL '1 days',
-     CURRENT_TIMESTAMP + INTERVAL '1 days 1 hours',
+     CURRENT_TIMESTAMP + INTERVAL '50 minutes',
+     CURRENT_TIMESTAMP + INTERVAL '1 hour 50 minutes',
      'b029f559-52a8-4699-b595-71161498ed8c',
      'b029f559-52a8-4699-b595-71161498ed8c',
      true,
@@ -2536,8 +2593,8 @@ VALUES
      '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
      '<p><strong>Pre-determined Challenge Scores:</strong></p><p>Each challenge you conquer has a pre-set score waiting to be claimed. The more complex the challenge, the higher the score you can rack up!</p><p><br></p><p><strong>Test Cases: Your Gateway to Glory:</strong></p><p>Each challenge comes with a battery of test cases designed to put your code through its paces. Every test case you conquer translates into points towards your final score. The more test cases you dominate, the closer you get to scoring supremacy!</p><p><br></p><p><strong>Multiple Submissions? No Problem!</strong></p><p>Feeling creative and tinkering with different solutions? No sweat! We take your highest scoring submission for each challenge into account, so fire away with your best attempts.</p><p><br></p><p><strong>The Leaderboard Beckons: It''s All About the Rank</strong></p><p>Participants are ranked on the glorious leaderboard based on their total score. But what happens when coders achieve the same score? Buckle up, because things get exciting!</p><p><br></p><p><strong>Tie-Breaker Time: Speed Demons Unite!</strong></p><p>In the thrilling case of a tie, the tie-breaker comes down to <strong>speed</strong>. The participant who submitted their highest-scoring solution in the <strong>shortest amount of time</strong> reigns supreme! So, channel your inner coding ninja and blaze through those challenges for ultimate glory.</p>',
      'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png',
-     CURRENT_TIMESTAMP + INTERVAL '2 days',
-     CURRENT_TIMESTAMP + INTERVAL '2 days 1 hours',
+     CURRENT_TIMESTAMP + INTERVAL '1 hour',
+     CURRENT_TIMESTAMP + INTERVAL '2 hours',
      'b029f559-52a8-4699-b595-71161498ed8c',
      'b029f559-52a8-4699-b595-71161498ed8c',
      true,
@@ -2550,8 +2607,8 @@ VALUES
      '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
      '<p><strong>Pre-determined Challenge Scores:</strong></p><p>Each challenge you conquer has a pre-set score waiting to be claimed. The more complex the challenge, the higher the score you can rack up!</p><p><br></p><p><strong>Test Cases: Your Gateway to Glory:</strong></p><p>Each challenge comes with a battery of test cases designed to put your code through its paces. Every test case you conquer translates into points towards your final score. The more test cases you dominate, the closer you get to scoring supremacy!</p><p><br></p><p><strong>Multiple Submissions? No Problem!</strong></p><p>Feeling creative and tinkering with different solutions? No sweat! We take your highest scoring submission for each challenge into account, so fire away with your best attempts.</p><p><br></p><p><strong>The Leaderboard Beckons: It''s All About the Rank</strong></p><p>Participants are ranked on the glorious leaderboard based on their total score. But what happens when coders achieve the same score? Buckle up, because things get exciting!</p><p><br></p><p><strong>Tie-Breaker Time: Speed Demons Unite!</strong></p><p>In the thrilling case of a tie, the tie-breaker comes down to <strong>speed</strong>. The participant who submitted their highest-scoring solution in the <strong>shortest amount of time</strong> reigns supreme! So, channel your inner coding ninja and blaze through those challenges for ultimate glory.</p>',
      'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png',
-     CURRENT_TIMESTAMP + INTERVAL '3 days',
-     CURRENT_TIMESTAMP + INTERVAL '3 days 1 hours',
+     CURRENT_TIMESTAMP + INTERVAL '1 hour 30 minutes',
+     CURRENT_TIMESTAMP + INTERVAL '2 hours 30 minutes',
      'b029f559-52a8-4699-b595-71161498ed8c',
      'b029f559-52a8-4699-b595-71161498ed8c',
      true,
@@ -2564,8 +2621,8 @@ VALUES
      '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
      '<p><strong>Pre-determined Challenge Scores:</strong></p><p>Each challenge you conquer has a pre-set score waiting to be claimed. The more complex the challenge, the higher the score you can rack up!</p><p><br></p><p><strong>Test Cases: Your Gateway to Glory:</strong></p><p>Each challenge comes with a battery of test cases designed to put your code through its paces. Every test case you conquer translates into points towards your final score. The more test cases you dominate, the closer you get to scoring supremacy!</p><p><br></p><p><strong>Multiple Submissions? No Problem!</strong></p><p>Feeling creative and tinkering with different solutions? No sweat! We take your highest scoring submission for each challenge into account, so fire away with your best attempts.</p><p><br></p><p><strong>The Leaderboard Beckons: It''s All About the Rank</strong></p><p>Participants are ranked on the glorious leaderboard based on their total score. But what happens when coders achieve the same score? Buckle up, because things get exciting!</p><p><br></p><p><strong>Tie-Breaker Time: Speed Demons Unite!</strong></p><p>In the thrilling case of a tie, the tie-breaker comes down to <strong>speed</strong>. The participant who submitted their highest-scoring solution in the <strong>shortest amount of time</strong> reigns supreme! So, channel your inner coding ninja and blaze through those challenges for ultimate glory.</p>',
      'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png',
-     CURRENT_TIMESTAMP + INTERVAL '5 days',
-     CURRENT_TIMESTAMP + INTERVAL '5 days 1 hours',
+     CURRENT_TIMESTAMP + INTERVAL '2 hours',
+     CURRENT_TIMESTAMP + INTERVAL '3 hours',
      'b029f559-52a8-4699-b595-71161498ed8c',
      'b029f559-52a8-4699-b595-71161498ed8c',
      true,
@@ -2578,8 +2635,8 @@ VALUES
      '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
      '<p><strong>Pre-determined Challenge Scores:</strong></p><p>Each challenge you conquer has a pre-set score waiting to be claimed. The more complex the challenge, the higher the score you can rack up!</p><p><br></p><p><strong>Test Cases: Your Gateway to Glory:</strong></p><p>Each challenge comes with a battery of test cases designed to put your code through its paces. Every test case you conquer translates into points towards your final score. The more test cases you dominate, the closer you get to scoring supremacy!</p><p><br></p><p><strong>Multiple Submissions? No Problem!</strong></p><p>Feeling creative and tinkering with different solutions? No sweat! We take your highest scoring submission for each challenge into account, so fire away with your best attempts.</p><p><br></p><p><strong>The Leaderboard Beckons: It''s All About the Rank</strong></p><p>Participants are ranked on the glorious leaderboard based on their total score. But what happens when coders achieve the same score? Buckle up, because things get exciting!</p><p><br></p><p><strong>Tie-Breaker Time: Speed Demons Unite!</strong></p><p>In the thrilling case of a tie, the tie-breaker comes down to <strong>speed</strong>. The participant who submitted their highest-scoring solution in the <strong>shortest amount of time</strong> reigns supreme! So, channel your inner coding ninja and blaze through those challenges for ultimate glory.</p>',
      'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png',
-     CURRENT_TIMESTAMP + INTERVAL '10 days',
-     CURRENT_TIMESTAMP + INTERVAL '10 days 1 hours',
+     CURRENT_TIMESTAMP + INTERVAL '2 hours 30 minutes',
+     CURRENT_TIMESTAMP + INTERVAL '3 hours 30 minutes',
      'b029f559-52a8-4699-b595-71161498ed8c',
      'b029f559-52a8-4699-b595-71161498ed8c',
      true,
@@ -2592,8 +2649,8 @@ VALUES
      '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
      '<p><strong>Pre-determined Challenge Scores:</strong></p><p>Each challenge you conquer has a pre-set score waiting to be claimed. The more complex the challenge, the higher the score you can rack up!</p><p><br></p><p><strong>Test Cases: Your Gateway to Glory:</strong></p><p>Each challenge comes with a battery of test cases designed to put your code through its paces. Every test case you conquer translates into points towards your final score. The more test cases you dominate, the closer you get to scoring supremacy!</p><p><br></p><p><strong>Multiple Submissions? No Problem!</strong></p><p>Feeling creative and tinkering with different solutions? No sweat! We take your highest scoring submission for each challenge into account, so fire away with your best attempts.</p><p><br></p><p><strong>The Leaderboard Beckons: It''s All About the Rank</strong></p><p>Participants are ranked on the glorious leaderboard based on their total score. But what happens when coders achieve the same score? Buckle up, because things get exciting!</p><p><br></p><p><strong>Tie-Breaker Time: Speed Demons Unite!</strong></p><p>In the thrilling case of a tie, the tie-breaker comes down to <strong>speed</strong>. The participant who submitted their highest-scoring solution in the <strong>shortest amount of time</strong> reigns supreme! So, channel your inner coding ninja and blaze through those challenges for ultimate glory.</p>',
      'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png',
-     CURRENT_TIMESTAMP + INTERVAL '5 minutes',
-     CURRENT_TIMESTAMP + INTERVAL '1 hours 5 minutes',
+     CURRENT_TIMESTAMP + INTERVAL '15 minutes',
+     CURRENT_TIMESTAMP + INTERVAL '1 hours 15 minutes',
      'b029f559-52a8-4699-b595-71161498ed8c',
      'b029f559-52a8-4699-b595-71161498ed8c',
      true,
@@ -2759,19 +2816,19 @@ INSERT INTO public.question
 VALUES('0fe5d2ee-6892-4f62-a6e6-83284f2430bc'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Câu 5', '<p>QUEUE hoạt động như thế nào?</p>', '', 1.00, 'SHORT_ANSWER'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-06-20 21:29:18.256', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-06-20 21:29:18.256', NULL, false);
 INSERT INTO public.question
 (id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank)
-VALUES('513a7e58-00d0-450b-8f0d-78af23898b81'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Câu 6', '<p>Sinh viên IT mới ra trường lương nghìn $ ?</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-06-20 21:30:29.529', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-06-20 21:30:29.529', NULL, false);
+VALUES('513a7e58-00d0-450b-8f0d-78af23898b81'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Câu 6', '<p>Có thể gán NULL cho con trỏ nhằm chỉ định rằng nó không trỏ tới bất kỳ vùng nhớ nào</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-06-20 21:30:29.529', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-06-20 21:30:29.529', NULL, false);
 INSERT INTO public.question
 (id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank)
-VALUES('1168fba1-8391-4294-b1cb-2c108f96af1f'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Câu 7', '<p>Trường HCMUS top 1 IT?</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-06-20 21:31:55.692', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-06-20 21:31:55.692', NULL, false);
+VALUES('1168fba1-8391-4294-b1cb-2c108f96af1f'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Câu 7', '<p>%ld là xâu định dạng để in ra một số nguyên dài</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-06-20 21:31:55.692', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-06-20 21:31:55.692', NULL, false);
 INSERT INTO public.question
 (id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank)
 VALUES('c4b3219f-9d83-4497-ad15-d46772141bd5'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Câu 8', '<p>STACK hoạt động như nào?</p>', '', 1.00, 'SHORT_ANSWER'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-06-20 21:33:16.328', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-06-20 21:33:16.328', NULL, false);
 INSERT INTO public.question
 (id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank)
-VALUES('29a71c20-290b-471d-acc8-4c5c929f96a8'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Câu 9', '<p>Đầu vào trường Ú rất dễ?</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-06-20 21:34:55.796', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-06-20 21:34:55.796', NULL, false);
+VALUES('29a71c20-290b-471d-acc8-4c5c929f96a8'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Câu 9', '<p>* là ký tự dùng để biểu diễn con trỏ trong C/C++</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-06-20 21:34:55.796', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-06-20 21:34:55.796', NULL, false);
 INSERT INTO public.question
 (id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank)
-VALUES('1ca8c89a-1bd0-41b2-adf0-4f7b55f8b256'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Câu 10', '<p>Thầy cô trường Ú dễ thương</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-06-20 21:35:23.054', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-06-20 21:35:23.054', NULL, false);
+VALUES('1ca8c89a-1bd0-41b2-adf0-4f7b55f8b256'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Câu 10', '<p>Con trỏ là một biến dùng để lưu địa chỉ nhớ của một biến khác</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-06-20 21:35:23.054', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-06-20 21:35:23.054', NULL, false);
 
 
 INSERT INTO public.qtype_multichoice_question

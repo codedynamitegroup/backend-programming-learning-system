@@ -22,7 +22,9 @@ INSERT INTO public."user" (id,user_id_moodle,role_moodle_id,org_id,username,emai
 	 ('2d3c1e66-1835-457f-93e9-265fe483feee',5,5,'08b65a39-394f-4977-a5fa-3fe145b620f8','ngocthu','dt.ngocthw@gmail.com',NULL,'Thư','Ngọc',NULL,NULL,NULL,'2024-06-04 19:54:23.712124+07',false,'2024-06-04 19:54:23.712124+07','2024-06-04 19:54:23.712124+07'),
 	 ('a9f5487e-c0b1-4fa4-b93a-6f16bde90583',6,3,'08b65a39-394f-4977-a5fa-3fe145b620f8','giaovien','ktpm4t@gmail.com',NULL,'giáo','vien',NULL,NULL,NULL,'2024-06-04 19:54:23.73386+07',false,'2024-06-04 19:54:23.73386+07','2024-06-04 19:54:23.73386+07'),
 	 ('9ba179ed-d26d-4828-a0f6-8836c2063992',7,5,'08b65a39-394f-4977-a5fa-3fe145b620f8','quoctuan2002','nguyenquoctuan385@gmail.com',NULL,'Tuấn','Nguyễn Quốc',NULL,NULL,NULL,'2024-06-04 19:54:23.75895+07',false,'2024-06-04 19:54:23.759506+07','2024-06-04 19:54:23.759506+07'),
-	 ('ca3040f2-e173-40a5-aab7-6ef15965ce43',8,5,'08b65a39-394f-4977-a5fa-3fe145b620f8','tgt2002','truonggiatien123@gmail.com',NULL,'Tiến','Trương Gia',NULL,NULL,NULL,'2024-06-04 19:54:23.789236+07',false,'2024-06-04 19:54:23.789748+07','2024-06-04 19:54:23.789748+07');
+	 ('ca3040f2-e173-40a5-aab7-6ef15965ce43',8,5,'08b65a39-394f-4977-a5fa-3fe145b620f8','tgt2002','truonggiatien123@gmail.com',NULL,'Tiến','Trương Gia',NULL,NULL,NULL,'2024-06-04 19:54:23.789236+07',false,'2024-06-04 19:54:23.789748+07','2024-06-04 19:54:23.789748+07'),
+	 ('1e327a63-b0d6-476f-bb99-8c594560f971',null,null,'cb69c0bf-c454-4f15-be10-791f6749dac7','truonggiatien456@gmail.com','truonggiatien456@gmail.com',NULL,'Tiến','Trương Gia',NULL,NULL,NULL,'2024-06-04 19:54:23.789236+07',false,'2024-06-04 19:54:23.789748+07','2024-06-04 19:54:23.789748+07');
+
 
 INSERT INTO public.course_type (id,moodle_id,name,org_id) VALUES
 	 ('56b844c6-b59a-4135-b028-f8b1a7b68eea',3,'Tiên Tiến','08b65a39-394f-4977-a5fa-3fe145b620f8'),
@@ -204,7 +206,7 @@ VALUES('94f340b3-fb05-4e3a-8cb5-44ef5d936a9b'::uuid, 'Mạng máy tính', '<p>C�
 
 INSERT INTO public.question(id, org_id, difficulty, name, question_text, general_feedback, default_mark, qtype, created_by, updated_by)
 VALUES
-    ('b6484e21-6937-489c-b031-b71767994233','08b65a39-394f-4977-a5fa-3fe145b620f8', 'EASY', 'Question Handle', 'Question Wire Text', 'Question Gold feedback', 1, 'ESSAY', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('b6484e21-6937-489c-b031-b71767994233','08b65a39-394f-4977-a5fa-3fe145b620f8', 'EASY', 'Khái niệm và ứng dụng của con trỏ', 'Hãy giải thích khái niệm con trỏ trong ngôn ngữ lập trình C/C++. Tại sao con trỏ lại quan trọng trong lập trình?', 'Question Gold feedback', 1, 'ESSAY', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('b6484e21-6937-489c-b031-b71767994132','08b65a39-394f-4977-a5fa-3fe145b620f8', 'MEDIUM', 'Question hihi', 'Question Wow Text', 'Question Amazing feedback', 1, 'SHORT_ANSWER', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('b6484e21-6937-489c-b031-b71767994735','08b65a39-394f-4977-a5fa-3fe145b620f8', 'HARD', 'Question haha', 'Question Speaker Text', 'Good Job', 1, 'MULTIPLE_CHOICE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('b6484e21-6937-489c-b031-b71767994752','08b65a39-394f-4977-a5fa-3fe145b620f8', 'MEDIUM', 'K Divisible Elements Subarrays', 'Question Wow Text', 'Question Amazing feedback', 1, 'SHORT_ANSWER', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
@@ -390,19 +392,19 @@ INSERT INTO public.question
 VALUES('0fe5d2ee-6892-4f62-a6e6-83284f2430bc'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Câu 5', '<p>QUEUE hoạt động như thế nào?</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-06-20 21:29:19.651', '2024-06-20 21:29:19.651', NULL, false, 'SHORT_ANSWER'::public."qtype", 'EASY'::public."difficulty");
 INSERT INTO public.question
 (id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
-VALUES('513a7e58-00d0-450b-8f0d-78af23898b81'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Câu 6', '<p>Sinh viên IT mới ra trường lương nghìn $ ?</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-06-20 21:30:30.013', '2024-06-20 21:30:30.013', NULL, false, 'TRUE_FALSE'::public."qtype", 'EASY'::public."difficulty");
+VALUES('513a7e58-00d0-450b-8f0d-78af23898b81'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Câu 6', '<p>Có thể gán NULL cho con trỏ nhằm chỉ định rằng nó không trỏ tới bất kỳ vùng nhớ nào</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-06-20 21:30:30.013', '2024-06-20 21:30:30.013', NULL, false, 'TRUE_FALSE'::public."qtype", 'EASY'::public."difficulty");
 INSERT INTO public.question
 (id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
-VALUES('1168fba1-8391-4294-b1cb-2c108f96af1f'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Câu 7', '<p>Trường HCMUS top 1 IT?</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-06-20 21:31:56.412', '2024-06-20 21:31:56.412', NULL, false, 'TRUE_FALSE'::public."qtype", 'EASY'::public."difficulty");
+VALUES('1168fba1-8391-4294-b1cb-2c108f96af1f'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Câu 7', '<p>%ld là xâu định dạng để in ra một số nguyên dài</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-06-20 21:31:56.412', '2024-06-20 21:31:56.412', NULL, false, 'TRUE_FALSE'::public."qtype", 'EASY'::public."difficulty");
 INSERT INTO public.question
 (id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
 VALUES('c4b3219f-9d83-4497-ad15-d46772141bd5'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Câu 8', '<p>STACK hoạt động như nào?</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-06-20 21:33:16.858', '2024-06-20 21:33:16.858', NULL, false, 'SHORT_ANSWER'::public."qtype", 'EASY'::public."difficulty");
 INSERT INTO public.question
 (id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
-VALUES('29a71c20-290b-471d-acc8-4c5c929f96a8'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Câu 9', '<p>Đầu vào trường Ú rất dễ?</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-06-20 21:34:57.337', '2024-06-20 21:34:57.337', NULL, false, 'TRUE_FALSE'::public."qtype", 'EASY'::public."difficulty");
+VALUES('29a71c20-290b-471d-acc8-4c5c929f96a8'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Câu 9', '<p>* là ký tự dùng để biểu diễn con trỏ trong C/C++</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-06-20 21:34:57.337', '2024-06-20 21:34:57.337', NULL, false, 'TRUE_FALSE'::public."qtype", 'EASY'::public."difficulty");
 INSERT INTO public.question
 (id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
-VALUES('1ca8c89a-1bd0-41b2-adf0-4f7b55f8b256'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Câu 10', '<p>Thầy cô trường Ú dễ thương</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-06-20 21:35:23.436', '2024-06-20 21:35:23.436', NULL, false, 'TRUE_FALSE'::public."qtype", 'EASY'::public."difficulty");
+VALUES('1ca8c89a-1bd0-41b2-adf0-4f7b55f8b256'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Câu 10', '<p>Con trỏ là một biến dùng để lưu địa chỉ nhớ của một biến khác</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-06-20 21:35:23.436', '2024-06-20 21:35:23.436', NULL, false, 'TRUE_FALSE'::public."qtype", 'EASY'::public."difficulty");
 
 
 

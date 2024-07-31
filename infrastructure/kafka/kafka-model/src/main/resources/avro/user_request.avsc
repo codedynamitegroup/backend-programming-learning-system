@@ -63,15 +63,15 @@
     },
     {
       "name": "dob",
-      "type": {
+      "type": ["null", {
         "type": "long",
         "logicalType": "timestamp-millis"
-      },
-      "default": 0
+      }],
+      "default": null
     },
     {
       "name": "serviceName",
-      "type": {
+      "type": ["null", {
         "type": "enum",
         "name": "ServiceName",
         "symbols": [
@@ -81,23 +81,25 @@
           "CODE_ASSESSMENT_SERVICE",
           "BACKGROUND_SERVICE"
         ]
-      }
+      }],
+      "default": null
     },
     {
       "name": "roleName",
-      "type": {
+      "type": ["null", {
         "type": "enum",
         "name": "RoleName",
         "symbols": [
           "LECTURER",
-          "STUDENT"
+          "STUDENT",
+          "USER"
         ]
-      },
-      "default": "STUDENT"
+      }],
+      "default": null
     },
     {
       "name": "copyState",
-      "type": {
+      "type": ["null", {
         "type": "enum",
         "name": "CopyState",
         "symbols": [
@@ -111,23 +113,24 @@
           "UPDATE_FAILED",
           "CREATE_FAILED"
         ]
-      }
+      }],
+        "default": null
     },
     {
       "name": "createdAt",
-      "type": {
+      "type": ["null", {
         "type": "long",
         "logicalType": "timestamp-millis"
-      },
-      "default": 0
+      }],
+      "default": null
     },
     {
       "name": "updatedAt",
-      "type": {
+      "type": ["null",  {
         "type": "long",
         "logicalType": "timestamp-millis"
-      },
-      "default": 0
+      }],
+      "default": null
     },
     {
       "name": "isDeleted",

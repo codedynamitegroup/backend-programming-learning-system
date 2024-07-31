@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 @Slf4j
 @RestController
@@ -60,6 +61,23 @@ public class SynchronizeMoodleController {
                 .build();
         QuerySynchronizeStateResponse response = synchronizeStateApplicationService.
                 querySynchronizeByOrganizationIdAndStep(querySynchronizeStateCommand);
+        return  ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/all/{organizationId}")
+    @Operation(summary = "Query all synchronize state.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QuerySynchronizeStateResponse[].class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<List<QuerySynchronizeStateResponse>> querySynchronizeByOrganizationId(
+            @PathVariable UUID organizationId
+    ) {
+        List<QuerySynchronizeStateResponse> response = synchronizeStateApplicationService.
+                querySynchronizeByOrganizationId(organizationId);
         return  ResponseEntity.ok(response);
     }
 

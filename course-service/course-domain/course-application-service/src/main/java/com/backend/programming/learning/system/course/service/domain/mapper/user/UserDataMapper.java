@@ -71,7 +71,7 @@ public class UserDataMapper {
                 .createdAt(userRequest.getCreatedAt().atZone(ZoneId.of(DomainConstants.UTC)))
                 .updatedAt(userRequest.getUpdatedAt().atZone(ZoneId.of(DomainConstants.UTC)))
                 .isDeleted(userRequest.getIsDeleted())
-                .roleMoodle(RoleMoodle.builder()
+                .roleMoodle(userRequest.getRoleName() == null ? null : RoleMoodle.builder()
                         .id(new RoleMoodleId(userRequest.getRoleName().equals(ROLE_STUDENT_NAME) ? ROLE_STUDENT : ROLE_LECTURER))
                         .build())
                 .userIdMoodle(userRequest.getUserIdMoodle())

@@ -12,6 +12,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.intro_attachment.IntroAttachmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.user.UserSubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
+import com.backend.programming.learning.system.course.service.domain.entity.Module;
 import com.backend.programming.learning.system.course.service.domain.implement.service.user.UserCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.mapper.intro_attachment.IntroAttachmentDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.*;
@@ -37,6 +38,7 @@ public class AssignmentDataMapper {
     private final SubmissionAssignmentRepository submissionAssignmentRepository;
     private final SubmissionGradeRepository submissionGradeRepository;
     private final ExamSubmissionRepository examSubmissionRepository;
+    private final ModuleRepository moduleRepository;
 
     public Assignment createAssignmentCommandToAssignment(CreateAssignmentCommand createAssignmentCommand) {
         Course course = courseRepository.findById(createAssignmentCommand.getCourseId());
@@ -66,6 +68,8 @@ public class AssignmentDataMapper {
     }
 
     public QueryAssignmentResponse assignmentToQueryAssignmentResponse(Assignment assignment) {
+        Optional<Module> module = moduleRepository.findByAssignmentId(assignment.getId().getValue());
+
 
         List<IntroAttachmentResponseEntity> introAttachmentResponseEntities = List.of();
         List<IntroAttachment> introAttachments = introAttachmentRepository.findAllByAssignmentId(assignment.getId().getValue());
@@ -78,6 +82,7 @@ public class AssignmentDataMapper {
         return QueryAssignmentResponse.builder()
                 .id(assignment.getId().getValue())
                 .courseName(assignment.getCourse().getName())
+                .sectionId(module.get().getSection().getId().getValue())
                 .moodleId(assignment.getAssignmentIdMoodle())
                 .title(assignment.getTitle())
                 .intro(assignment.getIntro())

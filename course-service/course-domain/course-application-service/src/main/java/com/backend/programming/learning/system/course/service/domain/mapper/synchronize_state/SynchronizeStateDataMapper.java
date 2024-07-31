@@ -5,6 +5,8 @@ import com.backend.programming.learning.system.course.service.domain.entity.Sync
 import com.backend.programming.learning.system.domain.valueobject.SynchronizeStatus;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class SynchronizeStateDataMapper {
 
@@ -15,5 +17,11 @@ public class SynchronizeStateDataMapper {
                 .step(synchronizeState.getStep().name())
                 .syncCount(synchronizeState.getSyncCount())
                 .build();
+    }
+
+    public List<QuerySynchronizeStateResponse> mapSynchronizeStateToQuerySynchronizeStateResponse(List<SynchronizeState> synchronizeStates) {
+        return synchronizeStates.stream()
+                .map(this::mapSynchronizeStateToQuerySynchronizeStateResponse)
+                .toList();
     }
 }

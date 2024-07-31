@@ -56,12 +56,12 @@ public class ModuleDataMapper {
         }
         Assignment assignmentResult = null;
         Exam examResult=null;
-        if(createModuleCommand.getType().equals("ASSIGNMENT"))
+        if(createModuleCommand.getType().equals("Assignments"))
         {
             Optional<Assignment> assignment =assignmentRepository.findById(createModuleCommand.getAssignmentId());
             assignmentResult=assignment.get();
         }
-        else if(createModuleCommand.getType().equals("QUIZ"))
+        else if(createModuleCommand.getType().equals("Quizzes"))
         {
             Exam exam =examRepository.findBy(new ExamId(createModuleCommand.getExamId()));
             examResult=exam;
