@@ -5,13 +5,18 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QuestionBankCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.AnswerOfQuestion;
+import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.implement.service.question.saga.QuestionSagaHelper;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
+import com.backend.programming.learning.system.core.service.domain.outbox.scheduler.question.QuestionOutboxHelper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.core.service.domain.entity.Organization;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
+import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -31,6 +36,8 @@ public class QuestionCreateHelper {
     private final UserRepository userRepository;
     private final AnswerOfQuestionRepository answerOfQuestionRepository;
     private final QuestionDataMapper questionDataMapper;
+    private final QuestionOutboxHelper questionOutboxHelper;
+    private final QuestionSagaHelper questionSagaHelper;
 
     // Create and save question
     @Transactional
@@ -103,9 +110,18 @@ public class QuestionCreateHelper {
     }
 
     public List<Question> cloneQuestion(List<CreateQuestionClone> questionClones) {
-        List<Question> questions = questionRepository.cloneQuestion(questionClones);
+        List<QuestionCreatedEvent> questions = questionRepository.cloneQuestion(questionClones);
 
-        return questions;
+        questions.forEach(questionCreatedEvent -> {
+            questionOutboxHelper.saveNewQuestionOutboxMessage(questionDataMapper.questionCreatedEventToQuestionEventPayload(questionCreatedEvent),
+                    questionCreatedEvent.getQuestion().getCopyState(),
+                    OutboxStatus.STARTED,
+                    questionSagaHelper.questionStatusToSagaStatus(questionCreatedEvent.getQuestion().getCopyState()),
+                    ServiceName.COURSE_SERVICE,
+                    UUID.randomUUID(), null);
+        });
+
+        return questionDataMapper.questionCreatedEventListToQuestionList(questions);
     }
 
     public void updateCategoryOfQuestions(QuestionBankCommand questionBankCommand) {

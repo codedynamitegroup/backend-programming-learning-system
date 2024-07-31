@@ -28,6 +28,13 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     }
 
     @Override
+    public void createQuestionV2(Question question) {
+        question.setCopyState(CopyState.CREATING);
+
+        log.info("Question initialized with id: {}", question.getId().getValue());
+    }
+
+    @Override
     public QuestionCreatedEvent createQtypeCodeQuestion(Question question, QtypeCodeQuestion qtypeCodeQuestion) {
         qtypeCodeQuestion.initQtypeCodeQuestion();
         question.setCopyState(CopyState.CREATING);
