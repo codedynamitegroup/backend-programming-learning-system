@@ -15,7 +15,7 @@ import java.util.UUID;
 public interface CoreDomainService {
     // question
     void createQuestion(Question question);
-
+    void createQuestionV2(Question question);
     // create qtype
     QuestionCreatedEvent createQtypeCodeQuestion(Question question, QtypeCodeQuestion qtypeCodeQuestion);
     QuestionCreatedEvent createQtypeEssayQuestion(Question question, QtypeEssayQuestion qtypeEssayQuestion);

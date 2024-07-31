@@ -121,7 +121,7 @@ public class QuestionCreateHelper {
                     UUID.randomUUID(), null);
         });
 
-        return null;
+        return questionDataMapper.questionCreatedEventListToQuestionList(questions);
     }
 
     public void updateCategoryOfQuestions(QuestionBankCommand questionBankCommand) {

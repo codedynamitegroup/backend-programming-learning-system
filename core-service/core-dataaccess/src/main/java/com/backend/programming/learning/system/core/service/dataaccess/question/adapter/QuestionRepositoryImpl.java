@@ -254,7 +254,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 
                                 // init QtypeEssayQuestion
                                 QuestionCreatedEvent questionCreatedEvent = coreDomainService.createQtypeEssayQuestion(createdQuestion, qtypeEssayQuestion1);
-                                qtypeEssayQuestionRepository.saveQtypeEssayQuestion(qtypeEssayQuestion1);
+//                                qtypeEssayQuestionRepository.saveQtypeEssayQuestion(qtypeEssayQuestion1);
 
                                 questionCreatedEvents.add(questionCreatedEvent);
 
@@ -304,7 +304,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 
                                 // init QtypeMultiChoiceQuestion
                                 QuestionCreatedEvent questionCreatedEvent = coreDomainService.createQtypeMultipleChoiceQuestion(createdQuestion, qtypeMultiChoiceQuestion);
-                                qtypeMultichoiceQuestionRepository.saveQtypeMultipleChoiceQuestion(qtypeMultiChoiceQuestion);
+//                                qtypeMultichoiceQuestionRepository.saveQtypeMultipleChoiceQuestion(qtypeMultiChoiceQuestion);
 
                                 questionCreatedEvents.add(questionCreatedEvent);
                                 log.info("Qtype Multi Choice Question created with id: {}", qtypeMultiChoiceQuestion.getId().getValue());
@@ -322,7 +322,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 
 
                                 Question question = questionDataAccessMapper.questionEntityToQuestion(newQuestion);
-                                coreDomainService.createQuestion(question);
+                                coreDomainService.createQuestionV2(question);
 //                                saveQuestion(question);
 
                                 // save answer
@@ -356,7 +356,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 
                                 // init QtypeShortAnswerQuestion
                                 QuestionCreatedEvent questionCreatedEvent = coreDomainService.createQtypeShortAnswerQuestion(createdQuestion, qtypeShortAnswerQuestion);
-                                qtypeShortanswerQuestionRepository.saveQtypeShortAnswerQuestion(qtypeShortAnswerQuestion);
+//                                qtypeShortanswerQuestionRepository.saveQtypeShortAnswerQuestion(qtypeShortAnswerQuestion);
 
                                 questionCreatedEvents.add(questionCreatedEvent);
                             });
@@ -406,7 +406,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 
                                 // init QtypeMultiChoiceQuestion
                                 QuestionCreatedEvent questionCreatedEvent = coreDomainService.createQtypeMultipleChoiceQuestion(createdQuestion, qtypeMultiChoiceQuestion);
-                                qtypeMultichoiceQuestionRepository.saveQtypeMultipleChoiceQuestion(qtypeMultiChoiceQuestion);
+//                                qtypeMultichoiceQuestionRepository.saveQtypeMultipleChoiceQuestion(qtypeMultiChoiceQuestion);
                                 questionCreatedEvents.add(questionCreatedEvent);
                             });
                     break;
