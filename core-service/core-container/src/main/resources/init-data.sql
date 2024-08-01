@@ -375,39 +375,211 @@ INSERT INTO public.qtype_multichoice_question(id, question_id, single, shuffle_a
 VALUES
     ('27549d54-4a3a-4be4-9875-eab03f88ba8f', 'b6484e21-6937-489c-b031-b71767994735', true, true, 'Correct', 'Partially correct', 'Incorrect', 'none', 3, 'Show instruction 2');
 
-INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'Basic Python', 'BASIC', '<div class="markdown prose w-full break-words dark:prose-invert light"><p><strong>Course Title: Basic Python</strong></p><p><strong>Course Description:</strong></p><p>Begin your journey into the world of programming with our <strong>Basic Python</strong> course. This course is designed for beginners with little to no prior programming experience and provides a solid foundation in Python, one of the most popular and versatile programming languages today.</p><p><strong>Key Features:</strong></p><ul><li><strong>Introduction to Python:</strong> Learn the basics of Python programming, including syntax, variables, and data types.</li><li><strong>Control Structures:</strong> Understand essential control structures such as loops and conditionals to control the flow of your programs.</li><li><strong>Functions:</strong> Discover how to write reusable code using functions, making your programs more modular and easier to manage.</li><li><strong>Data Structures:</strong> Get introduced to fundamental data structures like lists, tuples, and dictionaries to store and manipulate data efficiently.</li><li><strong>File Handling:</strong> Learn basic file input/output operations to read from and write to files.</li><li><strong>Error Handling:</strong> Gain an understanding of error handling to write more robust and reliable programs.</li><li><strong>Libraries and Modules:</strong> Explore how to use Python libraries and modules to extend the functionality of your programs.</li></ul><p>By the end of this course, you''ll have the skills to write simple Python programs, understand core programming concepts, and be ready to advance to more complex topics. Whether you''re aiming to start a career in programming, automate simple tasks, or just explore a new hobby, this Basic Python course is your gateway to the world of coding.</p><p><strong>Prerequisites:</strong></p><ul><li>No prior programming experience required</li><li>Basic computer literacy</li></ul><p>Join us and take the first step towards becoming a proficient Python programmer!</p></div>', 4.0, '2024-04-15 11:09:29.488151+00', '2024-04-15 11:09:29.488151+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00');
-INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'Intermediate Python', 'INTERMEDIATE', '<div class="flex w-full flex-col gap-1 juice:empty:hidden juice:first:pt-[3px]"><div class="markdown prose w-full break-words dark:prose-invert light"><p><strong>Course Title: Intermediate Python</strong></p><p><strong>Course Description:</strong></p><p>Unlock the next level of your Python programming skills with our <strong>Intermediate Python</strong> course. Designed for those with a basic understanding of Python, this course dives deeper into the language, enhancing your ability to develop robust, efficient, and versatile code.</p><p><strong>Key Features:</strong></p><ul><li><strong>Advanced Data Structures:</strong> Master complex data structures like sets, dictionaries, and comprehensions to write more efficient code.</li><li><strong>Object-Oriented Programming:</strong> Gain a solid foundation in OOP principles, learning how to design and implement Python classes and objects effectively.</li><li><strong>Modules and Packages:</strong> Understand how to create and use modules and packages to organize your code better and reuse it across multiple projects.</li><li><strong>Error Handling:</strong> Learn advanced techniques for managing errors and exceptions to build more reliable programs.</li><li><strong>File I/O:</strong> Explore advanced file input/output operations to handle various file formats and data streams.</li><li><strong>Regular Expressions:</strong> Get introduced to regular expressions for powerful text processing capabilities.</li><li><strong>Libraries and Frameworks:</strong> Discover popular Python libraries and frameworks that can help streamline your development process.</li></ul><p>By the end of this course, you''ll be equipped with the skills and confidence to tackle more complex programming challenges and contribute to larger projects. Whether you''re looking to advance your career, prepare for a technical role, or simply enhance your coding abilities, this Intermediate Python course is the perfect stepping stone.</p><p><strong>Prerequisites:</strong></p><ul><li>Basic knowledge of Python programming</li><li>Familiarity with fundamental programming concepts</li></ul><p>Join us and take the next step in becoming a proficient Python programmer!</p></div></div>', 4.0, '2024-04-15 11:09:29.488151+00', '2024-04-15 11:09:29.488151+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00');
-INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'Advanced Python', 'ADVANCED', '<div class="markdown prose w-full break-words dark:prose-invert light"><p><strong>Course Title: Advanced Python</strong></p><p><strong>Course Description:</strong></p><p>Elevate your Python programming expertise with our <strong>Advanced Python</strong> course. This course is tailored for experienced Python developers who are ready to tackle sophisticated programming challenges and explore the full capabilities of the language.</p><p><strong>Key Features:</strong></p><ul><li><strong>Advanced Object-Oriented Programming:</strong> Dive deep into OOP principles, including inheritance, polymorphism, and metaclasses, to create more flexible and powerful code.</li><li><strong>Concurrency and Parallelism:</strong> Learn to write concurrent and parallel programs using threading, multiprocessing, and asynchronous programming.</li><li><strong>Decorators and Context Managers:</strong> Master the use of decorators and context managers to enhance code readability and functionality.</li><li><strong>Advanced Data Handling:</strong> Explore advanced techniques for data manipulation, including working with large datasets using libraries like Pandas and NumPy.</li><li><strong>Network Programming:</strong> Understand the principles of network programming to build applications that communicate over the internet using sockets and web APIs.</li><li><strong>Testing and Debugging:</strong> Gain expertise in advanced testing and debugging techniques to ensure your code is reliable and bug-free.</li><li><strong>Performance Optimization:</strong> Learn strategies for optimizing the performance of your Python applications, including profiling and efficient algorithm design.</li><li><strong>Metaprogramming:</strong> Explore the concepts of metaprogramming to write code that can manipulate itself.</li></ul><p>By the end of this course, you will be equipped with the advanced skills required to develop complex, high-performance Python applications. Whether you''re looking to solve intricate problems, contribute to cutting-edge projects, or simply refine your programming acumen, this Advanced Python course will help you achieve your goals.</p><p><strong>Prerequisites:</strong></p><ul><li>Solid understanding of intermediate Python concepts</li><li>Experience with basic object-oriented programming</li></ul><p>Join us and push the boundaries of your Python programming capabilities!</p></div>', 4.0, '2024-04-15 11:09:29.488151+00', '2024-04-15 11:09:29.488151+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00');
 INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', 'd215b5f8-0249-4dc5-89a3-51fd148cfb46', 'Intermediate Java', 'INTERMEDIATE', 'This course is designed for intermediate Java programmers who want to enhance their skills and knowledge. It covers advanced topics such as object-oriented programming, data structures, algorithms, and more.', 0.0, '2024-04-15 11:09:29.488151+00', '2024-04-15 11:09:29.488151+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00');
 INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', 'd215b5f8-0249-4dc5-89a3-51fd148cfb46', 'Advanced Java', 'ADVANCED', 'This course is designed for experienced Java programmers who want to master advanced Java concepts and techniques. It covers topics such as decorators, generators, metaclasses, and more.', 0.0, '2024-04-15 11:09:29.488151+00', '2024-04-15 11:09:29.488151+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00');
-INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 'd215b5f8-0249-4dc5-89a3-51fd148cfb48', 'Stacks and Queues', 'BASIC', 'This course is designed for beginners who want to learn about stacks and queues. It covers the basics of stacks and queues, including their implementation, operations, and applications.', 0.0, '2024-04-15 11:09:29.488151+00', '2024-04-15 11:09:29.488151+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00');
-INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', 'd215b5f8-0249-4dc5-89a3-51fd148cfb48', 'Linked Lists', 'INTERMEDIATE', 'This course is designed for intermediate programmers who want to learn about linked lists. It covers the basics of linked lists, including their implementation, operations, and applications.', 0.0, '2024-04-15 11:09:29.488151+00', '2024-04-15 11:09:29.488151+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00');
-INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', 'd215b5f8-0249-4dc5-89a3-51fd148cfb48', 'Binary Trees', 'ADVANCED', 'This course is designed for experienced programmers who want to learn about binary trees. It covers the basics of binary trees, including their implementation, operations, and applications.', 0.0, '2024-04-15 11:09:29.488151+00', '2024-04-15 11:09:29.488151+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00');
 INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'd215b5f8-0249-4dc5-89a3-51fd148cfb46', 'Learn Java', 'BASIC', '<h3>Overview</h3><p>Welcome to the <strong>Learn Java</strong> course, designed specifically for beginners who are eager to dive into the world of Java programming. This course provides a thorough introduction to Java, covering the fundamental concepts and essential skills needed to become proficient in this popular programming language. Whether you''re aiming to build a strong foundation in programming or enhance your existing skills, this course is tailored to guide you through the basics of Java and beyond.</p><p><br></p><h3>What You Will Learn</h3><ol><li><strong>Java Syntax and Print Statements: </strong>Discover the core syntax of Java and understand how to use print statements effectively. Learn to display output and debug your code using various print methods.</li><li><strong>Variables and Data Types: </strong>Explore Java''s variable types and data structures. Gain insights into how different data types work and how to use them in your programs.</li><li><strong>Operators: </strong>Delve into the fundamental operators in Java, including arithmetic operations. Understand how to perform calculations and manipulate data using operators.</li><li><strong>Strings: </strong>Learn about string handling in Java, including the creation, manipulation, and comparison of string values. Master the use of strings to handle textual data.</li><li><strong>User Inputs: </strong>Discover how to capture and process user inputs. Learn about different methods for reading input, including <code>BufferedReader</code> and <code>Scanner</code>.</li><li><strong>Conditional Statements: </strong>Master control flow with conditional statements. Understand how to make decisions in your code using <code>if-else</code> and <code>switch</code> statements.</li><li><strong>Loops: </strong>Gain proficiency in using loops to execute repetitive tasks. Learn about different types of loops and how to use them effectively in your programs.</li><li><strong>Arrays: </strong>Explore the concept of arrays, including how to declare, initialize, and manipulate arrays. Learn about one-dimensional and multidimensional arrays to handle collections of data.</li><li><strong>Methods: </strong>Understand the structure and purpose of methods in Java. Learn to define, call, and use methods to organize and reuse code efficiently.</li></ol><h3>Features</h3><ul><li><strong>Hands-on Lessons:</strong> Each topic is accompanied by practical examples and exercises to reinforce your understanding.</li><li><strong>Comprehensive Resources:</strong> Access a variety of resources including detailed lessons, videos, and real-world examples to enhance your learning experience.</li><li><strong>Interactive Learning:</strong> Engage with interactive exercises and projects to apply what you''ve learned and build your programming skills.</li></ul><p><br></p><h3>Who Should Take This Course</h3><p>This course is ideal for:</p><ul><li>Beginners who want to start learning Java programming from scratch.</li><li>Individuals seeking to build a strong foundation in Java for further study or career advancement.</li><li>Anyone interested in understanding the basics of Java and applying them in real-world scenarios.</li></ul><p><br></p><h3>Conclusion</h3><p>By the end of this course, you will have a solid understanding of Java fundamentals and be equipped to tackle more advanced programming challenges. You''ll be prepared to continue your learning journey with more complex Java concepts and applications.</p><p>Join us in this exciting course and start your journey towards mastering Java programming today!</p>', 0.0, '2024-07-20 09:17:28.876+00', '2027-09-20 19:04:08.876+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 09:17:28.966831+00');
+INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'Learn Python Programming', 'BASIC', '<p>Welcome to the <strong>Learn Python Programming</strong> certificate course! This beginner-friendly course is designed to provide you with a solid foundation in Python programming. Whether you''re new to coding or looking to refresh your skills, this course covers all the essential concepts and techniques you need to start writing efficient and effective Python code.</p><p><br></p><h3>Course Breakdown</h3><p><strong>Output / Print in Python</strong></p><ul><li><strong>Introducing Output / Printing</strong>: Learn how to display output in Python using the <code>print</code> function.</li><li><strong>Printing on Multiple Lines</strong>: Discover techniques for printing text across multiple lines.</li><li><strong>Print Text and Numbers Using Single Print</strong>: Combine text and numbers in a single print statement.</li><li><strong>Câu Lệnh Print Trong Python | In ra màn hình trong Python</strong>: Understand print statements in Python, explained in Vietnamese.</li><li><strong>Sum of Two Integers</strong>: Implement a program to calculate and print the sum of two integers.</li></ul><p><strong>Variables and Datatypes</strong></p><ul><li><strong>Introduction to Variables and Datatypes</strong>: Understand the basics of variables and data types in Python.</li><li><strong>Variables in Python</strong>: Learn how to declare and use variables effectively.</li><li><strong>Check Square Number</strong>: Write a program to check if a number is a perfect square.</li></ul><p><strong>Operators</strong></p><ul><li><strong>Arithmetic Operators</strong>: Perform basic arithmetic operations like addition, subtraction, multiplication, and division.</li><li><strong>Relational Operators</strong>: Compare values using relational operators such as <code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, and <code>&lt;=</code>.</li><li><strong>Logical Operators</strong>: Combine conditions using logical operators <code>and</code>, <code>or</code>, and <code>not</code>.</li><li><strong>Precedence and Associativity</strong>: Understand the order of operations and associativity rules in Python expressions.</li><li><strong>Arithmetic Operators in Python</strong>: Apply arithmetic operators in various programming scenarios.</li><li><strong>List Odd Divisor</strong>: Write a program to list all odd divisors of a given number.</li></ul><p><strong>Strings</strong></p><ul><li><strong>Introduction to Strings</strong>: Learn the basics of string manipulation and operations.</li><li><strong>Strings in Python</strong>: Explore advanced string functions and methods.</li></ul><p><strong>User Inputs</strong></p><ul><li><strong>Taking User Input</strong>: Learn how to read input from users in Python.</li><li><strong>Python User Input ⌨️</strong>: Practical examples of handling user inputs.</li><li><strong>Sum of Two Integers</strong>: Implement a program to read two integers from the user and calculate their sum.</li></ul><p><strong>Conditional Statements</strong></p><ul><li><strong>Intro to If / Else</strong>: Understand the basics of conditional statements in Python.</li><li><strong>Python If Statements | Python Tutorial #10</strong>: Learn how to use <code>if</code>, <code>else</code>, and <code>elif</code> statements to control program flow.</li><li><strong>Check Prime Number</strong>: Write a program to check if a number is prime.</li></ul><p><strong>Arrays</strong></p><ul><li><strong>Introduction to Arrays</strong>: Learn the fundamentals of arrays and their usage.</li><li><strong>ARRAYS in Python - Start Here!</strong>: Understand how to work with arrays in Python.</li><li><strong>Check 2^k</strong>: Write a program to check if a number is a power of 2.</li></ul><p><strong>Loops</strong></p><ul><li><strong>While Loops</strong>: Learn how to use <code>while</code> loops for repetitive tasks.</li><li><strong>For Loops</strong>: Explore the use of <code>for</code> loops to iterate over sequences.</li><li><strong>Break / Continue</strong>: Understand how to control loop execution using <code>break</code> and <code>continue</code> statements.</li><li><strong>Nested Loops</strong>: Learn how to use loops within loops for complex iteration tasks.</li><li><strong>Loops in Python | While &amp; For Loops | Python Full Course</strong>: Comprehensive coverage of looping constructs in Python.</li></ul><p><strong>Functions in Python</strong></p><ul><li><strong>Learn About Functions</strong>: Understand the basics of defining and calling functions.</li><li><strong>Python Functions | Python Tutorial for Absolute Beginners</strong>: Dive deeper into function concepts and best practices.</li><li><strong>Check Prime Number</strong>: Implement a function to check if a number is prime.</li></ul><p><strong>Tuples and Dictionary</strong></p><ul><li><strong>Learn About Tuples</strong>: Understand the characteristics and uses of tuples in Python.</li><li><strong>Dictionary</strong>: Learn how to use dictionaries for key-value pair data storage.</li><li><strong>Python Lists, Tuples, and Dictionaries</strong>: Comprehensive overview of lists, tuples, and dictionaries in Python.</li></ul><p><br></p><p>By the end of this course, you will have a solid understanding of Python programming, enabling you to write clean, efficient, and effective code. This course is structured to build your skills step-by-step, ensuring a thorough understanding of each concept before moving on to the next. Join us and start your journey towards becoming a proficient Python programmer!</p>', 4.0, '2024-07-30 17:44:20.54+00', '2027-10-01 03:31:00.54+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.607817+00');
+INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'Advanced Python', 'ADVANCED', '<p>Welcome to the <strong>Advanced Python</strong> certificate course! This comprehensive program is designed for experienced programmers who want to deepen their understanding of Python''s advanced features and capabilities. Whether you''re looking to enhance your current skills or prepare for more complex programming challenges, this course will equip you with the knowledge and tools necessary to excel in Python development.</p><p><br></p><h3>Course Breakdown</h3><p><strong>Functions and Modules</strong></p><ul><li><strong>Modules</strong>: Learn how to organize your code into reusable modules, enhancing maintainability and scalability.</li><li><strong>Namespaces and Scope</strong>: Understand the principles of namespaces and scope, and how they affect variable visibility and lifetime.</li><li><strong>Generators</strong>: Explore the power of generators for creating iterators and managing large datasets efficiently with minimal memory usage.</li></ul><p><strong>Advanced Python Features</strong></p><ul><li><strong>Iterators</strong>: Delve into the creation and use of iterators, a fundamental aspect of Python programming.</li><li><strong>Regular Expressions</strong>: Master the use of regular expressions for pattern matching and text processing tasks.</li><li><strong>Decorators</strong>: Learn how to use decorators to modify the behavior of functions and methods, enabling cleaner and more readable code.</li></ul><p><strong>Introduction to OOPs</strong></p><ul><li><strong>What is OOPs / Features of OOPs</strong>: Get introduced to the core concepts and features of Object-Oriented Programming (OOP).</li><li><strong>Constructors, Static Members</strong>: Understand the role of constructors and static members in class design and object management.</li></ul><p><strong>Inheritance, Packages and Interfaces</strong></p><ul><li><strong>Inheritance</strong>: Explore the concepts of inheritance to create hierarchical class structures and promote code reuse.</li><li><strong>Objects as Parameters &amp; Aggregation</strong>: Learn how to pass objects as parameters and utilize aggregation for complex class relationships.</li><li><strong>Polymorphism - Overloading</strong>: Implement polymorphism through method overloading to enhance code flexibility.</li><li><strong>Method Overriding</strong>: Override methods in derived classes to customize or extend base class functionality.</li><li><strong>Interfaces &amp; Abstract Classes</strong>: Understand the use of interfaces and abstract classes to define contracts and enforce consistent behavior across different classes.</li><li><strong>Returning Objects - Static, Nested, and Inner Classes</strong>: Explore advanced class structures and their applications.</li><li><strong>Upcasting &amp; Dynamic Method Dispatch</strong>: Utilize upcasting and dynamic method dispatch to achieve polymorphic behavior and efficient code execution.</li><li><strong>Inheritance in Python | Types of Inheritance in Python</strong>: Discover the different types of inheritance supported in Python and their use cases.</li></ul><p><strong>Exception Handling and Multithreading</strong></p><ul><li><strong>Exception Handling Basics</strong>: Learn how to handle exceptions to build robust and error-resistant applications.</li><li><strong>Multiple Catch Clauses</strong>: Use multiple catch clauses to handle different types of exceptions effectively.</li><li><strong>Nested Try Statements</strong>: Implement nested try statements for more granular error handling.</li><li><strong>Multithreaded Programming</strong>: Explore multithreading techniques to improve application performance and responsiveness.</li><li><strong>Yield Method and Interrupting a Thread</strong>: Understand the <code>yield</code> method and how to manage thread interruptions.</li><li><strong>Priorities / Synchronization</strong>: Manage thread priorities and synchronization to ensure efficient and coordinated execution.</li></ul><p><strong>Generics and File Handling</strong></p><ul><li><strong>Reading and Writing Files</strong>: Master the techniques of file handling for data persistence and retrieval.</li><li><strong>Generic Programming: Classes, Methods</strong>: Implement generic programming to create flexible and reusable classes and methods that work with different data types.</li></ul><p><br></p><p>By the end of this course, you will have a profound understanding of advanced Python programming concepts and techniques, empowering you to tackle complex projects and develop sophisticated applications with confidence. Join us on this exciting journey to master the depths of Python programming!</p>', 4.0, '2024-07-31 09:21:35.716+00', '2027-10-01 19:08:15.716+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 09:21:35.777129+00');
+INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'Beginner DSA In Python', 'BASIC', '<p>Welcome to the <strong>Beginner DSA in Python</strong> certificate course! This comprehensive course is designed to introduce you to the fundamentals of Data Structures and Algorithms (DSA) using Python. Tailored for beginners, this course will equip you with essential programming skills and a solid understanding of DSA concepts, enabling you to solve complex problems efficiently.</p><p><br></p><h3>Course Breakdown</h3><p><strong>Recap - Logic Building</strong></p><p>Before diving into more advanced topics, we''ll refresh our understanding of basic logic building. This section will reinforce your foundational skills, ensuring you are well-prepared for the challenges ahead.</p><p><br></p><p><strong>Array Operations</strong></p><ul><li><strong>Array Operations Part-1</strong>: Learn the basics of array construction and manipulation, focusing on how to store and access multiple items efficiently.</li><li><strong>Important Array Functions</strong>: Discover essential functions for manipulating arrays, such as sorting, reversing, and slicing.</li><li><strong>Array Operations Part-2</strong>: Delve deeper into advanced array techniques and explore more complex operations.</li><li><strong>Arrays In Python | Python Array Operations | Python Tutorial For Beginners | Edureka</strong>: Gain a thorough understanding of arrays through detailed tutorials and practical examples.</li><li><strong>Palindrome Integer</strong>: Implement a program to check if a given integer is a palindrome, applying your array manipulation skills.</li></ul><p><strong>Basic String Operations</strong></p><ul><li><strong>String Operations Part-1</strong>: Understand the basics of string manipulation, including how to access and modify string data.</li><li><strong>String Operations Part-2</strong>: Explore advanced string operations, such as slicing, concatenation, and formatting.</li><li><strong>String Methods in Python are Easy 🧵</strong>: Learn various string methods provided by Python to handle and process string data effortlessly.</li></ul><p><strong>Basic Math Continued</strong></p><ul><li><strong>Basic Math Continued Part-1</strong>: Tackle more complex mathematical problems, focusing on finding divisors of integers and other practical applications.</li><li><strong>Basic Math Continued Part-2</strong>: Further your understanding of mathematical operations with problems involving greatest common divisors (GCD) and least common multiples (LCM).</li><li><strong>Check 2^k</strong>: Write a program to check if a given number is a power of 2, applying mathematical concepts in programming.</li><li><strong>Python - Basic Math Tutorial</strong>: Strengthen your mathematical foundations with a comprehensive tutorial covering essential basic math concepts.</li></ul><p><br></p><p>By the end of this course, you will have a solid grasp of essential data structures and algorithms, along with foundational programming skills in Python. This course is designed to build your knowledge incrementally, ensuring a thorough understanding of each topic before moving on to the next. Join us on this exciting journey and start mastering Python programming today!</p>', 4.0, '2024-07-31 06:55:21.546+00', '2027-10-01 16:42:01.546+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 06:55:21.606216+00');
 INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('452371a5-2f58-4bfa-947b-af3140671057', 'd215b5f8-0249-4dc5-89a3-51fd148cfb93', 'Learn C++', 'BASIC', '<h1>Course Description: Learn C++ Crash Course</h1><p>Embark on a thrilling journey into the world of C++ programming with our <strong>"Learn C++ Crash Course"</strong>! This dynamic and hands-on course is designed to take you from a novice to a confident C++ programmer in no time. Perfect for beginners and those looking to solidify their programming skills, this course covers everything you need to know about C++.</p><h2>What You''ll Learn:</h2><h3>Chapter 1: Hello World</h3><p>Begin your adventure with the classic "Hello World" program. Learn about the structure of a C++ program, basic syntax, and how to set up your development environment.</p><h3>Chapter 2: Variables</h3><p>Discover the building blocks of C++ with variables. Understand different data types, variable declaration, initialization, and how to manipulate data.</p><h3>Chapter 3: Conditionals</h3><p>Dive into decision-making with conditionals. Master if statements, else if, else, and switch cases to control the flow of your programs.</p><h3>Chapter 4: Loops</h3><p>Unleash the power of loops to perform repetitive tasks efficiently. Explore for, while, and do-while loops, and understand their practical applications.</p><h3>Chapter 5: Vectors &amp; Arrays</h3><p>Get hands-on with data structures. Learn about arrays and vectors, their differences, and how to use them to store and manipulate collections of data.</p><h3>Chapter 6: Classes &amp; Objects</h3><p>Step into the realm of object-oriented programming. Create and work with classes and objects, understand constructors and destructors, and implement encapsulation, inheritance, and polymorphism.</p><h2>Why Enroll?</h2><ul><li><strong>Interactive Learning:</strong> Engage with practical examples, quizzes, and coding exercises to reinforce your understanding.</li><li><strong>Expert Guidance:</strong> Learn from industry professionals with years of experience in C++ programming.</li><li><strong>Comprehensive Curriculum:</strong> Cover all essential topics needed to build a solid foundation in C++.</li><li><strong>Flexible Schedule:</strong> Learn at your own pace with lifetime access to course materials.</li></ul><p>Join us in the <strong>"Learn C++ Crash Course"</strong> and take the first step towards becoming a proficient C++ programmer. Let''s code, create, and innovate together!</p><p>This paste expires in &lt;1 hour. Public IP access. Share whatever you see with others in seconds with Context.Terms of ServiceReport this</p>', NULL, '2024-07-20 09:46:43.455+00', '2027-09-20 19:33:23.455+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-10 13:43:04.895+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 09:46:43.577774+00');
-INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('2d2ebd9e-2829-495e-87f7-4f050a8f3628', 'd215b5f8-0249-4dc5-89a3-51fd148cfb92', 'Learn C', 'BASIC', '<h3>Course Description</h3><p>Unlock the world of programming with our <strong>"Learn C"</strong> certificate course! This course is tailored for beginners eager to dive into the fundamentals of C programming. Whether you''re looking to start a career in tech or simply want to expand your knowledge, this course offers a solid foundation in one of the most powerful and widely-used programming languages.</p><p><br></p><h3>What You''ll Learn</h3><ol><li><strong>Introduction, Outputting &amp; Math Operators: </strong>Start your journey by mastering the basics of C. Learn to write your first "Hello World" program, understand how to output data, and perform essential arithmetic operations. This foundational knowledge will set the stage for all your future coding endeavors.</li><li><strong>Pointers and Memory: </strong>Dive deep into the concept of pointers and memory management. Discover how to use pointers to optimize your code and manage memory effectively, providing you with a deeper understanding of how programs interact with computer memory.</li><li><strong>Variables and Data Types: </strong>Explore C’s variable types and data structures. Learn to declare and use various data types to handle data efficiently and accurately, making your programs more versatile and robust.</li><li><strong>Conditionals: </strong>Learn how to use conditionals to make your programs smarter. With <code>if</code> and <code>switch</code> statements, you’ll be able to control the flow of your programs based on different conditions, making your code more dynamic and responsive.</li><li><strong>Loops: </strong>Master the use of loops to execute repetitive tasks efficiently. Discover how <code>while</code> and <code>for</code> loops can help you automate repetitive operations, making your code more efficient and concise.</li><li><strong>Arrays: </strong>Understand arrays, a fundamental data structure in C. Learn to declare, initialize, and manipulate arrays to handle collections of data effectively, streamlining your programming tasks.</li><li><strong>Strings: </strong>Delve into string manipulation, an essential skill for handling text data. Learn how to work with strings to perform various text operations, enhancing the functionality of your programs.</li><li><strong>Functions and Structures: </strong>Elevate your programming skills by exploring functions and structures. Learn how to define and use functions to organize your code and create reusable components. Understand structures to group related data, making your code more modular and maintainable.</li></ol><p><br></p><h3>Why Enroll?</h3><ul><li><strong>Practical Learning</strong>: Engage in hands-on exercises that solidify your understanding and skills.</li><li><strong>Expert Guidance</strong>: Benefit from a course designed to provide a clear and comprehensive introduction to C programming.</li><li><strong>Career-Ready Skills</strong>: Gain essential programming skills that are highly valued in the tech industry, laying the groundwork for further study and career advancement.</li></ul><p><br></p><p>Join the <strong>"Learn C"</strong> course today and embark on your journey to becoming a proficient C programmer!</p>', NULL, '2024-07-20 10:08:56.181+00', '2027-09-20 19:55:36.181+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:57:26.179961+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 10:08:56.255418+00');
+INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('cbddf1c0-d816-44fe-bce3-16ed430306ef', 'd215b5f8-0249-4dc5-89a3-51fd148cfb92', 'Problem solving in C', 'BASIC', '<p>Welcome to the <strong>Problem Solving in C</strong> certificate course! This comprehensive course is designed for beginners eager to master the fundamentals of C programming through engaging and practical problem-solving exercises. Whether you''re new to programming or looking to solidify your foundational skills, this course provides the essential tools and knowledge to get you started on your coding journey.</p><p><br></p><h3>Course Breakdown</h3><p><strong>Getting Started</strong></p><ul><li><strong>Input and Output</strong>: Learn the basics of reading input from the user and displaying output to the console.</li><li><strong>What are Test Cases?</strong>: Understand the importance of test cases in verifying the correctness of your programs.</li><li><strong>Custom Input</strong>: Explore techniques for handling user input in various formats.</li><li><strong>Check Square Number</strong>: Implement a program to determine if a given number is a perfect square.</li></ul><p><strong>Basic Math</strong></p><ul><li><strong>Addition and Multiplication</strong>: Master the fundamental arithmetic operations and their applications in programming.</li><li><strong>Subtraction and Division</strong>: Dive into more arithmetic operations essential for solving a variety of problems.</li><li><strong>Useful Math Functions</strong>: Discover essential math functions provided by the C standard library.</li><li><strong>Sum of Two Integers</strong>: Practice writing simple programs to compute the sum of two integers.</li><li><strong>Arithmetic Operators in C</strong>: Understand and use the basic arithmetic operators available in C.</li></ul><p><strong>Conditional Statements</strong></p><ul><li><strong>Conditional Statements in C</strong>: Learn to control the flow of your programs using if, else if, and else statements.</li><li><strong>Conditionals (if-else, Nested if and else if)</strong>: Explore advanced conditional structures for more complex decision making.</li><li><strong>Determine the Day of the Week from a Given Date</strong>: Write a program to calculate the day of the week for any given date.</li></ul><p><strong>Logic Building</strong></p><ul><li><strong>Logic Building Part-1</strong>: Start with basic logic-building exercises to develop your problem-solving skills.</li><li><strong>Logic Building Part-2</strong>: Advance to more complex logic problems and learn to break down larger problems into manageable parts.</li><li><strong>Logic Building Part-3</strong>: Master advanced logic-building techniques to tackle challenging problems with confidence.</li><li><strong>Logic Building with C</strong>: Apply your logic-building skills specifically in the context of C programming.</li><li><strong>Finding Maximum Sum K Less Than N</strong>: Solve problems that require finding maximum sums under given constraints.</li></ul><p><br></p><p>By the end of this course, you will have a solid foundation in C programming and the problem-solving skills necessary to tackle a wide range of programming challenges. This course is structured to build your confidence and competence step by step, ensuring a thorough understanding of each concept before moving on to the next. Join us and start your journey towards becoming a proficient C programmer!</p>', NULL, '2024-07-30 17:17:59.312+00', '2027-10-01 03:04:39.312+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 13:53:49.015976+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:17:59.395195+00');
+INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('2d2ebd9e-2829-495e-87f7-4f050a8f3628', 'd215b5f8-0249-4dc5-89a3-51fd148cfb92', 'Learn C Programming', 'BASIC', '<h3>Course Description</h3><p>Unlock the world of programming with our <strong>"Learn C"</strong> certificate course! This course is tailored for beginners eager to dive into the fundamentals of C programming. Whether you''re looking to start a career in tech or simply want to expand your knowledge, this course offers a solid foundation in one of the most powerful and widely-used programming languages.</p><p><br></p><h3>What You''ll Learn</h3><ol><li><strong>Introduction, Outputting &amp; Math Operators: </strong>Start your journey by mastering the basics of C. Learn to write your first "Hello World" program, understand how to output data, and perform essential arithmetic operations. This foundational knowledge will set the stage for all your future coding endeavors.</li><li><strong>Pointers and Memory: </strong>Dive deep into the concept of pointers and memory management. Discover how to use pointers to optimize your code and manage memory effectively, providing you with a deeper understanding of how programs interact with computer memory.</li><li><strong>Variables and Data Types: </strong>Explore C’s variable types and data structures. Learn to declare and use various data types to handle data efficiently and accurately, making your programs more versatile and robust.</li><li><strong>Conditionals: </strong>Learn how to use conditionals to make your programs smarter. With <code>if</code> and <code>switch</code> statements, you’ll be able to control the flow of your programs based on different conditions, making your code more dynamic and responsive.</li><li><strong>Loops: </strong>Master the use of loops to execute repetitive tasks efficiently. Discover how <code>while</code> and <code>for</code> loops can help you automate repetitive operations, making your code more efficient and concise.</li><li><strong>Arrays: </strong>Understand arrays, a fundamental data structure in C. Learn to declare, initialize, and manipulate arrays to handle collections of data effectively, streamlining your programming tasks.</li><li><strong>Strings: </strong>Delve into string manipulation, an essential skill for handling text data. Learn how to work with strings to perform various text operations, enhancing the functionality of your programs.</li><li><strong>Functions and Structures: </strong>Elevate your programming skills by exploring functions and structures. Learn how to define and use functions to organize your code and create reusable components. Understand structures to group related data, making your code more modular and maintainable.</li></ol><p><br></p><h3>Why Enroll?</h3><ul><li><strong>Practical Learning</strong>: Engage in hands-on exercises that solidify your understanding and skills.</li><li><strong>Expert Guidance</strong>: Benefit from a course designed to provide a clear and comprehensive introduction to C programming.</li><li><strong>Career-Ready Skills</strong>: Gain essential programming skills that are highly valued in the tech industry, laying the groundwork for further study and career advancement.</li></ul><p><br></p><p>Join the <strong>"Learn C"</strong> course today and embark on your journey to becoming a proficient C programmer!</p>', NULL, '2024-07-30 17:14:54.831+00', '2027-10-01 03:01:34.831+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:57:26.179961+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:14:54.938074+00');
+INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d2a18a10-a142-426b-bd8d-97ede9db5941', 'd215b5f8-0249-4dc5-89a3-51fd148cfb92', 'Beginner DSA in C', 'BASIC', '<p>Welcome to the <strong>Beginner DSA in C</strong> certificate course! This course is tailored for beginners who are eager to dive into the world of Data Structures and Algorithms (DSA) using the C programming language. This course will guide you through the fundamental concepts and practical implementations, ensuring you build a strong foundation in DSA that is crucial for efficient problem-solving and software development.</p><p><br></p><h3>Course Breakdown</h3><p><strong>Recap</strong></p><ul><li><strong>Recap - Logic Building</strong>: Refresh your understanding of basic logic-building techniques essential for solving programming problems. Revisit key concepts and ensure a solid grounding before diving into data structures.</li></ul><p><strong>Array Operations</strong></p><ul><li><strong>Array Operations Part-1</strong>: Learn the basics of array construction and manipulation. Understand how to initialize, access, and modify array elements.</li><li><strong>Array Operations Part-2</strong>: Dive deeper into advanced array operations, including traversal, insertion, deletion, and more.</li><li><strong>English Alphabet Printing</strong>: Implement a program to print the English alphabet using arrays.</li><li><strong>Array Operations - Traversal, Insertion | Explanation with C Program | DSA Course</strong>: Gain a thorough understanding of array traversal and insertion with detailed explanations and C program examples.</li></ul><p><strong>Basic String Operations</strong></p><ul><li><strong>String Operations Part-1</strong>: Introduction to string handling in C. Learn how to initialize, access, and manipulate strings.</li><li><strong>String Operations Part-2</strong>: Explore advanced string operations, including concatenation, comparison, and substring extraction.</li><li><strong>String Literals and String Initializations</strong>: Understand different ways to initialize strings and work with string literals in C.</li></ul><p><strong>Debug Algorithmic Problems</strong></p><ul><li><strong>Flow of Control and Key Variables</strong>: Learn to control the flow of your programs and identify key variables critical to the logic of your algorithms.</li><li><strong>Check-points</strong>: Understand the importance of checkpoints in debugging and ensuring your algorithm performs as expected.</li></ul><p><br></p><p>By the end of this course, you will have a strong grasp of basic data structures and algorithms in C, enabling you to tackle more complex programming challenges with confidence. This course is designed to provide a step-by-step approach, building your skills incrementally and ensuring a comprehensive understanding of each topic. Join us and start your journey towards mastering Data Structures and Algorithms in C!</p>', NULL, '2024-07-30 17:16:20.841+00', '2027-10-01 03:03:00.841+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 13:54:16.458221+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:16:20.907598+00');
+INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('265190be-817b-4b8e-a8e4-7b7e4980915f', 'd215b5f8-0249-4dc5-89a3-51fd148cfb50', 'Logic Building in C#', 'BASIC', '<p>Welcome to the <strong>Logic Building in C#</strong> certificate course! This comprehensive program is designed to introduce you to the fundamental principles of logic building and problem solving in C#. Whether you''re a beginner or looking to sharpen your skills, this course will equip you with the essential tools to approach and solve programming problems effectively.</p><p><br></p><h3>Course Breakdown</h3><p><strong>Getting Started on Problem Solving</strong></p><ul><li><strong>Input and Output</strong>: Learn the basics of handling input and output operations in C#, an essential foundation for any interactive program.</li><li><strong>What are Test Cases?</strong>: Understand the importance of test cases in validating your solutions and ensuring correctness.</li><li><strong>What are Custom Inputs?</strong>: Explore how to handle custom inputs to make your programs more flexible and user-friendly.</li><li><strong>Sum of Two Integers</strong>: Implement a basic program to practice input, output, and arithmetic operations by summing two integers.</li></ul><p><strong>Basic Math</strong></p><ul><li><strong>Addition and Multiplication</strong>: Master the basic arithmetic operations of addition and multiplication, and their applications in C#.</li><li><strong>Subtraction and Division</strong>: Learn how to perform subtraction and division, essential for a wide range of calculations.</li><li><strong>Useful Math Functions</strong>: Explore useful math functions provided by C# to perform complex calculations with ease.</li><li><strong>C# Math Class 📏</strong>: Dive deeper into the <code>Math</code> class in C#, which offers a variety of functions for advanced mathematical operations.</li><li><strong>Calculate Sum of Cubes</strong>: Apply your knowledge of arithmetic operations to calculate the sum of cubes, reinforcing your understanding of loops and accumulation.</li></ul><p><strong>Conditional Statements</strong></p><ul><li><strong>Conditional Statements Part-1</strong>: Get introduced to <code>if</code>, <code>else if</code>, and <code>else</code> statements to control the flow of your program based on conditions.</li><li><strong>Conditional Statements Part-2</strong>: Explore advanced uses of conditional statements, including logical operators and the <code>switch</code> statement.</li><li><strong>Conditional Statements in C#</strong>: Gain a comprehensive understanding of how to implement and use conditional statements effectively in C#.</li><li><strong>Check Square Number</strong>: Develop a program to check if a given number is a perfect square, applying your knowledge of conditional statements.</li></ul><p><strong>Logic Building</strong></p><ul><li><strong>Logic Building Part-1</strong>: Learn the fundamental steps to approach and solve programming problems, from understanding the problem statement to writing and testing your code.</li><li><strong>Logic Building Part-2</strong>: Build on the foundation by tackling more complex problems and refining your problem-solving approach, including breaking down problems and using recursion.</li><li><strong>Logic Building Part-3</strong>: Apply advanced logic building techniques to solve real-world problems, focusing on optimizing solutions and using dynamic programming.</li></ul><p><br></p><p>By the end of this course, you will have a solid foundation in logic building and problem solving in C#. This structured approach will prepare you to tackle a wide range of programming challenges efficiently and effectively, setting you on the path to becoming a proficient C# developer. Join us on this exciting journey and start building your problem-solving skills today!</p>', NULL, '2024-07-31 11:26:34.259+00', '2027-10-01 21:13:14.259+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:09:11.729531+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:26:34.322833+00');
+INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('0c1a30e7-97f9-4b5d-8d35-b500e7a57f82', 'd215b5f8-0249-4dc5-89a3-51fd148cfb50', 'Learn C# Programming', 'BASIC', '<p>Welcome to the <strong>Learn C# Programming</strong> certificate course! This comprehensive program is designed to introduce you to the fundamentals of C# programming. Whether you''re new to coding or looking to enhance your skills, this course provides a solid foundation to help you become proficient in C#. By the end of this course, you''ll be equipped with the knowledge and skills to develop dynamic and interactive applications.</p><p><br></p><h3>Course Breakdown</h3><p><strong>Outputting &amp; Math Operators</strong></p><ul><li><strong>Introducing Printing - Console.WriteLine()</strong>: Learn how to use the <code>Console.WriteLine()</code> method to output text to the console, a fundamental step in displaying information in your programs.</li><li><strong>Printing on Multiple Lines</strong>: Discover techniques for printing text across multiple lines using multiple <code>Console.WriteLine()</code> statements and newline characters.</li><li><strong>Multiple Prints Using Single Console.WriteLine()</strong>: Explore how to print multiple variables or values using a single <code>Console.WriteLine()</code> statement for more concise and readable code.</li><li><strong>Math Operators and Overall Code Structure</strong>: Understand how to use basic math operators in C# and grasp the overall structure of a simple C# program.</li><li><strong>C# Output 💬</strong>: Master various output techniques to enhance the user interface of your applications.</li><li><strong>Sum of Two Integers</strong>: Implement a basic calculator to perform addition of two integers, reinforcing your understanding of input and output in C#.</li></ul><p><strong>Variables and Data Types</strong></p><ul><li><strong>Introduction to Variables and Data Types</strong>: Learn about declaring, initializing, and using variables, and understand the different data types available in C#.</li><li><strong>C# Variables ✖️</strong>: Explore the practical use of variables in various scenarios.</li><li><strong>Calculate Sum of Cubes</strong>: Apply your knowledge of variables and math operators to calculate the sum of cubes of numbers.</li></ul><p><strong>Strings</strong></p><ul><li><strong>Introduction to Strings</strong>: Understand the fundamentals of strings in C#, including how to declare, initialize, and manipulate them.</li><li><strong>Strings in C#</strong>: Dive deeper into string operations, including concatenation, substring extraction, and string interpolation.</li></ul><p><strong>User Inputs</strong></p><ul><li><strong>Introducing Taking Inputs - Console.ReadLine()</strong>: Learn how to use the <code>Console.ReadLine()</code> method to take input from the user, making your programs interactive.</li><li><strong>C# User Input ⌨️</strong>: Practice handling different types of user input and converting them to various data types.</li><li><strong>Replace Negative Number</strong>: Create a program that processes user input to replace negative numbers with their absolute values.</li></ul><p><strong>Conditional Statements</strong></p><ul><li><strong>Introduction to "if", "else"</strong>: Understand the basic conditional statements in C# to execute code based on specific conditions.</li><li><strong>Review Problems</strong>: Reinforce your understanding of conditional statements through practical problem-solving.</li><li><strong>Different Ways to Compare Elements Inside If</strong>: Learn about the various comparison operators available in C# and how to use them within <code>if</code> statements.</li><li><strong>Combining Conditions - And, Or</strong>: Discover how to combine multiple conditions using logical operators to create more complex conditional statements.</li><li><strong>Switch</strong>: Simplify complex conditional logic using the <code>switch</code> statement in C#.</li><li><strong>Conditional Statements In C#</strong>: Gain a comprehensive understanding of conditional statements and their applications.</li><li><strong>Check Square Number</strong>: Develop a program to check if a given number is a perfect square, applying your knowledge of conditional statements.</li></ul><p><strong>Arrays</strong></p><ul><li><strong>Introduction to Arrays</strong>: Learn the fundamentals of arrays, including how to declare, initialize, and manipulate them.</li><li><strong>C# Arrays 🚗</strong>: Explore practical applications of arrays in various scenarios.</li><li><strong>Sum of an Array</strong>: Implement a program to calculate the sum of elements in an array, reinforcing your understanding of array manipulation.</li></ul><p><strong>Loops</strong></p><ul><li><strong>While Loops</strong>: Understand how to use <code>while</code> loops to execute a block of code repeatedly as long as a specified condition is true.</li><li><strong>For Loops</strong>: Learn how to use <code>for</code> loops to execute a block of code a specific number of times.</li><li><strong>Break, Continue, For Each</strong>: Discover how to use the <code>break</code> and <code>continue</code> statements to control loop execution and explore the <code>foreach</code> loop for iterating over collections.</li><li><strong>C# Loops Tutorial | Loops In C# | Iteration Statements In C#</strong>: Gain a comprehensive understanding of loops and iteration statements in C#.</li><li><strong>Calculate Sum of Cubes</strong>: Apply your knowledge of loops to calculate the sum of cubes of numbers, reinforcing your understanding of iteration and accumulation.</li></ul><p><br></p><p>By mastering these lessons, you''ll be able to write efficient, dynamic, and interactive C# programs. This course is structured to build your skills step-by-step, ensuring a thorough understanding of each concept before moving on to the next. Join us and start your journey to becoming a proficient C# programmer today!</p>', NULL, '2024-07-31 11:07:14.148+00', '2027-10-01 20:53:54.148+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 09:55:31.759687+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:07:14.213117+00');
+INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('13f83797-dd2a-4083-aebf-43f45993bbe9', 'd215b5f8-0249-4dc5-89a3-51fd148cfb50', 'Beginner DSA in C#', 'BASIC', '<p>Welcome to the <strong>Beginner DSA in C#</strong> certificate course! This comprehensive program is designed to introduce you to the fundamental concepts of Data Structures and Algorithms (DSA) using C#. Whether you''re new to programming or looking to strengthen your skills, this course provides a solid foundation to help you become proficient in solving complex problems efficiently.</p><p><br></p><h3>Course Breakdown</h3><p><strong>Recap - Logic Building</strong></p><ul><li><strong>Recap - Logic Building</strong>: Revisit the essential principles of logic building that form the backbone of problem-solving in programming. Strengthen your understanding of algorithmic thinking and learn how to break down problems into manageable steps.</li></ul><p><strong>Array Operations</strong></p><ul><li><strong>Array Operations Part-1</strong>: Get started with arrays, learning how to declare, initialize, and access elements in an array. Understand the basic syntax and operations required to manipulate arrays in C#.</li><li><strong>Array Operations Part-2</strong>: Build on your knowledge of arrays by exploring advanced operations such as sorting, finding maximum and minimum values, reversing arrays, and searching for elements.</li><li><strong>Perform Operations on Array in C#</strong>: Apply your skills to perform various operations on arrays, including multi-dimensional arrays and more complex data manipulations.</li></ul><p><strong>Basic String Operations</strong></p><ul><li><strong>String Operations Part-1</strong>: Understand the fundamentals of strings, including how to declare, initialize, and access string elements. Learn about the basic syntax and operations needed to work with strings in C#.</li><li><strong>String Operations Part-2</strong>: Dive deeper into string manipulation techniques such as concatenation, interpolation, and using string methods for advanced operations.</li><li><strong>Strings and String Manipulation</strong>: Explore comprehensive string manipulation techniques, including splitting, joining, trimming, and replacing strings to handle complex text processing tasks.</li></ul><p><strong>Basic Math Continued</strong></p><ul><li><strong>Basic Math Continued Part-1</strong>: Enhance your mathematical skills by exploring modular arithmetic, exponentiation, square roots, and absolute values. Learn how to implement these functions and apply them to solve real-world problems.</li><li><strong>Basic Math Continued Part-2</strong>: Extend your mathematical capabilities by delving into trigonometric and logarithmic functions, as well as rounding numbers. Understand how to use these advanced mathematical operations in your programs.</li><li><strong>Determine the Quarter of a Given Month</strong>: Apply your knowledge of basic math to develop a program that determines the quarter of a given month, reinforcing your understanding of logical and mathematical operations.</li></ul><p><br></p><p>By completing this course, you will gain a robust understanding of data structures and algorithms in C#, along with the ability to manipulate arrays, strings, and perform complex mathematical operations. This course will equip you with the skills necessary to tackle a wide range of programming challenges, setting you on the path to becoming a proficient C# developer. Join us and start building your expertise in C# today!</p>', NULL, '2024-07-31 18:12:12.845+00', '2027-10-02 03:58:52.846+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:08:59.315815+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:12:12.89316+00');
+INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('1eb1b48d-a62e-4262-8bab-1abda96d5588', 'd215b5f8-0249-4dc5-89a3-51fd148cfb47', 'JavaScript Fundamentals', 'BASIC', '<p>Welcome to <strong>JavaScript Fundamentals</strong>, a comprehensive certificate course designed to introduce you to the core concepts and practical applications of JavaScript. Whether you''re a complete beginner or looking to strengthen your foundational knowledge, this course will equip you with the skills necessary to build dynamic and interactive web applications. Let''s dive into the details of what you''ll learn in this course!</p><p><br></p><h3>Course Breakdown</h3><p><strong>Introduction to JavaScript</strong></p><ul><li><strong>What is JavaScript?</strong> Discover the history, purpose, and capabilities of JavaScript, and understand why it''s a vital tool in modern web development.</li></ul><p><strong>Variables and Data Types</strong></p><ul><li><strong>Declaring Variables with </strong><code><strong>var</strong></code><strong>, </strong><code><strong>let</strong></code><strong>, and </strong><code><strong>const</strong></code> Learn how to declare variables using different keywords and understand the scope and lifetime of variables.</li><li><strong>Understanding Data Types: Number, String, Boolean, Null, Undefined, Symbol</strong> Explore the various data types in JavaScript and how to work with them effectively.</li><li><strong>Type Conversion and Coercion</strong> Master the techniques of converting between different data types and the nuances of type coercion in JavaScript.</li><li><strong>JavaScript for Beginners #3 - Variables and Data Types</strong> Gain practical insights into variables and data types through engaging tutorials and examples.</li></ul><p><strong>Operators and Expressions</strong></p><ul><li><strong>Arithmetic Operators</strong> Understand the fundamental arithmetic operations you can perform on numbers.</li><li><strong>Comparison Operators</strong> Learn how to compare values and control the flow of your programs.</li><li><strong>Logical Operators</strong> Explore how to combine multiple conditions using logical operators.</li><li><strong>Assignment Operators</strong> Get to grips with assigning values to variables using various assignment operators.</li><li><strong>Conditional (ternary) Operator</strong> Discover a concise way to handle conditional logic with the ternary operator.</li><li><strong>Expressions and Operators || JavaScript tutorial for Beginners</strong> Dive deep into expressions and operators with comprehensive tutorials.</li></ul><p><strong>Control Structures</strong></p><ul><li><strong>If...else Statements</strong> Master the basics of conditional statements to control the execution flow.</li><li><strong>Switch Statements</strong> Learn how to handle multiple conditions efficiently using switch statements.</li><li><strong>Loops: for, while, do...while</strong> Understand how to execute code repeatedly with different types of loops.</li><li><strong>Breaking and Continuing Loops</strong> Discover how to fine-tune your loops using break and continue statements.</li><li><strong>Control Statements | Theory</strong> Explore the theoretical foundations of control statements to enhance your understanding.</li></ul><p><strong>Functions</strong></p><ul><li><strong>Function Declarations and Expressions</strong> Learn the difference between function declarations and expressions and how to use them.</li><li><strong>Arrow Functions</strong> Get familiar with the concise syntax of arrow functions and their benefits.</li><li><strong>Parameters and Arguments</strong> Understand how to pass information to functions and handle multiple arguments.</li><li><strong>Return Statements</strong> Learn how to return values from functions to make your code more modular and reusable.</li><li><strong>Scope and Closures</strong> Explore the concepts of scope and closures to manage variable accessibility and lifetime effectively.</li></ul><p><strong>Objects and Arrays</strong></p><ul><li><strong>Creating and Manipulating Objects</strong> Discover how to create and manipulate objects to structure your data effectively.</li><li><strong>Array Methods and Properties</strong> Learn the essential methods and properties to work with arrays efficiently.</li><li><strong>Iterating Over Arrays</strong> Understand different techniques to iterate over arrays and process data.</li><li><strong>Nested Objects and Arrays</strong> Explore how to work with complex data structures involving nested objects and arrays.</li></ul><p><strong>DOM Manipulation</strong></p><ul><li><strong>Selecting DOM Elements</strong> Learn how to select and interact with DOM elements to build dynamic web pages.</li><li><strong>Modifying Element Content and Attributes</strong> Understand how to change the content and attributes of DOM elements.</li><li><strong>Creating and Removing Elements</strong> Discover how to create new elements and remove existing ones dynamically.</li><li><strong>Event Handling and Listeners</strong> Master the art of handling events and adding interactivity to your web applications.</li></ul><p><br></p><p>By the end of this course, you will have a solid understanding of JavaScript fundamentals and be able to create interactive web applications with confidence. Join us on this journey to master JavaScript and unlock your potential in web development!</p>', NULL, '2024-08-01 07:57:16.552+00', '2027-10-02 17:43:56.552+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:20:35.689458+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 07:57:16.614004+00');
+INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('db16e13e-9c52-47ac-8bd0-45f0dc0bab38', 'd215b5f8-0249-4dc5-89a3-51fd148cfb47', 'Advanced JavaScript', 'ADVANCED', '<p>Dive deep into the world of JavaScript with our <strong>Advanced JavaScript</strong> course. Designed for experienced developers, this course explores sophisticated JavaScript concepts, modern design patterns, functional programming, advanced DOM manipulation, and the latest frameworks and libraries. Enhance your skills to build complex, efficient, and maintainable web applications.</p><p><br></p><h3>Course Breakdown</h3><p><strong>JavaScript Design Patterns</strong></p><ul><li><strong>Understanding Design Patterns</strong> Explore the importance of design patterns in software development, providing reusable solutions to common problems.</li><li><strong>Module Pattern</strong> Learn how to create encapsulated code with the module pattern, enhancing reusability and maintainability.</li><li><strong>Revealing Module Pattern</strong> Discover the revealing module pattern to create clear and consistent public APIs for your modules.</li><li><strong>Singleton Pattern</strong> Understand how to implement the singleton pattern to ensure a class has only one instance and provides a global point of access to it.</li><li><strong>Factory Pattern</strong> Master the factory pattern to create objects without specifying the exact class of object that will be created.</li></ul><p><strong>Functional Programming in JavaScript</strong></p><ul><li><strong>Understanding Functional Programming Principles</strong> Get an overview of functional programming principles and their benefits in JavaScript.</li><li><strong>Pure Functions</strong> Learn how to write pure functions that produce predictable and consistent results without side effects.</li><li><strong>Immutability</strong> Understand the concept of immutability and how to create immutable data structures.</li><li><strong>Map, Reduce, and Filter</strong> Master the use of <code>map</code>, <code>reduce</code>, and <code>filter</code> functions to process and transform arrays.</li><li><strong>Functional Libraries (e.g., Lodash)</strong> Explore functional libraries like Lodash to enhance your functional programming capabilities.</li></ul><p><strong>Advanced DOM Manipulation</strong></p><ul><li><strong>Advanced Techniques for Manipulating the DOM</strong> Discover advanced methods for manipulating the DOM to create dynamic and interactive web applications.</li><li><strong>Virtual DOM</strong> Understand the concept of the Virtual DOM and how it improves performance by minimizing direct manipulation of the real DOM.</li><li><strong>Performance Optimization</strong> Learn techniques to optimize DOM manipulation for better performance and responsiveness.</li></ul><p><strong>JavaScript Frameworks and Libraries</strong></p><ul><li><strong>Introduction to Frameworks (React, Angular, Vue)</strong> Get an overview of the most popular JavaScript frameworks and libraries: React, Angular, and Vue.</li><li><strong>Setting Up a Development Environment</strong> Learn how to set up a development environment for building JavaScript applications with modern frameworks.</li><li><strong>Building a Simple Application with React</strong> Build a simple React application to understand the core concepts of React, including components, props, and state.</li><li><strong>State Management with Redux</strong> Understand how to manage state in a React application using Redux.</li></ul><p><strong>Web Components</strong></p><ul><li><strong>Understanding Web Components</strong> Learn about Web Components and their importance in modern web development.</li><li><strong>Custom Elements</strong> Discover how to define and use custom elements in your web applications.</li><li><strong>Shadow DOM</strong> Understand how to use the Shadow DOM to encapsulate styles and structure within a web component.</li><li><strong>HTML Templates</strong> Learn how to use HTML templates to define reusable HTML snippets that can be used within your web components.</li></ul><p><br></p><p>By mastering these advanced JavaScript topics, you will be equipped to tackle complex programming challenges and build sophisticated, efficient, and maintainable web applications. Join us in the <strong>Advanced JavaScript</strong> course and elevate your JavaScript skills to the next level!</p>', NULL, '2024-08-01 09:18:46.92+00', '2027-10-02 19:05:26.92+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:21:25.320376+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 09:18:46.976541+00');
+INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 'd215b5f8-0249-4dc5-89a3-51fd148cfb48', 'One-dimensional Arrays', 'BASIC', '<p>Unlock the power of one-dimensional arrays with our comprehensive <strong>One-dimensional Arrays</strong> course. Designed for beginners, this course delves into the fundamentals of arrays, a crucial data structure in programming. You will learn how to efficiently store, access, and manipulate data using arrays, and tackle a variety of practical problems that reinforce these concepts.</p><p><br></p><h3>Course Breakdown</h3><p><strong>Fundamentals Of One-dimensional Arrays</strong></p><ul><li><strong>Introduction to One-dimensional Arrays</strong> Begin your journey by understanding the core concepts of one-dimensional arrays. Learn about their structure, how to declare and initialize them, and perform basic operations such as accessing, updating, and traversing elements.</li><li><strong>List Odd Divisors</strong> Apply your knowledge of arrays to solve problems like listing all odd divisors of a number. Develop algorithms that iterate through arrays to find specific elements based on given conditions.</li><li><strong>Sum of an Array</strong> Master the technique of calculating the sum of elements in an array. Understand how to use loops to traverse arrays and accumulate values efficiently.</li><li><strong>Robber</strong> Tackle more complex problems such as the "Robber" problem, where you need to optimize your solution to maximize the sum of non-adjacent elements in an array. This exercise will enhance your problem-solving skills and understanding of dynamic programming.</li><li><strong>Three Sum Closest</strong> Challenge yourself with advanced problems like finding three numbers in an array whose sum is closest to a given target. Learn to implement sorting and two-pointer techniques to solve this efficiently.</li></ul><h3>What You Will Learn</h3><ol><li><strong>Array Fundamentals:</strong></li></ol><ul><li class="ql-indent-1">Declaration and initialization of arrays in different programming languages.</li><li class="ql-indent-1">Accessing and updating elements using indices.</li><li class="ql-indent-1">Traversing arrays using loops.</li></ul><ol><li><strong>Algorithm Development:</strong></li></ol><ul><li class="ql-indent-1">Creating algorithms to solve specific problems using arrays.</li><li class="ql-indent-1">Understanding the efficiency of different approaches.</li><li class="ql-indent-1">Implementing solutions in various programming languages.</li></ul><ol><li><strong>Practical Problem Solving:</strong></li></ol><ul><li class="ql-indent-1">Applying theoretical knowledge to real-world problems.</li><li class="ql-indent-1">Enhancing coding skills through hands-on exercises.</li><li class="ql-indent-1">Developing optimized solutions for complex scenarios.</li></ul><h3>Why Enroll?</h3><ul><li><strong>Comprehensive Learning:</strong> Gain a solid foundation in one-dimensional arrays, an essential data structure in programming.</li><li><strong>Practical Skills:</strong> Solve real-world problems and improve your algorithmic thinking.</li><li><strong>Flexible Learning:</strong> Suitable for beginners with a focus on practical, hands-on coding exercises.</li><li><strong>Foundational Course:</strong> Build a strong base for further studies in data structures and algorithms.</li></ul><p><br></p><p>By the end of this course, you will have a thorough understanding of one-dimensional arrays and be able to solve a wide range of problems using this versatile data structure. Join us in the <strong>One-dimensional Arrays</strong> course and take the first step towards mastering data structures and algorithms!</p>', 0.0, '2024-08-01 09:42:43.415+00', '2027-10-02 19:29:23.415+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.603388+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 09:42:43.462435+00');
+INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('534b285b-83ee-41a0-93ea-9fb79fb2ffd4', 'd215b5f8-0249-4dc5-89a3-51fd148cfb52', 'Learn Rust', 'BASIC', '<p>Welcome to the <strong>Learn Rust Programming</strong> certificate course! This comprehensive program is designed to introduce you to the fundamental concepts of Rust, a powerful and modern systems programming language. Whether you are new to programming or looking to expand your skills, this course will provide you with a solid foundation in Rust, equipping you with the knowledge to build efficient and safe software.</p><p><br></p><h3>Course Breakdown</h3><p><strong>Outputting &amp; Math Operators</strong></p><ul><li><strong>Introducing Printing - </strong><code><strong>println!</strong></code>: Learn the basics of outputting text to the console using the <code>println!</code> macro, essential for displaying information in Rust programs.</li><li><strong>Printing on Multiple Lines</strong>: Explore how to print text across multiple lines using multiple <code>println!</code> statements and newline characters.</li><li><strong>Multiple Prints Using Single </strong><code><strong>println!</strong></code>: Discover how to use a single <code>println!</code> statement to print multiple variables and values for cleaner and more readable code.</li><li><strong>Math Operators and Overall Code Structure</strong>: Understand the basic arithmetic operators in Rust and learn about the overall structure of a Rust program.</li><li><strong>Rust 101 - Arithmetic Operators</strong>: Dive deeper into arithmetic operators and their applications in Rust.</li><li><strong>Input/Output in Rust - Read Trait</strong>: Gain insight into Rust''s input/output mechanisms and the <code>Read</code> trait for handling input operations.</li></ul><p><strong>Variables and Data Types</strong></p><ul><li><strong>Introduction to Variables and Data Types</strong>: Get acquainted with variables and data types in Rust, including how to declare, initialize, and use them effectively.</li><li><strong>Variables and Data Types in Rust</strong>: Explore the various data types available in Rust and learn how to work with them in your programs.</li></ul><p><strong>Strings</strong></p><ul><li><strong>Introduction to Strings</strong>: Understand the basics of strings in Rust, including how to declare, initialize, and manipulate them.</li><li><strong>Strings in Rust FINALLY EXPLAINED!</strong>: Gain a deeper understanding of string operations and methods in Rust, making string manipulation straightforward and efficient.</li></ul><p><strong>User Inputs</strong></p><ul><li><strong>Introducing Taking Inputs - </strong><code><strong>std::io::stdin().read_line()</strong></code>: Learn how to take user input in Rust using the <code>std::io::stdin().read_line()</code> method, essential for interactive applications.</li><li><strong>Reading User Input in Rust</strong>: Further explore techniques for reading and handling user input in Rust.</li></ul><p><strong>Conditional Statements</strong></p><ul><li><strong>Introduction to "if", "else"</strong>: Master the basics of conditional statements in Rust, including <code>if</code>, <code>else if</code>, and <code>else</code> constructs.</li><li><strong>Different Ways to Compare Elements Inside </strong><code><strong>if</strong></code>: Discover various comparison operators and how to use them within <code>if</code> statements.</li><li><strong>Combining Conditions - And, Or</strong>: Learn how to combine multiple conditions using logical operators <code>&amp;&amp;</code> (AND) and <code>||</code> (OR) for more complex decision-making.</li><li><strong>Switch</strong>: Understand the <code>match</code> statement in Rust, which simplifies selecting one of many code blocks to execute based on a variable''s value.</li><li><strong>Rust Conditional Statements</strong>: Gain a comprehensive overview of conditional statements in Rust, ensuring you can handle any decision-making scenario.</li></ul><p><strong>Arrays</strong></p><ul><li><strong>Introduction to Arrays</strong>: Get to know arrays in Rust, including how to declare, initialize, access, and manipulate them.</li><li><strong>Rust Programming Tutorial #20 - Arrays</strong>: Dive deeper into advanced array operations and techniques in Rust.</li></ul><p><strong>Loops</strong></p><ul><li><strong>Break, Continue, For Each</strong>: Learn how to control loop execution using <code>break</code>, <code>continue</code>, and the <code>for_each</code> method for iterating over collections.</li><li><strong>While Loops</strong>: Understand how to use <code>while</code> loops to repeatedly execute a block of code as long as a specified condition is true.</li><li><strong>For Loops</strong>: Master the use of <code>for</code> loops to iterate over ranges and collections efficiently.</li><li><strong>Rust Programming Tutorial #8 - While Loop</strong>: Gain practical insights and examples of using <code>while</code> loops in Rust.</li><li><strong>Rust Programming Tutorial #9 - For Loop</strong>: Explore practical examples and advanced uses of <code>for</code> loops in Rust.</li></ul><p><br></p><p>By the end of this course, you will have a strong foundation in Rust programming, enabling you to write efficient, safe, and high-performance software. Join us on this journey to master Rust and unlock the potential of this powerful language in your programming toolkit!</p>', NULL, '2024-07-31 18:51:59.847+00', '2027-10-02 04:38:39.847+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:12:52.282675+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:51:59.903831+00');
+INSERT INTO "public"."certificate_course" ("id", "topic_id", "name", "skill_level", "description", "avg_rating", "start_time", "end_time", "created_by", "created_at", "updated_by", "updated_at") VALUES ('cc43bb7a-a0c2-4cae-92c6-b4cfa6c5fb8a', 'd215b5f8-0249-4dc5-89a3-51fd148cfb47', 'Intermediate JavaScript', 'INTERMEDIATE', '<p>Welcome to <strong>Intermediate JavaScript</strong>, an in-depth certificate course designed for developers who have a basic understanding of JavaScript and are ready to take their skills to the next level. This course covers advanced JavaScript concepts and modern ES6+ features that are essential for building sophisticated and high-performance web applications. By the end of this course, you will be well-versed in advanced functions, asynchronous programming, error handling and debugging, and event-driven programming.</p><p><br></p><h3>Course Breakdown</h3><p><strong>Advanced Functions</strong></p><ul><li><strong>Higher-Order Functions</strong> Learn about functions that take other functions as arguments or return them as results, enabling more modular and reusable code.</li><li><strong>Callback Functions</strong> Understand how to use callbacks to handle asynchronous operations and avoid blocking code execution.</li><li><strong>Function Currying</strong> Master the technique of transforming functions to handle multiple arguments one at a time, enhancing code reusability and readability.</li><li><strong>Recursion</strong> Explore the concept of recursion, where functions call themselves to solve problems that can be broken down into simpler sub-problems.</li></ul><p><strong>Asynchronous JavaScript</strong></p><ul><li><strong>Understanding Asynchronous Programming</strong> Grasp the importance of non-blocking code execution and how it improves application performance.</li><li><strong>Callbacks</strong> Delve into using callbacks effectively to handle asynchronous tasks such as network requests and file operations.</li><li><strong>Promises</strong> Learn how to use promises to manage asynchronous operations more cleanly and avoid callback hell.</li><li><strong>Async/Await</strong> Simplify asynchronous code with the async/await syntax, making it easier to read and maintain.</li></ul><p><strong>Error Handling and Debugging</strong></p><ul><li><strong>Try...Catch Statements</strong> Implement error handling using try...catch blocks to manage exceptions gracefully and maintain application stability.</li><li><strong>Throwing Custom Errors</strong> Create and throw custom errors to provide more meaningful feedback during error conditions.</li><li><strong>Debugging Techniques and Tools</strong> Utilize various debugging techniques and tools to identify and fix issues in your code efficiently.</li><li><strong>Console Methods for Debugging</strong> Leverage powerful console methods to log information, display data in tabular format, and group related messages, enhancing your debugging process.</li></ul><p><strong>ES6+ Features</strong></p><ul><li><strong>Classes and Modules</strong> Learn how to define and use classes and modules to create modular and reusable code structures.</li><li><strong>Let and Const</strong> Understand the block-scoped nature of let and const, and when to use each for variable declarations.</li><li><strong>Template Literals</strong> Use template literals to create multi-line strings and embed expressions within strings effortlessly.</li><li><strong>Destructuring Assignment</strong> Unpack values from arrays and objects into distinct variables using destructuring, simplifying data manipulation.</li><li><strong>Spread and Rest Operators</strong> Master the spread and rest operators to expand and collect elements, making your code more concise and flexible.</li><li><strong>Default Parameters</strong> Set default values for function parameters to handle cases where arguments are not provided, ensuring robust functions.</li></ul><p><strong>Event-Driven Programming</strong></p><ul><li><strong>Understanding Events</strong> Learn the basics of events and how to handle them in JavaScript to create interactive web applications.</li><li><strong>Event Propagation: Capturing and Bubbling</strong> Understand the phases of event propagation and how to control event flow using capturing and bubbling techniques.</li><li><strong>Event Delegation</strong> Use event delegation to manage events efficiently, especially when dealing with dynamic content.</li><li><strong>Debouncing and Throttling</strong> Optimize event handling with debouncing and throttling techniques to improve application performance and responsiveness.</li></ul><p><br></p><p>By mastering the concepts covered in this Intermediate JavaScript course, you will be equipped to tackle complex programming challenges and build dynamic, efficient, and maintainable web applications. Join us and elevate your JavaScript skills to the next level!</p>', NULL, '2024-08-01 08:47:27.988+00', '2027-10-02 18:34:07.988+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:20:52.599647+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 08:47:28.064482+00');
 
-
+-- use all the above course ids to insert into certificate_course_user table
 INSERT INTO public.certificate_course_user(certificate_course_id, user_id)
 VALUES
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'b029f559-52a8-4699-b595-71161498ed8c'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    -- cer course id: 'd215b5f8-0249-4dc5-89a3-51fd148cfb19'
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', '8edbc0aa-0b91-480e-a428-23abf2109df9'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', '05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', '64412e27-169e-44ea-a101-74ebf8cb82d9'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', 'cb2c22ac-87de-44e4-9638-35979f6af667'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    -- cer course id: 'd215b5f8-0249-4dc5-89a3-51fd148cfb20'
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', 'b029f559-52a8-4699-b595-71161498ed8c'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', 'b029f559-52a8-4699-b595-71161498ed8c'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', '8edbc0aa-0b91-480e-a428-23abf2109df9'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', '05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', '64412e27-169e-44ea-a101-74ebf8cb82d9'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', 'cb2c22ac-87de-44e4-9638-35979f6af667'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    -- cer course id: 'd215b5f8-0249-4dc5-89a3-51fd148cfb18'
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', '8edbc0aa-0b91-480e-a428-23abf2109df9'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', '05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', '64412e27-169e-44ea-a101-74ebf8cb82d9'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'cb2c22ac-87de-44e4-9638-35979f6af667'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    -- cer course id: 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '8edbc0aa-0b91-480e-a428-23abf2109df9'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '64412e27-169e-44ea-a101-74ebf8cb82d9'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'cb2c22ac-87de-44e4-9638-35979f6af667'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    -- cer course id: 'd215b5f8-0249-4dc5-89a3-51fd148cfb17'
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', '8edbc0aa-0b91-480e-a428-23abf2109df9'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', '05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', '64412e27-169e-44ea-a101-74ebf8cb82d9'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'cb2c22ac-87de-44e4-9638-35979f6af667'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    -- cer course id: 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', '8edbc0aa-0b91-480e-a428-23abf2109df9'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', '05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', '64412e27-169e-44ea-a101-74ebf8cb82d9'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'cb2c22ac-87de-44e4-9638-35979f6af667'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    -- cer course id: '452371a5-2f58-4bfa-947b-af3140671057'
     ('452371a5-2f58-4bfa-947b-af3140671057', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('452371a5-2f58-4bfa-947b-af3140671057', 'b029f559-52a8-4699-b595-71161498ed8c'),
     ('452371a5-2f58-4bfa-947b-af3140671057', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
-    -- add more for cer course id 452371a5-2f58-4bfa-947b-af3140671057
     ('452371a5-2f58-4bfa-947b-af3140671057', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('452371a5-2f58-4bfa-947b-af3140671057', '8edbc0aa-0b91-480e-a428-23abf2109df9'),
+    ('452371a5-2f58-4bfa-947b-af3140671057', '05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510'),
+    ('452371a5-2f58-4bfa-947b-af3140671057', '64412e27-169e-44ea-a101-74ebf8cb82d9'),
+    ('452371a5-2f58-4bfa-947b-af3140671057', 'cb2c22ac-87de-44e4-9638-35979f6af667'),
     ('452371a5-2f58-4bfa-947b-af3140671057', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    -- cer course id: 'cbddf1c0-d816-44fe-bce3-16ed430306ef'
+    ('cbddf1c0-d816-44fe-bce3-16ed430306ef', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('cbddf1c0-d816-44fe-bce3-16ed430306ef', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('cbddf1c0-d816-44fe-bce3-16ed430306ef', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('cbddf1c0-d816-44fe-bce3-16ed430306ef', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('cbddf1c0-d816-44fe-bce3-16ed430306ef', '8edbc0aa-0b91-480e-a428-23abf2109df9'),
+    ('cbddf1c0-d816-44fe-bce3-16ed430306ef', '05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510'),
+    ('cbddf1c0-d816-44fe-bce3-16ed430306ef', '64412e27-169e-44ea-a101-74ebf8cb82d9'),
+    ('cbddf1c0-d816-44fe-bce3-16ed430306ef', 'cb2c22ac-87de-44e4-9638-35979f6af667'),
+    ('cbddf1c0-d816-44fe-bce3-16ed430306ef', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    -- cer course id: '2d2ebd9e-2829-495e-87f7-4f050a8f3628'
     ('2d2ebd9e-2829-495e-87f7-4f050a8f3628', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('2d2ebd9e-2829-495e-87f7-4f050a8f3628', 'b029f559-52a8-4699-b595-71161498ed8c'),
-    ('2d2ebd9e-2829-495e-87f7-4f050a8f3628', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7');
+    ('2d2ebd9e-2829-495e-87f7-4f050a8f3628', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('2d2ebd9e-2829-495e-87f7-4f050a8f3628', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('2d2ebd9e-2829-495e-87f7-4f050a8f3628', '8edbc0aa-0b91-480e-a428-23abf2109df9'),
+    ('2d2ebd9e-2829-495e-87f7-4f050a8f3628', '05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510'),
+    ('2d2ebd9e-2829-495e-87f7-4f050a8f3628', '64412e27-169e-44ea-a101-74ebf8cb82d9'),
+    ('2d2ebd9e-2829-495e-87f7-4f050a8f3628', 'cb2c22ac-87de-44e4-9638-35979f6af667'),
+    ('2d2ebd9e-2829-495e-87f7-4f050a8f3628', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    -- cer course id: 'd2a18a10-a142-426b-bd8d-97ede9db5941'
+    ('d2a18a10-a142-426b-bd8d-97ede9db5941', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('d2a18a10-a142-426b-bd8d-97ede9db5941', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('d2a18a10-a142-426b-bd8d-97ede9db5941', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('d2a18a10-a142-426b-bd8d-97ede9db5941', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('d2a18a10-a142-426b-bd8d-97ede9db5941', '8edbc0aa-0b91-480e-a428-23abf2109df9'),
+    ('d2a18a10-a142-426b-bd8d-97ede9db5941', '05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510'),
+    ('d2a18a10-a142-426b-bd8d-97ede9db5941', '64412e27-169e-44ea-a101-74ebf8cb82d9'),
+    ('d2a18a10-a142-426b-bd8d-97ede9db5941', 'cb2c22ac-87de-44e4-9638-35979f6af667'),
+    ('d2a18a10-a142-426b-bd8d-97ede9db5941', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    -- cer course id: '265190be-817b-4b8e-a8e4-7b7e4980915f'
+    ('265190be-817b-4b8e-a8e4-7b7e4980915f', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('265190be-817b-4b8e-a8e4-7b7e4980915f', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('265190be-817b-4b8e-a8e4-7b7e4980915f', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('265190be-817b-4b8e-a8e4-7b7e4980915f', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('265190be-817b-4b8e-a8e4-7b7e4980915f', '8edbc0aa-0b91-480e-a428-23abf2109df9'),
+    ('265190be-817b-4b8e-a8e4-7b7e4980915f', '05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510'),
+    ('265190be-817b-4b8e-a8e4-7b7e4980915f', '64412e27-169e-44ea-a101-74ebf8cb82d9'),
+    ('265190be-817b-4b8e-a8e4-7b7e4980915f', 'cb2c22ac-87de-44e4-9638-35979f6af667'),
+    ('265190be-817b-4b8e-a8e4-7b7e4980915f', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    -- cer course id: '0c1a30e7-97f9-4b5d-8d35-b500e7a57f82'
+    ('0c1a30e7-97f9-4b5d-8d35-b500e7a57f82', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('0c1a30e7-97f9-4b5d-8d35-b500e7a57f82', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('0c1a30e7-97f9-4b5d-8d35-b500e7a57f82', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('0c1a30e7-97f9-4b5d-8d35-b500e7a57f82', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('0c1a30e7-97f9-4b5d-8d35-b500e7a57f82', '8edbc0aa-0b91-480e-a428-23abf2109df9'),
+    ('0c1a30e7-97f9-4b5d-8d35-b500e7a57f82', '05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510'),
+    ('0c1a30e7-97f9-4b5d-8d35-b500e7a57f82', '64412e27-169e-44ea-a101-74ebf8cb82d9'),
+    ('0c1a30e7-97f9-4b5d-8d35-b500e7a57f82', 'cb2c22ac-87de-44e4-9638-35979f6af667'),
+    ('0c1a30e7-97f9-4b5d-8d35-b500e7a57f82', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    -- cer course id: '13f83797-dd2a-4083-aebf-43f45993bbe9'
+    ('13f83797-dd2a-4083-aebf-43f45993bbe9', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('13f83797-dd2a-4083-aebf-43f45993bbe9', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('13f83797-dd2a-4083-aebf-43f45993bbe9', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('13f83797-dd2a-4083-aebf-43f45993bbe9', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('13f83797-dd2a-4083-aebf-43f45993bbe9', '8edbc0aa-0b91-480e-a428-23abf2109df9'),
+    ('13f83797-dd2a-4083-aebf-43f45993bbe9', '05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510'),
+    ('13f83797-dd2a-4083-aebf-43f45993bbe9', '64412e27-169e-44ea-a101-74ebf8cb82d9'),
+    ('13f83797-dd2a-4083-aebf-43f45993bbe9', 'cb2c22ac-87de-44e4-9638-35979f6af667'),
+    ('13f83797-dd2a-4083-aebf-43f45993bbe9', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    -- cer course id: '1eb1b48d-a62e-4262-8bab-1abda96d5588'
+    ('1eb1b48d-a62e-4262-8bab-1abda96d5588', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('1eb1b48d-a62e-4262-8bab-1abda96d5588', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('1eb1b48d-a62e-4262-8bab-1abda96d5588', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('1eb1b48d-a62e-4262-8bab-1abda96d5588', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('1eb1b48d-a62e-4262-8bab-1abda96d5588', '8edbc0aa-0b91-480e-a428-23abf2109df9'),
+    ('1eb1b48d-a62e-4262-8bab-1abda96d5588', '05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510'),
+    ('1eb1b48d-a62e-4262-8bab-1abda96d5588', '64412e27-169e-44ea-a101-74ebf8cb82d9'),
+    ('1eb1b48d-a62e-4262-8bab-1abda96d5588', 'cb2c22ac-87de-44e4-9638-35979f6af667'),
+    ('1eb1b48d-a62e-4262-8bab-1abda96d5588', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    -- cer course id: 'db16e13e-9c52-47ac-8bd0-45f0dc0bab38'
+    ('db16e13e-9c52-47ac-8bd0-45f0dc0bab38', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('db16e13e-9c52-47ac-8bd0-45f0dc0bab38', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('db16e13e-9c52-47ac-8bd0-45f0dc0bab38', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('db16e13e-9c52-47ac-8bd0-45f0dc0bab38', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('db16e13e-9c52-47ac-8bd0-45f0dc0bab38', '8edbc0aa-0b91-480e-a428-23abf2109df9'),
+    ('db16e13e-9c52-47ac-8bd0-45f0dc0bab38', '05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510'),
+    ('db16e13e-9c52-47ac-8bd0-45f0dc0bab38', '64412e27-169e-44ea-a101-74ebf8cb82d9'),
+    ('db16e13e-9c52-47ac-8bd0-45f0dc0bab38', 'cb2c22ac-87de-44e4-9638-35979f6af667'),
+    ('db16e13e-9c52-47ac-8bd0-45f0dc0bab38', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    -- cer course id: 'd215b5f8-0249-4dc5-89a3-51fd148cfb21'
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', '8edbc0aa-0b91-480e-a428-23abf2109df9'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', '05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', '64412e27-169e-44ea-a101-74ebf8cb82d9'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 'cb2c22ac-87de-44e4-9638-35979f6af667'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    -- cer course id: '534b285b-83ee-41a0-93ea-9fb79fb2ffd4'
+    ('534b285b-83ee-41a0-93ea-9fb79fb2ffd4', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('534b285b-83ee-41a0-93ea-9fb79fb2ffd4', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('534b285b-83ee-41a0-93ea-9fb79fb2ffd4', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('534b285b-83ee-41a0-93ea-9fb79fb2ffd4', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('534b285b-83ee-41a0-93ea-9fb79fb2ffd4', '8edbc0aa-0b91-480e-a428-23abf2109df9'),
+    ('534b285b-83ee-41a0-93ea-9fb79fb2ffd4', '05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510'),
+    ('534b285b-83ee-41a0-93ea-9fb79fb2ffd4', '64412e27-169e-44ea-a101-74ebf8cb82d9'),
+    ('534b285b-83ee-41a0-93ea-9fb79fb2ffd4', 'cb2c22ac-87de-44e4-9638-35979f6af667'),
+    ('534b285b-83ee-41a0-93ea-9fb79fb2ffd4', '2d7ed5a0-fb21-4927-9a25-647c17d29668'),
+    -- cer course id: 'cc43bb7a-a0c2-4cae-92c6-b4cfa6c5fb8a'
+    ('cc43bb7a-a0c2-4cae-92c6-b4cfa6c5fb8a', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('cc43bb7a-a0c2-4cae-92c6-b4cfa6c5fb8a', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('cc43bb7a-a0c2-4cae-92c6-b4cfa6c5fb8a', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('cc43bb7a-a0c2-4cae-92c6-b4cfa6c5fb8a', '39328bcf-8af6-44fc-9ae9-247f953ee2a2'),
+    ('cc43bb7a-a0c2-4cae-92c6-b4cfa6c5fb8a', '8edbc0aa-0b91-480e-a428-23abf2109df9'),
+    ('cc43bb7a-a0c2-4cae-92c6-b4cfa6c5fb8a', '05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510'),
+    ('cc43bb7a-a0c2-4cae-92c6-b4cfa6c5fb8a', '64412e27-169e-44ea-a101-74ebf8cb82d9'),
+    ('cc43bb7a-a0c2-4cae-92c6-b4cfa6c5fb8a', 'cb2c22ac-87de-44e4-9638-35979f6af667'),
+    ('cc43bb7a-a0c2-4cae-92c6-b4cfa6c5fb8a', '2d7ed5a0-fb21-4927-9a25-647c17d29668');
+
+
+
 
 -- each user can only review a course once
 INSERT INTO public.review(id, certificate_course_id, rating, content, created_by, updated_by)
@@ -431,30 +603,17 @@ VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb31', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 3, 'Okay course. Could be better.', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7');
 
 
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 1, 'Introduction to Python', 'This chapter introduces Python programming and covers basic concepts such as data types, control structures, and functions.', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.606514+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.606514+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 2, 'Advanced Python Programming', 'This chapter covers advanced Python programming topics such as object-oriented programming, data structures, and algorithms.', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:51:27.606514+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:51:27.606514+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 3, 'Python Projects', 'This chapter focuses on building real-world Python projects to apply the knowledge and skills learned in the previous chapters.', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '2024-07-20 07:51:27.606514+00', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '2024-07-20 07:51:27.606514+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 1, 'Introduction to Java', 'This chapter introduces Java programming and covers basic concepts such as data types, control structures, and functions.', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.606514+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.606514+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 2, 'Advanced Java Programming', 'This chapter covers advanced Java programming topics such as object-oriented programming, data structures, and algorithms.', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:51:27.606514+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:51:27.606514+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 3, 'Java Projects', 'This chapter focuses on building real-world Java projects to apply the knowledge and skills learned in the previous chapters.', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '2024-07-20 07:51:27.606514+00', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '2024-07-20 07:51:27.606514+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 1, 'Introduction to Stacks and Queues', 'This chapter introduces stacks and queues and covers basic concepts such as implementation, operations, and applications.', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.606514+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.606514+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 2, 'Linked Lists', 'This chapter covers linked lists and their implementation, operations, and applications.', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:51:27.606514+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:51:27.606514+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 3, 'Binary Trees', 'This chapter covers binary trees and their implementation, operations, and applications.', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '2024-07-20 07:51:27.606514+00', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '2024-07-20 07:51:27.606514+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('2f316c08-6f46-4fa8-8aa6-c02602556802', '0c1a30e7-97f9-4b5d-8d35-b500e7a57f82', 0, 'Outputting & Math Operators', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:07:14.226599+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:07:14.2266+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('266211ad-b8ac-4d99-8618-e5567b467067', '0c1a30e7-97f9-4b5d-8d35-b500e7a57f82', 1, 'Variables and Data Types', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:07:14.247932+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:07:14.247933+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('20035541-a9c7-488a-8cad-346841600648', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 0, 'Functions and Modules', '<p><br></p>', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 09:21:35.789907+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 09:21:35.789909+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('9877a522-d634-4866-b9ba-159d9952d139', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 1, 'Advanced Python Features', '<p>Learn about advanced python features like Iterators, Regular Expressions and Decorators</p>', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 09:21:35.802755+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 09:21:35.802757+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('22f8b1cd-bfff-4989-8a83-9a4cd46e3870', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 2, ' Introduction to OOPs', '<p>This chapter covers binary trees and their implementation, operations, and applications.</p>', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 09:21:35.809608+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 09:21:35.809609+00');
 INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb27', 'd215b5f8-0249-4dc5-89a3-51fd148cfb19', 1, 'Introduction to Stacks and Queues', 'This chapter introduces stacks and queues and covers basic concepts such as implementation, operations, and applications.', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.606514+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.606514+00');
 INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb28', 'd215b5f8-0249-4dc5-89a3-51fd148cfb19', 2, 'Linked Lists', 'This chapter covers linked lists and their implementation, operations, and applications.', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:51:27.606514+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:51:27.606514+00');
 INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb29', 'd215b5f8-0249-4dc5-89a3-51fd148cfb19', 3, 'Binary Trees', 'This chapter covers binary trees and their implementation, operations, and applications.', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '2024-07-20 07:51:27.606514+00', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '2024-07-20 07:51:27.606514+00');
 INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb30', 'd215b5f8-0249-4dc5-89a3-51fd148cfb20', 1, 'Introduction to Stacks and Queues', 'This chapter introduces stacks and queues and covers basic concepts such as implementation, operations, and applications.', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.606514+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.606514+00');
 INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb31', 'd215b5f8-0249-4dc5-89a3-51fd148cfb20', 2, 'Linked Lists', 'This chapter covers linked lists and their implementation, operations, and applications.', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:51:27.606514+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:51:27.606514+00');
 INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb32', 'd215b5f8-0249-4dc5-89a3-51fd148cfb20', 3, 'Binary Trees', 'This chapter covers binary trees and their implementation, operations, and applications.', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '2024-07-20 07:51:27.606514+00', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '2024-07-20 07:51:27.606514+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb33', 'd215b5f8-0249-4dc5-89a3-51fd148cfb21', 1, 'Introduction to Stacks and Queues', 'This chapter introduces stacks and queues and covers basic concepts such as implementation, operations, and applications.', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.606514+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.606514+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb34', 'd215b5f8-0249-4dc5-89a3-51fd148cfb21', 2, 'Linked Lists', 'This chapter covers linked lists and their implementation, operations, and applications.', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:51:27.606514+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:51:27.606514+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb35', 'd215b5f8-0249-4dc5-89a3-51fd148cfb21', 3, 'Binary Trees', 'This chapter covers binary trees and their implementation, operations, and applications.', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '2024-07-20 07:51:27.606514+00', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '2024-07-20 07:51:27.606514+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb36', 'd215b5f8-0249-4dc5-89a3-51fd148cfb22', 1, 'Introduction to Stacks and Queues', 'This chapter introduces stacks and queues and covers basic concepts such as implementation, operations, and applications.', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.606514+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.606514+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb37', 'd215b5f8-0249-4dc5-89a3-51fd148cfb22', 2, 'Linked Lists', 'This chapter covers linked lists and their implementation, operations, and applications.', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:51:27.606514+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:51:27.606514+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb38', 'd215b5f8-0249-4dc5-89a3-51fd148cfb22', 3, 'Binary Trees', 'This chapter covers binary trees and their implementation, operations, and applications.', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '2024-07-20 07:51:27.606514+00', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '2024-07-20 07:51:27.606514+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb39', 'd215b5f8-0249-4dc5-89a3-51fd148cfb23', 1, 'Introduction to Stacks and Queues', 'This chapter introduces stacks and queues and covers basic concepts such as implementation, operations, and applications.', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.606514+00', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-07-20 07:51:27.606514+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb40', 'd215b5f8-0249-4dc5-89a3-51fd148cfb23', 2, 'Linked Lists', 'This chapter covers linked lists and their implementation, operations, and applications.', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:51:27.606514+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 07:51:27.606514+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb41', 'd215b5f8-0249-4dc5-89a3-51fd148cfb23', 3, 'Binary Trees', 'This chapter covers binary trees and their implementation, operations, and applications.', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '2024-07-20 07:51:27.606514+00', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '2024-07-20 07:51:27.606514+00');
 INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('de760849-3377-4334-8d14-ba89ca34e927', 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 0, 'Print statement and Java Syntax', '<p>Learn the basic concepts of Java, one of the most widely used object-oriented programming languages.</p>', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 09:17:28.974485+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 09:17:28.974485+00');
 INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('a6ba8a08-84ae-4655-8406-05d181e58ae3', 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 1, 'Variables and Data Types', '<p><br></p>', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 09:17:29.005581+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 09:17:29.005582+00');
 INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('9ce115e6-aaef-4743-9fb2-db64c86c4acd', 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 2, 'Operators', '<p><br></p>', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 09:17:29.00836+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 09:17:29.008361+00');
@@ -469,438 +628,380 @@ INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "d
 INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('75c1b5b9-370d-4c24-9335-56c5dbd43c51', '452371a5-2f58-4bfa-947b-af3140671057', 2, 'Conditionals & Logic', '<p>Learn how to use conditionals and logic to build programs that generate different outcomes.</p>', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 09:46:43.685545+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 09:46:43.685549+00');
 INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('e099d057-b400-456b-b01a-54c5be0364d4', '452371a5-2f58-4bfa-947b-af3140671057', 3, 'Loops', '<p>Loops, loops, loops, loops, loops.</p>', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 09:46:43.70497+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 09:46:43.704974+00');
 INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('e31671c0-e26f-46e7-ba81-6d954a51c37c', '452371a5-2f58-4bfa-947b-af3140671057', 4, 'Vectors', '<p>Learn how to use C++ vectors, a great way to keep your data organized.</p><p><br></p><p><br></p>', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 09:46:43.716337+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 09:46:43.716341+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('fcbeaffe-82c1-4535-aa2a-246ba99adc7e', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 3, 'Inheritance, Packages and Interfaces', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 09:21:35.811375+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 09:21:35.811375+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('55192438-8e60-4f3c-a8cb-a6e3e2dd164b', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 4, 'Exception handling and multithreading', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 09:21:35.816839+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 09:21:35.816841+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('8a4e420d-46d5-4eb2-b801-2136ad54c0fa', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 5, 'Generics and File handling', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 09:21:35.821308+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 09:21:35.821309+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('c982460d-a9d0-4a2c-919c-5a2dace33050', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 0, 'Recap - Logic building', '<p>Recap on logic building from Beginner''s part-1</p>', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 06:55:21.61226+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 06:55:21.612266+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('0b8f86c2-ceb5-4849-be55-196ee65c07fe', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 1, 'Array Operations', '<p>This chapter covers advanced Java programming topics such as object-oriented programming, data structures, and algorithms.</p>', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 06:55:21.616295+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 06:55:21.616296+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('6b6031db-d128-40da-b3d4-4d6e8d346c5b', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 2, 'Basic string operations', '<p><br></p>', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 06:55:21.619621+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 06:55:21.619627+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('5157a1ed-4393-4d91-9d3c-f9e94589620f', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 3, 'Basic math continued', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 06:55:21.621888+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 06:55:21.621889+00');
 INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('2a90b255-ca79-4fba-af46-952ac41a0502', '452371a5-2f58-4bfa-947b-af3140671057', 5, 'Functions', '<p>Use C++ functions to write more flexible, modular, reusable code.</p>', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 09:46:43.725628+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 09:46:43.725631+00');
 INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('3e3699ce-1b80-4236-873f-05b17522e25f', '452371a5-2f58-4bfa-947b-af3140671057', 6, 'Classes & Objects', '<p>Use C++ classes and objects to build more scalable, modular programs.</p>', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 09:46:43.738072+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 09:46:43.738076+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('80124868-3c09-4967-b846-43ba04c064f7', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 0, 'Introduction, Outputting & Math Operators', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 10:08:56.261578+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 10:08:56.261578+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('3c8a381e-8a85-41ca-b07e-4d792c5571fd', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 1, 'Pointers and Memory', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 10:08:56.269486+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 10:08:56.269486+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('57fe22fb-ed2b-45d2-b1c0-5e8fca623cce', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 2, 'Variables and Data Types', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 10:08:56.271772+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 10:08:56.271773+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('99e1bbc1-92cd-4fff-b1ea-5151a6154c4f', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 3, 'Conditionals', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 10:08:56.274481+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 10:08:56.274482+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('c273fe40-49ef-42c6-8fd1-b732a96d281f', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 4, 'Loops', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 10:08:56.276718+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 10:08:56.276719+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('9fe625bc-0d96-40e2-9b4d-ce58a1d1ff09', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 5, 'Arrays', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 10:08:56.279616+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 10:08:56.279617+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('f1d16ebc-8ac1-4aa0-8380-1c0158099b5e', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 6, 'Strings', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 10:08:56.281483+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 10:08:56.281484+00');
-INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('f142b4d8-75e1-4abf-a62a-1aade21ba327', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 7, 'Functions and Structures', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 10:08:56.283437+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-20 10:08:56.283439+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('1d9b2a8f-e543-4c4d-ae65-b82a22e234b1', '0c1a30e7-97f9-4b5d-8d35-b500e7a57f82', 2, 'Strings', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:07:14.254921+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:07:14.254922+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('aa21ea7c-eee7-482e-80d1-39d3fe5b6da4', '0c1a30e7-97f9-4b5d-8d35-b500e7a57f82', 3, 'User Inputs', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:07:14.2588+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:07:14.258801+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('9dfc1f9e-be04-448d-ae04-16cf3599e861', '0c1a30e7-97f9-4b5d-8d35-b500e7a57f82', 4, 'Conditional Statements', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:07:14.264342+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:07:14.264343+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('3cfbf83b-3d61-4f46-aaa8-6bbd2c07c216', '0c1a30e7-97f9-4b5d-8d35-b500e7a57f82', 5, 'Arrays', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:07:14.275642+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:07:14.275643+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('1c64da87-8cf6-47d9-ad16-b2ea87945562', '0c1a30e7-97f9-4b5d-8d35-b500e7a57f82', 6, 'Loops', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:07:14.281607+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:07:14.281608+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('9e2dfaec-351f-41a1-8cf1-394d5bfe5846', 'db16e13e-9c52-47ac-8bd0-45f0dc0bab38', 0, 'JavaScript Design Patterns', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 09:18:46.98741+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 09:18:46.987411+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('b3557f99-e402-4d5a-8574-058fafe5fa28', 'db16e13e-9c52-47ac-8bd0-45f0dc0bab38', 1, 'Functional Programming in JavaScript', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 09:18:47.005883+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 09:18:47.005884+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('2eaa7791-da93-45fe-b20c-20e86379d8a1', 'db16e13e-9c52-47ac-8bd0-45f0dc0bab38', 2, 'Advanced DOM Manipulation', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 09:18:47.014462+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 09:18:47.014463+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('9f4635ae-bdb4-4ce8-954f-fe7905cf3619', 'db16e13e-9c52-47ac-8bd0-45f0dc0bab38', 3, 'JavaScript Frameworks and Libraries', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 09:18:47.019736+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 09:18:47.019741+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('807a912f-1d50-4aa0-9a65-cc3869ec70c9', 'db16e13e-9c52-47ac-8bd0-45f0dc0bab38', 4, 'Web Components', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 09:18:47.026464+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 09:18:47.026465+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('dbb26f3a-5184-49db-8d89-0e30898a470f', 'd215b5f8-0249-4dc5-89a3-51fd148cfb21', 0, 'Fundamentals Of One-dimensional Arrays', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 09:42:43.476368+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 09:42:43.476369+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('b1f13eaf-9fd1-4b93-8bab-71cc3b1ee9b0', 'cc43bb7a-a0c2-4cae-92c6-b4cfa6c5fb8a', 0, 'Advanced Functions', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 08:47:28.071401+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 08:47:28.071401+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('9f6e63e8-a037-4b51-911d-cc4da22189f1', 'cc43bb7a-a0c2-4cae-92c6-b4cfa6c5fb8a', 1, 'Asynchronous JavaScript', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 08:47:28.076645+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 08:47:28.076646+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('0802330e-801e-4560-837e-ec318192f029', 'cc43bb7a-a0c2-4cae-92c6-b4cfa6c5fb8a', 2, 'Error Handling and Debugging', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 08:47:28.079303+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 08:47:28.079303+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('1114db30-77a8-402e-a56f-64de3c93d36d', 'cc43bb7a-a0c2-4cae-92c6-b4cfa6c5fb8a', 3, 'ES6 + Features', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 08:47:28.081146+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 08:47:28.081146+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('8df85dd0-20a1-42fa-96bb-78cc90ee6187', 'cc43bb7a-a0c2-4cae-92c6-b4cfa6c5fb8a', 4, 'Event-Driven Programming', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 08:47:28.08412+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 08:47:28.084121+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('41039a23-f534-44d4-ab43-55b0580d7dc1', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 0, 'Introduction, Outputting & Math Operators', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:14:54.948307+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:14:54.948307+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('8478ca69-d368-4f1e-84c2-e792b694bb68', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 1, 'Pointers and Memory', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:14:54.965859+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:14:54.96586+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('d88a276f-b263-4b8e-aaf9-7f8340c6b100', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 2, 'Variables and Data Types', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:14:54.969837+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:14:54.969838+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('626aedf8-8a49-42e0-be2d-8f25d146704c', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 3, 'Conditionals', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:14:54.976502+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:14:54.976503+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('20c10331-48be-401e-a923-fd6fe734176a', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 4, 'Loops', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:14:54.984884+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:14:54.984885+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('0a02f0ef-03fd-4621-88b2-872d7536bba0', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 5, 'Arrays', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:14:54.997549+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:14:54.99755+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('470ed176-4da4-4337-bc24-de5c20719293', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 6, 'Strings', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:14:55.009631+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:14:55.009632+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('afec063e-fa7e-424d-9ca1-0ea52810da18', '2d2ebd9e-2829-495e-87f7-4f050a8f3628', 7, 'Functions and Structures', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:14:55.016438+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:14:55.016439+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('de140ad6-3454-40ad-a9db-12ba171f969d', 'd2a18a10-a142-426b-bd8d-97ede9db5941', 0, 'Recap', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:16:20.918931+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:16:20.918932+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('a35521fa-847b-4ddf-a75a-0c416adec848', 'd2a18a10-a142-426b-bd8d-97ede9db5941', 1, ' Array Operations', '<p>Basic implementation of Arrays in programming problems</p>', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:16:20.929919+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:16:20.92992+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('21d7c27b-83ff-4715-b290-02e34c5cd70b', 'd2a18a10-a142-426b-bd8d-97ede9db5941', 2, 'Basic string operations', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:16:20.936189+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:16:20.93619+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('dffe4b22-0465-48fe-8de0-6d846d5cb08c', 'd2a18a10-a142-426b-bd8d-97ede9db5941', 3, 'Debug Algorithmic Problems', '<p>Master principles required to debug beginner level algorithmic problems</p>', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:16:20.940844+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:16:20.940845+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('0f72faae-00c0-49d7-ad43-9cfa2e42a51b', 'cbddf1c0-d816-44fe-bce3-16ed430306ef', 0, 'Getting started', '<p>Learn how to take input and output for programming problems. Understand about hidden and custom test cases. End the module with practice problems.</p>', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:17:59.404789+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:17:59.404789+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('5df4c2b2-7be2-43f1-a7c7-924a4b542027', 'cbddf1c0-d816-44fe-bce3-16ed430306ef', 1, 'Basic math', '<p>Simple math concepts required to solve programming problems</p>', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:17:59.445575+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:17:59.445576+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('0296d1de-6b5d-4b7b-8997-bf5bdc140e16', 'cbddf1c0-d816-44fe-bce3-16ed430306ef', 2, 'Conditional statements', '<p>Simple conditional concepts required in programming problems</p>', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:17:59.463175+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:17:59.463175+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('6b703088-5f16-405c-869f-2f3ecd4445ae', 'cbddf1c0-d816-44fe-bce3-16ed430306ef', 3, 'Logic Building', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:17:59.469564+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:17:59.469565+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('19419e58-966b-4ae9-8c4a-330100c76166', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 0, ' Output / Print in Python', '<p>Learn how to make Python print whatever you want, and learn to use it as a basic calculator.</p>', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.619936+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.619937+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('94c250f7-7f2c-4cd8-a41f-5d05bbabedf6', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 1, 'Variables and datatypes', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.633219+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.63322+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('6afaf653-6486-4ffb-b2d0-1460e629933f', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 2, 'Operators', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.637961+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.637961+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('ebc43b1c-2c83-4d5d-8f8d-c940bc5cc4b2', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 3, 'Strings', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.644186+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.644187+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('80ddc21d-f973-498a-a213-c70f6a6df53a', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 4, 'User inputs', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.646059+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.64606+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('f72f8157-1b3e-4de0-acf3-7da9760b9352', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 5, 'Conditional statements', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.648786+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.648787+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('33526918-26be-4fe4-8c92-9cc7bc0d53fd', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 6, 'Arrays', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.651212+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.651213+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('685c9fe2-e6e1-4ebc-bb1f-251a2822ca2e', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 7, 'Loops', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.653463+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.653464+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('b7d4d279-925b-42a6-b198-134b74efa721', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 8, 'Functions in python', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.656777+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.656778+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('236a5c83-3d52-4a4e-9f59-7101fe603889', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 9, 'Tuples and Dictionary', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.658916+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-30 17:44:20.658917+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('736ddfc6-cf8b-4a9c-825e-f6529410f492', '13f83797-dd2a-4083-aebf-43f45993bbe9', 0, 'Recap - Logic building', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:12:12.9009+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:12:12.900903+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('f646e38b-8dd6-4cc6-a17a-187415ee8ba2', '13f83797-dd2a-4083-aebf-43f45993bbe9', 1, 'Array Operations', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:12:12.910064+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:12:12.91007+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('3a57a7e8-9989-498a-beb8-2a5a81774427', '13f83797-dd2a-4083-aebf-43f45993bbe9', 2, 'Basic string operations', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:12:12.913759+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:12:12.91376+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('4a4d46dd-09d3-403e-8b9c-a42154814e27', '13f83797-dd2a-4083-aebf-43f45993bbe9', 3, 'Basic math continued', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:12:12.916838+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:12:12.91684+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('9633622c-8304-4610-81f2-2c3af684ff7e', '265190be-817b-4b8e-a8e4-7b7e4980915f', 0, 'Getting started on problem solving', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:26:34.331799+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:26:34.3318+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('0b7edcfd-cb5b-4a3f-b282-450b2c2bc000', '265190be-817b-4b8e-a8e4-7b7e4980915f', 1, ' Basic Math', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:26:34.33647+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:26:34.33647+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('b4f5bfde-dfa4-4bb0-9e81-705405423211', '265190be-817b-4b8e-a8e4-7b7e4980915f', 2, 'Conditional statements', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:26:34.339947+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:26:34.339947+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('196b3f65-770e-4078-8865-73f665a65f93', '265190be-817b-4b8e-a8e4-7b7e4980915f', 3, ' Logic building', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:26:34.344061+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 11:26:34.344062+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('4710e388-7569-4d36-ac26-4588d0da9643', '1eb1b48d-a62e-4262-8bab-1abda96d5588', 0, 'Introduction to JavaScript', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 07:57:16.625794+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 07:57:16.625795+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('76fc9f87-6f51-4416-a1f7-ee1426e46688', '1eb1b48d-a62e-4262-8bab-1abda96d5588', 1, 'Variables and Data Types', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 07:57:16.62708+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 07:57:16.627085+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('b77003f7-a3dd-469b-b2de-99c0700233c3', '1eb1b48d-a62e-4262-8bab-1abda96d5588', 2, 'Operators and Expressions', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 07:57:16.630367+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 07:57:16.630367+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('20de1ddc-7dec-4e12-b833-fca267b44a91', '1eb1b48d-a62e-4262-8bab-1abda96d5588', 3, 'Control Structures', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 07:57:16.637199+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 07:57:16.637199+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('e8860811-7ecd-44fc-8719-17b680ac5441', '1eb1b48d-a62e-4262-8bab-1abda96d5588', 4, 'Functions', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 07:57:16.64418+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 07:57:16.644181+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('66442f0b-4d4f-4eb4-9d0a-dc0fbe9ae914', '1eb1b48d-a62e-4262-8bab-1abda96d5588', 5, 'Objects and Arrays', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 07:57:16.651465+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 07:57:16.651465+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('4487ad9c-6b9d-4002-b1d9-f47ea0b40982', '1eb1b48d-a62e-4262-8bab-1abda96d5588', 6, 'DOM Manipulation', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 07:57:16.654892+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-01 07:57:16.654893+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('875e0a0c-cd9f-41e8-9304-b9d589c5b2c7', '534b285b-83ee-41a0-93ea-9fb79fb2ffd4', 0, 'Outputting & Math Operators', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:51:59.91318+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:51:59.913181+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('9009c296-a5bb-47b2-9cc3-d154d23342d1', '534b285b-83ee-41a0-93ea-9fb79fb2ffd4', 1, 'Variables and Data Types', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:51:59.920347+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:51:59.920347+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('4e2864f7-f74f-4281-8b1e-71fe6bfc56d9', '534b285b-83ee-41a0-93ea-9fb79fb2ffd4', 2, 'Strings', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:51:59.922392+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:51:59.922393+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('5ba5a591-f36c-4a4d-a09a-1a85dd4f42e4', '534b285b-83ee-41a0-93ea-9fb79fb2ffd4', 3, 'User Inputs', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:51:59.924365+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:51:59.924366+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('240d7ad7-391e-4a5a-8fe0-3dfcc4a46d1f', '534b285b-83ee-41a0-93ea-9fb79fb2ffd4', 4, 'Conditional Statements', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:51:59.92605+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:51:59.92605+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('789ec000-6f61-4349-bad4-4a8deffe46b0', '534b285b-83ee-41a0-93ea-9fb79fb2ffd4', 5, 'Arrays', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:51:59.928843+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:51:59.928844+00');
+INSERT INTO "public"."chapter" ("id", "certificate_course_id", "no", "title", "description", "created_by", "created_at", "updated_by", "updated_at") VALUES ('0b8d3b3a-1d28-41c1-80d4-19375d5ce114', '534b285b-83ee-41a0-93ea-9fb79fb2ffd4', 6, 'Loops', '', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:51:59.933288+00', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-07-31 18:51:59.933289+00');
 
-
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 1, 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'CODE', 'Question 1', 'b6484e21-6937-489c-b031-b71767994221', NULL, NULL);
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 2, 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'LESSON', 'This is a lesson on Python programming.', NULL, '<p>This is a lesson on Python programming.</p>', NULL);
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 3, 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'VIDEO', 'Video on Python programming', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 4, 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'CODE', 'Question 2', 'b6484e21-6937-489c-b031-b71767994737', NULL, NULL);
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', 5, 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'LESSON', 'This is a lesson on Python programming.', NULL, '<p>This is a lesson on Python programming.</p>', NULL);
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', 6, 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'VIDEO', 'Video on Python programming', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 1, 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'CODE', 'Question 1', 'b6484e21-6937-489c-b031-b71767994738', NULL, NULL);
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', 2, 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'LESSON', 'This is a lesson on Python programming.', NULL, '<p>This is a lesson on Python programming.</p>', NULL);
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', 3, 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'VIDEO', 'Video on Python programming', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb24', 4, 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'CODE', 'Question 2', 'b6484e21-6937-489c-b031-b71767994739', NULL, NULL);
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb25', 5, 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'LESSON', 'This is a lesson on Python programming.', NULL, '<p>This is a lesson on Python programming.</p>', NULL);
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb26', 6, 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'VIDEO', 'Video on Python programming', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb27', 1, 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'CODE', 'Question 1', 'b6484e21-6937-489c-b031-b71767994740', NULL, NULL);
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb28', 2, 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'LESSON', 'This is a lesson on Python programming.', NULL, '<p>This is a lesson on Python programming.</p>', NULL);
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb29', 3, 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'VIDEO', 'Video on Python programming', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb30', 4, 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'CODE', 'Question 2', 'b6484e21-6937-489c-b031-b71767994741', NULL, NULL);
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb31', 5, 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'LESSON', 'This is a lesson on Python programming.', NULL, '<p>This is a lesson on Python programming.</p>', NULL);
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb32', 6, 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'VIDEO', 'Video on Python programming', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb33', 1, 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'CODE', 'Question 1', 'b6484e21-6937-489c-b031-b71767994221', NULL, NULL);
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb34', 2, 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'LESSON', 'This is a lesson on Python programming.', NULL, '<p>This is a lesson on Python programming.</p>', NULL);
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb35', 3, 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'VIDEO', 'Video on Python programming', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb36', 4, 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'LESSON', 'This is a lesson on Python programming.', NULL, '<p>This is a lesson on Python programming.</p>', NULL);
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb37', 5, 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'VIDEO', 'Video on Python programming', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb38', 1, 'd215b5f8-0249-4dc5-89a3-51fd148cfb19', 'LESSON', 'This is a lesson on Python programming.', NULL, '<p>This is a lesson on Python programming.</p>', NULL);
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb39', 2, 'd215b5f8-0249-4dc5-89a3-51fd148cfb19', 'VIDEO', 'Video on Python programming', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb40', 1, 'd215b5f8-0249-4dc5-89a3-51fd148cfb20', 'LESSON', 'This is a lesson on Python programming.', NULL, '<p>This is a lesson on Python programming.</p>', NULL);
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb41', 2, 'd215b5f8-0249-4dc5-89a3-51fd148cfb20', 'VIDEO', 'Video on Python programming', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('f38dfeea-9040-4734-bb79-4b5e8fafc884', 0, 'c273fe40-49ef-42c6-8fd1-b732a96d281f', 'LESSON', 'Loops In C', NULL, '<h3>Introduction</h3><p>Loops are essential in C programming for repeating a block of code multiple times based on a condition. They help automate repetitive tasks and process data efficiently. C provides several types of loops: <code>for</code>, <code>while</code>, and <code>do-while</code>.</p><h3>The <code>for</code> Loop</h3><p>The <code>for</code> loop is used when the number of iterations is known beforehand. It includes three parts: initialization, condition, and increment/decrement.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-for (initialization; condition; increment/decrement) {
-    // Code to execute
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('bc0ac556-cee1-4530-ab5f-676720cb49e2', 0, '875e0a0c-cd9f-41e8-9304-b9d589c5b2c7', 'LESSON', ' Introducing printing - println', NULL, '<h4>Lesson: Introducing Printing - <code>println!</code></h4><p><strong>Objective:</strong> Learn how to use the <code>println!</code> macro in Rust to output text to the console. This is the foundational step for displaying information in Rust programs.</p><p><br></p><h3>Key Concepts:</h3><p><strong>1. Using </strong><code><strong>println!</strong></code><strong>:</strong></p><p>The <code>println!</code> macro is used to print text to the console with a newline character at the end. It can be used to display static text, variables, and formatted strings.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    println!("Hello, World!");
 }
-</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-#include &lt;stdio.h&gt;
+</pre><p><strong>Explanation:</strong></p><ul><li><code>println!</code> is a macro that prints text followed by a newline.</li><li>The text to be printed is enclosed in double quotes.</li></ul><p><strong>2. Printing Variables:</strong></p><p>You can print the value of variables using <code>println!</code> by including the variable name inside curly braces <code>{}</code> within the string.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let name = "Alice";
+    println!("Hello, {}!", name);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>let name = "Alice";</code> declares a variable <code>name</code> with the value "Alice".</li><li><code>println!("Hello, {}!", name);</code> prints "Hello, Alice!", where <code>{}</code> is replaced by the value of <code>name</code>.</li></ul><p><strong>3. Formatting Output:</strong></p><p>Rust allows for advanced formatting using format specifiers within the <code>println!</code> macro.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let x = 42;
+    let y = 3.14159;
+    println!("x = {}, y = {:.2}", x, y);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>x = {}</code> prints the value of <code>x</code>.</li><li><code>y = {:.2}</code> prints the value of <code>y</code> rounded to two decimal places.</li></ul>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('5d0e997a-03eb-41c8-9d76-49eb34d9bc13', 1, '875e0a0c-cd9f-41e8-9304-b9d589c5b2c7', 'LESSON', ' Printing on multiple lines', NULL, '<h4>Lesson: Printing on Multiple Lines</h4><p><strong>Objective:</strong> Learn how to print text across multiple lines using multiple <code>println!</code> statements and how to handle newline characters within a single <code>println!</code> statement.</p><h3>Key Concepts:</h3><p><strong>1. Multiple </strong><code><strong>println!</strong></code><strong> Statements:</strong></p><p>Use multiple <code>println!</code> statements to print text on different lines.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    println!("Hello");
+    println!("World");
+}
+</pre><p><strong>Explanation:</strong></p><ul><li>Each <code>println!</code> statement prints text followed by a newline.</li></ul><p><strong>2. Using Newline Characters:</strong></p><p>Use the <code>\n</code> escape character to insert a newline within a single <code>println!</code> statement.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    println!("Hello\nWorld");
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>\n</code> inserts a newline, so "Hello" and "World" are printed on separate lines.</li></ul><p><strong>3. Combining Strings:</strong></p><p>Concatenate strings using the <code>+</code> operator or format strings using the <code>format!</code> macro.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let part1 = "Hello";
+    let part2 = "World";
+    println!("{}\n{}", part1, part2);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>{}</code> placeholders are replaced by <code>part1</code> and <code>part2</code>, each followed by a newline.</li></ul>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('937920bf-cb40-412f-9f1b-dd40a1428faa', 2, '875e0a0c-cd9f-41e8-9304-b9d589c5b2c7', 'LESSON', ' Multiple prints using single println', NULL, '<h4>Lesson: Multiple Prints Using Single <code>println!</code></h4><p><strong>Objective:</strong> Learn how to print multiple variables or values using a single <code>println!</code> statement for more concise and readable code.</p><h3>Key Concepts:</h3><p><strong>1. Using Placeholders:</strong></p><p>Use <code>{}</code> placeholders to include multiple variables in a single <code>println!</code>.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let age = 25;
+    let name = "Alice";
+    println!("Name: {}, Age: {}", name, age);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>{}</code> placeholders are replaced by the values of <code>name</code> and <code>age</code>.</li></ul><p><strong>2. String Interpolation:</strong></p><p>Rust supports string interpolation through the <code>format!</code> macro.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let age = 25;
+    let name = "Alice";
+    println!("{}", format!("Name: {}, Age: {}", name, age));
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>format!</code> creates a formatted string which is then printed by <code>println!</code>.</li></ul><p><strong>3. Combining Strings:</strong></p><p>Concatenate multiple strings and variables in a single <code>println!</code> statement.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let city = "New York";
+    let country = "USA";
+    println!("City: {}, Country: {}", city, country);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>{}</code> placeholders are replaced by <code>city</code> and <code>country</code>.</li></ul>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('4eaea639-e720-4e1f-8d45-886747f5e0c6', 3, '875e0a0c-cd9f-41e8-9304-b9d589c5b2c7', 'LESSON', ' Math Operators and overall code structure', NULL, '<h4>Lesson: Math Operators and Overall Code Structure</h4><p><strong>Objective:</strong> Learn how to use basic math operators in Rust and understand the overall structure of a simple Rust program.</p><h3>Key Concepts:</h3><p><strong>1. Basic Math Operators:</strong></p><p>Rust supports basic arithmetic operators such as addition (<code>+</code>), subtraction (<code>-</code>), multiplication (<code>*</code>), division (<code>/</code>), and modulus (<code>%</code>).</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let a = 10;
+    let b = 5;
+    println!("Addition: {}", a + b);
+    println!("Subtraction: {}", a - b);
+    println!("Multiplication: {}", a * b);
+    println!("Division: {}", a / b);
+    println!("Modulus: {}", a % b);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>+</code> adds two numbers.</li><li><code>-</code> subtracts the second number from the first.</li><li><code>*</code> multiplies two numbers.</li><li><code>/</code> divides the first number by the second.</li><li><code>%</code> returns the remainder of the division.</li></ul><p><strong>2. Order of Operations:</strong></p><p>Follow the standard mathematical order of operations (PEMDAS/BODMAS).</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let result = 10 + 5 * 2;
+    println!("Result: {}", result);  // Output: 20
+}
+</pre><p><strong>Explanation:</strong></p><ul><li>Multiplication is performed before addition.</li></ul><p><strong>3. Overall Code Structure:</strong></p><p>Understand the basic structure of a Rust program, including the <code>fn main()</code> function and the use of <code>let</code> for variable declaration.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    // Variable declaration
+    let a = 10;
+    let b = 5;
 
-int main() {
-    for (int i = 1; i &lt;= 5; i++) {
-        printf("Iteration %d\n", i);
+    // Performing operations
+    let sum = a + b;
+    let difference = a - b;
+    let product = a * b;
+    let quotient = a / b;
+    let remainder = a % b;
+
+    // Printing results
+    println!("Sum: {}", sum);
+    println!("Difference: {}", difference);
+    println!("Product: {}", product);
+    println!("Quotient: {}", quotient);
+    println!("Remainder: {}", remainder);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li>The <code>main</code> function is the entry point of a Rust program.</li><li>Variables are declared using <code>let</code>.</li><li>Arithmetic operations are performed and stored in variables.</li><li>Results are printed using <code>println!</code>.</li></ul><p>By mastering these lessons, you will be able to effectively output text to the console and perform basic arithmetic operations, laying a solid foundation for more advanced programming concepts in Rust.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('a0349b64-9174-42d1-8fdc-03ac706c3ff2', 4, '875e0a0c-cd9f-41e8-9304-b9d589c5b2c7', 'VIDEO', 'Rust 101 - Arithmetic operators', NULL, '', 'https://www.youtube.com/watch?v=O6qMBJGQwUk');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('b5e7c723-a7ca-4e14-93b3-807ba7f46b5c', 5, '875e0a0c-cd9f-41e8-9304-b9d589c5b2c7', 'VIDEO', 'Input/Output in Rust - Read Trait', NULL, '', 'https://www.youtube.com/watch?v=ARZJL067pkU');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('5a69712d-15b4-4d5e-ba7d-95525e2ced4e', 0, '9009c296-a5bb-47b2-9cc3-d154d23342d1', 'LESSON', 'Introduction to Variables and Data Types', NULL, '<h4>Lesson: Introduction to Variables and Data Types</h4><p><strong>Objective:</strong> Understand the fundamentals of variables and data types in Rust. Learn how to declare, initialize, and use variables, and explore the various data types available in Rust.</p><p><br></p><h3>Key Concepts:</h3><p><strong>1. What are Variables?</strong></p><p>Variables are used to store data that can be accessed and manipulated by your program. In Rust, variables are immutable by default, but they can be made mutable using the <code>mut</code> keyword.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let x = 5;         // Immutable variable
+    let mut y = 10;    // Mutable variable
+
+    println!("x = {}", x);
+    println!("y = {}", y);
+
+    y += 5;
+    println!("Updated y = {}", y);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>let x = 5;</code> declares an immutable variable <code>x</code> with the value <code>5</code>.</li><li><code>let mut y = 10;</code> declares a mutable variable <code>y</code> with the value <code>10</code>.</li><li><code>y += 5;</code> updates the value of <code>y</code> by adding <code>5</code>.</li></ul><p><strong>2. Data Types in Rust</strong></p><p>Rust is a statically-typed language, which means that the type of a variable must be known at compile time. Rust can usually infer the type based on the value, but you can also specify the type explicitly.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let integer: i32 = 42;       // 32-bit integer
+    let float: f64 = 3.14;       // 64-bit floating-point number
+    let boolean: bool = true;    // Boolean
+    let character: char = ''A'';   // Character
+
+    println!("integer = {}", integer);
+    println!("float = {}", float);
+    println!("boolean = {}", boolean);
+    println!("character = {}", character);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>let integer: i32 = 42;</code> declares an integer variable of type <code>i32</code>.</li><li><code>let float: f64 = 3.14;</code> declares a floating-point variable of type <code>f64</code>.</li><li><code>let boolean: bool = true;</code> declares a boolean variable.</li><li><code>let character: char = ''A'';</code> declares a character variable.</li></ul><p><strong>3. Common Data Types</strong></p><p>Rust provides several primitive data types, including:</p><ul><li><strong>Integers</strong>: Signed (<code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, <code>i128</code>, <code>isize</code>) and unsigned (<code>u8</code>, <code>u16</code>, <code>u32</code>, <code>u64</code>, <code>u128</code>, <code>usize</code>).</li><li><strong>Floating-Point Numbers</strong>: <code>f32</code> and <code>f64</code>.</li><li><strong>Boolean</strong>: <code>bool</code>.</li><li><strong>Character</strong>: <code>char</code>.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let small_number: u8 = 255;          // 8-bit unsigned integer
+    let large_number: i64 = -9223372036854775808; // 64-bit signed integer
+    let pi: f32 = 3.14159;               // 32-bit floating-point number
+
+    println!("small_number = {}", small_number);
+    println!("large_number = {}", large_number);
+    println!("pi = {}", pi);
+}
+</pre><p><strong>4. Compound Data Types</strong></p><p>Rust also supports compound data types like tuples and arrays.</p><ul><li><strong>Tuples</strong>: Group multiple values of different types into a single compound value.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let tuple: (i32, f64, char) = (500, 6.4, ''z'');
+    let (x, y, z) = tuple; // Destructuring
+
+    println!("tuple = {:?}", tuple);
+    println!("x = {}", x);
+    println!("y = {}", y);
+    println!("z = {}", z);
+}
+</pre><ul><li><strong>Arrays</strong>: Collection of multiple values of the same type.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let array: [i32; 5] = [1, 2, 3, 4, 5];
+    let first_element = array[0];
+
+    println!("array = {:?}", array);
+    println!("first_element = {}", first_element);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>let tuple: (i32, f64, char) = (500, 6.4, ''z'');</code> declares a tuple with three elements.</li><li><code>let (x, y, z) = tuple;</code> destructures the tuple into three variables <code>x</code>, <code>y</code>, and <code>z</code>.</li><li><code>let array: [i32; 5] = [1, 2, 3, 4, 5];</code> declares an array of five <code>i32</code> elements.</li><li><code>let first_element = array[0];</code> accesses the first element of the array.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that declares different types of variables, performs some operations on them, and prints the results.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    // Declare variables
+    let a: i32 = 10;
+    let b: f64 = 20.5;
+    let is_active: bool = true;
+    let letter: char = ''R'';
+
+    // Perform operations
+    let sum = a + b as i32; // Type casting
+    let product = a * 2;
+    let is_not_active = !is_active;
+
+    // Print results
+    println!("a = {}", a);
+    println!("b = {}", b);
+    println!("is_active = {}", is_active);
+    println!("letter = {}", letter);
+    println!("sum = {}", sum);
+    println!("product = {}", product);
+    println!("is_not_active = {}", is_not_active);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>let sum = a + b as i32;</code> casts <code>b</code> to <code>i32</code> before adding it to <code>a</code>.</li><li><code>let product = a * 2;</code> multiplies <code>a</code> by <code>2</code>.</li><li><code>let is_not_active = !is_active;</code> negates the boolean value of <code>is_active</code>.</li></ul><p>By understanding variables and data types in Rust, you will be able to store and manipulate data effectively, laying a strong foundation for more advanced programming concepts.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('86c23001-f67f-490c-86fa-6d0da06923b7', 1, '9009c296-a5bb-47b2-9cc3-d154d23342d1', 'VIDEO', 'Variables and Data types in Rust', NULL, '', 'https://www.youtube.com/watch?v=V867Ulf17vs');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('13c6f59c-91e7-4d68-bbeb-f8c4359d3d67', 0, '4e2864f7-f74f-4281-8b1e-71fe6bfc56d9', 'LESSON', 'Introduction to Strings', NULL, '<h4>Lesson: Introduction to Strings</h4><p><strong>Objective:</strong> Understand the fundamentals of strings in Rust. Learn how to declare, initialize, and manipulate strings, and explore common string methods and properties.</p><p><br></p><h3>Key Concepts:</h3><p><strong>1. What are Strings?</strong></p><p>Strings in Rust are a sequence of characters. Rust has two main string types: <code>String</code> and string slices (<code>&amp;str</code>). The <code>String</code> type is a growable, mutable string, while string slices are references to an immutable string.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let immutable_str: &amp;str = "Hello, world!"; // String slice
+    let mut mutable_string: String = String::from("Hello, Rust!"); // String
+
+    println!("Immutable string slice: {}", immutable_str);
+    println!("Mutable String: {}", mutable_string);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>let immutable_str: &amp;str = "Hello, world!";</code> declares an immutable string slice.</li><li><code>let mut mutable_string: String = String::from("Hello, Rust!");</code> declares a mutable <code>String</code>.</li></ul><p><strong>2. Creating and Initializing Strings</strong></p><p>You can create and initialize strings using string literals, <code>String::from</code>, or the <code>to_string</code> method.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let string_literal = "Hello, world!";
+    let from_string = String::from("Hello, Rust!");
+    let to_string = "Hello, everyone!".to_string();
+
+    println!("String literal: {}", string_literal);
+    println!("String from String::from: {}", from_string);
+    println!("String from to_string: {}", to_string);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>let string_literal = "Hello, world!";</code> creates a string slice from a string literal.</li><li><code>let from_string = String::from("Hello, Rust!");</code> creates a <code>String</code> from a string literal.</li><li><code>let to_string = "Hello, everyone!".to_string();</code> converts a string slice to a <code>String</code>.</li></ul><p><strong>3. String Methods and Properties</strong></p><p>Rust provides various methods to manipulate strings. Some commonly used methods include:</p><ul><li><code>len()</code>: Returns the length of the string.</li><li><code>push_str()</code>: Appends a string slice to a <code>String</code>.</li><li><code>push()</code>: Appends a character to a <code>String</code>.</li><li><code>replace()</code>: Replaces all occurrences of a substring with another substring.</li><li><code>split_whitespace()</code>: Splits the string by whitespace and returns an iterator.</li></ul><p><strong>Examples:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let mut greeting = String::from("Hello");
+
+    // len() method
+    println!("Length: {}", greeting.len());
+
+    // push_str() method
+    greeting.push_str(", Rust!");
+    println!("After push_str: {}", greeting);
+
+    // push() method
+    greeting.push(''!'');
+    println!("After push: {}", greeting);
+
+    // replace() method
+    let new_greeting = greeting.replace("Rust", "World");
+    println!("After replace: {}", new_greeting);
+
+    // split_whitespace() method
+    for word in new_greeting.split_whitespace() {
+        println!("Word: {}", word);
     }
-    return 0;
 }
-</pre><p>In this example, the loop initializes <code>i</code> to 1, checks if <code>i</code> is less than or equal to 5, and increments <code>i</code> by 1 each time. The loop prints the current iteration number from 1 to 5.</p><h3>The <code>while</code> Loop</h3><p>The <code>while</code> loop is used when the number of iterations is not known beforehand and depends on a condition being true.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-while (condition) {
-    // Code to execute
-}
-</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-#include &lt;stdio.h&gt;
+</pre><p><strong>Explanation:</strong></p><ul><li><code>greeting.len()</code> returns the length of the string.</li><li><code>greeting.push_str(", Rust!");</code> appends <code>", Rust!"</code> to the <code>greeting</code>.</li><li><code>greeting.push(''!'');</code> appends the character <code>''!''</code> to the <code>greeting</code>.</li><li><code>greeting.replace("Rust", "World");</code> replaces <code>"Rust"</code> with <code>"World"</code>.</li><li><code>new_greeting.split_whitespace()</code> splits the string by whitespace and iterates through the words.</li></ul><p><strong>4. String Concatenation</strong></p><p>Strings can be concatenated using the <code>+</code> operator or the <code>format!</code> macro.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let hello = String::from("Hello");
+    let world = String::from("World");
 
-int main() {
-    int i = 1;
-    while (i &lt;= 5) {
-        printf("Iteration %d\n", i);
-        i++;
+    // Using + operator
+    let hello_world = hello + " " + &amp;world + "!";
+    println!("Concatenated using +: {}", hello_world);
+
+    // Using format! macro
+    let formatted = format!("{} {}!", "Hello", "Rust");
+    println!("Concatenated using format!: {}", formatted);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>hello + " " + &amp;world + "!";</code> concatenates <code>hello</code>, a space, <code>world</code>, and an exclamation mark.</li><li><code>format!("{} {}!", "Hello", "Rust");</code> uses the <code>format!</code> macro to concatenate and format strings.</li></ul><p><strong>5. Slicing Strings</strong></p><p>You can create string slices to reference a part of a string.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let full_string = String::from("Hello, Rustaceans!");
+
+    let slice1 = &amp;full_string[0..5]; // "Hello"
+    let slice2 = &amp;full_string[7..11]; // "Rust"
+
+    println!("Slice 1: {}", slice1);
+    println!("Slice 2: {}", slice2);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>let slice1 = &amp;full_string[0..5];</code> creates a slice containing the first five characters.</li><li><code>let slice2 = &amp;full_string[7..11];</code> creates a slice containing characters from index 7 to 10.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that takes a user''s first and last name as input, concatenates them into a full name, converts the full name to uppercase, and displays the length of the full name.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">use std::io;
+
+fn main() {
+    let mut first_name = String::new();
+    let mut last_name = String::new();
+
+    println!("Enter your first name:");
+    io::stdin().read_line(&amp;mut first_name).expect("Failed to read line");
+    println!("Enter your last name:");
+    io::stdin().read_line(&amp;mut last_name).expect("Failed to read line");
+
+    // Remove newline characters
+    let first_name = first_name.trim();
+    let last_name = last_name.trim();
+
+    // Concatenate first name and last name
+    let full_name = format!("{} {}", first_name, last_name);
+
+    // Convert full name to uppercase
+    let upper_full_name = full_name.to_uppercase();
+
+    // Display the full name and its length
+    println!("Full Name: {}", upper_full_name);
+    println!("Length of Full Name: {}", upper_full_name.len());
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>io::stdin().read_line(&amp;mut first_name).expect("Failed to read line");</code> reads the first name from user input.</li><li><code>let full_name = format!("{} {}", first_name.trim(), last_name.trim());</code> concatenates the trimmed first and last names.</li><li><code>let upper_full_name = full_name.to_uppercase();</code> converts the full name to uppercase.</li><li><code>println!("Length of Full Name: {}", upper_full_name.len());</code> prints the length of the full name.</li></ul><p>By understanding and mastering strings in Rust, you will be able to handle and manipulate textual data effectively, solving complex problems with ease. This lesson builds a strong foundation for working with strings in more advanced Rust programming tasks.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('01c6d596-b4d7-455d-a1b3-461944bf1ffa', 1, '4e2864f7-f74f-4281-8b1e-71fe6bfc56d9', 'VIDEO', 'Strings in Rust FINALLY EXPLAINED!', NULL, '', 'https://www.youtube.com/watch?v=Mcuqzx3rBWc');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('eb38c10e-da31-43c9-9793-8c194ca97710', 0, '5ba5a591-f36c-4a4d-a09a-1a85dd4f42e4', 'LESSON', 'Introducing taking inputs - std::io::stdin().read_line()', NULL, '<h4>Lesson: Introducing Taking Inputs - <code>std::io::stdin().read_line()</code></h4><p><strong>Objective:</strong> Learn how to use the <code>std::io::stdin().read_line()</code> method to take input from the user in a Rust program. Understanding how to handle user input is essential for creating interactive applications.</p><p><br></p><h3>Key Concepts:</h3><p><strong>1. Using </strong><code><strong>std::io::stdin().read_line()</strong></code><strong>:</strong></p><p>The <code>std::io::stdin().read_line()</code> method reads a line of text from standard input and appends it to a string. It is commonly used for taking user input.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">use std::io;
+
+fn main() {
+    let mut input = String::new();
+    println!("Please enter your name:");
+
+    io::stdin().read_line(&amp;mut input).expect("Failed to read line");
+    println!("Hello, {}!", input.trim());
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>use std::io;</code>: Imports the I/O library.</li><li><code>let mut input = String::new();</code>: Declares a mutable <code>String</code> variable to store user input.</li><li><code>io::stdin().read_line(&amp;mut input).expect("Failed to read line");</code>: Reads a line from standard input and appends it to <code>input</code>.</li><li><code>input.trim()</code>: Removes any leading or trailing whitespace from the input.</li></ul><p><strong>2. Handling Errors:</strong></p><p>The <code>expect</code> method is used to handle potential errors that may occur during input reading. It provides a custom error message if the operation fails.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">use std::io;
+
+fn main() {
+    let mut input = String::new();
+    println!("Enter a number:");
+
+    io::stdin().read_line(&amp;mut input).expect("Failed to read line");
+
+    let trimmed = input.trim();
+    match trimmed.parse::&lt;i32&gt;() {
+        Ok(i) =&gt; println!("You entered the number: {}", i),
+        Err(_) =&gt; println!("That''s not a valid number!"),
     }
-    return 0;
 }
-</pre><p>In this example, the loop starts with <code>i</code> set to 1. As long as <code>i</code> is less than or equal to 5, the loop prints the current iteration number and increments <code>i</code>.</p><h3>The <code>do-while</code> Loop</h3><p>The <code>do-while</code> loop is similar to the <code>while</code> loop but guarantees that the loop body will execute at least once before the condition is tested.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-do {
-    // Code to execute
-} while (condition);
-</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-#include &lt;stdio.h&gt;
+</pre><p><strong>Explanation:</strong></p><ul><li><code>match trimmed.parse::&lt;i32&gt;() { ... }</code>: Tries to parse the trimmed input as an <code>i32</code>.</li><li><code>Ok(i) =&gt; println!("You entered the number: {}", i)</code>: Prints the number if parsing is successful.</li><li><code>Err(_) =&gt; println!("That''s not a valid number!");</code>: Prints an error message if parsing fails.</li></ul><p><strong>3. Multiple Inputs:</strong></p><p>You can take multiple inputs from the user by calling <code>read_line</code> multiple times.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">use std::io;
 
-int main() {
-    int i = 1;
-    do {
-        printf("Iteration %d\n", i);
-        i++;
-    } while (i &lt;= 5);
-    return 0;
+fn main() {
+    let mut first_name = String::new();
+    let mut last_name = String::new();
+
+    println!("Enter your first name:");
+    io::stdin().read_line(&amp;mut first_name).expect("Failed to read line");
+
+    println!("Enter your last name:");
+    io::stdin().read_line(&amp;mut last_name).expect("Failed to read line");
+
+    let full_name = format!("{} {}", first_name.trim(), last_name.trim());
+    println!("Your full name is: {}", full_name);
 }
-</pre><p>In this example, the loop prints the current iteration number and increments <code>i</code>, and it checks the condition after executing the loop body.</p><h3>Loop Control Statements</h3><p>C provides control statements to alter the flow of loops:</p><ul><li><code><strong>break</strong></code><strong>:</strong> Exits the loop immediately, regardless of the condition.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-for (int i = 1; i &lt;= 10; i++) {
-    if (i == 6) {
-        break;
-    }
-    printf("Iteration %d\n", i);
+</pre><p><strong>Explanation:</strong></p><ul><li><code>let mut first_name = String::new();</code>: Declares a mutable <code>String</code> variable for the first name.</li><li><code>let mut last_name = String::new();</code>: Declares a mutable <code>String</code> variable for the last name.</li><li><code>io::stdin().read_line(&amp;mut first_name).expect("Failed to read line");</code>: Reads the first name from standard input.</li><li><code>io::stdin().read_line(&amp;mut last_name).expect("Failed to read line");</code>: Reads the last name from standard input.</li><li><code>let full_name = format!("{} {}", first_name.trim(), last_name.trim());</code>: Concatenates the first and last names.</li></ul><p><strong>4. Converting Input to Other Data Types:</strong></p><p>You often need to convert the input from a string to other data types such as integers or floats.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">use std::io;
+
+fn main() {
+    let mut input = String::new();
+    println!("Enter your age:");
+
+    io::stdin().read_line(&amp;mut input).expect("Failed to read line");
+
+    let age: i32 = input.trim().parse().expect("Please type a number!");
+    println!("You are {} years old.", age);
 }
-</pre><ul><li>This loop will print iteration numbers from 1 to 5 and then exit when <code>i</code> equals 6.</li><li><code><strong>continue</strong></code><strong>:</strong> Skips the rest of the code in the current iteration and proceeds to the next iteration of the loop.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-for (int i = 1; i &lt;= 10; i++) {
-    if (i % 2 == 0) {
-        continue;
-    }
-    printf("Odd number %d\n", i);
+</pre><p><strong>Explanation:</strong></p><ul><li><code>let age: i32 = input.trim().parse().expect("Please type a number!");</code>: Parses the trimmed input as an <code>i32</code>.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that takes a user''s name and age as input and prints a greeting message along with their age.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">use std::io;
+
+fn main() {
+    let mut name = String::new();
+    let mut age_input = String::new();
+
+    println!("Enter your name:");
+    io::stdin().read_line(&amp;mut name).expect("Failed to read line");
+
+    println!("Enter your age:");
+    io::stdin().read_line(&amp;mut age_input).expect("Failed to read line");
+
+    let age: i32 = age_input.trim().parse().expect("Please type a number!");
+    println!("Hello, {}! You are {} years old.", name.trim(), age);
 }
-</pre><ul><li>This loop prints only the odd numbers between 1 and 10, skipping the even numbers.</li></ul><h3>Nested Loops</h3><p>You can nest loops within each other to handle more complex scenarios.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-#include &lt;stdio.h&gt;
-
-int main() {
-    for (int i = 1; i &lt;= 3; i++) {
-        for (int j = 1; j &lt;= 3; j++) {
-            printf("i = %d, j = %d\n", i, j);
-        }
-    }
-    return 0;
-}
-</pre><p>In this example, the outer loop iterates three times, and for each iteration of the outer loop, the inner loop also iterates three times, printing the values of <code>i</code> and <code>j</code>.</p><h3>Conclusion</h3><p>Loops are powerful constructs in C programming that allow you to repeat actions and process data efficiently. Understanding how to use <code>for</code>, <code>while</code>, and <code>do-while</code> loops, as well as loop control statements, is essential for writing effective and efficient C code.</p>', '');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('7fd2dd46-6553-42bf-916f-9bd730df08ab', 1, 'c273fe40-49ef-42c6-8fd1-b732a96d281f', 'VIDEO', 'C Programming Tutorial for Beginners - While Loops', NULL, '', 'https://www.youtube.com/watch?v=KJgsSFOSQv0&t=8983s');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('b632eb20-a320-4db5-b3c5-dded099b04af', 2, 'c273fe40-49ef-42c6-8fd1-b732a96d281f', 'VIDEO', 'C Programming Tutorial for Beginners - For Loops', NULL, '', 'https://www.youtube.com/watch?v=KJgsSFOSQv0&t=10211s');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('0ab30091-fef7-4596-9040-3cf680afd9d5', 0, '9fe625bc-0d96-40e2-9b4d-ce58a1d1ff09', 'LESSON', 'Arrays In C', NULL, '<h3>Introduction</h3><p>Arrays in C are a data structure that allows you to store multiple values of the same type in a single variable. They are useful for managing collections of data, such as lists or tables, where each element is accessed using an index. This lesson covers the basics of arrays, including declaration, initialization, and manipulation.</p><h3>Declaring Arrays</h3><p>To use an array, you first need to declare it by specifying the type of its elements and the number of elements it will hold.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-dataType arrayName[arraySize];
-</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int numbers[5];
-</pre><p>In this example, <code>numbers</code> is an array of integers capable of holding 5 elements.</p><h3>Initializing Arrays</h3><p>After declaring an array, you can initialize it with values either at the time of declaration or later in the code.</p><ul><li><strong>Initialization at Declaration:</strong></li><li>You can initialize an array with specific values when you declare it.</li><li><strong>Syntax:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-dataType arrayName[] = {value1, value2, value3, ...};
-</pre><ul><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int numbers[] = {1, 2, 3, 4, 5};
-</pre><ul><li>Here, <code>numbers</code> is initialized with five values. The size of the array is automatically determined by the number of values provided.</li><li><strong>Initialization After Declaration:</strong></li><li>You can also initialize an array after declaring it by assigning values to each element individually.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int numbers[5];
-numbers[0] = 1;
-numbers[1] = 2;
-numbers[2] = 3;
-numbers[3] = 4;
-numbers[4] = 5;
-</pre><h3>Accessing Array Elements</h3><p>Array elements are accessed using their index, which starts from 0. You can read or modify elements using their index.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-arrayName[index]
-</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int numbers[] = {1, 2, 3, 4, 5};
-int firstNumber = numbers[0]; // Access the first element
-numbers[2] = 10; // Modify the third element
-</pre><p>In this example, <code>firstNumber</code> is assigned the value <code>1</code>, and the third element of the <code>numbers</code> array is updated to <code>10</code>.</p><h3>Array Length</h3><p>The length of an array (i.e., the number of elements it holds) can be determined using the <code>sizeof</code> operator. This approach calculates the total size of the array and divides it by the size of an individual element.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int length = sizeof(arrayName) / sizeof(arrayName[0]);
-</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int numbers[] = {1, 2, 3, 4, 5};
-int length = sizeof(numbers) / sizeof(numbers[0]);
-printf("Array length: %d\n", length);
-</pre><p>In this example, <code>length</code> will be <code>5</code>, representing the number of elements in the <code>numbers</code> array.</p><h3>Iterating Through Arrays</h3><p>You can use loops to iterate through all elements of an array. This is useful for performing operations on each element.</p><ul><li><strong>Using a </strong><code><strong>for</strong></code><strong> Loop:</strong></li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int numbers[] = {1, 2, 3, 4, 5};
-for (int i = 0; i &lt; sizeof(numbers) / sizeof(numbers[0]); i++) {
-    printf("%d\n", numbers[i]);
-}
-</pre><ul><li>This loop prints each element of the <code>numbers</code> array.</li><li><strong>Using an Enhanced </strong><code><strong>for</strong></code><strong> Loop (C99 Standard):</strong></li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int numbers[] = {1, 2, 3, 4, 5};
-for (int i : numbers) {
-    printf("%d\n", i);
-}
-</pre><ul><li>This loop is more concise and iterates over each element of the array directly.</li></ul><h3>Multidimensional Arrays</h3><p>C also supports multidimensional arrays, such as 2D arrays, which can be thought of as arrays of arrays.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-dataType arrayName[rowSize][columnSize];
-</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int matrix[3][3] = {
-    {1, 2, 3},
-    {4, 5, 6},
-    {7, 8, 9}
-};
-</pre><p>In this example, <code>matrix</code> is a 3x3 array.</p><ul><li><strong>Accessing Elements:</strong></li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int value = matrix[1][2]; // Access the element in the second row, third column
-</pre><ul><li><strong>Iterating Through a 2D Array:</strong></li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-for (int i = 0; i &lt; 3; i++) {
-    for (int j = 0; j &lt; 3; j++) {
-        printf("%d ", matrix[i][j]);
-    }
-    printf("\n");
-}
-</pre><ul><li>This loop prints each element of the 2D array in matrix form.</li></ul><h3>Conclusion</h3><p>Arrays are fundamental to C programming, allowing you to store and manage multiple values efficiently. Understanding how to declare, initialize, access, and manipulate arrays is crucial for working with collections of data. Multidimensional arrays further extend this concept, enabling the handling of more complex data structures.</p>', '');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('5c09c716-768f-4437-95a7-ade97ab4d13d', 1, '9fe625bc-0d96-40e2-9b4d-ce58a1d1ff09', 'VIDEO', 'C Programming Tutorial for Beginners - Arrays', NULL, '', 'https://www.youtube.com/watch?v=KJgsSFOSQv0&t=5189s');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('e3627884-b8ea-42d1-872a-0390f5d20a1d', 0, 'f1d16ebc-8ac1-4aa0-8380-1c0158099b5e', 'LESSON', 'Strings In C', NULL, '<h3>Introduction</h3><p>In C programming, strings are sequences of characters stored in an array. Unlike some other programming languages, C does not have a built-in string data type. Instead, strings are handled as arrays of characters, terminated by a special null character <code>''\0''</code>. This null terminator indicates the end of the string.</p><h3>Declaring Strings</h3><p>To declare a string in C, you create an array of characters. The size of the array should be sufficient to hold all characters, including the null terminator.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-char stringName[size];
-</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-char greeting[6];
-</pre><p>In this example, <code>greeting</code> can hold up to 5 characters plus the null terminator.</p><h3>Initializing Strings</h3><p>You can initialize a string at the time of declaration using double quotes. The compiler automatically includes the null terminator.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-char stringName[] = "initialValue";
-</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-char greeting[] = "Hello";
-</pre><p>In this example, <code>greeting</code> is initialized to "Hello", and the array size is automatically set to 6 (5 characters + 1 null terminator).</p><h3>Accessing String Characters</h3><p>You can access individual characters in a string using array indexing. Remember that the index starts from 0.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-#include &lt;stdio.h&gt;
-
-int main() {
-    char greeting[] = "Hello";
-    printf("First character: %c\n", greeting[0]); // H
-    printf("Third character: %c\n", greeting[2]); // l
-    return 0;
-}
-</pre><h3>String Functions</h3><p>C provides a standard library <code>&lt;string.h&gt;</code> with functions to manipulate strings. Here are some commonly used functions:</p><ul><li><code><strong>strlen()</strong></code>: Computes the length of a string (excluding the null terminator).</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-
-int main() {
-    char str[] = "Hello";
-    printf("Length of string: %zu\n", strlen(str));
-    return 0;
-}
-</pre><ul><li><code><strong>strcpy()</strong></code>: Copies a string from one location to another.</li><li><strong>Syntax:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-char *strcpy(char *dest, const char *src);
-</pre><ul><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-
-int main() {
-    char source[] = "Hello";
-    char destination[6];
-    strcpy(destination, source);
-    printf("Destination string: %s\n", destination);
-    return 0;
-}
-</pre><ul><li><code><strong>strcat()</strong></code>: Concatenates (appends) one string to the end of another.</li><li><strong>Syntax:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-char *strcat(char *dest, const char *src);
-</pre><ul><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-
-int main() {
-    char str1[20] = "Hello";
-    char str2[] = " World";
-    strcat(str1, str2);
-    printf("Concatenated string: %s\n", str1);
-    return 0;
-}
-</pre><ul><li><code><strong>strcmp()</strong></code>: Compares two strings.</li><li><strong>Syntax:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int strcmp(const char *str1, const char *str2);
-</pre><ul><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-
-int main() {
-    char str1[] = "Hello";
-    char str2[] = "Hello";
-    int result = strcmp(str1, str2);
-    if (result == 0) {
-        printf("Strings are equal.\n");
-    } else if (result &lt; 0) {
-        printf("String 1 is less than String 2.\n");
-    } else {
-        printf("String 1 is greater than String 2.\n");
-    }
-    return 0;
-}
-</pre><h3>Reading Strings</h3><p>You can read strings from the user using <code>scanf()</code> or <code>fgets()</code>. <code>fgets()</code> is generally preferred because it handles input safely, preventing buffer overflow.</p><ul><li><strong>Using </strong><code><strong>scanf()</strong></code><strong>:</strong></li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-#include &lt;stdio.h&gt;
-
-int main() {
-    char name[50];
-    printf("Enter your name: ");
-    scanf("%49s", name); // Reads up to 49 characters
-    printf("Hello, %s!\n", name);
-    return 0;
-}
-</pre><ul><li><strong>Using </strong><code><strong>fgets()</strong></code><strong>:</strong></li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-#include &lt;stdio.h&gt;
-
-int main() {
-    char name[50];
-    printf("Enter your name: ");
-    fgets(name, sizeof(name), stdin); // Reads up to sizeof(name) - 1 characters
-    printf("Hello, %s", name);
-    return 0;
-}
-</pre><h3>String Literals</h3><p>String literals are constant strings used in your code. They are automatically null-terminated.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-#include &lt;stdio.h&gt;
-
-int main() {
-    printf("This is a string literal.\n");
-    return 0;
-}
-</pre><h3>Conclusion</h3><p>Strings in C are handled as arrays of characters, terminated by a null character. Understanding how to declare, initialize, and manipulate strings, along with using standard library functions, is essential for managing textual data in C programs.</p>', '');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('83d99377-5964-4261-9889-0707c4654969', 1, 'f1d16ebc-8ac1-4aa0-8380-1c0158099b5e', 'VIDEO', 'Strings in C', NULL, '', 'https://youtu.be/5TzFNouc0PE?si=VAJZKM9oetwPwgeh');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('f3a669a5-b4db-4ceb-8de5-d75af0d21d88', 0, 'f142b4d8-75e1-4abf-a62a-1aade21ba327', 'LESSON', 'Functions and Structures In C', NULL, '<h3>Functions</h3><p>In C programming, functions are blocks of code designed to perform a specific task. They help in organizing code, promoting reusability, and reducing redundancy. Functions can be called from other functions, allowing you to break down complex problems into simpler, manageable tasks.</p><h4>Defining Functions</h4><p>To define a function, you specify the return type, function name, and parameters (if any). The function body contains the code to be executed.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-returnType functionName(parameters) {
-    // Code to execute
-    return value; // if returnType is not void
-}
-</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-#include &lt;stdio.h&gt;
-
-// Function declaration
-int add(int a, int b);
-
-// Function definition
-int add(int a, int b) {
-    return a + b;
-}
-
-int main() {
-    int result = add(5, 3);
-    printf("Sum: %d\n", result);
-    return 0;
-}
-</pre><h4>Calling Functions</h4><p>You can call a function by using its name followed by parentheses. If the function requires parameters, pass them inside the parentheses.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int result = add(10, 20);
-</pre><h4>Function Parameters and Return Types</h4><p>Functions can accept parameters to provide input values and return a value to the caller. The return type can be any valid data type, including <code>int</code>, <code>float</code>, <code>char</code>, etc. If a function does not return a value, use <code>void</code>.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-float multiply(float x, float y) {
-    return x * y;
-}
-
-void printMessage() {
-    printf("This function does not return a value.\n");
-}
-</pre><h4>Function Overloading</h4><p>C does not support function overloading directly, meaning you cannot have multiple functions with the same name but different parameters. Instead, you can achieve similar functionality by using different names for functions.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int addInt(int a, int b) {
-    return a + b;
-}
-
-float addFloat(float a, float b) {
-    return a + b;
-}
-</pre><h3>Structures</h3><p>Structures (<code>struct</code>) in C are used to group related variables of different types into a single unit. They are useful for creating complex data types that model real-world entities.</p><h4>Defining Structures</h4><p>To define a structure, use the <code>struct</code> keyword followed by the structure name and its members enclosed in curly braces.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-struct StructureName {
-    dataType member1;
-    dataType member2;
-    // Additional members
-};
-</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-#include &lt;stdio.h&gt;
-
-// Structure definition
-struct Person {
-    char name[50];
-    int age;
-    float height;
-};
-
-int main() {
-    // Structure variable declaration and initialization
-    struct Person person1 = {"Alice", 30, 5.5};
-
-    // Accessing structure members
-    printf("Name: %s\n", person1.name);
-    printf("Age: %d\n", person1.age);
-    printf("Height: %.2f\n", person1.height);
-
-    return 0;
-}
-</pre><h4>Accessing Structure Members</h4><p>Structure members are accessed using the dot operator (<code>.</code>) with the structure variable.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-person1.age = 35; // Modify age
-printf("Updated Age: %d\n", person1.age);
-</pre><h4>Pointers to Structures</h4><p>You can use pointers to structures to handle large amounts of data more efficiently. Access structure members through a pointer using the arrow operator (<code>-&gt;</code>).</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-#include &lt;stdio.h&gt;
-
-// Structure definition
-struct Person {
-    char name[50];
-    int age;
-};
-
-int main() {
-    // Structure variable and pointer declaration
-    struct Person person1 = {"Bob", 25};
-    struct Person *ptr = &amp;person1;
-
-    // Accessing members via pointer
-    printf("Name: %s\n", ptr-&gt;name);
-    printf("Age: %d\n", ptr-&gt;age);
-
-    return 0;
-}
-</pre><h3>Functions with Structures</h3><p>Functions can accept structures as parameters or return structures. This allows you to pass complex data types to functions for processing.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-#include &lt;stdio.h&gt;
-
-// Structure definition
-struct Rectangle {
-    int length;
-    int width;
-};
-
-// Function to calculate area
-int calculateArea(struct Rectangle r) {
-    return r.length * r.width;
-}
-
-int main() {
-    // Structure variable declaration
-    struct Rectangle rect = {10, 5};
-
-    // Function call
-    int area = calculateArea(rect);
-    printf("Area of Rectangle: %d\n", area);
-
-    return 0;
-}
-</pre><h3>Conclusion</h3><p>Functions and structures are fundamental in C programming, helping to organize code and manage complex data. Functions promote modularity and reuse, while structures allow for the grouping of related data into cohesive units. Mastering both concepts will enable you to write more efficient and maintainable C programs.</p>', '');
+</pre><p><strong>Explanation:</strong></p><ul><li><code>let mut name = String::new();</code>: Declares a mutable <code>String</code> variable for the name.</li><li><code>let mut age_input = String::new();</code>: Declares a mutable <code>String</code> variable for the age input.</li><li><code>let age: i32 = age_input.trim().parse().expect("Please type a number!");</code>: Parses the age input as an <code>i32</code>.</li><li><code>println!("Hello, {}! You are {} years old.", name.trim(), age);</code>: Prints the greeting message with the name and age.</li></ul><p>By mastering <code>std::io::stdin().read_line()</code> to take input from the user, you will be able to create interactive Rust programs that can respond to user data, making your applications more dynamic and user-friendly. This lesson lays the groundwork for more advanced input handling and processing techniques in Rust.</p>', '');
 INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('282c9246-1319-4e0f-9392-dbae3852a1e7', 1, 'a6ba8a08-84ae-4655-8406-05d181e58ae3', 'VIDEO', 'Java Basics - An Overview', NULL, '', 'https://youtu.be/doxwM_gVc90?si=GVcuTo7tYVhTrbde');
 INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('0270923f-ca5e-4676-8b8e-bf667e579a18', 1, '62513510-6e1b-4548-8b73-95427e766bb3', 'VIDEO', 'Java methods 📞', NULL, '', 'https://youtu.be/v5p_SUfi710?si=SHNA00c8OUpILr1Y');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('83cadec2-7053-4c3f-b485-74bebd62e32d', 1, 'f142b4d8-75e1-4abf-a62a-1aade21ba327', 'VIDEO', 'Structures and Functions (Part 1)', NULL, '', 'https://www.youtube.com/watch?v=16P51olKuzk');
 INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('fa9d1c90-6bab-4220-bee4-2e33c5192485', 0, '34b88085-66f2-47cc-85d9-0db02d5dfa64', 'LESSON', 'Loops in Java', NULL, '<h3>Introduction to Loops</h3><p>Loops in Java are used to execute a block of code repeatedly based on a condition. They are essential for tasks that require repetition, such as iterating over arrays or performing repetitive operations. Java provides several types of loops:</p><ol><li><code><strong>for</strong></code><strong> Loop</strong></li><li><code><strong>while</strong></code><strong> Loop</strong></li><li><code><strong>do-while</strong></code><strong> Loop</strong></li></ol><h3>The <code>for</code> Loop</h3><p>The <code>for</code> loop is used when you know in advance how many times you want to execute a block of code. It consists of three parts: initialization, condition, and iteration.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">java
 Copy code
 for (initialization; condition; iteration) {
@@ -1599,6 +1700,7 @@ public class StringExample {
 </pre><h3>Conclusion</h3><p>Understanding strings and their methods is essential for manipulating text in Java. Strings are versatile and powerful, allowing you to perform a wide range of operations, from simple concatenation to complex transformations.</p>', '');
 INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('e62daba7-70da-463b-a996-d6fb12fd2a69', 1, '4bbff1c6-51e5-4c6d-b5eb-0335f9b718cd', 'VIDEO', 'What is String in Java', NULL, '', 'https://youtu.be/cV-sOpOgof8?si=Bz8rVYwb6upCUYhi');
 INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('a3a0f7b7-b998-49cd-a6c4-7a81ac589dd0', 2, '4bbff1c6-51e5-4c6d-b5eb-0335f9b718cd', 'CODE', 'English Alphabet Printing', 'b6484e21-6937-489c-b031-b71767994757', 'English alphabet printing', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('58396b7e-9044-4b91-bf07-c1ec7e007eac', 1, '5ba5a591-f36c-4a4d-a09a-1a85dd4f42e4', 'VIDEO', 'Reading user input in Rust', NULL, '', 'https://www.youtube.com/watch?v=3tXY1StzlGs');
 INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('95dc53e2-0350-46fc-af2a-65bb94d2bebf', 0, '567446cf-e4dd-45a6-93c1-9b539a9c4f2e', 'LESSON', 'User Inputs In Java', NULL, '<h3>Introduction to User Inputs</h3><p>In Java, handling user input is crucial for interactive programs. The <code>Scanner</code> class is commonly used to read data from various input sources, such as the keyboard. This lesson will guide you through the basics of using the <code>Scanner</code> class to get user inputs in Java.</p><h3>Importing the Scanner Class</h3><p>To use the <code>Scanner</code> class, you need to import it from the <code>java.util</code> package.</p><pre class="ql-syntax" spellcheck="false">java
 Copy code
 import java.util.Scanner;
@@ -1869,6 +1971,47 @@ INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_typ
 INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d84a5566-793a-4da3-acf3-1163c8fdd745', 3, '88515ed4-0b74-47d8-9279-0d47c2a21ef4', 'CODE', 'Sign number', 'b6484e21-6937-489c-b031-b71767994750', 'Same sign number', '');
 INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('9592bc3e-874d-4d62-9b06-877d2ad79998', 4, '88515ed4-0b74-47d8-9279-0d47c2a21ef4', 'VIDEO', 'Data type sizes', NULL, '', 'https://www.youtube.com/watch?v=Bgs9PxHuF1M');
 INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('4ee891ca-5117-425e-a226-288b50190375', 0, '75c1b5b9-370d-4c24-9335-56c5dbd43c51', 'LESSON', 'Conditionals & Logic', NULL, '<h3>Introduction to Conditionals &amp; Logic</h3><p>&lt;1 min</p><p>Every program we’ve seen so far has only had one possible path of execution — they all execute line by line, from top to bottom. And every time you run one of those programs, it gives you the same exact result. But it’s the twenty-first century, and we like options!</p><p>In this lesson, we will explore how programs make decisions by evaluating conditions and introduce logic into our code!</p><p>We’ll be covering the following concepts:</p><ul><li><code style="color: rgb(21, 20, 31); background-color: rgb(234, 233, 237);">if</code>,&nbsp;<code style="color: rgb(21, 20, 31); background-color: rgb(234, 233, 237);">else if</code>, and&nbsp;<code style="color: rgb(21, 20, 31); background-color: rgb(234, 233, 237);">else</code>&nbsp;statements</li><li><code style="color: rgb(21, 20, 31); background-color: rgb(234, 233, 237);"><a href="https://www.codecademy.com/resources/docs/cpp/switch?page_ref=catalog" rel="noopener noreferrer" target="_blank">switch</a></code>&nbsp;statements</li><li><a href="https://www.codecademy.com/resources/docs/cpp/operators?page_ref=cataloglink" rel="noopener noreferrer" target="_blank" style="color: var(--color-primary); background-color: transparent;">Relational operators</a></li><li><a href="https://www.codecademy.com/resources/docs/cpp/operators?page_ref=catalog" rel="noopener noreferrer" target="_blank" style="color: var(--color-primary); background-color: transparent;">Logical operators</a></li></ul><p>So…&nbsp;<em>if</em>&nbsp;you’ve already learned these concepts in another language, go to the next lesson —&nbsp;<em>else</em>, prepare yourself and let’s get started!</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('bee705ff-3fd4-4b5d-bc8a-4d6e2157617b', 0, '240d7ad7-391e-4a5a-8fe0-3dfcc4a46d1f', 'LESSON', 'Introductino to "if", "else"', NULL, '<h4>Lesson: Introduction to "if", "else"</h4><p><strong>Objective:</strong> Understand the basics of conditional statements in Rust, namely <code>if</code> and <code>else</code>, which allow you to execute code based on specific conditions.</p><p><br></p><h3>Key Concepts:</h3><p><strong>1. If Statement:</strong></p><p>The <code>if</code> statement executes a block of code if a specified condition is true.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let number = 10;
+    if number &gt; 5 {
+        println!("The number is greater than 5.");
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>if number &gt; 5 { ... }</code>: Executes the block of code if <code>number</code> is greater than 5.</li></ul><p><strong>2. If-Else Statement:</strong></p><p>The <code>else</code> statement executes a block of code if the condition in the <code>if</code> statement is false.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let number = 3;
+    if number &gt; 5 {
+        println!("The number is greater than 5.");
+    } else {
+        println!("The number is 5 or less.");
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>else { ... }</code>: Executes the block of code if the <code>if</code> condition is false.</li></ul><p><strong>3. Else If Statement:</strong></p><p>The <code>else if</code> statement allows you to check multiple conditions.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let number = 7;
+    if number &gt; 10 {
+        println!("The number is greater than 10.");
+    } else if number &gt; 5 {
+        println!("The number is greater than 5 but less than or equal to 10.");
+    } else {
+        println!("The number is 5 or less.");
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>else if number &gt; 5 { ... }</code>: Checks another condition if the previous <code>if</code> condition is false.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that checks if a given number is positive, negative, or zero.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">use std::io;
+
+fn main() {
+    let mut input = String::new();
+    println!("Enter a number:");
+    io::stdin().read_line(&amp;mut input).expect("Failed to read line");
+
+    let number: i32 = input.trim().parse().expect("Please type a number!");
+    if number &gt; 0 {
+        println!("The number is positive.");
+    } else if number &lt; 0 {
+        println!("The number is negative.");
+    } else {
+        println!("The number is zero.");
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li>The program reads an integer input from the user and checks if it is positive, negative, or zero using <code>if</code>, <code>else if</code>, and <code>else</code> statements.</li></ul>', '');
 INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('cc2e6609-5a53-4d06-993d-3dd1d7bf840f', 1, '75c1b5b9-370d-4c24-9335-56c5dbd43c51', 'LESSON', 'Logical Operators', NULL, '<h3>Introduction to Logical Operators</h3><p>1 min</p><p>Often, when we are trying to create a control flow for our program, we’ll encounter situations where the logic cannot be satisfied with a single condition.</p><p><a href="https://www.codecademy.com/resources/docs/cpp/operators?page_ref=catalog" rel="noopener noreferrer" target="_blank" style="color: var(--color-primary); background-color: transparent;"><em>Logical operators</em></a>&nbsp;are used to combine two or more conditions. They allow programs to make more flexible decisions. The result of the operation of a logical operator is a&nbsp;<code style="color: rgb(21, 20, 31); background-color: rgb(234, 233, 237);">bool</code>&nbsp;value of either&nbsp;<code style="color: rgb(21, 20, 31); background-color: rgb(234, 233, 237);">true</code>&nbsp;or&nbsp;<code style="color: rgb(21, 20, 31); background-color: rgb(234, 233, 237);">false</code>.</p><p>There are three logical operators that we will cover:</p><ul><li><code style="color: rgb(21, 20, 31); background-color: rgb(234, 233, 237);">&amp;&amp;</code>: the&nbsp;<code style="color: rgb(21, 20, 31); background-color: rgb(234, 233, 237);">and</code>&nbsp;logical operator</li><li><code style="color: rgb(21, 20, 31); background-color: rgb(234, 233, 237);">||</code>: the&nbsp;<code style="color: rgb(21, 20, 31); background-color: rgb(234, 233, 237);">or</code>&nbsp;logical operator</li><li><code style="color: rgb(21, 20, 31); background-color: rgb(234, 233, 237);">!</code>: the&nbsp;<code style="color: rgb(21, 20, 31); background-color: rgb(234, 233, 237);">not</code>&nbsp;logical operator</li></ul><p>We will also discuss the order of operations.</p>', '');
 INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('bbefd6ae-0381-4ff2-88a4-eaf6457e8ff3', 2, '75c1b5b9-370d-4c24-9335-56c5dbd43c51', 'CODE', 'Prime number', 'b6484e21-6937-489c-b031-b71767994758', 'Check prime number', '');
 INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('c98adbce-828d-4faf-bb47-7d8028167274', 3, '75c1b5b9-370d-4c24-9335-56c5dbd43c51', 'VIDEO', 'Operators in C++', NULL, '', 'https://www.youtube.com/watch?v=ezqsL-st8qg');
@@ -1898,6 +2041,7 @@ std::cout &lt;&lt; vowels[0]; // Prints: r
 </pre><p>In the case above we initialized an array of&nbsp;<code style="background-color: transparent; color: rgb(79, 224, 176);"><strong>char</strong></code>s with all of the vowels, and then printed out the first element in the array at index&nbsp;<code style="background-color: transparent; color: rgb(79, 224, 176);"><strong>0</strong></code>. We then modified the element at index&nbsp;<code style="background-color: transparent; color: rgb(79, 224, 176);"><strong>0</strong></code>&nbsp;by assigning it a new value of&nbsp;<code style="background-color: transparent; color: rgb(79, 224, 176);"><strong>r</strong></code>, which got printed out below.</p><p>Arrays in C++ have a set size, meaning you can’t add or remove elements once the array has been created. You may only modify existing elements without changing the total size or shape of the structure.</p>', '');
 INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('46c10603-3b46-4f72-b259-9e8d20e90d48', 2, 'e31671c0-e26f-46e7-ba81-6d954a51c37c', 'VIDEO', 'Passing Vectors to Functions', NULL, '', 'https://www.youtube.com/watch?v=aUhYCyU2Meo');
 INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d72d93dd-1e4b-49f3-829d-6bd7391e2fdc', 3, 'e31671c0-e26f-46e7-ba81-6d954a51c37c', 'CODE', 'Array sum', 'b6484e21-6937-489c-b031-b71767994736', 'Sum of an array', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('c97f6d4c-ed9a-41e4-abde-89fad89fba76', 2, '0f72faae-00c0-49d7-ad43-9cfa2e42a51b', 'LESSON', 'Custom input', NULL, '<h3>What are custom inputs</h3><p>What are&nbsp;<code>custom inputs</code>?</p><p>You will usually find a&nbsp;<code><strong>custom</strong></code>&nbsp;<code>inputs</code>&nbsp;box in programming problems.</p><p><code><strong>Custom</strong></code>&nbsp;<code>inputs</code>&nbsp;allow you to do the following</p><ul><li>You are able to see the&nbsp;<code>output</code>&nbsp;generated by your code for&nbsp;<code>inputs</code>&nbsp;defined by you</li><li>Test your code with your&nbsp;<code>sample inputs</code>.</li><li>This helps you debug&nbsp;<code><strong>Wrong Answers (WA)</strong></code>,&nbsp;<code><strong>Runtime Errors (RE)</strong></code>&nbsp;faster</li><li>Create your own&nbsp;<code><strong>test cases</strong></code>.</li><li>In programming problems - you want to find exceptions or&nbsp;<code>test cases</code>&nbsp;where your code / logic can fail.</li><li><code><strong>Custom</strong></code>&nbsp;<code>inputs</code>&nbsp;allow you to test your code for the same.</li></ul><p>Click on&nbsp;<code><strong>Next</strong></code>&nbsp;to proceed.</p>', '');
 INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('1da523d7-baa5-49f7-b045-af02b4b5ce4a', 0, '2a90b255-ca79-4fba-af46-952ac41a0502', 'LESSON', 'Functions', NULL, '<h3>The Function of Functions</h3><p>4 min</p><p>As a programmer, you will find yourself reusing the same blocks of code over and over throughout your program. In times like these, you can turn to functions.</p><p>Also known as a method or procedure, a&nbsp;<em>function</em>&nbsp;is a named group of code statements that accomplish something together, a bit like a factory machine.</p><p><img src="https://content.codecademy.com/courses/learn-cpp/functions/functions-conceptual.gif">There are some great reasons to use functions in your code:</p><ul><li>A single line can make all that code fire off instead of a whole bunch of lines.</li><li>You can build DRY (Don’t Repeat Yourself) code, reusing the code you already wrote.</li><li>Functions help make your code flexible and&nbsp;<em>modular</em>, meaning you can group your code more easily by task.</li></ul><p>In fact, every C++ program has at least one function. “Hold on,” you may be thinking, “I’ve written some C++ programs, but I haven’t written any functions yet!”</p><p>Well, as it happens,&nbsp;<code style="color: rgb(21, 20, 31); background-color: rgb(234, 233, 237);">main()</code>&nbsp;is a function that you’ve already used! And you’ll understand it a bit more as you learn how functions work.</p>', '');
 INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('a71a049b-ad3c-4461-a1b7-b51cbe7a202d', 1, '2a90b255-ca79-4fba-af46-952ac41a0502', 'LESSON', 'C++ Functions challenge', NULL, '<h3>How It Works</h3><p>&lt;1 min</p><p>Roll up your sleeves and get yourself in the mood for&nbsp;<a href="https://www.codecademy.com/resources/docs/cpp/functions" rel="noopener noreferrer" target="_blank" style="color: var(--color-primary); background-color: transparent;">functions</a>, because it’s code challenge time!</p><p>Say what? Here’s how it works:</p><ul><li>Each exercise in this lesson has a C++ function for you to build.</li><li>Each challenge has many solutions and we encourage you to be creative.</li><li>We don’t care what goes on in the function as long as it works the way it should. (Notice those tests in&nbsp;<code style="color: rgb(21, 20, 31); background-color: rgb(234, 233, 237);">main()</code>&nbsp;for each function.)</li></ul><p>As a refresher, C++ function syntax looks like this:</p><pre class="ql-syntax" spellcheck="false">return_type function_name(paramater1, parameter2) {
 
@@ -1953,46 +2097,833 @@ age++; // age is now 34
 </pre><p><strong>Fun fact:</strong>&nbsp;C++’s original name was “C with&nbsp;<a href="https://www.codecademy.com/resources/docs/cpp/classes" rel="noopener noreferrer" target="_blank" style="background-color: transparent; color: var(--color-primary);">Classes</a>.”</p>', '');
 INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('5e062ef6-0170-44a5-8b03-0f03f66e9b25', 2, '3e3699ce-1b80-4236-873f-05b17522e25f', 'LESSON', 'Why Object-Oriented Programming?', NULL, '<h1>Why Object-Oriented Programming?</h1><p><strong>Why has object-oriented programming become a major programming paradigm?</strong></p><p>So far, you’ve built two kinds of C++ programs:</p><ul><li>Procedural: The program moves through a linear series of instructions.</li><li>Functional: The program moves from one function to another.</li></ul><p>But there is another very common way to structure C++ code: object-oriented programming.</p><p>Let’s consider a physical object: a light bulb. A light (usually) has two possible states: on and off. It also has functionality that allows you to change its state: you can turn it on and you turn it off. Thankfully, you don’t need to know electrical engineering to use the light! You only need to know how to interact with it.</p><p><em>Object-oriented programming (OOP)</em>&nbsp;is a programming paradigm that allows you to package together data states and functionality to modify those data states, while keeping the details hidden away (like with the lightbulb). As a result, code with OOP design is flexible, modular, and abstract. This makes it particularly useful when you create larger programs.</p><p>In C++, you can apply OOP in your code with classes and objects. And the C++ objects you create will have states and functionality.</p><p>There are four major benefits to object-oriented programming:</p><ul><li><strong>Encapsulation:</strong>&nbsp;in OOP, you bundle code into a single unit where you can determine the scope of each piece of data.</li><li><strong>Abstraction:</strong>&nbsp;by using classes, you are able to generalize your object types, simplifying your program.</li><li><strong>Inheritance:</strong>&nbsp;because a class can inherit attributes and behaviors from another class, you are able to reuse more code.</li><li><strong>Polymorphism:</strong>&nbsp;one class can be used to create many objects, all from the same flexible piece of code.</li></ul><p><br></p>', '');
 INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('6e484389-1ef9-4628-b90d-550801d65e08', 3, '3e3699ce-1b80-4236-873f-05b17522e25f', 'VIDEO', 'Why Object-Oriented Programming?', NULL, '', 'https://www.youtube.com/watch?v=u8gRq4OojXY&embeds_referring_euri=https%3A%2F%2Fwww.codecademy.com%2F&embeds_referring_origin=https%3A%2F%2Fwww.codecademy.com&feature=emb_imp_woyt');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('8c62f072-2efb-4919-a27e-681c64ea0535', 0, '80124868-3c09-4967-b846-43ba04c064f7', 'LESSON', 'Introduction, Outputting & Math Operators in C', NULL, '<h3>Introduction to C Programming</h3><p>C is a powerful and widely-used programming language known for its efficiency and control. It serves as the foundation for many other languages and is crucial for system-level programming. This lesson will introduce you to the basics of C programming, focusing on outputting data and using math operators.</p><h3>Basic Structure of a C Program</h3><p>A C program consists of functions, with the <code>main</code> function being the entry point. The structure of a simple C program is as follows:</p><pre class="ql-syntax" spellcheck="false">c
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('40616ff6-3efb-482d-86a0-dfe7b986db72', 3, '0f72faae-00c0-49d7-ad43-9cfa2e42a51b', 'CODE', 'Check square number', 'b6484e21-6937-489c-b031-b71767994748', 'Check square number', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('eb767932-a7f1-4eb9-a4cc-56f9e4e9f702', 1, '240d7ad7-391e-4a5a-8fe0-3dfcc4a46d1f', 'LESSON', 'Different ways to compare elements inside if', NULL, '<h4>Lesson: Different Ways to Compare Elements Inside If</h4><p><strong>Objective:</strong> Learn about the various comparison operators available in Rust and how to use them within <code>if</code> statements to compare elements.</p><p><br></p><h3>Key Concepts:</h3><p><strong>1. Comparison Operators:</strong></p><ul><li><strong>Equality (</strong><code><strong>==</strong></code><strong>)</strong>: Checks if two values are equal.</li><li><strong>Inequality (</strong><code><strong>!=</strong></code><strong>)</strong>: Checks if two values are not equal.</li><li><strong>Greater Than (</strong><code><strong>&gt;</strong></code><strong>)</strong>: Checks if the left value is greater than the right value.</li><li><strong>Less Than (</strong><code><strong>&lt;</strong></code><strong>)</strong>: Checks if the left value is less than the right value.</li><li><strong>Greater Than or Equal To (</strong><code><strong>&gt;=</strong></code><strong>)</strong>: Checks if the left value is greater than or equal to the right value.</li><li><strong>Less Than or Equal To (</strong><code><strong>&lt;=</strong></code><strong>)</strong>: Checks if the left value is less than or equal to the right value.</li></ul><p><strong>Examples:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let a = 5;
+    let b = 10;
+
+    if a == b {
+        println!("a is equal to b");
+    }
+
+    if a != b {
+        println!("a is not equal to b");
+    }
+
+    if a &gt; b {
+        println!("a is greater than b");
+    }
+
+    if a &lt; b {
+        println!("a is less than b");
+    }
+
+    if a &gt;= 5 {
+        println!("a is greater than or equal to 5");
+    }
+
+    if b &lt;= 10 {
+        println!("b is less than or equal to 10");
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li>Demonstrates the use of various comparison operators in <code>if</code> statements.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that checks if two numbers are equal, not equal, greater than, or less than each other.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">use std::io;
+
+fn main() {
+    let mut input1 = String::new();
+    let mut input2 = String::new();
+
+    println!("Enter the first number:");
+    io::stdin().read_line(&amp;mut input1).expect("Failed to read line");
+
+    println!("Enter the second number:");
+    io::stdin().read_line(&amp;mut input2).expect("Failed to read line");
+
+    let number1: i32 = input1.trim().parse().expect("Please type a number!");
+    let number2: i32 = input2.trim().parse().expect("Please type a number!");
+
+    if number1 == number2 {
+        println!("The numbers are equal.");
+    } else if number1 != number2 {
+        println!("The numbers are not equal.");
+    }
+
+    if number1 &gt; number2 {
+        println!("The first number is greater than the second number.");
+    } else if number1 &lt; number2 {
+        println!("The first number is less than the second number.");
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li>The program reads two integer inputs from the user and compares them using various comparison operators.</li></ul>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('a5bb607b-fe1e-47bb-bf3c-03ae9eeb817f', 2, '240d7ad7-391e-4a5a-8fe0-3dfcc4a46d1f', 'LESSON', 'Combining Conditions - And, Or', NULL, '<h4>Lesson: Combining Conditions - And, Or</h4><p><strong>Objective:</strong> Learn how to combine multiple conditions using logical operators <code>&amp;&amp;</code> (AND) and <code>||</code> (OR) to create more complex conditional statements.</p><p><br></p><h3>Key Concepts:</h3><p><strong>1. Logical AND (</strong><code><strong>&amp;&amp;</strong></code><strong>):</strong></p><p>The <code>&amp;&amp;</code> operator combines two conditions and returns true only if both conditions are true.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let age = 25;
+    let has_license = true;
+
+    if age &gt;= 18 &amp;&amp; has_license {
+        println!("You are eligible to drive.");
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>if age &gt;= 18 &amp;&amp; has_license { ... }</code>: Checks if <code>age</code> is at least 18 and <code>has_license</code> is true.</li></ul><p><strong>2. Logical OR (</strong><code><strong>||</strong></code><strong>):</strong></p><p>The <code>||</code> operator combines two conditions and returns true if at least one of the conditions is true.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let is_weekend = true;
+    let is_holiday = false;
+
+    if is_weekend || is_holiday {
+        println!("You have a day off.");
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>if is_weekend || is_holiday { ... }</code>: Checks if either <code>is_weekend</code> or <code>is_holiday</code> is true.</li></ul><p><strong>3. Combining Multiple Conditions:</strong></p><p>You can combine multiple conditions using both <code>&amp;&amp;</code> and <code>||</code> to form complex logical expressions.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let age = 20;
+    let has_permission = false;
+
+    if (age &gt;= 18 &amp;&amp; age &lt;= 21) || has_permission {
+        println!("You have limited access.");
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>if (age &gt;= 18 &amp;&amp; age &lt;= 21) || has_permission { ... }</code>: Checks if <code>age</code> is between 18 and 21 (inclusive) or <code>has_permission</code> is true.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that checks if a user is eligible for a discount based on their age and membership status.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">use std::io;
+
+fn main() {
+    let mut age_input = String::new();
+    let mut member_input = String::new();
+
+    println!("Enter your age:");
+    io::stdin().read_line(&amp;mut age_input).expect("Failed to read line");
+
+    println!("Are you a member? (yes/no):");
+    io::stdin().read_line(&amp;mut member_input).expect("Failed to read line");
+
+    let age: i32 = age_input.trim().parse().expect("Please type a number!");
+    let is_member = member_input.trim() == "yes";
+
+    if age &lt; 18 || age &gt;= 65 || is_member {
+        println!("You are eligible for a discount.");
+    } else {
+        println!("You are not eligible for a discount.");
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li>The program reads the user''s age and membership status, then checks if they are eligible for a discount based on combined conditions using <code>||</code>.</li></ul>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('230ee53b-8ec8-4f85-bdc4-f09949f3b2f5', 3, '240d7ad7-391e-4a5a-8fe0-3dfcc4a46d1f', 'LESSON', 'Switch', NULL, '<h4>Lesson: Switch</h4><p><strong>Objective:</strong> Learn how to use the <code>match</code> statement in Rust to simplify the process of selecting one of many code blocks to be executed based on the value of a variable or expression.</p><p><br></p><h3>Key Concepts:</h3><p><strong>1. Match Statement:</strong></p><p>The <code>match</code> statement is used to execute one code block among many based on the value of a variable or expression.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let day = 3;
+
+    match day {
+        1 =&gt; println!("Monday"),
+        2 =&gt; println!("Tuesday"),
+        3 =&gt; println!("Wednesday"),
+        4 =&gt; println!("Thursday"),
+        5 =&gt; println!("Friday"),
+        6 =&gt; println!("Saturday"),
+        7 =&gt; println!("Sunday"),
+        _ =&gt; println!("Invalid day"),
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>match day { ... }</code>: Matches the value of <code>day</code> against the patterns provided.</li><li><code>_ =&gt; println!("Invalid day")</code>: The <code>_</code> pattern is a catch-all</li></ul>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('60818dbb-3d9e-437a-a7c6-df8093fddc2e', 4, '240d7ad7-391e-4a5a-8fe0-3dfcc4a46d1f', 'VIDEO', 'Rust Conditional Statements', NULL, '', 'https://www.youtube.com/watch?v=Vz9_y7NjRlQ');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('1b9c096a-9613-4eda-aea9-0d7de1562326', 0, '789ec000-6f61-4349-bad4-4a8deffe46b0', 'LESSON', 'Introduction to Arrays', NULL, '<h4>Lesson: Introduction to Arrays</h4><p><strong>Objective:</strong> Understand the basics of arrays in Rust. Learn how to declare, initialize, access, and manipulate arrays. This lesson will provide a foundation for working with arrays, which are essential for storing and processing collections of data.</p><p><br></p><h3>Key Concepts:</h3><p><strong>1. What are Arrays?</strong></p><p>Arrays in Rust are a fixed-size collection of elements of the same type. Each element can be accessed by its index.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">
+fn main() {
+    let array = [1, 2, 3, 4, 5];
+    println!("Array: {:?}", array);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>let array = [1, 2, 3, 4, 5];</code> declares an array of five integers.</li><li><code>println!("Array: {:?}", array);</code> prints the entire array using the <code>:?</code> format specifier.</li></ul><p><strong>2. Declaring and Initializing Arrays:</strong></p><p>Arrays can be declared and initialized in several ways.</p><p><strong>Examples:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    // Array with explicit type and length
+    let array: [i32; 5] = [1, 2, 3, 4, 5];
+    println!("Array with explicit type and length: {:?}", array);
+
+    // Array with all elements initialized to the same value
+    let array = [0; 5];
+    println!("Array with all elements initialized to 0: {:?}", array);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>let array: [i32; 5] = [1, 2, 3, 4, 5];</code> declares an array of five <code>i32</code> elements.</li><li><code>let array = [0; 5];</code> declares an array of five elements, all initialized to <code>0</code>.</li></ul><p><strong>3. Accessing Array Elements:</strong></p><p>You can access array elements using their index. Indexes in Rust are zero-based, meaning the first element is at index <code>0</code>.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let array = [10, 20, 30, 40, 50];
+    println!("First element: {}", array[0]);
+    println!("Third element: {}", array[2]);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>array[0]</code> accesses the first element of the array.</li><li><code>array[2]</code> accesses the third element of the array.</li></ul><p><strong>4. Modifying Array Elements:</strong></p><p>Arrays can be modified if they are mutable.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let mut array = [1, 2, 3, 4, 5];
+    array[1] = 10;
+    array[3] = 20;
+    println!("Modified array: {:?}", array);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>let mut array = [1, 2, 3, 4, 5];</code> declares a mutable array.</li><li><code>array[1] = 10;</code> modifies the second element of the array.</li><li><code>array[3] = 20;</code> modifies the fourth element of the array.</li></ul><p><strong>5. Iterating Over Arrays:</strong></p><p>You can iterate over arrays using a <code>for</code> loop.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let array = [10, 20, 30, 40, 50];
+    for element in array.iter() {
+        println!("Element: {}", element);
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>for element in array.iter() { ... }</code> iterates over each element in the array.</li></ul><p><strong>6. Array Length:</strong></p><p>You can get the length of an array using the <code>len</code> method.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let array = [10, 20, 30, 40, 50];
+    println!("Array length: {}", array.len());
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>array.len()</code> returns the number of elements in the array.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that declares an array of 5 integers, modifies some of its elements, prints the entire array, and then iterates over it to print each element.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    // Declare and initialize the array
+    let mut array = [1, 2, 3, 4, 5];
+
+    // Modify some elements
+    array[1] = 10;
+    array[3] = 20;
+
+    // Print the entire array
+    println!("Modified array: {:?}", array);
+
+    // Iterate over the array and print each element
+    for element in array.iter() {
+        println!("Element: {}", element);
+    }
+
+    // Print the length of the array
+    println!("Array length: {}", array.len());
+}
+</pre><p><strong>Explanation:</strong></p><ul><li>The program declares a mutable array of 5 integers.</li><li>It modifies the second and fourth elements of the array.</li><li>It prints the entire array using the <code>:?</code> format specifier.</li><li>It iterates over the array and prints each element.</li><li>It prints the length of the array.</li></ul><p>By mastering arrays in Rust, you will be able to store and manipulate collections of data efficiently, laying a solid foundation for more advanced data structures and algorithms. This lesson provides the building blocks for working with arrays and performing common array operations in Rust.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('918cdafb-700f-4824-89cc-044031be3b24', 1, '789ec000-6f61-4349-bad4-4a8deffe46b0', 'VIDEO', 'Rust Programming Tutorial #20 - Arrays', NULL, '', 'https://www.youtube.com/watch?v=cH6Qv47MPwk');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('4f5ead34-6c8a-44fc-9565-7bf7e77e7469', 0, '0b8d3b3a-1d28-41c1-80d4-19375d5ce114', 'LESSON', 'Break, Continue, For each', NULL, '<h4>Lesson: Break, Continue, For Each</h4><p><strong>Objective:</strong> Learn how to use <code style="background-color: rgb(240, 240, 240);">break</code> and <code style="background-color: rgb(240, 240, 240);">continue</code> statements to control loop execution, and explore the <code style="background-color: rgb(240, 240, 240);">for_each</code> method for iterating over collections.</p><h3>Key Concepts:</h3><p><strong>1. Break Statement:</strong></p><p>The <code style="background-color: rgb(240, 240, 240);">break</code> statement terminates the loop immediately.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    for i in 0..10 {
+        if i == 5 {
+            break;
+        }
+        println!("i: {}", i);
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code style="background-color: rgb(240, 240, 240);">if i == 5 { break; }</code> exits the loop when <code style="background-color: rgb(240, 240, 240);">i</code> equals 5.</li></ul><p><strong>2. Continue Statement:</strong></p><p>The <code style="background-color: rgb(240, 240, 240);">continue</code> statement skips the current iteration and proceeds with the next iteration.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    for i in 0..10 {
+        if i % 2 == 0 {
+            continue;
+        }
+        println!("i: {}", i);
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code style="background-color: rgb(240, 240, 240);">if i % 2 == 0 { continue; }</code> skips even numbers and continues with the next iteration.</li></ul><p><strong>3. For Each Method:</strong></p><p>The <code style="background-color: rgb(240, 240, 240);">for_each</code> method allows for functional-style iteration over collections.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let array = [1, 2, 3, 4, 5];
+    array.iter().for_each(|&amp;x| {
+        println!("Element: {}", x);
+    });
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code style="background-color: rgb(240, 240, 240);">array.iter().for_each(|&amp;x| { ... });</code> iterates over each element in the array and executes the closure for each element.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that iterates over a range of numbers from 1 to 10, prints each number, but skips multiples of 3 and stops if it encounters the number 8.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    for i in 1..=10 {
+        if i % 3 == 0 {
+            continue;
+        }
+        if i == 8 {
+            break;
+        }
+        println!("i: {}", i);
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code style="background-color: rgb(240, 240, 240);">if i % 3 == 0 { continue; }</code> skips multiples of 3.</li><li><code style="background-color: rgb(240, 240, 240);">if i == 8 { break; }</code> stops the loop when <code style="background-color: rgb(240, 240, 240);">i</code> equals 8.</li></ul><p>By mastering <code style="background-color: rgb(240, 240, 240);">while</code> loops, <code style="background-color: rgb(240, 240, 240);">for</code> loops, and the use of <code style="background-color: rgb(240, 240, 240);">break</code>, <code style="background-color: rgb(240, 240, 240);">continue</code>, and <code style="background-color: rgb(240, 240, 240);">for_each</code>, you will be able to handle repetitive tasks and complex iterations efficiently in your Rust programs. These lessons provide the foundation for more advanced control flow and iteration techniques in Rust.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('bd5a3d36-5b43-49ea-af70-a6f77abcfffa', 0, '9633622c-8304-4610-81f2-2c3af684ff7e', 'LESSON', ' Input and Output', NULL, '<h3>Getting started with programming problems</h3><p>If you are here - then you already know the basic syntax of C#.</p><p>Let''s now take it up a notch and train you to solve programming problems. Before that, let us do a quick recap of what we had learned about C# in&nbsp;<a href="https://www.codechef.com/learn/c-sharp" rel="noopener noreferrer" target="_blank" style="color: rgb(87, 128, 176);">Learn C# Path</a>.</p><p>On CodeChef and other platforms, you will come across programming problems.</p><ul><li>Each programming problem has a&nbsp;<strong>problem statement</strong></li><li>You write a&nbsp;<strong>solution code</strong>&nbsp;which will solve the problem</li><li>Your code is executed, performs some computations, and generates&nbsp;<strong>your output</strong>.</li><li><strong>Your output</strong>&nbsp;is compared with the&nbsp;<strong>Expected output</strong>.</li><li class="ql-indent-1">If they match - then your code is correct!</li><li class="ql-indent-1">If they don''t match - then there is some error in your code.</li></ul><p>Click on&nbsp;<strong>Next</strong>&nbsp;to proceed!</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('abd12328-4d62-40fb-9b66-d203951a2dcc', 1, '9633622c-8304-4610-81f2-2c3af684ff7e', 'LESSON', 'What are test cases?', NULL, '<h3>What are test cases</h3><p>In the previous module, we practiced simple methods of input&nbsp;and&nbsp;output used in programming problems.</p><p><br></p><p>Let us take the next small step and learn about&nbsp;<strong>test cases</strong>.</p><p>You will find the concept of ''test cases'' on various programming platforms such as Leetcode, Codeforces, CodeChef, Hackerrank. What are&nbsp;<strong>test cases</strong>?</p><ul><li><strong>Test cases</strong>&nbsp;are multiple&nbsp;<strong>Inputs</strong>&nbsp;- multiple instances of the same problem, all of which have to be solved by your code correctly.</li><li>Example 1: Consider 5 test cases or 5 inputs</li></ul><pre class="ql-syntax" spellcheck="false">11
+13
+2
+4
+9
+</pre>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('36f1ebbe-a26f-491b-b97a-e0b3f4ea7123', 2, '9633622c-8304-4610-81f2-2c3af684ff7e', 'LESSON', 'What are Custom inputs?', NULL, '<h3>What are custom inputs</h3><p>What are custom inputs?</p><p>You will usually find a&nbsp;<strong>custom</strong>&nbsp;inputs box in programming problems.</p><p><strong>Custom</strong>&nbsp;inputs allow you to do the following</p><ul><li>You are able to see the output generated by your code for inputs defined by you</li><li>Test your code with your sample inputs.</li><li>This helps you debug&nbsp;<strong>Wrong Answers (WA)</strong>,&nbsp;<strong>Runtime Errors (RE)</strong>&nbsp;faster</li><li>Create your own&nbsp;<strong>test cases</strong>.</li><li>In programming problems - you want to find exceptions or test cases where your code / logic can fail.</li><li><strong>Custom</strong>&nbsp;inputs allow you to test your code for the same.</li></ul><p>Click on&nbsp;<strong>Next</strong>&nbsp;to proceed.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('0acb5264-ecf2-4173-838e-4417431f5f9d', 3, '9633622c-8304-4610-81f2-2c3af684ff7e', 'CODE', 'Sum of two integer', 'b6484e21-6937-489c-b031-b71767994221', 'Sum of two integer', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('23c7df33-6bc3-4410-aa78-7dbbb1e615da', 0, '0b7edcfd-cb5b-4a3f-b282-450b2c2bc000', 'LESSON', 'Addition and multiplication', NULL, '<h4>Lesson: Addition and Multiplication</h4><p><strong>Objective:</strong> Learn how to perform basic arithmetic operations such as addition and multiplication in C#. These operations are fundamental for performing calculations in any programming task.</p><h3>Key Concepts:</h3><p><strong>1. Addition:</strong></p><p>Addition is the arithmetic operation of combining two or more numbers to get their total.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        int a = 10;
+        int b = 20;
+        int sum = a + b;
+
+        Console.WriteLine("Addition:");
+        Console.WriteLine($"{a} + {b} = {sum}");
+    }
+}
+</pre><p><strong>2. Multiplication:</strong></p><p>Multiplication is the arithmetic operation of scaling one number by another. It is essentially repeated addition.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        int a = 10;
+        int b = 20;
+        int product = a * b;
+
+        Console.WriteLine("Multiplication:");
+        Console.WriteLine($"{a} * {b} = {product}");
+    }
+}
+</pre><p><strong>3. Combining Addition and Multiplication:</strong></p><p>You can combine addition and multiplication to perform more complex calculations.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        int a = 10;
+        int b = 20;
+        int c = 5;
+
+        int result = (a + b) * c;
+
+        Console.WriteLine("Combining Addition and Multiplication:");
+        Console.WriteLine($"({a} + {b}) * {c} = {result}");
+    }
+}
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that takes two numbers as input from the user and outputs their sum and product.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Enter the first number:");
+        int num1 = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Enter the second number:");
+        int num2 = int.Parse(Console.ReadLine());
+
+        int sum = num1 + num2;
+        int product = num1 * num2;
+
+        Console.WriteLine("Results:");
+        Console.WriteLine($"Sum: {num1} + {num2} = {sum}");
+        Console.WriteLine($"Product: {num1} * {num2} = {product}");
+    }
+}
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('8eee2d09-e705-4f36-ab38-c66cfa766dfc', 1, '0b7edcfd-cb5b-4a3f-b282-450b2c2bc000', 'LESSON', ' Subtraction and division', NULL, '<h4>Lesson: Subtraction and Division</h4><p><strong>Objective:</strong> Learn how to perform subtraction and division operations in C#. These operations are essential for performing various calculations and data manipulations.</p><h3>Key Concepts:</h3><p><strong>1. Subtraction:</strong></p><p>Subtraction is the arithmetic operation of finding the difference between two numbers.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        int a = 20;
+        int b = 10;
+        int difference = a - b;
+
+        Console.WriteLine("Subtraction:");
+        Console.WriteLine($"{a} - {b} = {difference}");
+    }
+}
+</pre><p><strong>2. Division:</strong></p><p>Division is the arithmetic operation of splitting a number into equal parts. It consists of a dividend (number to be divided) and a divisor (number by which to divide).</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        int a = 20;
+        int b = 10;
+        int quotient = a / b;
+
+        Console.WriteLine("Division:");
+        Console.WriteLine($"{a} / {b} = {quotient}");
+    }
+}
+</pre><p><strong>3. Combining Subtraction and Division:</strong></p><p>You can combine subtraction and division to perform more complex calculations.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        int a = 20;
+        int b = 10;
+        int c = 5;
+
+        int result = (a - b) / c;
+
+        Console.WriteLine("Combining Subtraction and Division:");
+        Console.WriteLine($"({a} - {b}) / {c} = {result}");
+    }
+}
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that takes two numbers as input from the user and outputs their difference and quotient.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Enter the first number:");
+        int num1 = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Enter the second number:");
+        int num2 = int.Parse(Console.ReadLine());
+
+        int difference = num1 - num2;
+        int quotient = num1 / num2;
+
+        Console.WriteLine("Results:");
+        Console.WriteLine($"Difference: {num1} - {num2} = {difference}");
+        Console.WriteLine($"Quotient: {num1} / {num2} = {quotient}");
+    }
+}
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('364eb227-398c-4552-be02-1a9108329e0e', 0, '5df4c2b2-7be2-43f1-a7c7-924a4b542027', 'LESSON', 'Addition and multiplication', NULL, '<h4>Lesson: Addition and Multiplication</h4><p>In this lesson, we will delve into the fundamental operations of addition and multiplication, essential building blocks in C programming and mathematical problem solving.</p><p><strong>Addition:</strong> Addition is the process of combining two or more numbers to obtain their total. In C, the <code>+</code> operator is used for addition. For example:</p><pre class="ql-syntax" spellcheck="false">int sum = 5 + 3; // sum now holds the value 8
+</pre><p>Addition is commutative, meaning the order of numbers does not affect the result:</p><pre class="ql-syntax" spellcheck="false">int a = 4;
+int b = 7;
+int result = a + b; // result is 11
+</pre><p><strong>Multiplication:</strong> Multiplication involves adding a number to itself a certain number of times. In C, the <code>*</code> operator is used for multiplication. For instance:</p><pre class="ql-syntax" spellcheck="false">int product = 4 * 5; // product now holds the value 20
+</pre><p>Like addition, multiplication is also commutative:</p><pre class="ql-syntax" spellcheck="false">int x = 6;
+int y = 3;
+int product = x * y; // product is 18
+</pre><p>Understanding these basic operations is crucial for solving more complex mathematical problems in programming.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('f1eaf498-92ae-408a-898c-0074883bb621', 1, '5df4c2b2-7be2-43f1-a7c7-924a4b542027', 'LESSON', 'Subtraction and division', NULL, '<h4>Lesson: Subtraction and Division</h4><p>Next, we explore subtraction and division, two more essential arithmetic operations in C programming.</p><p><strong>Subtraction:</strong> Subtraction is the process of finding the difference between two numbers. In C, the <code>-</code> operator is used for subtraction:</p><pre class="ql-syntax" spellcheck="false">int difference = 9 - 4; // difference now holds the value 5
+</pre><p>Subtraction is not commutative, meaning the order of numbers affects the result:</p><pre class="ql-syntax" spellcheck="false">int m = 10;
+int n = 3;
+int result = m - n; // result is 7
+</pre><p><strong>Division:</strong> Division is the process of determining how many times one number is contained within another. The <code>/</code> operator is used for division in C:</p><pre class="ql-syntax" spellcheck="false">int quotient = 20 / 4; // quotient now holds the value 5
+</pre><p>Division is not commutative:</p><pre class="ql-syntax" spellcheck="false">int p = 15;
+int q = 3;
+int result = p / q; // result is 5
+</pre><p>It''s important to note that dividing by zero is undefined and should be avoided in programs.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('a0302865-abd6-4230-a937-f0a866ca4568', 2, '0b7edcfd-cb5b-4a3f-b282-450b2c2bc000', 'LESSON', ' Useful math functions', NULL, '<h4>Lesson: Useful Math Functions</h4><p><strong>Objective:</strong> Explore some of the useful math functions provided by the <code>System.Math</code> class in C#. These functions allow you to perform complex mathematical calculations with ease.</p><h3>Key Concepts:</h3><p><strong>1. Math.Sqrt():</strong></p><p>The <code>Math.Sqrt()</code> method returns the square root of a specified number.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        double number = 16;
+        double sqrt = Math.Sqrt(number);
+
+        Console.WriteLine("Square Root:");
+        Console.WriteLine($"The square root of {number} is {sqrt}");
+    }
+}
+</pre><p><strong>2. Math.Pow():</strong></p><p>The <code>Math.Pow()</code> method returns a specified number raised to the specified power.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        double baseNum = 2;
+        double exponent = 3;
+        double result = Math.Pow(baseNum, exponent);
+
+        Console.WriteLine("Power:");
+        Console.WriteLine($"{baseNum} raised to the power of {exponent} is {result}");
+    }
+}
+</pre><p><strong>3. Math.Abs():</strong></p><p>The <code>Math.Abs()</code> method returns the absolute value of a specified number.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        int number = -10;
+        int absoluteValue = Math.Abs(number);
+
+        Console.WriteLine("Absolute Value:");
+        Console.WriteLine($"The absolute value of {number} is {absoluteValue}");
+    }
+}
+</pre><p><strong>4. Math.Max() and Math.Min():</strong></p><p>The <code>Math.Max()</code> method returns the larger of two specified numbers, while the <code>Math.Min()</code> method returns the smaller of two specified numbers.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        int a = 10;
+        int b = 20;
+
+        int max = Math.Max(a, b);
+        int min = Math.Min(a, b);
+
+        Console.WriteLine("Max and Min:");
+        Console.WriteLine($"The maximum of {a} and {b} is {max}");
+        Console.WriteLine($"The minimum of {a} and {b} is {min}");
+    }
+}
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that takes a number from the user and performs various mathematical operations such as calculating the square root, power, absolute value, and finding the maximum and minimum of two numbers.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Enter a number:");
+        double num = double.Parse(Console.ReadLine());
+
+        double sqrt = Math.Sqrt(num);
+        double power = Math.Pow(num, 2);
+        double abs = Math.Abs(num);
+
+        Console.WriteLine("Mathematical Operations:");
+        Console.WriteLine($"Square root of {num} is {sqrt}");
+        Console.WriteLine($"{num} raised to the power of 2 is {power}");
+        Console.WriteLine($"Absolute value of {num} is {abs}");
+
+        Console.WriteLine("Enter two numbers:");
+        int a = int.Parse(Console.ReadLine());
+        int b = int.Parse(Console.ReadLine());
+
+        int max = Math.Max(a, b);
+        int min = Math.Min(a, b);
+
+        Console.WriteLine("Max and Min:");
+        Console.WriteLine($"The maximum of {a} and {b} is {max}");
+        Console.WriteLine($"The minimum of {a} and {b} is {min}");
+    }
+}
+</pre><p>By mastering these basic math operations and useful functions, you will be well-equipped to handle a wide range of mathematical tasks in your C# programs.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('a92178a5-2f81-4451-a759-e302ec1e4fe6', 3, '0b7edcfd-cb5b-4a3f-b282-450b2c2bc000', 'VIDEO', 'C# Math class 📏', NULL, '', 'https://www.youtube.com/watch?v=tzRK0QFEte0');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('e5b5e57e-c224-49b9-a878-cbb47fc8fcd3', 4, '0b7edcfd-cb5b-4a3f-b282-450b2c2bc000', 'CODE', 'Calculate sum of cubes', 'b6484e21-6937-489c-b031-b71767994756', 'Calculate sum of cubes', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('b0f3bfa3-b20b-49c6-bd71-519d7bd07a03', 0, 'b4f5bfde-dfa4-4bb0-9e81-705405423211', 'LESSON', ' Conditional statements part-1', NULL, '<h4>Lesson: Conditional Statements Part-1</h4><p><strong>Objective:</strong> Understand the basics of conditional statements in C# and learn how to use <code>if</code>, <code>else if</code>, and <code>else</code> statements to control the flow of your programs based on specific conditions.</p><h3>Key Concepts:</h3><p><strong>1. If Statement:</strong></p><p>The <code>if</code> statement executes a block of code if a specified condition is true.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">if (condition)
+{
+    // Code to be executed if the condition is true
+}
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int number = 10;
+if (number &gt; 5)
+{
+    Console.WriteLine("The number is greater than 5.");
+}
+</pre><p><strong>2. If-Else Statement:</strong></p><p>The <code>else</code> statement executes a block of code if the condition in the <code>if</code> statement is false.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">if (condition)
+{
+    // Code to be executed if the condition is true
+}
+else
+{
+    // Code to be executed if the condition is false
+}
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int number = 3;
+if (number &gt; 5)
+{
+    Console.WriteLine("The number is greater than 5.");
+}
+else
+{
+    Console.WriteLine("The number is 5 or less.");
+}
+</pre><p><strong>3. Else If Statement:</strong></p><p>The <code>else if</code> statement allows you to check multiple conditions.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">if (condition1)
+{
+    // Code to be executed if condition1 is true
+}
+else if (condition2)
+{
+    // Code to be executed if condition2 is true
+}
+else
+{
+    // Code to be executed if both condition1 and condition2 are false
+}
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int number = 7;
+if (number &gt; 10)
+{
+    Console.WriteLine("The number is greater than 10.");
+}
+else if (number &gt; 5)
+{
+    Console.WriteLine("The number is greater than 5 but less than or equal to 10.");
+}
+else
+{
+    Console.WriteLine("The number is 5 or less.");
+}
+</pre><p><strong>4. Nested If Statements:</strong></p><p>You can nest <code>if</code> statements to check for multiple conditions within the same block.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int number = 8;
+if (number &gt; 5)
+{
+    if (number % 2 == 0)
+    {
+        Console.WriteLine("The number is greater than 5 and even.");
+    }
+    else
+    {
+        Console.WriteLine("The number is greater than 5 and odd.");
+    }
+}
+else
+{
+    Console.WriteLine("The number is 5 or less.");
+}
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that checks if a given number is positive, negative, or zero.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Enter a number:");
+        int number = int.Parse(Console.ReadLine());
+
+        if (number &gt; 0)
+        {
+            Console.WriteLine("The number is positive.");
+        }
+        else if (number &lt; 0)
+        {
+            Console.WriteLine("The number is negative.");
+        }
+        else
+        {
+            Console.WriteLine("The number is zero.");
+        }
+    }
+}
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('4fff2ea6-1f42-4007-8e52-f70800bc10c3', 1, 'b4f5bfde-dfa4-4bb0-9e81-705405423211', 'LESSON', ' Conditional statements part-2', NULL, '<h4>Lesson: Conditional Statements Part-2</h4><p><strong>Objective:</strong> Explore advanced uses of conditional statements in C# by learning how to combine conditions using logical operators and utilize the <code>switch</code> statement for more complex decision-making scenarios.</p><h3>Key Concepts:</h3><p><strong>1. Combining Conditions with Logical Operators:</strong></p><p>You can combine multiple conditions using logical operators such as <code>&amp;&amp;</code> (AND) and <code>||</code> (OR).</p><p><strong>Logical AND (</strong><code><strong>&amp;&amp;</strong></code><strong>):</strong></p><p>The <code>&amp;&amp;</code> operator combines two conditions and returns true only if both conditions are true.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int age = 25;
+bool hasLicense = true;
+
+if (age &gt;= 18 &amp;&amp; hasLicense)
+{
+    Console.WriteLine("You are eligible to drive.");
+}
+</pre><p><strong>Logical OR (</strong><code><strong>||</strong></code><strong>):</strong></p><p>The <code>||</code> operator combines two conditions and returns true if at least one of the conditions is true.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">bool isWeekend = true;
+bool isHoliday = false;
+
+if (isWeekend || isHoliday)
+{
+    Console.WriteLine("You have a day off.");
+}
+</pre><p><strong>Combining Multiple Conditions:</strong></p><p>You can combine multiple conditions using both <code>&amp;&amp;</code> and <code>||</code> to form complex logical expressions.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int age = 20;
+bool hasPermission = false;
+
+if ((age &gt;= 18 &amp;&amp; age &lt;= 21) || hasPermission)
+{
+    Console.WriteLine("You have limited access.");
+}
+</pre><p><strong>2. The Switch Statement:</strong></p><p>The <code>switch</code> statement allows you to execute one code block among many based on the value of a variable or expression.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">switch (expression)
+{
+    case value1:
+        // Code to be executed if expression equals value1
+        break;
+    case value2:
+        // Code to be executed if expression equals value2
+        break;
+    // Additional cases
+    default:
+        // Code to be executed if expression doesn''t match any case
+        break;
+}
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int day = 3;
+
+switch (day)
+{
+    case 1:
+        Console.WriteLine("Monday");
+        break;
+    case 2:
+        Console.WriteLine("Tuesday");
+        break;
+    case 3:
+        Console.WriteLine("Wednesday");
+        break;
+    case 4:
+        Console.WriteLine("Thursday");
+        break;
+    case 5:
+        Console.WriteLine("Friday");
+        break;
+    case 6:
+        Console.WriteLine("Saturday");
+        break;
+    case 7:
+        Console.WriteLine("Sunday");
+        break;
+    default:
+        Console.WriteLine("Invalid day");
+        break;
+}
+</pre><p><strong>3. Using the Default Case:</strong></p><p>The <code>default</code> case in a <code>switch</code> statement executes if none of the other cases match the value of the variable or expression.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int number = 10;
+
+switch (number)
+{
+    case 1:
+        Console.WriteLine("One");
+        break;
+    case 2:
+        Console.WriteLine("Two");
+        break;
+    default:
+        Console.WriteLine("Other number");
+        break;
+}
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that converts a numerical grade to a letter grade using the <code>switch</code> statement.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Enter your numerical grade:");
+        int grade = int.Parse(Console.ReadLine());
+
+        switch (grade / 10)
+        {
+            case 10:
+            case 9:
+                Console.WriteLine("Your grade is A.");
+                break;
+            case 8:
+                Console.WriteLine("Your grade is B.");
+                break;
+            case 7:
+                Console.WriteLine("Your grade is C.");
+                break;
+            case 6:
+                Console.WriteLine("Your grade is D.");
+                break;
+            default:
+                Console.WriteLine("Your grade is F.");
+                break;
+        }
+    }
+}
+</pre><p>By mastering these advanced conditional statements, you will be able to write more dynamic and responsive C# programs, capable of handling a wide range of decision-making scenarios efficiently.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('0e908dc9-052e-4e11-a685-92bc2d3a8cfb', 2, 'b4f5bfde-dfa4-4bb0-9e81-705405423211', 'VIDEO', 'Conditional Statements in C#', NULL, '', 'https://www.youtube.com/watch?v=LwIULGTxs-I');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('2fefd7d3-1575-4476-bb1c-2103dc576943', 3, 'b4f5bfde-dfa4-4bb0-9e81-705405423211', 'CODE', 'Check square number', 'b6484e21-6937-489c-b031-b71767994748', 'Check square number', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('94290e78-3a1d-427b-8a03-f47de435e3d2', 0, '196b3f65-770e-4078-8865-73f665a65f93', 'LESSON', ' Logic building part-1', NULL, '<h3>How to solve programming problems</h3><p>In the previous modules - we solved simple programming problems that had a direct approach.</p><p>In this module, we will cover problems that focus on logic building. Some suggestions for this module:</p><ul><li>Use a pen and paper to work out solutions.</li><li>The logic / algorithm first has to be clear in your mind before you decide to code it out.</li><li>Don''t spend more than 30 minutes on any problem. While the objective is to learn - if you don''t know the approach, it''s best to learn the concept / review the solution.</li></ul><p>For Beginner''s level programming problems - we think the following works best</p><ul><li><strong>Step 1</strong>: Understand the problem statement and the sample test cases</li><li><strong>Step 2</strong>: Generate examples - Create 10 input and output cases of your own</li><li><strong>Step 3</strong>: Observations / Pattern - Observe your examples to identify the logic</li><li><strong>Step 4</strong>: Plan your code - Modularise and solve sub-components of your problem</li><li><strong>Step 5</strong>: Learn - You may come across components of your logic where you don''t know how to execute the code.</li><li>In such cases, ask Google or ChatGPT or your friends and learn!</li><li><strong>Step 6</strong>: Write the code - For simpler programming problems - C++ solutions will be less than 20 lines in more than 95% of the cases.</li><li><strong>Step 7</strong>: Identify edge cases - If your code still fails - try and and come up with corner cases where your code may fail</li></ul><p>Click on&nbsp;<strong>Next</strong>&nbsp;to continue.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('9feb132a-c157-409c-b3b5-d3854c24ab2f', 1, '196b3f65-770e-4078-8865-73f665a65f93', 'LESSON', ' Logic building part-2', NULL, '<h4>Lesson: Logic Building Part-2</h4><p><strong>Objective:</strong> Build on the foundation laid in Part-1 by tackling more complex problems and refining your problem-solving approach. This lesson will help you enhance your logical thinking and coding skills.</p><h3>Key Concepts:</h3><p><strong>1. Breaking Down Complex Problems:</strong></p><p>In this lesson, we will focus on solving more complex problems that require breaking down the problem into smaller, manageable parts. This involves understanding the problem statement thoroughly and identifying the different components that need to be addressed.</p><p><strong>Example Problem:</strong> Write a program to find the factorial of a given number.</p><p><strong>Steps to Solve:</strong></p><ol><li><strong>Understand the Problem Statement and Sample Test Cases:</strong></li></ol><ul><li>Problem: Calculate the factorial of a number nn</li><li class="ql-indent-1">n.</li><li class="ql-indent-1">Sample Test Case: Input: 5, Output: 120</li></ul><ol><li><strong>Generate Examples:</strong></li></ol><ul><li class="ql-indent-1">Input: 3, Output: 6 (3! = 3 * 2 * 1)</li><li class="ql-indent-1">Input: 4, Output: 24 (4! = 4 * 3 * 2 * 1)</li></ul><ol><li><strong>Observations / Pattern:</strong></li></ol><ul><li class="ql-indent-1">Factorial of a number is the product of all positive integers less than or equal to the number.</li></ul><ol><li><strong>Plan Your Code:</strong></li></ol><ul><li class="ql-indent-1">Initialize a variable to store the result (e.g., <code>result = 1</code>).</li><li>Use a loop to multiply the variable by each integer from 1 to nn</li><li class="ql-indent-1">n.</li></ul><ol><li><strong>Learn:</strong></li></ol><ul><li class="ql-indent-1">Understand how loops work and how to multiply numbers iteratively.</li></ul><ol><li><strong>Write the Code:</strong></li></ol><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Enter a number:");
+        int n = int.Parse(Console.ReadLine());
+        int result = 1;
+
+        for (int i = 1; i &lt;= n; i++)
+        {
+            result *= i;
+        }
+
+        Console.WriteLine("Factorial: " + result);
+    }
+}
+</pre><ol><li><strong>Identify Edge Cases:</strong></li></ol><ul><li class="ql-indent-1">Input: 0, Output: 1 (0! is defined as 1)</li><li class="ql-indent-1">Input: Negative number, Output: Undefined (factorial is not defined for negative numbers)</li></ul><p><strong>2. Using Recursion:</strong></p><p>Learn how to use recursion to solve problems where the solution involves solving smaller instances of the same problem.</p><p><strong>Example Problem:</strong> Write a recursive program to calculate the factorial of a number.</p><p><strong>Steps to Solve:</strong></p><ol><li><strong>Understand the Problem Statement and Sample Test Cases:</strong></li></ol><ul><li>Problem: Calculate the factorial of a number nn</li><li class="ql-indent-1">n using recursion.</li><li class="ql-indent-1">Sample Test Case: Input: 5, Output: 120</li></ul><ol><li><strong>Generate Examples:</strong></li></ol><ul><li class="ql-indent-1">Input: 3, Output: 6</li><li class="ql-indent-1">Input: 4, Output: 24</li></ul><ol><li><strong>Observations / Pattern:</strong></li></ol><ul><li>The factorial of nn</li><li>n can be defined as n×(n−1)!n \times (n-1)!</li><li class="ql-indent-1">n×(n−1)!.</li></ul><ol><li><strong>Plan Your Code:</strong></li></ol><ul><li>Define a recursive function that calls itself with n−1n-1</li><li>n−1 until nn</li><li class="ql-indent-1">n is 1.</li></ul><ol><li><strong>Learn:</strong></li></ol><ul><li class="ql-indent-1">Understand the concept of recursion and how base cases work.</li></ul><ol><li><strong>Write the Code:</strong></li></ol><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Enter a number:");
+        int n = int.Parse(Console.ReadLine());
+        int result = Factorial(n);
+        Console.WriteLine("Factorial: " + result);
+    }
+
+    static int Factorial(int n)
+    {
+        if (n == 0 || n == 1)
+            return 1;
+        else
+            return n * Factorial(n - 1);
+    }
+}
+</pre><p>	<strong>Identify Edge Cases:</strong></p><ul><li>Input: 0, Output: 1</li><li>Input: Negative number, Output: Undefined</li></ul><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('c8d81db9-daba-4e5b-92d9-84644d4cbeb8', 2, '196b3f65-770e-4078-8865-73f665a65f93', 'LESSON', ' Logic building part-3', NULL, '<h4>Lesson: Logic Building Part-3</h4><p><strong>Objective:</strong> Apply advanced logic building techniques to solve real-world problems. This lesson focuses on enhancing your problem-solving skills through more challenging scenarios and efficient algorithms.</p><h3>Key Concepts:</h3><p><strong>1. Optimizing Solutions:</strong></p><p>In this lesson, we will focus on optimizing solutions to ensure that they are efficient and scalable. This involves understanding time and space complexity and making appropriate trade-offs.</p><p><strong>Example Problem:</strong> Write a program to find the nth Fibonacci number.</p><p><strong>Steps to Solve:</strong></p><ol><li><strong>Understand the Problem Statement and Sample Test Cases:</strong></li></ol><ul><li class="ql-indent-1">Problem: Calculate the nth Fibonacci number.</li><li class="ql-indent-1">Sample Test Case: Input: 5, Output: 5 (0, 1, 1, 2, 3, 5)</li></ul><ol><li><strong>Generate Examples:</strong></li></ol><ul><li class="ql-indent-1">Input: 3, Output: 2 (0, 1, 1, 2)</li><li class="ql-indent-1">Input: 4, Output: 3 (0, 1, 1, 2, 3)</li></ul><ol><li><strong>Observations / Pattern:</strong></li></ol><ul><li>Fibonacci sequence is defined as: F(0)=0,F(1)=1,F(n)=F(n−1)+F(n−2)F(0) = 0, F(1) = 1, F(n) = F(n-1) + F(n-2)</li><li class="ql-indent-1">F(0)=0,F(1)=1,F(n)=F(n−1)+F(n−2)</li></ul><ol><li><strong>Plan Your Code:</strong></li></ol><ul><li class="ql-indent-1">Use an iterative approach to calculate the nth Fibonacci number to optimize space complexity.</li></ul><ol><li><strong>Learn:</strong></li></ol><ul><li class="ql-indent-1">Understand the difference between recursive and iterative approaches and their impact on performance.</li></ul><ol><li><strong>Write the Code:</strong></li></ol><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Enter a number:");
+        int n = int.Parse(Console.ReadLine());
+        int result = Fibonacci(n);
+        Console.WriteLine("Fibonacci: " + result);
+    }
+
+    static int Fibonacci(int n)
+    {
+        if (n == 0) return 0;
+        if (n == 1) return 1;
+
+        int a = 0, b = 1, c = 0;
+        for (int i = 2; i &lt;= n; i++)
+        {
+            c = a + b;
+            a = b;
+            b = c;
+        }
+        return c;
+    }
+}
+</pre><ol><li><strong>Identify Edge Cases:</strong></li></ol><ul><li class="ql-indent-1">Input: 0, Output: 0</li><li class="ql-indent-1">Input: 1, Output: 1</li><li class="ql-indent-1">Large inputs should be handled efficiently</li></ul><p><strong>2. Dynamic Programming:</strong></p><p>Learn how to use dynamic programming to solve problems that can be broken down into overlapping subproblems.</p><p><strong>Example Problem:</strong> Write a program to find the nth Fibonacci number using dynamic programming.</p><p><strong>Steps to Solve:</strong></p><ol><li><strong>Understand the Problem Statement and Sample Test Cases:</strong></li></ol><ul><li class="ql-indent-1">Problem: Calculate the nth Fibonacci number using dynamic programming.</li><li class="ql-indent-1">Sample Test Case: Input: 5, Output: 5</li></ul><ol><li><strong>Generate Examples:</strong></li></ol><ul><li class="ql-indent-1">Input: 3, Output: 2</li><li class="ql-indent-1">Input: 4, Output: 3</li></ul><ol><li><strong>Observations / Pattern:</strong></li></ol><ul><li class="ql-indent-1">Use an array to store previously calculated Fibonacci numbers to avoid redundant calculations.</li></ul><ol><li><strong>Plan Your Code:</strong></li></ol><ul><li class="ql-indent-1">Initialize an array to store Fibonacci numbers up to n.</li><li class="ql-indent-1">Use a loop to fill the array based on the Fibonacci formula.</li></ul><ol><li><strong>Learn:</strong></li></ol><ul><li class="ql-indent-1">Understand how dynamic programming improves efficiency by reusing previously computed values.</li></ul><ol><li><strong>Write the Code:</strong></li></ol><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Enter a number:");
+        int n = int.Parse(Console.ReadLine());
+        int result = Fibonacci(n);
+        Console.WriteLine("Fibonacci: " + result);
+    }
+
+    static int Fibonacci(int n)
+    {
+        if (n == 0) return 0;
+        if (n == 1) return 1;
+
+        int[] fib = new int[n + 1];
+        fib[0] = 0;
+        fib[1] = 1;
+
+        for (int i = 2; i &lt;= n; i++)
+        {
+            fib[i] = fib[i - 1] + fib[i - 2];
+        }
+
+        return fib[n];
+    }
+}
+</pre><ol><li><strong>Identify Edge Cases:</strong></li></ol><ul><li class="ql-indent-1">Input: 0, Output: 0</li><li class="ql-indent-1">Input: 1, Output: 1</li><li class="ql-indent-1">Ensure the program handles large inputs efficiently</li></ul><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('c098acf7-4181-4a89-aa5e-85686efbe9bb', 1, '1c64da87-8cf6-47d9-ad16-b2ea87945562', 'LESSON', 'For loops', NULL, '<h4>Lesson: For Loops</h4><p><strong>Objective:</strong> Learn how to use <code>for</code> loops to execute a block of code a specific number of times.</p><h3>Key Concepts:</h3><p><strong>1. What is a For Loop?</strong></p><p>A <code>for</code> loop is used when you know in advance how many times you want to execute a statement or a block of statements.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">for (initialization; condition; increment)
+{
+    // Code to be executed
+}
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">csharp
 Copy code
-#include &lt;stdio.h&gt;
+for (int i = 0; i &lt; 5; i++)
+{
+    Console.WriteLine("i: " + i);
+}
+</pre><p><strong>2. Components of a For Loop:</strong></p><ul><li><strong>Initialization:</strong> Executed once at the beginning of the loop.</li><li><strong>Condition:</strong> Evaluated before each iteration. If true, the loop continues; if false, the loop ends.</li><li><strong>Increment:</strong> Executed at the end of each iteration.</li></ul><p><strong>3. Using Different Data Types:</strong></p><p>You can use different data types in the <code>for</code> loop, not just integers.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">for (char c = ''A''; c &lt;= ''E''; c++)
+{
+    Console.WriteLine("Char: " + c);
+}
+</pre><p><strong>4. Nested For Loops:</strong></p><p>You can nest <code>for</code> loops to handle more complex iterations.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">for (int i = 1; i &lt;= 3; i++)
+{
+    for (int j = 1; j &lt;= 3; j++)
+    {
+        Console.WriteLine("i: " + i + ", j: " + j);
+    }
+}
+</pre><p>Using <code>for</code> loops allows you to perform repetitive tasks efficiently and with greater control over the number of iterations.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('11fe0109-7912-4ad5-9586-00205c81d42d', 2, '1c64da87-8cf6-47d9-ad16-b2ea87945562', 'LESSON', 'Break, Continue, For each', NULL, '<h4>Lesson: Break, Continue, For Each</h4><p><strong>Objective:</strong> Learn how to use the <code>break</code> and <code>continue</code> statements to control loop execution and explore the <code>foreach</code> loop for iterating over collections.</p><h3>Key Concepts:</h3><p><strong>1. Break Statement:</strong></p><p>The <code>break</code> statement terminates the loop immediately, and control is passed to the statement following the terminated loop.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">for (int i = 0; i &lt; 10; i++)
+{
+    if (i == 5)
+    {
+        break;
+    }
+    Console.WriteLine("i: " + i);
+}
+</pre><p><strong>2. Continue Statement:</strong></p><p>The <code>continue</code> statement skips the current iteration of the loop and proceeds with the next iteration.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">for (int i = 0; i &lt; 10; i++)
+{
+    if (i % 2 == 0)
+    {
+        continue;
+    }
+    Console.WriteLine("i: " + i);
+}
+</pre><p><strong>3. Foreach Loop:</strong></p><p>The <code>foreach</code> loop is used to iterate over elements in a collection (such as arrays or lists) without using an explicit counter.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">foreach (type variable in collection)
+{
+    // Code to be executed
+}
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">string[] fruits = { "Apple", "Banana", "Cherry" };
+foreach (string fruit in fruits)
+{
+    Console.WriteLine(fruit);
+}
+</pre><p><strong>4. Foreach with Different Data Types:</strong></p><p>You can use the <code>foreach</code> loop with different data types and collections.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">List&lt;int&gt; numbers = new List&lt;int&gt; { 1, 2, 3, 4, 5 };
+foreach (int number in numbers)
+{
+    Console.WriteLine(number);
+}
+</pre><p>Using the <code>break</code> and <code>continue</code> statements allows you to control the flow within loops more precisely, and the <code>foreach</code> loop simplifies the iteration over collections, making your code more readable and maintainable.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('fb9013c2-17ca-4f89-82d3-42415fa1a8ae', 3, '1c64da87-8cf6-47d9-ad16-b2ea87945562', 'VIDEO', 'C# Loops Tutorial | Loops In C# | Iteration Statements In C#', NULL, '', 'https://www.youtube.com/watch?v=yMOjBupmP2A');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('80e5ee5d-4681-4375-af20-ee2d200ab0e7', 4, '1c64da87-8cf6-47d9-ad16-b2ea87945562', 'CODE', 'Calculate sum of cubes', 'b6484e21-6937-489c-b031-b71767994756', 'Calculate sum of cubes', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('19b85358-2ab8-490b-a506-f6e537386006', 0, '41039a23-f534-44d4-ab43-55b0580d7dc1', 'LESSON', 'Introduction, Outputting & Math Operators in C', NULL, '<h3>Introduction to C Programming</h3><p>C is a powerful and widely-used programming language known for its efficiency and control. It serves as the foundation for many other languages and is crucial for system-level programming. This lesson will introduce you to the basics of C programming, focusing on outputting data and using math operators.</p><h3>Basic Structure of a C Program</h3><p>A C program consists of functions, with the <code>main</code> function being the entry point. The structure of a simple C program is as follows:</p><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
 
 int main() {
     // Code to execute
     return 0;
 }
-</pre><ul><li><code>#include &lt;stdio.h&gt;</code>: This preprocessor directive includes the standard input/output library, allowing you to use functions like <code>printf</code>.</li><li><code>int main()</code>: The <code>main</code> function is where the execution of the program begins.</li><li><code>return 0;</code>: This statement ends the <code>main</code> function and returns a status code to the operating system.</li></ul><h3>Outputting Data</h3><p>In C, the <code>printf</code> function is used to output data to the console. It allows you to display formatted text and variables.</p><p><strong>Basic Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-printf("format string", variables);
-</pre><p><strong>Examples:</strong></p><ul><li><strong>Printing Text:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-printf("Hello, World!\n");
-</pre><ul><li>This will output the text <code>Hello, World!</code> followed by a newline.</li><li><strong>Printing Variables:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int age = 25;
+</pre><ul><li><code>#include &lt;stdio.h&gt;</code>: This preprocessor directive includes the standard input/output library, allowing you to use functions like <code>printf</code>.</li><li><code>int main()</code>: The <code>main</code> function is where the execution of the program begins.</li><li><code>return 0;</code>: This statement ends the <code>main</code> function and returns a status code to the operating system.</li></ul><h3>Outputting Data</h3><p>In C, the <code>printf</code> function is used to output data to the console. It allows you to display formatted text and variables.</p><p><strong>Basic Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">printf("format string", variables);
+</pre><p><strong>Examples:</strong></p><ul><li><strong>Printing Text:</strong></li></ul><pre class="ql-syntax" spellcheck="false">printf("Hello, World!\n");
+</pre><ul><li>This will output the text <code>Hello, World!</code> followed by a newline.</li><li><strong>Printing Variables:</strong></li></ul><pre class="ql-syntax" spellcheck="false">int age = 25;
 printf("Age: %d\n", age);
-</pre><ul><li>The <code>%d</code> format specifier is used to print integers. Other specifiers include <code>%f</code> for floating-point numbers and <code>%s</code> for strings.</li><li><strong>Formatted Output:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-float pi = 3.14159;
+</pre><ul><li>The <code>%d</code> format specifier is used to print integers. Other specifiers include <code>%f</code> for floating-point numbers and <code>%s</code> for strings.</li><li><strong>Formatted Output:</strong></li></ul><pre class="ql-syntax" spellcheck="false">float pi = 3.14159;
 printf("Value of pi: %.2f\n", pi);
-</pre><ul><li>The <code>%.2f</code> format specifier limits the floating-point number to two decimal places.</li></ul><h3>Math Operators in C</h3><p>Math operators in C perform arithmetic operations on variables and constants. They are similar to those used in other programming languages.</p><p><strong>Arithmetic Operators:</strong></p><ul><li><strong>Addition (</strong><code><strong>+</strong></code><strong>):</strong> Adds two values.</li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int sum = 5 + 3; // sum is 8
-</pre><ul><li><strong>Subtraction (</strong><code><strong>-</strong></code><strong>):</strong> Subtracts one value from another.</li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int difference = 10 - 4; // difference is 6
-</pre><ul><li><strong>Multiplication (</strong><code><strong>*</strong></code><strong>):</strong> Multiplies two values.</li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int product = 7 * 6; // product is 42
-</pre><ul><li><strong>Division (</strong><code><strong>/</strong></code><strong>):</strong> Divides one value by another. For integer division, the result is an integer.</li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int quotient = 20 / 4; // quotient is 5
-</pre><ul><li><strong>Modulus (</strong><code><strong>%</strong></code><strong>):</strong> Returns the remainder of a division.</li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int remainder = 10 % 3; // remainder is 1
-</pre><p><strong>Example Program:</strong></p><p>Here is a complete example demonstrating output and math operations:</p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-#include &lt;stdio.h&gt;
+</pre><ul><li>The <code>%.2f</code> format specifier limits the floating-point number to two decimal places.</li></ul><h3>Math Operators in C</h3><p>Math operators in C perform arithmetic operations on variables and constants. They are similar to those used in other programming languages.</p><p><strong>Arithmetic Operators:</strong></p><ul><li><strong>Addition (</strong><code><strong>+</strong></code><strong>):</strong> Adds two values.</li></ul><pre class="ql-syntax" spellcheck="false">int sum = 5 + 3; // sum is 8
+</pre><ul><li>Subtraction (-): Subtracts one value from another.</li></ul><pre class="ql-syntax" spellcheck="false">int difference = 10 - 4; // difference is 6
+</pre><ul><li><strong>Multiplication (</strong><code><strong>*</strong></code><strong>):</strong> Multiplies two values.</li></ul><pre class="ql-syntax" spellcheck="false">int product = 7 * 6; // product is 42
+</pre><ul><li><strong>Division (</strong><code><strong>/</strong></code><strong>):</strong> Divides one value by another. For integer division, the result is an integer.</li></ul><pre class="ql-syntax" spellcheck="false">int quotient = 20 / 4; // quotient is 5
+</pre><ul><li><strong>Modulus (</strong><code><strong>%</strong></code><strong>):</strong> Returns the remainder of a division.</li></ul><pre class="ql-syntax" spellcheck="false">int remainder = 10 % 3; // remainder is 1
+</pre><p><strong>Example Program:</strong></p><p>Here is a complete example demonstrating output and math operations:</p><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
 
 int main() {
     int a = 10;
@@ -2015,49 +2946,98 @@ int main() {
     return 0;
 }
 </pre><p>In this program:</p><ul><li>We declare two integer variables, <code>a</code> and <code>b</code>.</li><li>We perform addition, subtraction, multiplication, division, and modulus operations.</li><li>We use <code>printf</code> to display the results of these operations.</li></ul><h3>Conclusion</h3><p>Understanding how to output data and use basic math operators is fundamental to programming in C. These concepts allow you to perform calculations and display results, forming the basis for more complex programming tasks. With these basics, you can start writing more advanced C programs and explore additional features of the language.</p>', '');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('9b030211-7ade-4d04-b138-e439caa809d8', 1, '80124868-3c09-4967-b846-43ba04c064f7', 'VIDEO', 'C Programming Tutorial for Beginners - Hello World', NULL, '', 'https://www.youtube.com/watch?v=KJgsSFOSQv0&t=544s');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('49386ce6-dd6e-4829-9b31-c9fc05653198', 0, '3c8a381e-8a85-41ca-b07e-4d792c5571fd', 'LESSON', 'Pointers and Memory In C', NULL, '<h3>Introduction to Pointers</h3><p>Pointers are a fundamental concept in C programming that allow you to directly interact with memory. Understanding pointers is crucial for managing memory efficiently and for various advanced programming techniques.</p><h3>What is a Pointer?</h3><p>A pointer is a variable that stores the memory address of another variable. Instead of holding a data value, a pointer holds the address where the value is stored in memory.</p><p><strong>Syntax for Pointer Declaration:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-dataType *pointerName;
-</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int *p;
-</pre><p>Here, <code>p</code> is a pointer to an integer.</p><h3>Declaring and Initializing Pointers</h3><p>To use a pointer, you need to declare it and then initialize it with the address of a variable.</p><p><strong>Declaration:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int *p;
-</pre><p><strong>Initialization:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int x = 10;
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('db7a284b-32d2-407c-a3b8-c3f40cb64e98', 1, '41039a23-f534-44d4-ab43-55b0580d7dc1', 'CODE', 'Check prime number', 'b6484e21-6937-489c-b031-b71767994758', 'Check prime number', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('ae6d230e-bd68-41fd-bc0c-50852baaa1d5', 2, '41039a23-f534-44d4-ab43-55b0580d7dc1', 'VIDEO', 'C Programming Tutorial for Beginners - Hello World', NULL, '', 'https://www.youtube.com/watch?v=KJgsSFOSQv0&t=544s');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('6a379a85-1036-4f70-95c0-23a15498f4a6', 1, '0b8d3b3a-1d28-41c1-80d4-19375d5ce114', 'LESSON', 'While loops', NULL, '<h4>Lesson: While Loops</h4><p><strong>Objective:</strong> Understand how to use <code>while</code> loops to execute a block of code repeatedly as long as a specified condition is true.</p><p><br></p><h3>Key Concepts:</h3><p><strong>1. Basic </strong><code><strong>while</strong></code><strong> Loop:</strong></p><p>A <code>while</code> loop repeatedly executes a block of code as long as the specified condition evaluates to true.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let mut count = 0;
+    while count &lt; 5 {
+        println!("Count: {}", count);
+        count += 1;
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>let mut count = 0;</code> initializes a mutable variable <code>count</code>.</li><li><code>while count &lt; 5 { ... }</code> repeatedly executes the block as long as <code>count</code> is less than 5.</li><li><code>count += 1;</code> increments <code>count</code> by 1 on each iteration.</li></ul><p><strong>2. Infinite Loops:</strong></p><p>An infinite loop occurs if the condition never becomes false. Be cautious to ensure your <code>while</code> loop has a condition that will eventually be met.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let mut count = 0;
+    while count &lt; 5 {
+        println!("Count: {}", count);
+        count += 1;
+        if count == 3 {
+            break;
+        }
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>if count == 3 { break; }</code> exits the loop when <code>count</code> equals 3 to avoid an infinite loop.</li></ul><p><strong>3. Nested </strong><code><strong>while</strong></code><strong> Loops:</strong></p><p>You can nest <code>while</code> loops to handle more complex iterations.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let mut i = 1;
+    while i &lt;= 3 {
+        let mut j = 1;
+        while j &lt;= 3 {
+            println!("i: {}, j: {}", i, j);
+            j += 1;
+        }
+        i += 1;
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li>Nested <code>while</code> loops iterate through combinations of <code>i</code> and <code>j</code>.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that prints the first 10 numbers of the Fibonacci sequence using a <code>while</code> loop.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let mut a = 0;
+    let mut b = 1;
+    let mut count = 0;
+
+    while count &lt; 10 {
+        println!("{}", a);
+        let temp = a;
+        a = b;
+        b = temp + b;
+        count += 1;
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li>The program initializes <code>a</code> and <code>b</code> to the first two Fibonacci numbers and prints the sequence up to 10 numbers using a <code>while</code> loop.</li></ul>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('7b4e9e3c-d82e-45e5-9a05-886153df077f', 2, '0b8d3b3a-1d28-41c1-80d4-19375d5ce114', 'LESSON', 'For loops', NULL, '<h4>Lesson: For Loops</h4><p><strong>Objective:</strong> Learn how to use <code>for</code> loops to iterate over a range of values or collections.</p><p><br></p><h3>Key Concepts:</h3><p><strong>1. Basic </strong><code><strong>for</strong></code><strong> Loop:</strong></p><p>A <code>for</code> loop is used to iterate over a range of values.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    for i in 0..5 {
+        println!("i: {}", i);
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>for i in 0..5 { ... }</code> iterates from 0 to 4 (the range <code>0..5</code> includes 0 but excludes 5).</li></ul><p><strong>2. Iterating Over Collections:</strong></p><p>You can use a <code>for</code> loop to iterate over elements in a collection like arrays or vectors.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let array = [10, 20, 30, 40, 50];
+    for element in array.iter() {
+        println!("Element: {}", element);
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>for element in array.iter() { ... }</code> iterates over each element in the array.</li></ul><p><strong>3. Iterating with Indices:</strong></p><p>You can iterate over a collection with access to both indices and elements.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let array = [10, 20, 30, 40, 50];
+    for (index, &amp;element) in array.iter().enumerate() {
+        println!("Index: {}, Element: {}", index, element);
+    }
+}
+</pre><p><strong>Explanation:</strong></p><ul><li><code>for (index, &amp;element) in array.iter().enumerate() { ... }</code> provides both the index and the element during iteration.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that calculates the factorial of a number using a <code>for</code> loop.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">fn main() {
+    let number = 5;
+    let mut factorial = 1;
+
+    for i in 1..=number {
+        factorial *= i;
+    }
+
+    println!("Factorial of {} is {}", number, factorial);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li>The program calculates the factorial of <code>number</code> by iterating from 1 to <code>number</code> and multiplying the <code>factorial</code> variable by each value.</li></ul>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('5dce4f69-d72c-416b-94d0-1cbe13cfadc4', 3, '0b8d3b3a-1d28-41c1-80d4-19375d5ce114', 'VIDEO', 'Rust Programming Tutorial #8 - While Loop', NULL, '', 'https://www.youtube.com/watch?v=OaEXxpELfvw');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('b4576abb-e3d5-4775-ba93-04ae912851d8', 4, '0b8d3b3a-1d28-41c1-80d4-19375d5ce114', 'VIDEO', 'Rust Programming Tutorial #9 - For Loop', NULL, '', 'https://www.youtube.com/watch?v=gtoj6vOeb1A');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('b4c034c4-a7e9-4c2f-b540-7610c6bb09d6', 0, '8478ca69-d368-4f1e-84c2-e792b694bb68', 'LESSON', 'Pointers and Memory In C', NULL, '<h3>Introduction to Pointers</h3><p>Pointers are a fundamental concept in C programming that allow you to directly interact with memory. Understanding pointers is crucial for managing memory efficiently and for various advanced programming techniques.</p><h3>What is a Pointer?</h3><p>A pointer is a variable that stores the memory address of another variable. Instead of holding a data value, a pointer holds the address where the value is stored in memory.</p><p><strong>Syntax for Pointer Declaration:</strong></p><pre class="ql-syntax" spellcheck="false">dataType *pointerName;
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int *p;
+</pre><p>Here, <code>p</code> is a pointer to an integer.</p><h3>Declaring and Initializing Pointers</h3><p>To use a pointer, you need to declare it and then initialize it with the address of a variable.</p><p><strong>Declaration:</strong></p><pre class="ql-syntax" spellcheck="false">int *p;
+</pre><p><strong>Initialization:</strong></p><pre class="ql-syntax" spellcheck="false">int x = 10;
 p = &amp;x; // &amp;x gives the address of variable x
-</pre><p>In this example, <code>p</code> now holds the address of the variable <code>x</code>.</p><h3>Dereferencing Pointers</h3><p>Dereferencing a pointer means accessing the value stored at the address the pointer points to. You use the <code>*</code> operator for dereferencing.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-*pointerName
-</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int value = *p; // value is now 10, the content of x
-</pre><p>Here, <code>*p</code> gives you the value stored at the address held by <code>p</code>.</p><h3>Pointer Arithmetic</h3><p>Pointers can be incremented or decremented to traverse arrays or manipulate data structures.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int arr[] = {1, 2, 3, 4, 5};
+</pre><p>In this example, <code>p</code> now holds the address of the variable <code>x</code>.</p><h3>Dereferencing Pointers</h3><p>Dereferencing a pointer means accessing the value stored at the address the pointer points to. You use the <code>*</code> operator for dereferencing.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">*pointerName
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int value = *p; // value is now 10, the content of x
+</pre><p>Here, <code>*p</code> gives you the value stored at the address held by <code>p</code>.</p><h3>Pointer Arithmetic</h3><p>Pointers can be incremented or decremented to traverse arrays or manipulate data structures.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int arr[] = {1, 2, 3, 4, 5};
 int *ptr = arr;
 
 printf("First element: %d\n", *ptr); // Outputs 1
 ptr++; // Move to the next integer
 printf("Second element: %d\n", *ptr); // Outputs 2
-</pre><h3>Memory Allocation</h3><p>In C, dynamic memory allocation is handled using pointers. Functions from the <code>stdlib.h</code> library, such as <code>malloc</code>, <code>calloc</code>, <code>realloc</code>, and <code>free</code>, are used for this purpose.</p><ul><li><code><strong>malloc(size_t size)</strong></code>: Allocates a block of memory of the specified size.</li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int *arr = (int *)malloc(5 * sizeof(int)); // Allocate memory for 5 integers
-</pre><ul><li><code><strong>calloc(size_t num, size_t size)</strong></code>: Allocates memory for an array of <code>num</code> elements of <code>size</code> bytes each, and initializes all bytes to zero.</li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int *arr = (int *)calloc(5, sizeof(int)); // Allocate memory for 5 integers and initialize to 0
-</pre><ul><li><code><strong>realloc(void *ptr, size_t size)</strong></code>: Changes the size of previously allocated memory.</li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-arr = (int *)realloc(arr, 10 * sizeof(int)); // Resize memory to hold 10 integers
-</pre><ul><li><code><strong>free(void *ptr)</strong></code>: Deallocates previously allocated memory.</li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-free(arr); // Free the allocated memory
-</pre><h3>Example Program</h3><p>Here is an example demonstrating the use of pointers and dynamic memory allocation:</p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-#include &lt;stdio.h&gt;
+</pre><h3>Memory Allocation</h3><p>In C, dynamic memory allocation is handled using pointers. Functions from the <code>stdlib.h</code> library, such as <code>malloc</code>, <code>calloc</code>, <code>realloc</code>, and <code>free</code>, are used for this purpose.</p><ul><li><code><strong>malloc(size_t size)</strong></code>: Allocates a block of memory of the specified size.</li></ul><pre class="ql-syntax" spellcheck="false">int *arr = (int *)malloc(5 * sizeof(int)); // Allocate memory for 5 integers
+</pre><ul><li><code><strong>calloc(size_t num, size_t size)</strong></code>: Allocates memory for an array of <code>num</code> elements of <code>size</code> bytes each, and initializes all bytes to zero.</li></ul><pre class="ql-syntax" spellcheck="false">int *arr = (int *)calloc(5, sizeof(int)); // Allocate memory for 5 integers and initialize to 0
+</pre><ul><li><code><strong>realloc(void *ptr, size_t size)</strong></code>: Changes the size of previously allocated memory.</li></ul><pre class="ql-syntax" spellcheck="false">arr = (int *)realloc(arr, 10 * sizeof(int)); // Resize memory to hold 10 integers
+</pre><ul><li><code><strong>free(void *ptr)</strong></code>: Deallocates previously allocated memory.</li></ul><pre class="ql-syntax" spellcheck="false">free(arr); // Free the allocated memory
+</pre><h3>Example Program</h3><p>Here is an example demonstrating the use of pointers and dynamic memory allocation:</p><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 
 int main() {
@@ -2088,60 +3068,34 @@ int main() {
     return 0;
 }
 </pre><p>In this program:</p><ul><li>We allocate memory for an array of integers.</li><li>Initialize the array with values and print them.</li><li>Finally, we free the allocated memory to prevent memory leaks.</li></ul><h3>Conclusion</h3><p>Pointers are a powerful feature in C programming that provide direct access to memory. Understanding pointers allows you to manage memory more efficiently and perform advanced programming techniques. With knowledge of pointer arithmetic and dynamic memory allocation, you can write more complex and efficient C programs.</p>', '');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('0fe31630-2800-429e-90af-676228cc4814', 1, '3c8a381e-8a85-41ca-b07e-4d792c5571fd', 'VIDEO', 'C Programming Tutorial for Beginners - Pointers and Memory', NULL, '', 'https://www.youtube.com/watch?v=KJgsSFOSQv0&t=11350s');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('e03ed4e8-de91-4867-8489-0cb157ff2c49', 0, '57fe22fb-ed2b-45d2-b1c0-5e8fca623cce', 'LESSON', 'Variables and Data Types In C', NULL, '<h3>Introduction</h3><p>In C programming, variables and data types are fundamental concepts that form the basis of any C program. Understanding how to declare variables and use different data types is essential for writing efficient and effective code.</p><h3>Variables</h3><p>A variable is a named storage location in memory that holds a value. The value of a variable can be changed during the execution of a program.</p><p><strong>Syntax for Variable Declaration:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-dataType variableName;
-</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int age;
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('eeb3f9a8-2cc5-4451-8ae0-7a2af67dd58e', 1, '8478ca69-d368-4f1e-84c2-e792b694bb68', 'VIDEO', 'C Programming Tutorial for Beginners - Pointers and Memory', NULL, '', 'https://www.youtube.com/watch?v=KJgsSFOSQv0&t=11350s');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('b090e878-bc1a-4d98-b813-6b429f5a0c42', 0, 'd88a276f-b263-4b8e-aaf9-7f8340c6b100', 'LESSON', 'Variables and Data Types In C', NULL, '<h3>Introduction</h3><p>In C programming, variables and data types are fundamental concepts that form the basis of any C program. Understanding how to declare variables and use different data types is essential for writing efficient and effective code.</p><h3>Variables</h3><p>A variable is a named storage location in memory that holds a value. The value of a variable can be changed during the execution of a program.</p><p><strong>Syntax for Variable Declaration:</strong></p><pre class="ql-syntax" spellcheck="false">dataType variableName;
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int age;
 float salary;
-</pre><p>In this example:</p><ul><li><code>age</code> is an integer variable.</li><li><code>salary</code> is a floating-point variable.</li></ul><h3>Initializing Variables</h3><p>Variables can be initialized at the time of declaration or later in the program.</p><p><strong>Declaration and Initialization:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int age = 25;
+</pre><p>In this example:</p><ul><li><code>age</code> is an integer variable.</li><li><code>salary</code> is a floating-point variable.</li></ul><h3>Initializing Variables</h3><p>Variables can be initialized at the time of declaration or later in the program.</p><p><strong>Declaration and Initialization:</strong></p><pre class="ql-syntax" spellcheck="false">int age = 25;
 float salary = 50000.50;
-</pre><p><strong>Initialization after Declaration:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int age;
+</pre><p><strong>Initialization after Declaration:</strong></p><pre class="ql-syntax" spellcheck="false">int age;
 age = 25;
 
 float salary;
 salary = 50000.50;
-</pre><h3>Data Types</h3><p>Data types specify the type of data that a variable can hold. C provides several built-in data types, which can be broadly classified into the following categories:</p><h4>1. <strong>Basic Data Types</strong></h4><ul><li><strong>Integer Types (</strong><code><strong>int</strong></code><strong>)</strong></li><li class="ql-indent-1">Used to store whole numbers.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int count = 10;
-</pre><ul><li><strong>Floating-Point Types (</strong><code><strong>float</strong></code><strong>, </strong><code><strong>double</strong></code><strong>)</strong></li><li class="ql-indent-1">Used to store numbers with fractional parts.</li><li class="ql-indent-1"><code>float</code> is used for single-precision floating-point numbers.</li><li class="ql-indent-1"><code>double</code> is used for double-precision floating-point numbers.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-float temperature = 98.6;
+</pre><h3>Data Types</h3><p>Data types specify the type of data that a variable can hold. C provides several built-in data types, which can be broadly classified into the following categories:</p><h4>1. <strong>Basic Data Types</strong></h4><ul><li><strong>Integer Types (</strong><code><strong>int</strong></code><strong>)</strong></li><li class="ql-indent-1">Used to store whole numbers.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">int count = 10;
+</pre><ul><li><strong>Floating-Point Types (</strong><code><strong>float</strong></code><strong>, </strong><code><strong>double</strong></code><strong>)</strong></li><li class="ql-indent-1">Used to store numbers with fractional parts.</li><li class="ql-indent-1"><code>float</code> is used for single-precision floating-point numbers.</li><li class="ql-indent-1"><code>double</code> is used for double-precision floating-point numbers.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">float temperature = 98.6;
 double distance = 123456.789;
-</pre><ul><li><strong>Character Type (</strong><code><strong>char</strong></code><strong>)</strong></li><li class="ql-indent-1">Used to store single characters.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-char grade = ''A'';
-</pre><h4>2. <strong>Derived Data Types</strong></h4><ul><li><strong>Arrays</strong></li><li class="ql-indent-1">Collections of variables of the same type.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int numbers[5] = {1, 2, 3, 4, 5};
-</pre><ul><li><strong>Pointers</strong></li><li class="ql-indent-1">Variables that store memory addresses.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int *ptr;
-</pre><ul><li><strong>Structures</strong></li><li class="ql-indent-1">User-defined data types that group related variables.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-struct Person {
+</pre><ul><li><strong>Character Type (</strong><code><strong>char</strong></code><strong>)</strong></li><li class="ql-indent-1">Used to store single characters.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">char grade = ''A'';
+</pre><h4>2. <strong>Derived Data Types</strong></h4><ul><li><strong>Arrays</strong></li><li class="ql-indent-1">Collections of variables of the same type.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">int numbers[5] = {1, 2, 3, 4, 5};
+</pre><ul><li><strong>Pointers</strong></li><li class="ql-indent-1">Variables that store memory addresses.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">int *ptr;
+</pre><ul><li><strong>Structures</strong></li><li class="ql-indent-1">User-defined data types that group related variables.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">struct Person {
     char name[50];
     int age;
 };
-</pre><ul><li><strong>Unions</strong></li><li class="ql-indent-1">User-defined data types that can hold different data types but only one at a time.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-union Data {
+</pre><ul><li><strong>Unions</strong></li><li class="ql-indent-1">User-defined data types that can hold different data types but only one at a time.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">union Data {
     int i;
     float f;
     char str[20];
 };
-</pre><h4>3. <strong>Enumeration Types (</strong><code><strong>enum</strong></code><strong>)</strong></h4><ul><li><strong>Enumeration Types</strong></li><li class="ql-indent-1">Define a variable that can hold a set of predefined constants.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">c
-Copy code
-enum Weekday { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday };
-</pre><h3>Example Program</h3><p>Here is a simple C program that demonstrates the use of different variables and data types:</p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-#include &lt;stdio.h&gt;
+</pre><h4>3. <strong>Enumeration Types (</strong><code><strong>enum</strong></code><strong>)</strong></h4><ul><li><strong>Enumeration Types</strong></li><li class="ql-indent-1">Define a variable that can hold a set of predefined constants.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">enum Weekday { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday };
+</pre><h3>Example Program</h3><p>Here is a simple C program that demonstrates the use of different variables and data types:</p><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
 
 int main() {
     int age = 25;
@@ -2173,45 +3127,34 @@ int main() {
     return 0;
 }
 </pre><p>In this program:</p><ul><li>We declare and initialize variables of different types.</li><li>We use an array to store multiple integers.</li><li>We define and use a structure to group related data.</li></ul><h3>Conclusion</h3><p>Variables and data types are essential components of C programming. Understanding how to declare variables, initialize them, and use different data types allows you to handle various kinds of data efficiently. This knowledge forms the foundation for building more complex programs and algorithms in C.</p>', '');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('846796c7-bec6-41cd-a59e-76dd94092878', 1, '57fe22fb-ed2b-45d2-b1c0-5e8fca623cce', 'VIDEO', 'C Programming Tutorial for Beginners - Variables And Data Types', NULL, '', 'https://www.youtube.com/watch?v=KJgsSFOSQv0&t=1256s');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('b15a286f-731a-49df-a626-eff50219d38e', 0, '99e1bbc1-92cd-4fff-b1ea-5151a6154c4f', 'LESSON', 'Conditionals In C', NULL, '<h3>Introduction</h3><p>Conditionals in C are used to make decisions in a program based on certain conditions. They allow you to control the flow of execution and execute different blocks of code based on whether a condition is true or false. The main conditional statements in C are <code>if</code>, <code>else</code>, <code>else if</code>, and <code>switch</code>.</p><h3>The <code>if</code> Statement</h3><p>The <code>if</code> statement evaluates a condition and executes a block of code if the condition is true.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-if (condition) {
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('c873eb27-4493-418e-baef-ca9325608543', 1, 'd88a276f-b263-4b8e-aaf9-7f8340c6b100', 'CODE', 'List divisor', 'b6484e21-6937-489c-b031-b71767994740', 'List divisor', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('e474769d-fc78-4170-9e29-b7ca3b89720e', 2, 'd88a276f-b263-4b8e-aaf9-7f8340c6b100', 'VIDEO', 'C Programming Tutorial for Beginners - Variables And Data Types', NULL, '', 'https://www.youtube.com/watch?v=KJgsSFOSQv0&t=1256s');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('b04725b2-97ac-4bcb-ad6f-3c2deaddbf1c', 0, '626aedf8-8a49-42e0-be2d-8f25d146704c', 'LESSON', 'Conditionals In C', NULL, '<h3>Introduction</h3><p>Conditionals in C are used to make decisions in a program based on certain conditions. They allow you to control the flow of execution and execute different blocks of code based on whether a condition is true or false. The main conditional statements in C are <code>if</code>, <code>else</code>, <code>else if</code>, and <code>switch</code>.</p><h3>The <code>if</code> Statement</h3><p>The <code>if</code> statement evaluates a condition and executes a block of code if the condition is true.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">if (condition) {
     // Code to execute if condition is true
 }
-</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int number = 10;
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int number = 10;
 if (number &gt; 0) {
     printf("The number is positive.\n");
 }
-</pre><p>In this example, the message will be printed because the condition <code>number &gt; 0</code> is true.</p><h3>The <code>if-else</code> Statement</h3><p>The <code>if-else</code> statement provides an alternative block of code that is executed if the condition in the <code>if</code> statement is false.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-if (condition) {
+</pre><p>In this example, the message will be printed because the condition <code>number &gt; 0</code> is true.</p><h3>The <code>if-else</code> Statement</h3><p>The <code>if-else</code> statement provides an alternative block of code that is executed if the condition in the <code>if</code> statement is false.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">if (condition) {
     // Code to execute if condition is true
 } else {
     // Code to execute if condition is false
 }
-</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int number = -5;
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int number = -5;
 if (number &gt; 0) {
     printf("The number is positive.\n");
 } else {
     printf("The number is not positive.\n");
 }
-</pre><p>Here, since <code>number</code> is not greater than 0, the second message will be printed.</p><h3>The <code>if-else if-else</code> Statement</h3><p>The <code>if-else if-else</code> statement is used to check multiple conditions in sequence. The first true condition''s block is executed, and the rest are skipped.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-if (condition1) {
+</pre><p>Here, since <code>number</code> is not greater than 0, the second message will be printed.</p><h3>The <code>if-else if-else</code> Statement</h3><p>The <code>if-else if-else</code> statement is used to check multiple conditions in sequence. The first true condition''s block is executed, and the rest are skipped.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">if (condition1) {
     // Code to execute if condition1 is true
 } else if (condition2) {
     // Code to execute if condition2 is true
 } else {
     // Code to execute if none of the above conditions are true
 }
-</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int number = 0;
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int number = 0;
 if (number &gt; 0) {
     printf("The number is positive.\n");
 } else if (number &lt; 0) {
@@ -2219,9 +3162,7 @@ if (number &gt; 0) {
 } else {
     printf("The number is zero.\n");
 }
-</pre><p>In this example, the output will be "The number is zero" because neither of the first two conditions is true.</p><h3>The <code>switch</code> Statement</h3><p>The <code>switch</code> statement is used to select one of many code blocks to be executed based on the value of a variable.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-switch (expression) {
+</pre><p>In this example, the output will be "The number is zero" because neither of the first two conditions is true.</p><h3>The <code>switch</code> Statement</h3><p>The <code>switch</code> statement is used to select one of many code blocks to be executed based on the value of a variable.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">switch (expression) {
     case constant1:
         // Code to execute if expression equals constant1
         break;
@@ -2232,9 +3173,7 @@ switch (expression) {
     default:
         // Code to execute if no case matches
 }
-</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int day = 3;
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int day = 3;
 switch (day) {
     case 1:
         printf("Monday\n");
@@ -2260,9 +3199,7 @@ switch (day) {
     default:
         printf("Invalid day\n");
 }
-</pre><p>In this example, the output will be "Wednesday" because the value of <code>day</code> is 3.</p><h3>Nested Conditional Statements</h3><p>You can nest <code>if</code> and <code>switch</code> statements within each other to handle more complex conditions.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">c
-Copy code
-int number = 10;
+</pre><p>In this example, the output will be "Wednesday" because the value of <code>day</code> is 3.</p><h3>Nested Conditional Statements</h3><p>You can nest <code>if</code> and <code>switch</code> statements within each other to handle more complex conditions.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int number = 10;
 if (number &gt; 0) {
     if (number % 2 == 0) {
         printf("The number is positive and even.\n");
@@ -2273,8 +3210,5510 @@ if (number &gt; 0) {
     printf("The number is non-positive.\n");
 }
 </pre><h3>Conclusion</h3><p>Conditional statements are a key component of control flow in C programming. They allow you to make decisions and execute different parts of your code based on conditions. Mastery of <code>if</code>, <code>else</code>, <code>else if</code>, and <code>switch</code> statements is crucial for creating flexible and robust programs.</p>', '');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d9b65062-cee8-4694-9116-15acd43149d3', 1, '99e1bbc1-92cd-4fff-b1ea-5151a6154c4f', 'VIDEO', 'C Programming Tutorial for Beginners - If Statements', NULL, '', 'https://www.youtube.com/watch?v=KJgsSFOSQv0&t=6801s');
-INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('08c0ecd0-f53d-46d4-bf79-f7dfd8b60860', 2, '99e1bbc1-92cd-4fff-b1ea-5151a6154c4f', 'VIDEO', 'C Programming Tutorial for Beginners - Switch Statements', NULL, '', 'https://www.youtube.com/watch?v=KJgsSFOSQv0&t=8091s');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('499d3020-1da4-4dce-8a92-1ec8146973b6', 1, '626aedf8-8a49-42e0-be2d-8f25d146704c', 'CODE', 'Check triangle from side length', 'b6484e21-6937-489c-b031-b71767994760', 'Check triangle from side length', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('42b73cb0-9d4c-4171-b813-f3b9aadd89ce', 2, '626aedf8-8a49-42e0-be2d-8f25d146704c', 'VIDEO', 'C Programming Tutorial for Beginners - If Statements', NULL, '', 'https://www.youtube.com/watch?v=KJgsSFOSQv0&t=6801s');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('ef062f54-1b34-41fc-8148-404c0caa2abd', 3, '626aedf8-8a49-42e0-be2d-8f25d146704c', 'VIDEO', 'C Programming Tutorial for Beginners - Switch Statements', NULL, '', 'https://www.youtube.com/watch?v=KJgsSFOSQv0&t=8091s');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('f9cf4339-ba98-49e9-9d36-348e49b134dc', 0, '9e2dfaec-351f-41a1-8cf1-394d5bfe5846', 'LESSON', 'Understanding design patterns', NULL, '<h3>Lesson: Understanding Design Patterns</h3><p><strong>Objective:</strong> Gain an understanding of what design patterns are and why they are essential in software development.</p><p><strong>1. Definition:</strong> Design patterns are reusable solutions to common problems in software design. They represent best practices used by experienced developers.</p><p><strong>2. Benefits:</strong></p><ul><li>Promote code reusability and scalability.</li><li>Improve code readability and maintainability.</li><li>Facilitate communication among developers by providing a common language.</li></ul><p><strong>3. Categories of Design Patterns:</strong></p><ul><li>Creational: Deal with object creation mechanisms (e.g., Singleton, Factory).</li><li>Structural: Deal with object composition (e.g., Module, Revealing Module).</li><li>Behavioral: Deal with object interaction and responsibility (e.g., Observer, Mediator).</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a brief explanation of why design patterns are important in JavaScript development.</p><p><strong>Solution:</strong> Design patterns are essential in JavaScript development as they provide tested, proven development paradigms. They help developers avoid common pitfalls, promote code reuse, and make code more maintainable. By using design patterns, developers can solve complex problems more efficiently and communicate solutions more effectively within a team.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('9d8c708a-15f4-44ce-860a-709eb82bf0dc', 1, '9e2dfaec-351f-41a1-8cf1-394d5bfe5846', 'LESSON', 'Module pattern', NULL, '<h3>Lesson: Module Pattern</h3><p><strong>Objective:</strong> Learn how to encapsulate private variables and methods using the module pattern.</p><p><strong>1. Definition:</strong> The module pattern allows you to create a public API while keeping certain variables and methods private.</p><p><strong>2. Implementation:</strong></p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">const Module = (function() {
+    // Private variables and methods
+    let privateVar = ''I am private'';
+
+    function privateMethod() {
+        console.log(privateVar);
+    }
+
+    // Public API
+    return {
+        publicMethod: function() {
+            privateMethod();
+        }
+    };
+})();
+
+Module.publicMethod(); // I am private
+// Module.privateMethod(); // Error: privateMethod is not a function
+</pre><p><strong>Explanation:</strong></p><ul><li>The <code>Module</code> is an IIFE (Immediately Invoked Function Expression) that returns an object with a public method <code>publicMethod</code>.</li><li><code>privateVar</code> and <code>privateMethod</code> are not accessible from outside the module, ensuring encapsulation.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a module that encapsulates a counter and provides methods to increment, decrement, and get the current value of the counter.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Module Pattern&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Module Pattern Example&lt;/h1&gt;
+    &lt;script&gt;
+        const CounterModule = (function() {
+            let counter = 0;
+
+            function increment() {
+                counter++;
+            }
+
+            function decrement() {
+                counter--;
+            }
+
+            function getValue() {
+                return counter;
+            }
+
+            return {
+                increment,
+                decrement,
+                getValue
+            };
+        })();
+
+        CounterModule.increment();
+        CounterModule.increment();
+        console.log(CounterModule.getValue()); // 2
+        CounterModule.decrement();
+        console.log(CounterModule.getValue()); // 1
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('31422413-6e5c-438d-824a-f16f0f4ecdc9', 2, '9e2dfaec-351f-41a1-8cf1-394d5bfe5846', 'LESSON', 'Revealing module pattern', NULL, '<h3>Lesson: Revealing Module Pattern</h3><p><strong>Objective:</strong> Learn how to create a clear and consistent structure for your modules using the revealing module pattern.</p><p><strong>1. Definition:</strong> The revealing module pattern is a variation of the module pattern that explicitly defines which methods and variables are public and which are private.</p><p><strong>2. Implementation:</strong></p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">const RevealingModule = (function() {
+    let privateVar = ''I am private'';
+
+    function privateMethod() {
+        console.log(privateVar);
+    }
+
+    function publicMethod() {
+        privateMethod();
+    }
+
+    // Explicitly reveal public methods
+    return {
+        publicMethod: publicMethod
+    };
+})();
+
+RevealingModule.publicMethod(); // I am private
+// RevealingModule.privateMethod(); // Error: privateMethod is not a function
+</pre><p><strong>Explanation:</strong></p><ul><li>The <code>RevealingModule</code> pattern explicitly reveals the public API by returning an object that maps public methods to private functions.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a revealing module pattern that manages a collection of items with methods to add, remove, and list items.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Revealing Module Pattern&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Revealing Module Pattern Example&lt;/h1&gt;
+    &lt;script&gt;
+        const ItemManager = (function() {
+            let items = [];
+
+            function addItem(item) {
+                items.push(item);
+            }
+
+            function removeItem(item) {
+                items = items.filter(i =&gt; i !== item);
+            }
+
+            function listItems() {
+                return items;
+            }
+
+            return {
+                addItem: addItem,
+                removeItem: removeItem,
+                listItems: listItems
+            };
+        })();
+
+        ItemManager.addItem(''Item 1'');
+        ItemManager.addItem(''Item 2'');
+        console.log(ItemManager.listItems()); // [''Item 1'', ''Item 2'']
+        ItemManager.removeItem(''Item 1'');
+        console.log(ItemManager.listItems()); // [''Item 2'']
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('edde1b09-00b1-4673-ace6-289cdbc5581c', 3, '9e2dfaec-351f-41a1-8cf1-394d5bfe5846', 'LESSON', 'Singleton pattern', NULL, '<h3>Lesson: Singleton Pattern</h3><p><strong>Objective:</strong> Learn how to ensure a class has only one instance and provide a global point of access to it using the singleton pattern.</p><p><strong>1. Definition:</strong> The singleton pattern restricts the instantiation of a class to a single instance and provides a global point of access to it.</p><p><strong>2. Implementation:</strong></p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">const Singleton = (function() {
+    let instance;
+
+    function createInstance() {
+        const object = new Object(''I am the instance'');
+        return object;
+    }
+
+    return {
+        getInstance: function() {
+            if (!instance) {
+                instance = createInstance();
+            }
+            return instance;
+        }
+    };
+})();
+
+const instance1 = Singleton.getInstance();
+const instance2 = Singleton.getInstance();
+console.log(instance1 === instance2); // true
+</pre><p><strong>Explanation:</strong></p><ul><li>The <code>Singleton</code> pattern uses a closure to store a single instance of the object.</li><li>The <code>getInstance</code> method returns the existing instance if it exists or creates a new one if it doesn''t.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a singleton pattern that manages a database connection object, ensuring only one connection is created.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Singleton Pattern&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Singleton Pattern Example&lt;/h1&gt;
+    &lt;script&gt;
+        const DatabaseConnection = (function() {
+            let instance;
+
+            function createConnection() {
+                const connection = new Object(''Database connection'');
+                return connection;
+            }
+
+            return {
+                getConnection: function() {
+                    if (!instance) {
+                        instance = createConnection();
+                    }
+                    return instance;
+                }
+            };
+        })();
+
+        const connection1 = DatabaseConnection.getConnection();
+        const connection2 = DatabaseConnection.getConnection();
+        console.log(connection1 === connection2); // true
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('cbfe16ea-b5b7-4856-98b8-f568aa8fda5b', 4, '9e2dfaec-351f-41a1-8cf1-394d5bfe5846', 'LESSON', 'Factory pattern', NULL, '<h3>Lesson: Factory Pattern</h3><p><strong>Objective:</strong> Learn how to create objects without specifying the exact class of the object that will be created using the factory pattern.</p><p><strong>1. Definition:</strong> The factory pattern provides a way to create objects without specifying the exact class of the object that will be created.</p><p><strong>2. Implementation:</strong></p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function Car(type) {
+    this.type = type;
+    this.drive = function() {
+        console.log(`Driving a ${this.type}`);
+    };
+}
+
+function CarFactory() {
+    this.createCar = function(type) {
+        return new Car(type);
+    };
+}
+
+const factory = new CarFactory();
+const sedan = factory.createCar(''Sedan'');
+const suv = factory.createCar(''SUV'');
+
+sedan.drive(); // Driving a Sedan
+suv.drive(); // Driving a SUV
+</pre><p><strong>Explanation:</strong></p><ul><li>The <code>CarFactory</code> class provides a <code>createCar</code> method that creates a new car object based on the provided type.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a factory pattern that creates different types of shapes (circle, square) with a method to calculate their area.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Factory Pattern&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Factory Pattern Example&lt;/h1&gt;
+    &lt;script&gt;
+        function Circle(radius) {
+            this.radius = radius;
+            this.area = function() {
+                return Math.PI * this.radius * this.radius;
+            };
+        }
+
+        function Square(side) {
+            this.side = side;
+            this.area = function() {
+                return this.side * this.side;
+            };
+        }
+
+        function ShapeFactory() {
+            this.createShape = function(type, size) {
+                switch (type) {
+                    case ''circle'':
+                        return new Circle(size);
+                    case ''square'':
+                        return new Square(size);
+                    default:
+                        throw new Error(''Invalid shape type'');
+                }
+            };
+        }
+
+        const shapeFactory = new ShapeFactory();
+        const circle = shapeFactory.createShape(''circle'', 5);
+        const square = shapeFactory.createShape(''square'', 4);
+
+        console.log(`Circle area: ${circle.area()}`); // Circle area: 78.53981633974483
+        console.log(`Square area: ${square.area()}`); // Square area: 16
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p>By mastering these JavaScript design patterns, you will be able to create more robust, maintainable, and scalable applications. These lessons provide a strong foundation for building well-structured and efficient code in your JavaScript projects.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('f14381ba-655d-4c45-8049-6ad93d1a3220', 0, '20c10331-48be-401e-a923-fd6fe734176a', 'LESSON', 'Loops In C', NULL, '<h3>Introduction</h3><p>Loops are essential in C programming for repeating a block of code multiple times based on a condition. They help automate repetitive tasks and process data efficiently. C provides several types of loops: <code>for</code>, <code>while</code>, and <code>do-while</code>.</p><h3>The <code>for</code> Loop</h3><p>The <code>for</code> loop is used when the number of iterations is known beforehand. It includes three parts: initialization, condition, and increment/decrement.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">for (initialization; condition; increment/decrement) {
+    // Code to execute
+}
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
+
+int main() {
+    for (int i = 1; i &lt;= 5; i++) {
+        printf("Iteration %d\n", i);
+    }
+    return 0;
+}
+</pre><p>In this example, the loop initializes <code>i</code> to 1, checks if <code>i</code> is less than or equal to 5, and increments <code>i</code> by 1 each time. The loop prints the current iteration number from 1 to 5.</p><h3>The <code>while</code> Loop</h3><p>The <code>while</code> loop is used when the number of iterations is not known beforehand and depends on a condition being true.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">while (condition) {
+    // Code to execute
+}
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
+
+int main() {
+    int i = 1;
+    while (i &lt;= 5) {
+        printf("Iteration %d\n", i);
+        i++;
+    }
+    return 0;
+}
+</pre><p>In this example, the loop starts with <code>i</code> set to 1. As long as <code>i</code> is less than or equal to 5, the loop prints the current iteration number and increments <code>i</code>.</p><h3>The <code>do-while</code> Loop</h3><p>The <code>do-while</code> loop is similar to the <code>while</code> loop but guarantees that the loop body will execute at least once before the condition is tested.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">do {
+    // Code to execute
+} while (condition);
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
+
+int main() {
+    int i = 1;
+    do {
+        printf("Iteration %d\n", i);
+        i++;
+    } while (i &lt;= 5);
+    return 0;
+}
+</pre><p>In this example, the loop prints the current iteration number and increments <code>i</code>, and it checks the condition after executing the loop body.</p><h3>Loop Control Statements</h3><p>C provides control statements to alter the flow of loops:</p><ul><li><code><strong>break</strong></code><strong>:</strong> Exits the loop immediately, regardless of the condition.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">for (int i = 1; i &lt;= 10; i++) {
+    if (i == 6) {
+        break;
+    }
+    printf("Iteration %d\n", i);
+}
+</pre><ul><li>This loop will print iteration numbers from 1 to 5 and then exit when <code>i</code> equals 6.</li><li><code><strong>continue</strong></code><strong>:</strong> Skips the rest of the code in the current iteration and proceeds to the next iteration of the loop.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">for (int i = 1; i &lt;= 10; i++) {
+    if (i % 2 == 0) {
+        continue;
+    }
+    printf("Odd number %d\n", i);
+}
+</pre><ul><li>This loop prints only the odd numbers between 1 and 10, skipping the even numbers.</li></ul><h3>Nested Loops</h3><p>You can nest loops within each other to handle more complex scenarios.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
+
+int main() {
+    for (int i = 1; i &lt;= 3; i++) {
+        for (int j = 1; j &lt;= 3; j++) {
+            printf("i = %d, j = %d\n", i, j);
+        }
+    }
+    return 0;
+}
+</pre><p>In this example, the outer loop iterates three times, and for each iteration of the outer loop, the inner loop also iterates three times, printing the values of <code>i</code> and <code>j</code>.</p><h3>Conclusion</h3><p>Loops are powerful constructs in C programming that allow you to repeat actions and process data efficiently. Understanding how to use <code>for</code>, <code>while</code>, and <code>do-while</code> loops, as well as loop control statements, is essential for writing effective and efficient C code.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('92f33928-0e2b-46b8-b5db-8b3362f3fc20', 1, '20c10331-48be-401e-a923-fd6fe734176a', 'CODE', 'Calculate sum of cubes', 'b6484e21-6937-489c-b031-b71767994756', 'Calculate sum of cubes', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('1c8f689c-7af9-40a0-b255-4e61cae78a28', 2, '20c10331-48be-401e-a923-fd6fe734176a', 'VIDEO', 'C Programming Tutorial for Beginners - While Loops', NULL, '', 'https://www.youtube.com/watch?v=KJgsSFOSQv0&t=8983s');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d451bbce-04e4-4e5c-ae0f-294cd8a946d4', 0, 'b3557f99-e402-4d5a-8574-058fafe5fa28', 'LESSON', 'Understanding functional programming principles', NULL, '<h3>Lesson: Understanding Functional Programming Principles</h3><p><strong>Objective:</strong> Gain a foundational understanding of the principles of functional programming and their importance in JavaScript.</p><p><strong>1. Definition:</strong> Functional programming is a programming paradigm that treats computation as the evaluation of mathematical functions and avoids changing state and mutable data.</p><p><strong>2. Key Principles:</strong></p><ul><li><strong>First-Class Functions:</strong> Functions are treated as first-class citizens. They can be assigned to variables, passed as arguments, and returned from other functions.</li><li><strong>Higher-Order Functions:</strong> Functions that take other functions as arguments or return functions as results.</li><li><strong>Pure Functions:</strong> Functions that always produce the same output for the same input and have no side effects.</li><li><strong>Immutability:</strong> Data is never modified after it is created. Instead, new data structures are created.</li><li><strong>Function Composition:</strong> Combining simple functions to build more complex ones.</li></ul><p><strong>3. Benefits:</strong></p><ul><li><strong>Predictable Code:</strong> Pure functions and immutability make code more predictable and easier to debug.</li><li><strong>Reusable Functions:</strong> Higher-order functions and function composition promote code reuse.</li><li><strong>Scalability:</strong> Functional programming can lead to more scalable and maintainable code.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a brief explanation of functional programming principles using a simple example.</p><p><strong>Solution:</strong> Functional programming emphasizes the use of pure functions, immutability, and first-class functions. For example, instead of modifying an array in place, you create a new array with the desired changes:</p><pre class="ql-syntax" spellcheck="false">const numbers = [1, 2, 3, 4, 5];
+
+function addOne(num) {
+    return num + 1;
+}
+
+const newNumbers = numbers.map(addOne);
+console.log(newNumbers); // [2, 3, 4, 5, 6]
+console.log(numbers); // [1, 2, 3, 4, 5]
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('3d281bbd-fe35-43f1-9722-c1dc3bc0c309', 1, 'b3557f99-e402-4d5a-8574-058fafe5fa28', 'LESSON', 'Pure functions', NULL, '<h3>Lesson: Pure Functions</h3><p><strong>Objective:</strong> Understand what pure functions are and how to write them in JavaScript.</p><p><strong>1. Definition:</strong> A pure function is a function that:</p><ul><li>Returns the same result given the same arguments.</li><li>Does not cause any observable side effects.</li></ul><p><strong>2. Characteristics of Pure Functions:</strong></p><ul><li>No reliance on external state.</li><li>No modifications to external state.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function pureAdd(a, b) {
+    return a + b;
+}
+
+console.log(pureAdd(2, 3)); // 5
+console.log(pureAdd(2, 3)); // 5
+</pre><p><strong>3. Non-Pure Functions:</strong> A function that depends on or modifies external state is not pure.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let count = 0;
+
+function impureAdd(a) {
+    count += a;
+    return count;
+}
+
+console.log(impureAdd(2)); // 2
+console.log(impureAdd(2)); // 4
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a pure function that multiplies two numbers and demonstrate its purity.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Pure Functions&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Pure Functions Example&lt;/h1&gt;
+    &lt;script&gt;
+        function pureMultiply(a, b) {
+            return a * b;
+        }
+
+        console.log(pureMultiply(2, 3)); // 6
+        console.log(pureMultiply(2, 3)); // 6
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('44f19644-4433-43f8-8337-33d483ea449b', 3, '20c10331-48be-401e-a923-fd6fe734176a', 'VIDEO', 'C Programming Tutorial for Beginners - For Loops', NULL, '', 'https://www.youtube.com/watch?v=KJgsSFOSQv0&t=10211s');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('1d7d2b61-1905-47ed-89e0-609a32550724', 0, '0a02f0ef-03fd-4621-88b2-872d7536bba0', 'LESSON', 'Arrays In C', NULL, '<h3>Introduction</h3><p>Arrays in C are a data structure that allows you to store multiple values of the same type in a single variable. They are useful for managing collections of data, such as lists or tables, where each element is accessed using an index. This lesson covers the basics of arrays, including declaration, initialization, and manipulation.</p><h3>Declaring Arrays</h3><p>To use an array, you first need to declare it by specifying the type of its elements and the number of elements it will hold.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">dataType arrayName[arraySize];
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int numbers[5];
+</pre><p>In this example, <code>numbers</code> is an array of integers capable of holding 5 elements.</p><h3>Initializing Arrays</h3><p>After declaring an array, you can initialize it with values either at the time of declaration or later in the code.</p><ul><li><strong>Initialization at Declaration:</strong></li><li>You can initialize an array with specific values when you declare it.</li><li><strong>Syntax:</strong></li></ul><pre class="ql-syntax" spellcheck="false">dataType arrayName[] = {value1, value2, value3, ...};
+</pre><ul><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">int numbers[] = {1, 2, 3, 4, 5};
+</pre><ul><li>Here, <code>numbers</code> is initialized with five values. The size of the array is automatically determined by the number of values provided.</li><li><strong>Initialization After Declaration:</strong></li><li>You can also initialize an array after declaring it by assigning values to each element individually.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">int numbers[5];
+numbers[0] = 1;
+numbers[1] = 2;
+numbers[2] = 3;
+numbers[3] = 4;
+numbers[4] = 5;
+</pre><h3>Accessing Array Elements</h3><p>Array elements are accessed using their index, which starts from 0. You can read or modify elements using their index.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">arrayName[index]
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int numbers[] = {1, 2, 3, 4, 5};
+int firstNumber = numbers[0]; // Access the first element
+numbers[2] = 10; // Modify the third element
+</pre><p>In this example, <code>firstNumber</code> is assigned the value <code>1</code>, and the third element of the <code>numbers</code> array is updated to <code>10</code>.</p><h3>Array Length</h3><p>The length of an array (i.e., the number of elements it holds) can be determined using the <code>sizeof</code> operator. This approach calculates the total size of the array and divides it by the size of an individual element.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">int length = sizeof(arrayName) / sizeof(arrayName[0]);
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int numbers[] = {1, 2, 3, 4, 5};
+int length = sizeof(numbers) / sizeof(numbers[0]);
+printf("Array length: %d\n", length);
+</pre><p>In this example, <code>length</code> will be <code>5</code>, representing the number of elements in the <code>numbers</code> array.</p><h3>Iterating Through Arrays</h3><p>You can use loops to iterate through all elements of an array. This is useful for performing operations on each element.</p><ul><li><strong>Using a </strong><code><strong>for</strong></code><strong> Loop:</strong></li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">int numbers[] = {1, 2, 3, 4, 5};
+for (int i = 0; i &lt; sizeof(numbers) / sizeof(numbers[0]); i++) {
+    printf("%d\n", numbers[i]);
+}
+</pre><ul><li>This loop prints each element of the <code>numbers</code> array.</li><li><strong>Using an Enhanced </strong><code><strong>for</strong></code><strong> Loop (C99 Standard):</strong></li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">int numbers[] = {1, 2, 3, 4, 5};
+for (int i : numbers) {
+    printf("%d\n", i);
+}
+</pre><ul><li>This loop is more concise and iterates over each element of the array directly.</li></ul><h3>Multidimensional Arrays</h3><p>C also supports multidimensional arrays, such as 2D arrays, which can be thought of as arrays of arrays.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">dataType arrayName[rowSize][columnSize];
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int matrix[3][3] = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+};
+</pre><p>In this example, <code>matrix</code> is a 3x3 array.</p><ul><li><strong>Accessing Elements:</strong></li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">int value = matrix[1][2]; // Access the element in the second row, third column
+</pre><ul><li><strong>Iterating Through a 2D Array:</strong></li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">for (int i = 0; i &lt; 3; i++) {
+    for (int j = 0; j &lt; 3; j++) {
+        printf("%d ", matrix[i][j]);
+    }
+    printf("\n");
+}
+</pre><ul><li>This loop prints each element of the 2D array in matrix form.</li></ul><h3>Conclusion</h3><p>Arrays are fundamental to C programming, allowing you to store and manage multiple values efficiently. Understanding how to declare, initialize, access, and manipulate arrays is crucial for working with collections of data. Multidimensional arrays further extend this concept, enabling the handling of more complex data structures.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('26bcdd4e-5326-4406-b770-2dc6023e6ee2', 1, '0a02f0ef-03fd-4621-88b2-872d7536bba0', 'CODE', 'List odd divisor', 'b6484e21-6937-489c-b031-b71767994741', 'List odd divisor', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('1c52a4c0-0c3c-4850-b89f-39cf2967a75f', 2, '0a02f0ef-03fd-4621-88b2-872d7536bba0', 'VIDEO', 'C Programming Tutorial for Beginners - Arrays', NULL, '', 'https://www.youtube.com/watch?v=KJgsSFOSQv0&t=5189s');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('7e5142cd-977d-4241-aba9-a2396cdd71c7', 0, '470ed176-4da4-4337-bc24-de5c20719293', 'LESSON', 'Strings In C', NULL, '<h3>Introduction</h3><p>In C programming, strings are sequences of characters stored in an array. Unlike some other programming languages, C does not have a built-in string data type. Instead, strings are handled as arrays of characters, terminated by a special null character <code>''\0''</code>. This null terminator indicates the end of the string.</p><h3>Declaring Strings</h3><p>To declare a string in C, you create an array of characters. The size of the array should be sufficient to hold all characters, including the null terminator.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">char stringName[size];
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">char greeting[6];
+</pre><p>In this example, <code>greeting</code> can hold up to 5 characters plus the null terminator.</p><h3>Initializing Strings</h3><p>You can initialize a string at the time of declaration using double quotes. The compiler automatically includes the null terminator.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">char stringName[] = "initialValue";
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">char greeting[] = "Hello";
+</pre><p>In this example, <code>greeting</code> is initialized to "Hello", and the array size is automatically set to 6 (5 characters + 1 null terminator).</p><h3>Accessing String Characters</h3><p>You can access individual characters in a string using array indexing. Remember that the index starts from 0.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
+
+int main() {
+    char greeting[] = "Hello";
+    printf("First character: %c\n", greeting[0]); // H
+    printf("Third character: %c\n", greeting[2]); // l
+    return 0;
+}
+</pre><h3>String Functions</h3><p>C provides a standard library <code>&lt;string.h&gt;</code> with functions to manipulate strings. Here are some commonly used functions:</p><ul><li><code><strong>strlen()</strong></code>: Computes the length of a string (excluding the null terminator).</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+    char str[] = "Hello";
+    printf("Length of string: %zu\n", strlen(str));
+    return 0;
+}
+</pre><ul><li><code><strong>strcpy()</strong></code>: Copies a string from one location to another.</li><li><strong>Syntax:</strong></li></ul><pre class="ql-syntax" spellcheck="false">char *strcpy(char *dest, const char *src);
+</pre><ul><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+    char source[] = "Hello";
+    char destination[6];
+    strcpy(destination, source);
+    printf("Destination string: %s\n", destination);
+    return 0;
+}
+</pre><ul><li><code><strong>strcat()</strong></code>: Concatenates (appends) one string to the end of another.</li><li><strong>Syntax:</strong></li></ul><pre class="ql-syntax" spellcheck="false">char *strcat(char *dest, const char *src);
+</pre><ul><li>Example:</li></ul><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+    char str1[20] = "Hello";
+    char str2[] = " World";
+    strcat(str1, str2);
+    printf("Concatenated string: %s\n", str1);
+    return 0;
+}
+</pre><ul><li><code><strong>strcmp()</strong></code>: Compares two strings.</li><li><strong>Syntax:</strong></li></ul><pre class="ql-syntax" spellcheck="false">int strcmp(const char *str1, const char *str2);
+</pre><ul><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+    char str1[] = "Hello";
+    char str2[] = "Hello";
+    int result = strcmp(str1, str2);
+    if (result == 0) {
+        printf("Strings are equal.\n");
+    } else if (result &lt; 0) {
+        printf("String 1 is less than String 2.\n");
+    } else {
+        printf("String 1 is greater than String 2.\n");
+    }
+    return 0;
+}
+</pre><h3>Reading Strings</h3><p>You can read strings from the user using <code>scanf()</code> or <code>fgets()</code>. <code>fgets()</code> is generally preferred because it handles input safely, preventing buffer overflow.</p><ul><li><strong>Using </strong><code><strong>scanf()</strong></code><strong>:</strong></li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
+
+int main() {
+    char name[50];
+    printf("Enter your name: ");
+    scanf("%49s", name); // Reads up to 49 characters
+    printf("Hello, %s!\n", name);
+    return 0;
+}
+</pre><ul><li><strong>Using </strong><code><strong>fgets()</strong></code><strong>:</strong></li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
+
+int main() {
+    char name[50];
+    printf("Enter your name: ");
+    fgets(name, sizeof(name), stdin); // Reads up to sizeof(name) - 1 characters
+    printf("Hello, %s", name);
+    return 0;
+}
+</pre><h3>String Literals</h3><p>String literals are constant strings used in your code. They are automatically null-terminated.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
+
+int main() {
+    printf("This is a string literal.\n");
+    return 0;
+}
+</pre><h3>Conclusion</h3><p>Strings in C are handled as arrays of characters, terminated by a null character. Understanding how to declare, initialize, and manipulate strings, along with using standard library functions, is essential for managing textual data in C programs.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('8b4a69f1-4c01-4ce2-8b32-de39309ae5b1', 1, '470ed176-4da4-4337-bc24-de5c20719293', 'VIDEO', 'Strings in C', NULL, '', 'https://youtu.be/5TzFNouc0PE?si=VAJZKM9oetwPwgeh');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('450c5bae-3e1f-49e1-a793-b03544bf9fba', 0, 'afec063e-fa7e-424d-9ca1-0ea52810da18', 'LESSON', 'Functions and Structures In C', NULL, '<h3>Functions</h3><p>In C programming, functions are blocks of code designed to perform a specific task. They help in organizing code, promoting reusability, and reducing redundancy. Functions can be called from other functions, allowing you to break down complex problems into simpler, manageable tasks.</p><h4>Defining Functions</h4><p>To define a function, you specify the return type, function name, and parameters (if any). The function body contains the code to be executed.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">returnType functionName(parameters) {
+    // Code to execute
+    return value; // if returnType is not void
+}
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
+
+// Function declaration
+int add(int a, int b);
+
+// Function definition
+int add(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    int result = add(5, 3);
+    printf("Sum: %d\n", result);
+    return 0;
+}
+</pre><h4>Calling Functions</h4><p>You can call a function by using its name followed by parentheses. If the function requires parameters, pass them inside the parentheses.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int result = add(10, 20);
+</pre><h4>Function Parameters and Return Types</h4><p>Functions can accept parameters to provide input values and return a value to the caller. The return type can be any valid data type, including <code>int</code>, <code>float</code>, <code>char</code>, etc. If a function does not return a value, use <code>void</code>.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">float multiply(float x, float y) {
+    return x * y;
+}
+
+void printMessage() {
+    printf("This function does not return a value.\n");
+}
+</pre><h4>Function Overloading</h4><p>C does not support function overloading directly, meaning you cannot have multiple functions with the same name but different parameters. Instead, you can achieve similar functionality by using different names for functions.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int addInt(int a, int b) {
+    return a + b;
+}
+
+float addFloat(float a, float b) {
+    return a + b;
+}
+</pre><h3>Structures</h3><p>Structures (<code>struct</code>) in C are used to group related variables of different types into a single unit. They are useful for creating complex data types that model real-world entities.</p><h4>Defining Structures</h4><p>To define a structure, use the <code>struct</code> keyword followed by the structure name and its members enclosed in curly braces.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">struct StructureName {
+    dataType member1;
+    dataType member2;
+    // Additional members
+};
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
+
+// Structure definition
+struct Person {
+    char name[50];
+    int age;
+    float height;
+};
+
+int main() {
+    // Structure variable declaration and initialization
+    struct Person person1 = {"Alice", 30, 5.5};
+
+    // Accessing structure members
+    printf("Name: %s\n", person1.name);
+    printf("Age: %d\n", person1.age);
+    printf("Height: %.2f\n", person1.height);
+
+    return 0;
+}
+</pre><h4>Accessing Structure Members</h4><p>Structure members are accessed using the dot operator (<code>.</code>) with the structure variable.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">person1.age = 35; // Modify age
+printf("Updated Age: %d\n", person1.age);
+</pre><h4>Pointers to Structures</h4><p>You can use pointers to structures to handle large amounts of data more efficiently. Access structure members through a pointer using the arrow operator (<code>-&gt;</code>).</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
+
+// Structure definition
+struct Person {
+    char name[50];
+    int age;
+};
+
+int main() {
+    // Structure variable and pointer declaration
+    struct Person person1 = {"Bob", 25};
+    struct Person *ptr = &amp;person1;
+
+    // Accessing members via pointer
+    printf("Name: %s\n", ptr-&gt;name);
+    printf("Age: %d\n", ptr-&gt;age);
+
+    return 0;
+}
+</pre><h3>Functions with Structures</h3><p>Functions can accept structures as parameters or return structures. This allows you to pass complex data types to functions for processing.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
+
+// Structure definition
+struct Rectangle {
+    int length;
+    int width;
+};
+
+// Function to calculate area
+int calculateArea(struct Rectangle r) {
+    return r.length * r.width;
+}
+
+int main() {
+    // Structure variable declaration
+    struct Rectangle rect = {10, 5};
+
+    // Function call
+    int area = calculateArea(rect);
+    printf("Area of Rectangle: %d\n", area);
+
+    return 0;
+}
+</pre><h3>Conclusion</h3><p>Functions and structures are fundamental in C programming, helping to organize code and manage complex data. Functions promote modularity and reuse, while structures allow for the grouping of related data into cohesive units. Mastering both concepts will enable you to write more efficient and maintainable C programs.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('5470ed20-b787-42d4-889b-76d9d437c013', 1, 'afec063e-fa7e-424d-9ca1-0ea52810da18', 'VIDEO', 'Structures and Functions (Part 1)', NULL, '', 'https://www.youtube.com/watch?v=16P51olKuzk');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('23d095b5-c326-4519-95bc-28b74a5d72c7', 2, 'afec063e-fa7e-424d-9ca1-0ea52810da18', 'CODE', 'Finding maximum sum k less than n', 'b6484e21-6937-489c-b031-b71767994744', 'Finding maximum sum k less than n', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('f72224cf-d0c9-4917-8e32-9a872156e83e', 2, '5df4c2b2-7be2-43f1-a7c7-924a4b542027', 'LESSON', 'Useful math functions', NULL, '<h4>Lesson: Useful Math Functions</h4><p>C provides a range of useful mathematical functions through the <code>&lt;math.h&gt;</code> library, which can help solve more complex problems.</p><p><strong>Common Math Functions:</strong></p><ul><li><code><strong>pow(base, exponent)</strong></code>: Calculates the power of a number.</li></ul><pre class="ql-syntax" spellcheck="false">#include &lt;math.h&gt;
+double result = pow(2, 3); // result is 8.0
+</pre><ul><li><code><strong>sqrt(number)</strong></code>: Computes the square root of a number.</li></ul><pre class="ql-syntax" spellcheck="false">double result = sqrt(16); // result is 4.0
+</pre><ul><li><code><strong>abs(number)</strong></code>: Returns the absolute value of an integer.</li></ul><pre class="ql-syntax" spellcheck="false">int result = abs(-5); // result is 5
+</pre><ul><li><code><strong>ceil(number)</strong></code><strong> and </strong><code><strong>floor(number)</strong></code>: Rounds a number up or down to the nearest integer.</li></ul><pre class="ql-syntax" spellcheck="false">double up = ceil(3.7); // up is 4.0
+double down = floor(3.7); // down is 3.0
+</pre><p>Using these functions can simplify the process of performing complex mathematical operations in your programs.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('5a6f9508-ec37-475f-b7e9-c2411e5f1548', 3, '5df4c2b2-7be2-43f1-a7c7-924a4b542027', 'CODE', 'Sum of two integer', 'b6484e21-6937-489c-b031-b71767994221', 'Sum of two integer', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d27b84d5-a52a-464d-9284-69a60d769316', 4, '5df4c2b2-7be2-43f1-a7c7-924a4b542027', 'VIDEO', 'Arithmetic Operators in C', NULL, '', 'https://www.youtube.com/watch?v=5JXcX0IqRUo');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('1f2f3c36-07a4-4041-bc2a-5dbe38b36141', 0, '0296d1de-6b5d-4b7b-8997-bf5bdc140e16', 'LESSON', 'Conditional statements in C', NULL, '<h3>Lesson: Conditional Statements in C</h3><p>Conditional statements are fundamental in programming, allowing the execution of code blocks based on certain conditions. Mastering these statements is crucial for developing dynamic and responsive programs.</p><p><br></p><h3>Introduction to Conditional Statements</h3><p>Conditional statements enable your program to make decisions and execute specific code based on whether certain conditions are true or false. The most common conditional statements in C are <code>if</code>, <code>else if</code>, and <code>else</code>.</p><p><br></p><h3>The <code>if</code> Statement</h3><p>The <code>if</code> statement allows you to execute a block of code only if a specified condition is true.</p><p><br></p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">if (condition) {
+    // Code to execute if condition is true
+}
+</pre><p><br></p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int number = 10;
+if (number &gt; 5) {
+    printf("The number is greater than 5\n");
+}
+</pre><p>In this example, the message "The number is greater than 5" will be printed because the condition <code>number &gt; 5</code> is true.</p><p><br></p><h3>The <code>else</code> Statement</h3><p>The <code>else</code> statement follows an <code>if</code> statement and executes a block of code if the <code>if</code> condition is false.</p><p><br></p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">if (condition) {
+    // Code to execute if condition is true
+} else {
+    // Code to execute if condition is false
+}
+</pre><p><br></p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int number = 3;
+if (number &gt; 5) {
+    printf("The number is greater than 5\n");
+} else {
+    printf("The number is not greater than 5\n");
+}
+</pre><p>In this example, the message "The number is not greater than 5" will be printed because the condition <code>number &gt; 5</code> is false.</p><p><br></p><h3>The <code>else if</code> Statement</h3><p>The <code>else if</code> statement allows you to check multiple conditions. If the first condition is false, it moves to the next <code>else if</code> condition, and so on.</p><p><br></p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">if (condition1) {
+    // Code to execute if condition1 is true
+} else if (condition2) {
+    // Code to execute if condition2 is true
+} else {
+    // Code to execute if none of the conditions are true
+}
+</pre><p><br></p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int number = 7;
+if (number &gt; 10) {
+    printf("The number is greater than 10\n");
+} else if (number &gt; 5) {
+    printf("The number is greater than 5 but less than or equal to 10\n");
+} else {
+    printf("The number is 5 or less\n");
+}
+</pre><p>In this example, the message "The number is greater than 5 but less than or equal to 10" will be printed because the first condition is false, but the second condition is true.</p><p><br></p><h3>Nested <code>if</code> Statements</h3><p>You can nest <code>if</code> statements within other <code>if</code> statements to create more complex decision-making structures.</p><p><br></p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int number = 8;
+if (number &gt; 5) {
+    if (number &lt; 10) {
+        printf("The number is between 6 and 9\n");
+    } else {
+        printf("The number is 10 or greater\n");
+    }
+} else {
+    printf("The number is 5 or less\n");
+}
+</pre><p>In this example, the message "The number is between 6 and 9" will be printed because the nested conditions <code>number &gt; 5</code> and <code>number &lt; 10</code> are both true.</p><p><br></p><h3>The <code>switch</code> Statement</h3><p>The <code>switch</code> statement provides a way to execute one code block out of many based on the value of a variable. It is often used as an alternative to multiple <code>else if</code> statements.</p><p><br></p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">switch (expression) {
+    case constant1:
+        // Code to execute if expression equals constant1
+        break;
+    case constant2:
+        // Code to execute if expression equals constant2
+        break;
+    // More cases...
+    default:
+        // Code to execute if expression does not match any case
+}
+</pre><p><br></p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int day = 3;
+switch (day) {
+    case 1:
+        printf("Monday\n");
+        break;
+    case 2:
+        printf("Tuesday\n");
+        break;
+    case 3:
+        printf("Wednesday\n");
+        break;
+    default:
+        printf("Other day\n");
+}
+</pre><p>In this example, the message "Wednesday" will be printed because the value of <code>day</code> matches the case <code>3</code>.</p><h3><br></h3><h3>Conclusion</h3><p>Understanding and effectively using conditional statements is crucial for controlling the flow of your programs. Practice using <code>if</code>, <code>else if</code>, <code>else</code>, and <code>switch</code> statements to make your programs more dynamic and responsive to different conditions.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('5566615e-8859-44be-abc8-f85bd44faaf0', 1, '0296d1de-6b5d-4b7b-8997-bf5bdc140e16', 'VIDEO', 'Conditionals (if-else, Nested if and else if)', NULL, '', 'https://www.youtube.com/watch?v=Led5aHdLoT4&list=PLBlnK6fEyqRgZq4a-SMViZr-V8jlvCioJ');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('3fd0146a-3408-4926-9901-167e9ebdb558', 2, '0296d1de-6b5d-4b7b-8997-bf5bdc140e16', 'CODE', 'Determine the Day of the Week from a Given Date', 'b6484e21-6937-489c-b031-b71767994763', 'Determine the Day of the Week from a Given Date', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('f869761f-e2d6-40d9-a69c-ee3c2bf3fc1c', 0, 'de140ad6-3454-40ad-a9db-12ba171f969d', 'LESSON', 'Recap - Logic building', NULL, '<h3>Solve programming problems with C - Part 2</h3><p>Welcome to&nbsp;<strong>Part-2</strong>&nbsp;of the Beginner''s guide to solving programming problems using C.</p><p><br></p><p>A quick re-cap of what was covered in&nbsp;<a href="https://codedynamite.site/#/certificate-courses/2d2ebd9e-2829-495e-87f7-4f050a8f3628/introduction" rel="noopener noreferrer" target="_blank" style="color: rgb(87, 128, 176);">Part-1</a>.</p><ul><li>Getting started with programming problems</li><li>Basic math functions</li><li>Conditional statements</li><li>Logic building / Approach</li></ul><p>Let''s begin! Click on ''Next'' to proceed with&nbsp;<strong>Part-2</strong></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('9fc08169-c5d6-476a-b5d2-c93bedade55e', 0, 'a35521fa-847b-4ddf-a75a-0c416adec848', 'LESSON', ' Array operations part-1', NULL, '<h4>Lesson: Array Operations Part-1</h4><p><strong>Introduction to the Module on Array Operations</strong></p><p>All right - things are now getting serious! In this module on Array Operations, we will learn the concepts required to successfully perform beginner-level array construction and manipulation required in programming problems.</p><p>Let''s revise some basic syntax about arrays in the IDE that we came across in "Learn C++":</p><ul><li><strong>Arrays</strong> are used to store multiple items in a single variable.</li><li>Array items can be accessed by referring to their index.</li><li><code>array[3]</code> refers to the 4th item of the array.</li></ul><pre class="ql-syntax" spellcheck="false">// Click on ''Submit'' to view the results
+// Click on ''Next'' to proceed
+
+
+#include &lt;stdio.h&gt;
+
+
+int main()&nbsp;
+{
+&nbsp; &nbsp; int sample_array[5]= {5, 3, 2, 4, 1};
+&nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; // command for displaying the elements of the array
+&nbsp; &nbsp; for(int i=0;i&lt;5;i++)
+&nbsp; &nbsp; {
+&nbsp; &nbsp; &nbsp; &nbsp; printf("%d", sample_array[i]);
+&nbsp; &nbsp; }
+&nbsp; &nbsp; printf("\n");
+
+
+&nbsp; &nbsp; // output specific index from the array
+&nbsp; &nbsp; printf("%d", sample_array[3]);
+&nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; return 0;
+}
+</pre>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('1ac6c7b9-38dd-4445-8cfd-20a88c2fc0f6', 1, 'a35521fa-847b-4ddf-a75a-0c416adec848', 'LESSON', ' Array operations part-2', NULL, '<h4>Lesson: Array Operations Part-2</h4><p><strong>Advanced Array Manipulation</strong></p><p>Building on the foundational knowledge from Part-1, this lesson will cover more advanced techniques for array operations in C.</p><h3>Initializing and Accessing Arrays</h3><p>In C, arrays can be initialized in several ways. Here are some examples:</p><ol><li><strong>Static Initialization</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">int numbers[5] = {1, 2, 3, 4, 5};
+</pre><ol><li>This initializes an array of size 5 with values from 1 to 5.</li><li><strong>Dynamic Initialization</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">int size;
+printf("Enter the size of the array: ");
+scanf("%d", &amp;size);
+int numbers[size];
+</pre><ol><li>This initializes an array with a size specified by the user at runtime.</li></ol><h3>Common Array Operations</h3><ol><li><strong>Traversing an Array</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">for (int i = 0; i &lt; 5; i++) {
+    printf("%d ", numbers[i]);
+}
+</pre><ol><li>This loop prints all elements of the <code>numbers</code> array.</li><li><strong>Inserting an Element</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">int position = 2; // Position where the new element is to be inserted
+int newValue = 10;
+for (int i = size - 1; i &gt;= position; i--) {
+    numbers[i + 1] = numbers[i];
+}
+numbers[position] = newValue;
+size++;
+</pre><ol><li>This inserts <code>newValue</code> at the specified <code>position</code> in the array.</li><li><strong>Deleting an Element</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">int position = 3; // Position of the element to be deleted
+for (int i = position; i &lt; size - 1; i++) {
+    numbers[i] = numbers[i + 1];
+}
+size--;
+</pre><ol><li>This deletes the element at the specified <code>position</code> in the array.</li></ol><h3>Advanced Array Manipulations</h3><ol><li><strong>Reversing an Array</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">int start = 0, end = size - 1;
+while (start &lt; end) {
+    int temp = numbers[start];
+    numbers[start] = numbers[end];
+    numbers[end] = temp;
+    start++;
+    end--;
+}
+</pre><ol><li>This code snippet reverses the elements of the array.</li><li><strong>Searching for an Element</strong>:</li></ol><ul><li><strong>Linear Search</strong>:</li></ul><pre class="ql-syntax" spellcheck="false">int key = 4;
+int found = 0;
+for (int i = 0; i &lt; size; i++) {
+    if (numbers[i] == key) {
+        printf("Element found at index %d\n", i);
+        found = 1;
+        break;
+    }
+}
+if (!found) {
+    printf("Element not found\n");
+}
+</pre><ul><li class="ql-indent-1">This performs a linear search to find <code>key</code> in the array.</li><li><strong>Binary Search</strong> (Array must be sorted):</li></ul><pre class="ql-syntax" spellcheck="false">int low = 0, high = size - 1, mid;
+int key = 4;
+while (low &lt;= high) {
+    mid = (low + high) / 2;
+    if (numbers[mid] == key) {
+        printf("Element found at index %d\n", mid);
+        break;
+    } else if (numbers[mid] &lt; key) {
+        low = mid + 1;
+    } else {
+        high = mid - 1;
+    }
+}
+if (low &gt; high) {
+    printf("Element not found\n");
+}
+</pre><ul><li class="ql-indent-1">This performs a binary search to find <code>key</code> in the array.</li></ul><h3>Sorting Arrays</h3><ol><li><strong>Bubble Sort</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">for (int i = 0; i &lt; size - 1; i++) {
+    for (int j = 0; j &lt; size - i - 1; j++) {
+        if (numbers[j] &gt; numbers[j + 1]) {
+            int temp = numbers[j];
+            numbers[j] = numbers[j + 1];
+            numbers[j + 1] = temp;
+        }
+    }
+}
+</pre><ol><li>This sorts the array using the bubble sort algorithm.</li><li><strong>Selection Sort</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">for (int i = 0; i &lt; size - 1; i++) {
+    int min_idx = i;
+    for (int j = i + 1; j &lt; size; j++) {
+        if (numbers[j] &lt; numbers[min_idx]) {
+            min_idx = j;
+        }
+    }
+    int temp = numbers[min_idx];
+    numbers[min_idx] = numbers[i];
+    numbers[i] = temp;
+}
+</pre><ol><li>This sorts the array using the selection sort algorithm.</li></ol><h3>Conclusion</h3><p>By mastering these array operations, you will be able to handle more complex data structures and algorithms efficiently. Practice these operations in the IDE to solidify your understanding and improve your problem-solving skills.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('79c70aa2-e5b6-4994-9745-eef107a95d7b', 2, 'a35521fa-847b-4ddf-a75a-0c416adec848', 'CODE', 'English alphabet printing', 'b6484e21-6937-489c-b031-b71767994757', 'English alphabet printing', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('48c927d3-d059-4b96-afaa-f4ec2634b476', 3, 'a35521fa-847b-4ddf-a75a-0c416adec848', 'VIDEO', 'Array Operations - Traversal, Insertion | Explanation with C Program | DSA Course', NULL, '', 'https://www.youtube.com/watch?v=Bnjbun-hiBk');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('320c7e35-f8f7-4b17-9ad0-ae2f189644ef', 0, '21d7c27b-83ff-4715-b290-02e34c5cd70b', 'LESSON', ' String operations part-1', NULL, '<h3>Introduction to the module on Strings</h3><p>So far, we have focused on logic, integers, math.</p><p>The module on logic building and problem solving primarily covered number operations.</p><p>It is time to add ''Strings'' to our arsenal for solving programming problems.</p><p>Lets revise some basic syntax of strings.</p><ul><li>Strings are a&nbsp;<strong>datatype</strong>.</li><li class="ql-indent-1">A string is composed of characters. A single character can be any letter, any digit, symbol, etc.</li><li class="ql-indent-1">A&nbsp;<strong>binary string</strong>&nbsp;is one which has only ''0'' and ''1'' as component characters</li><li class="ql-indent-1">The character in the&nbsp;<span class="ql-formula" data-value="i^{th}">﻿<span contenteditable="false"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>i</mi><mrow><mi>t</mi><mi>h</mi></mrow></msup></mrow><annotation encoding="application/x-tex">i^{th}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.8491em;"></span><span class="mord"><span class="mord mathnormal">i</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.8491em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">h</span></span></span></span></span></span></span></span></span></span></span></span></span>﻿</span>&nbsp;index of a string is represented as&nbsp;<strong>S[i]</strong></li></ul><p>Click in&nbsp;<strong>Next</strong>&nbsp;to proceed.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('823989d7-bd13-43fd-bb9a-20f2d3a73469', 0, '236a5c83-3d52-4a4e-9f59-7101fe603889', 'LESSON', 'Learn about tuples', NULL, '<h4>Lesson: Learn About Tuples</h4><p>Tuples are an essential data structure in Python, providing a way to store a fixed collection of items. Tuples are similar to lists, but with a key difference: tuples are immutable, meaning their elements cannot be changed after they are created. This immutability makes tuples useful for storing data that should not be modified.</p><h3>What is a Tuple?</h3><p>A tuple is a collection of ordered, immutable elements. Tuples can store items of different types, including integers, floats, strings, and even other tuples.</p><h3>Defining and Accessing Tuples</h3><ol><li><strong>Defining a Tuple</strong>: Tuples are defined by enclosing the elements in parentheses <code style="background-color: rgb(240, 240, 240);">()</code> and separating them with commas.</li><li><strong>Example</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">my_tuple = (1, 2, 3)
+another_tuple = ("apple", "banana", "cherry")
+</pre><ol><li><strong>Accessing Tuple Elements</strong>: Elements in a tuple can be accessed using indexing, similar to lists. The index of the first element is 0.</li><li><strong>Example</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">print(my_tuple[0])  # Prints: 1
+print(another_tuple[1])  # Prints: banana
+</pre><h3>Tuple Operations</h3><ol><li><strong>Tuple Concatenation</strong>: You can concatenate two or more tuples using the <code style="background-color: rgb(240, 240, 240);">+</code> operator.</li><li><strong>Example</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">tuple1 = (1, 2, 3)
+tuple2 = (4, 5, 6)
+combined_tuple = tuple1 + tuple2
+print(combined_tuple)  # Prints: (1, 2, 3, 4, 5, 6)
+</pre><ol><li><strong>Tuple Slicing</strong>: Tuples can be sliced to create a new tuple containing a subset of the elements.</li><li><strong>Example</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">sliced_tuple = my_tuple[1:3]
+print(sliced_tuple)  # Prints: (2, 3)
+</pre><ol><li><strong>Tuple Unpacking</strong>: You can unpack a tuple into individual variables.</li><li><strong>Example</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">a, b, c = my_tuple
+print(a)  # Prints: 1
+print(b)  # Prints: 2
+print(c)  # Prints: 3
+</pre><h3>Immutability of Tuples</h3><p>Because tuples are immutable, you cannot change, add, or remove elements once the tuple is created. Attempting to do so will result in an error.</p><p><strong>Example</strong>:</p><pre class="ql-syntax" spellcheck="false">my_tuple[0] = 10  # This will cause a TypeError
+</pre><h3>Practical Example</h3><p><strong>Problem</strong>: Write a function that takes a tuple of numbers and returns a new tuple with each number squared.</p><p><strong>Solution</strong>:</p><pre class="ql-syntax" spellcheck="false">def square_elements(numbers):
+    return tuple(x ** 2 for x in numbers)
+
+numbers = (1, 2, 3, 4, 5)
+squared_numbers = square_elements(numbers)
+print(squared_numbers)  # Prints: (1, 4, 9, 16, 25)
+</pre><h3>Conclusion</h3><p>Tuples are a powerful tool in Python for storing collections of items that should not be modified. They are simple to use and understand, making them a valuable addition to your programming toolkit. Practice using tuples to get comfortable with their syntax and capabilities.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('3673db49-9d37-47d7-9bba-fe2d85af33f3', 1, '21d7c27b-83ff-4715-b290-02e34c5cd70b', 'LESSON', ' String operations part-2', NULL, '<h3>Lesson: String Operations Part-2</h3><p><br></p><h4><strong>Advanced String Manipulation</strong></h4><p>Building on the basics from Part-1, this lesson will delve into more advanced string operations and manipulations in C.</p><h4>String Initialization and Access</h4><p>In C, strings can be initialized and accessed in various ways. Here are some examples:</p><ol><li><strong>Static Initialization</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">char str[] = "Hello, World!";
+</pre><ol><li>This initializes a string with the value "Hello, World!".</li><li><strong>Dynamic Initialization</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">char str[50];
+printf("Enter a string: ");
+scanf("%s", str);
+</pre><ol><li>This initializes a string with user input.</li></ol><h4>Common String Operations</h4><ol><li><strong>String Length</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">int length = strlen(str);
+</pre><ol><li>This function returns the length of the string <code>str</code>.</li><li><strong>String Copy</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">char destination[50];
+strcpy(destination, str);
+</pre><ol><li>This copies the contents of <code>str</code> to <code>destination</code>.</li><li><strong>String Concatenation</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">char str1[50] = "Hello, ";
+char str2[] = "World!";
+strcat(str1, str2);
+</pre><ol><li>This concatenates <code>str2</code> to the end of <code>str1</code>.</li></ol><h4>Advanced String Manipulations</h4><ol><li><strong>String Comparison</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">if (strcmp(str1, str2) == 0) {
+    printf("The strings are equal.\n");
+} else {
+    printf("The strings are not equal.\n");
+}
+</pre><ol><li>This compares two strings lexicographically.</li><li><strong>Substring Extraction</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">char substring[20];
+strncpy(substring, str + start, length);
+substring[length] = ''\0'';
+</pre><ol><li>This extracts a substring from <code>str</code> starting at index <code>start</code> with a specified <code>length</code>.</li><li><strong>String Reversal</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">int len = strlen(str);
+for (int i = 0; i &lt; len / 2; i++) {
+    char temp = str[i];
+    str[i] = str[len - i - 1];
+    str[len - i - 1] = temp;
+}
+</pre><ol><li>This reverses the string <code>str</code>.</li></ol><h4>Complex String Operations</h4><ol><li><strong>Finding a Substring</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">if (strstr(str, "World") != NULL) {
+    printf("Substring found.\n");
+} else {
+    printf("Substring not found.\n");
+}
+</pre><ol><li>This checks if "World" is a substring of <code>str</code>.</li><li><strong>Tokenizing a String</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">char str[] = "Hello, World! Welcome to C programming.";
+char *token = strtok(str, " ");
+while (token != NULL) {
+    printf("%s\n", token);
+    token = strtok(NULL, " ");
+}
+</pre><ol><li>This splits the string <code>str</code> into tokens based on the delimiter " ".</li><li><strong>Replacing a Substring</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">void replaceSubstring(char *str, const char *oldSub, const char *newSub) {
+    char buffer[100];
+    char *pos;
+    int index = 0;
+    int oldLen = strlen(oldSub);
+
+    while ((pos = strstr(str, oldSub)) != NULL) {
+        strncpy(buffer + index, str, pos - str);
+        index += pos - str;
+        strcpy(buffer + index, newSub);
+        index += strlen(newSub);
+        str = pos + oldLen;
+    }
+    strcpy(buffer + index, str);
+    strcpy(str, buffer);
+}
+
+replaceSubstring(str, "World", "C Programming");
+</pre><ol><li>This replaces occurrences of <code>oldSub</code> with <code>newSub</code> in the string <code>str</code>.</li></ol><p><br></p><h4>Conclusion</h4><p>By mastering these advanced string operations, you will be able to handle more complex data manipulation tasks efficiently. Practice these operations in the IDE to solidify your understanding and enhance your problem-solving skills in string manipulation.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('8f8dc59c-18ff-49e8-9f75-6afc82a9a13d', 2, '21d7c27b-83ff-4715-b290-02e34c5cd70b', 'VIDEO', 'String literals and string initializations', NULL, '', 'https://www.youtube.com/watch?v=gTXRfETK3z4&list=PLfqABt5AS4FmSwyvP5a3mYsaksq6yR3-Z');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('5f3c95f6-5978-48d5-b3ad-541638c704c7', 0, 'dffe4b22-0465-48fe-8de0-6d846d5cb08c', 'LESSON', ' Flow of control and Key Variables', NULL, '<h3>Flow of control introduction</h3><p><br></p><p>In this module we are going to learn the "Flow of control" ,"Tracing key variable" ,"Checkpoint" and "Unit testing".</p><p>First, we are going to learn the flow of control.</p><p>Do you have any understanding of the concept of "flow of control"?</p><p>Whenever you compile your program in C or any other language, how your compiler reads the program determines the program''s flow of control.</p><p>Generally the compiler first searches for the main function and then reads line by line in the main function until there is a breakpoint or function calling which changes the flow of control.</p><p>Review the code below carefully to understand the flow of control.</p><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
+
+void name()
+{
+    printf("My name is Krish\n");
+}
+
+void reply()
+{
+    printf("Doing great\n");
+}
+
+int main()
+{
+    printf("Hello bro, What is your name\n");
+    name();
+    printf("How you doing Krish\n");
+    reply();
+    return 0;
+}
+</pre><p>Let''s see how the flow of control is working in the above program and how our compiler reads it.</p><ul><li>We start from the main function.</li><li>The first line of the main function conatins print statement so we print&nbsp;<code><strong>Hello bro, What is your name</strong></code>.</li><li>The second line calls a function name(), so we need to stop reading the main function for now until we completely read the name function.</li><li>The first line of the name function contains print statement so we print&nbsp;<code><strong>My name is Krish</strong></code>.</li><li>The name function gets finished so we move back to the main function.</li><li>The third line of the main function is a print statement so we again printed&nbsp;<code><strong>How you doing Krish</strong></code></li><li>In the fourth line of the main function there is a function call so now we will read the reply function first then continue our main function.</li><li>The first line of the reply function is a print statement so we printed&nbsp;<code><strong>Doing great</strong></code>.</li><li>The reply function gets executed so we move back to the main function.</li><li>The main function is also terminated.</li></ul>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('7bf602fd-c576-4d24-8133-a5a4a3fa68b7', 1, 'dffe4b22-0465-48fe-8de0-6d846d5cb08c', 'LESSON', ' Check-points', NULL, '<h3>Introduction to checkpoints</h3><p>In the previous module, we learned about the flow of control and key variables which are essential for debugging. Now we are going to learn about checkpoints.</p><p><br></p><p>While tracing your program using the flow of control and figuring out the key variables we need to print the the key variables to check whether the program is working correctly till this point or not so those points in which we print our key variables to check whether the program is working correctly till this point is termed as checkpoints.</p><p>There can be multiple checkpoints according to the programmer''s requirement. But it''s important not to create unnecessary checkpoints as it may make your debugging harder. A relevant checkpoint is one which may arrive after a certain number of operations to check whether those operations get performed correctly or not.</p><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
+
+int main()
+{
+    {
+        // major chunk of code
+    }
+    // checkpoint1
+    {
+        // major chunk of code
+    }
+    // checkpoint2
+    {
+        // major chunk of code
+    }
+    // checkpoint3
+
+    return 0;
+}
+</pre>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('12b1b171-6254-41b3-b796-d28a4e84032f', 0, '6b703088-5f16-405c-869f-2f3ecd4445ae', 'LESSON', 'Logic Building part-1', NULL, '<h3>How to solve programming problems</h3><p>In the previous modules - we solved simple programming problems that had a direct approach.</p><p>In this module, we will cover problems that focus on logic building. Some suggestions for this module:</p><ul><li>Use a pen and paper to work out solutions.</li><li>The logic / algorithm first has to be clear in your mind before you decide to code it out.</li><li>Don''t spend more than 30 minutes on any problem. While the objective is to learn - if you don''t know the approach, it''s best to learn the concept / review the solution.</li></ul><p>For Beginner''s level programming problems - we think the following works best</p><ul><li><strong>Step 1</strong>: Understand the problem statement and the sample test cases</li><li><strong>Step 2</strong>: Generate examples - Create 10 input and output cases of your own</li><li><strong>Step 3</strong>: Observations / Pattern - Observe your examples to identify the logic</li><li><strong>Step 4</strong>: Plan your code - Modularise and solve sub-components of your problem</li><li><strong>Step 5</strong>: Learn - You may come across components of you logic where you don''t know how to execute the code.</li><li>In such cases, ask Google or ChatGPT or your friends and learn!</li><li><strong>Step 6</strong>: Write the code - For simpler programming problems - C++ solutions will be less than 20 lines in more than 95% of the cases.</li><li><strong>Step 7</strong>: Identify edge cases - If your code still fails - try and and come up with corner cases where your code may fail</li></ul><p>Click on&nbsp;<strong>Next</strong>&nbsp;to continue.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('10dd8be7-1f07-433e-abdb-111b8667257c', 1, '6b703088-5f16-405c-869f-2f3ecd4445ae', 'LESSON', 'Logic Building part-2', NULL, '<h4>Lesson: Logic Building Part-2</h4><p><strong>Advanced Logic Construction</strong></p><p>Building on the foundational steps from Part-1, this lesson focuses on advanced strategies and practices to enhance your problem-solving skills.</p><ol><li><strong>Break Down Complex Problems</strong>: Divide a complex problem into smaller, manageable parts. Address each part individually before combining them into a complete solution.</li></ol><ul><li class="ql-indent-1"><strong>Example</strong>: If solving a maze problem, first focus on pathfinding, then incorporate checks for dead ends.</li></ul><ol><li><strong>Pseudocode</strong>: Before writing actual code, outline your logic in pseudocode. This helps in visualizing the solution without worrying about syntax.</li></ol><ul><li><strong>Example</strong>:</li></ul><pre class="ql-syntax" spellcheck="false">Start
+Initialize variables
+Loop through input
+Check conditions
+Store results
+Output results
+End
+</pre><ol><li><strong>Flowcharts and Diagrams</strong>: Create flowcharts to map out the steps of your algorithm visually. This can make complex logic more understandable.</li></ol><ul><li class="ql-indent-1"><strong>Example</strong>: Draw a flowchart for a sorting algorithm to see the flow of data and operations.</li></ul><ol><li><strong>Test-Driven Development (TDD)</strong>: Write test cases before implementing the solution. This ensures your code meets the requirements and handles edge cases effectively.</li></ol><ul><li class="ql-indent-1"><strong>Example</strong>: For a function that calculates factorial, write tests for typical inputs, zero, and negative numbers.</li></ul><ol><li><strong>Optimization</strong>: After getting a working solution, look for ways to optimize your code for better performance. Consider time and space complexity.</li></ol><ul><li class="ql-indent-1"><strong>Example</strong>: Use efficient data structures like hash maps for quick lookups instead of linear searches.</li></ul><ol><li><strong>Code Reviews and Pair Programming</strong>: Collaborate with peers to review each other’s code. This helps in identifying potential issues and learning different approaches.</li></ol><ul><li class="ql-indent-1"><strong>Example</strong>: Pair up with a classmate and take turns coding and reviewing a solution to a challenging problem.</li></ul><ol><li><strong>Iterative Improvement</strong>: Continuously refine your logic and approach. Reflect on solved problems and think of better or alternative solutions.</li></ol><ul><li class="ql-indent-1"><strong>Example</strong>: Revisit an old problem and try solving it with a different algorithm or a more efficient method.</li></ul><p>By following these advanced strategies, you can tackle more complex problems with confidence and improve your programming skills further.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('92920a7b-a117-4dc8-94bc-ce323dcfa6f4', 2, 'b3557f99-e402-4d5a-8574-058fafe5fa28', 'LESSON', 'Immutability', NULL, '<h3>Lesson: Immutability</h3><p><strong>Objective:</strong> Learn the concept of immutability and how to apply it in JavaScript to create immutable data structures.</p><p><strong>1. Definition:</strong> Immutability means that once a data structure is created, it cannot be changed. Instead, new data structures are created with the desired changes.</p><p><strong>2. Benefits:</strong></p><ul><li><strong>Predictability:</strong> Immutable data structures lead to more predictable and easier-to-debug code.</li><li><strong>Concurrency:</strong> Immutability helps in concurrent programming by avoiding race conditions.</li></ul><p><strong>3. Techniques for Immutability:</strong></p><ul><li><strong>Object.assign:</strong> Create copies of objects with new properties.</li><li><strong>Spread Operator:</strong> Use the spread operator to create new arrays or objects with modifications.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">const person = { name: ''John'', age: 25 };
+
+// Using Object.assign
+const updatedPerson = Object.assign({}, person, { age: 26 });
+console.log(updatedPerson); // { name: ''John'', age: 26 }
+console.log(person); // { name: ''John'', age: 25 }
+
+// Using Spread Operator
+const newPerson = { ...person, age: 27 };
+console.log(newPerson); // { name: ''John'', age: 27 }
+console.log(person); // { name: ''John'', age: 25 }
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that demonstrates immutability by creating a new array with an added element without modifying the original array.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Immutability&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Immutability Example&lt;/h1&gt;
+    &lt;script&gt;
+        const originalArray = [1, 2, 3];
+
+        // Using Spread Operator
+        const newArray = [...originalArray, 4];
+
+        console.log(newArray); // [1, 2, 3, 4]
+        console.log(originalArray); // [1, 2, 3]
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('cd125e97-c909-4e9d-9de0-41bd89f58e0c', 3, 'b3557f99-e402-4d5a-8574-058fafe5fa28', 'LESSON', 'Map, reduce, and filter', NULL, '<h3>Lesson: Map, Reduce, and Filter</h3><p><strong>Objective:</strong> Learn how to use the <code>map</code>, <code>reduce</code>, and <code>filter</code> methods to process and transform arrays in a functional programming style.</p><p><strong>1. Map:</strong> The <code>map</code> method creates a new array by applying a function to each element of the original array.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">javascript
+Copy code
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(num =&gt; num * 2);
+console.log(doubled); // [2, 4, 6, 8, 10]
+</pre><p><strong>2. Filter:</strong> The <code>filter</code> method creates a new array with all elements that pass the test implemented by the provided function.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">const numbers = [1, 2, 3, 4, 5];
+const evens = numbers.filter(num =&gt; num % 2 === 0);
+console.log(evens); // [2, 4]
+</pre><p><strong>3. Reduce:</strong> The <code>reduce</code> method applies a function against an accumulator and each element in the array to reduce it to a single value.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">const numbers = [1, 2, 3, 4, 5];
+const sum = numbers.reduce((acc, num) =&gt; acc + num, 0);
+console.log(sum); // 15
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that uses <code>map</code>, <code>filter</code>, and <code>reduce</code> to process an array of numbers.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Map, Filter, and Reduce&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Map, Filter, and Reduce Example&lt;/h1&gt;
+    &lt;script&gt;
+        const numbers = [1, 2, 3, 4, 5];
+
+        // Using map to double each number
+        const doubled = numbers.map(num =&gt; num * 2);
+        console.log(doubled); // [2, 4, 6, 8, 10]
+
+        // Using filter to get even numbers
+        const evens = numbers.filter(num =&gt; num % 2 === 0);
+        console.log(evens); // [2, 4]
+
+        // Using reduce to sum the numbers
+        const sum = numbers.reduce((acc, num) =&gt; acc + num, 0);
+        console.log(sum); // 15
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('1d75c53b-bcc7-433f-a82b-c34c4353eba3', 4, 'b3557f99-e402-4d5a-8574-058fafe5fa28', 'LESSON', 'Functional libraries (e.g., Lodash)', NULL, '<h3>Lesson: Functional Libraries (e.g., Lodash)</h3><p><strong>Objective:</strong> Explore functional programming libraries like Lodash that provide utility functions to enhance your functional programming capabilities in JavaScript.</p><p><strong>1. Introduction to Lodash:</strong> Lodash is a JavaScript library that provides utility functions for common programming tasks, including functional programming operations.</p><p><strong>2. Using Lodash:</strong></p><ul><li><strong>Installation:</strong> Install Lodash using npm or include it via a CDN.</li><li><strong>Basic Usage:</strong> Use Lodash functions to manipulate data.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">// Using npm
+const _ = require(''lodash'');
+
+// Using a CDN
+// &lt;script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"&gt;&lt;/script&gt;
+
+const numbers = [1, 2, 3, 4, 5];
+
+// Using Lodash map
+const doubled = _.map(numbers, num =&gt; num * 2);
+console.log(doubled); // [2, 4, 6, 8, 10]
+
+// Using Lodash filter
+const evens = _.filter(numbers, num =&gt; num % 2 === 0);
+console.log(evens); // [2, 4]
+
+// Using Lodash reduce
+const sum = _.reduce(numbers, (acc, num) =&gt; acc + num, 0);
+console.log(sum); // 15
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that uses Lodash to perform <code>map</code>, <code>filter</code>, and <code>reduce</code> operations on an array of numbers.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Functional Libraries (Lodash)&lt;/title&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Functional Libraries (Lodash) Example&lt;/h1&gt;
+    &lt;script&gt;
+        const numbers = [1, 2, 3, 4, 5];
+
+        // Using Lodash map to double each number
+        const doubled = _.map(numbers, num =&gt; num * 2);
+        console.log(doubled); // [2, 4, 6, 8, 10]
+
+        // Using Lodash filter to get even numbers
+        const evens = _.filter(numbers, num =&gt; num % 2 === 0);
+        console.log(evens); // [2, 4]
+
+        // Using Lodash reduce to sum the numbers
+        const sum = _.reduce(numbers, (acc, num) =&gt; acc + num, 0);
+        console.log(sum); // 15
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p>By mastering these functional programming concepts, including pure functions, immutability, higher-order functions like <code>map</code>, <code>reduce</code>, and <code>filter</code>, and using functional libraries like Lodash, you will be able to write more predictable, maintainable, and reusable JavaScript code. These lessons provide the foundation for building robust functional applications in JavaScript.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('dc66eeca-aa87-4147-ac50-1d34a5647ce0', 0, 'b7d4d279-925b-42a6-b198-134b74efa721', 'LESSON', ' Learn about functions', NULL, '<h4>Lesson: Learn About Functions</h4><p>Functions are fundamental building blocks in programming that allow you to encapsulate code into reusable blocks. By using functions, you can organize your code more efficiently, reduce redundancy, and make your programs more modular and easier to manage.</p><h3>What is a Function?</h3><p>A function is a named block of code designed to perform a specific task. Functions can take input in the form of parameters, execute a series of statements, and return a result. Functions help in breaking down complex problems into smaller, more manageable pieces.</p><h3>Defining and Calling Functions</h3><ol><li><strong>Defining a Function</strong>: In Python, you define a function using the <code>def</code> keyword, followed by the function name, parentheses, and a colon. Inside the function, you write the code that performs the task.</li><li><strong>Syntax</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">def function_name(parameters):
+    # Code to execute
+    return result
+</pre><ol><li><strong>Example</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">def greet(name):
+    print(f"Hello, {name}!")
+</pre><ol><li><strong>Calling a Function</strong>: To execute the code inside a function, you call the function by its name and pass any required arguments.</li><li><strong>Example</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">greet("Alice")  # Prints: Hello, Alice!
+</pre><h3>Function Parameters and Arguments</h3><p>Functions can take multiple parameters, which are variables that hold the values passed to the function. These values are called arguments when you call the function.</p><p><strong>Example</strong>:</p><pre class="ql-syntax" spellcheck="false">def add(a, b):
+    return a + b
+
+result = add(3, 5)  # result is 8
+print(result)
+</pre><h3>Return Statement</h3><p>The <code>return</code> statement is used to send a result back to the caller of the function. Once the return statement is executed, the function terminates.</p><p><strong>Example</strong>:</p><pre class="ql-syntax" spellcheck="false">def square(x):
+    return x * x
+
+print(square(4))  # Prints: 16
+</pre><h3>Default Parameters</h3><p>Python allows you to define default values for parameters, which are used if no argument is passed for that parameter.</p><p><strong>Example</strong>:</p><pre class="ql-syntax" spellcheck="false">def greet(name="World"):
+    print(f"Hello, {name}!")
+
+greet()         # Prints: Hello, World!
+greet("Alice")  # Prints: Hello, Alice!
+</pre><h3>Variable Scope</h3><p>Variables defined inside a function are local to that function and cannot be accessed outside of it. Conversely, variables defined outside of any function are global and can be accessed anywhere in the program.</p><p><strong>Example</strong>:</p><pre class="ql-syntax" spellcheck="false">def print_message():
+    message = "Hello from inside the function"
+    print(message)
+
+print_message()
+# print(message)  # This will cause an error because ''message'' is not defined outside the function
+</pre><h3>Lambda Functions</h3><p>Lambda functions are small anonymous functions defined using the <code>lambda</code> keyword. They can have any number of parameters but only one expression.</p><p><strong>Example</strong>:</p><pre class="ql-syntax" spellcheck="false">square = lambda x: x * x
+print(square(5))  # Prints: 25
+</pre><h3>Practical Example</h3><p><strong>Problem</strong>: Write a function that calculates the factorial of a given number.</p><p><strong>Solution</strong>:</p><pre class="ql-syntax" spellcheck="false">def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+print(factorial(5))  # Prints: 120
+</pre><p>This function uses recursion to calculate the factorial of a number.</p><h3>Conclusion</h3><p>Understanding functions is essential for writing efficient and organized code in Python. Functions enable code reusability, improve readability, and make debugging easier. Practice defining and using functions to enhance your problem-solving skills and programming proficiency.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('a0d25613-1308-48fb-8e62-79ec9a0c7cb8', 1, 'b7d4d279-925b-42a6-b198-134b74efa721', 'VIDEO', 'Python Functions | Python Tutorial for Absolute Beginners', NULL, '', 'https://www.youtube.com/watch?v=u-OmVr_fT4s');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('2b43130c-61f5-4826-adcb-92dc8b0e57d3', 2, 'b7d4d279-925b-42a6-b198-134b74efa721', 'CODE', 'Check prime number', 'b6484e21-6937-489c-b031-b71767994758', 'Check prime number', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('4f1706b9-ef5b-4763-8f27-53c69b1fbd83', 3, 'b1f13eaf-9fd1-4b93-8bab-71cc3b1ee9b0', 'LESSON', 'Recursion', NULL, '<h4>Lesson: Recursion</h4><p><strong>Objective:</strong> Understand recursion and how to use it to solve problems that can be broken down into simpler sub-problems.</p><p><strong>1. Definition:</strong> Recursion is a technique where a function calls itself in order to solve a problem.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function factorial(n) {
+    if (n === 0) {
+        return 1;
+    } else {
+        return n * factorial(n - 1);
+    }
+}
+
+console.log(factorial(5)); // 120
+</pre><p><strong>Explanation:</strong></p><ul><li><code>factorial</code> is a recursive function that calculates the factorial of a number.</li><li>The base case is <code>n === 0</code>, and the recursive case is <code>n * factorial(n - 1)</code>.</li></ul><p><strong>2. Common Recursive Problems:</strong></p><ul><li>Calculating Fibonacci numbers</li><li>Traversing tree structures</li></ul><p><strong>Example (Fibonacci):</strong></p><pre class="ql-syntax" spellcheck="false">function fibonacci(n) {
+    if (n &lt;= 1) {
+        return n;
+    } else {
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+}
+
+console.log(fibonacci(6)); // 8
+</pre><p><strong>Explanation:</strong></p><ul><li><code>fibonacci</code> is a recursive function that calculates the nth Fibonacci number.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that uses recursion to find the greatest common divisor (GCD) of two numbers.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Recursion Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;GCD Calculation&lt;/h1&gt;
+    &lt;script&gt;
+        function gcd(a, b) {
+            if (b === 0) {
+                return a;
+            } else {
+                return gcd(b, a % b);
+            }
+        }
+
+        console.log(gcd(48, 18)); // 6
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p>By mastering these advanced function concepts, you will be able to write more powerful, reusable, and efficient JavaScript code. These lessons provide the foundation for tackling complex programming challenges and building sophisticated applications.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('145d96d8-f057-4f15-bb05-049f465c2bcc', 0, '0f72faae-00c0-49d7-ad43-9cfa2e42a51b', 'LESSON', 'Input and Output', NULL, '<h3>Getting started with programming problems</h3><p>If you are here - then you already know the basic syntax of C.</p><p>Let''s now take it up a notch and train you to solve programming problems. Before that, let us do a quick recap of what we had learned about C in&nbsp;<a href="https://codedynamite.site/#/certificate-courses/2d2ebd9e-2829-495e-87f7-4f050a8f3628/introduction" rel="noopener noreferrer" target="_blank" style="color: rgb(87, 128, 176);">Learn C Path</a>.</p><p><br></p><p>On Codedynamite and other platforms, you will come across programming problems.</p><ul><li>Each programming problem has a&nbsp;<strong>problem statement</strong></li><li>You write a&nbsp;<strong>solution code</strong>&nbsp;which will solve the problem</li><li>Your code is run, does some computation and generates&nbsp;<strong>your output</strong></li><li><strong>Your output</strong>&nbsp;is compared with the&nbsp;<strong>Expected output</strong>.</li><li class="ql-indent-1">If they match - then your code is correct!</li><li class="ql-indent-1">If they don''t match - then there is some error in your code.</li></ul><p>Click on&nbsp;<strong>Next</strong>&nbsp;to proceed!</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('e6648888-407f-455d-8da5-4e463be042fc', 1, '0f72faae-00c0-49d7-ad43-9cfa2e42a51b', 'LESSON', 'What are test cases?', NULL, '<h3><strong>What are Test Cases?</strong></h3><p><br></p><p>In the previous module, we practiced simple methods of input and output used in programming problems. Now, let''s take the next small step and learn about test cases.</p><p><br></p><p>You will find the concept of ''test cases'' on various programming platforms such as Leetcode, Codeforces, CodeChef, and Hackerrank.&nbsp;</p><p><br></p><h4><strong>What are test cases?</strong></h4><p><br></p><p>Test cases involve multiple inputs—multiple instances of the same problem—that your code must solve correctly.</p><p><br></p><h4><strong>Example 1:</strong></h4><p><br></p><p>Consider 5 test cases or 5 inputs:</p><p>- 11</p><p>- 13</p><p>- 2</p><p>- 4</p><p>- 9</p><p><br></p><h3>Task</h3><p><br></p><p>Let''s solve a simple problem.</p><p><br></p><p>Write a program in the IDE which does the following:</p><p><br></p><p>1. Accepts 5 inputs given on 5 separate lines. Each input is an integer \( N \).</p><p>2. For each test case, prints out the integer \( N \) to the console on a separate line (our Input mirror problem).</p><p><br></p><h4>Sample 1:</h4><p><br></p><p><strong>Input:</strong></p><pre class="ql-syntax" spellcheck="false">11
+13
+2
+4
+9
+</pre><p><br></p><p><strong>Output:</strong></p><pre class="ql-syntax" spellcheck="false">11
+13
+2
+4
+9
+</pre><p><br></p><p><strong>Explanation:</strong></p><p><br></p><p>Since the count of test cases is 5, we accept 5 inputs and print 5 outputs.</p><p><br></p><h3>Solutions:</h3><pre class="ql-syntax" spellcheck="false">//Solution as follows
+
+#include &lt;stdio.h&gt;
+
+int main() {
+    int A, B, C, D, E;
+    scanf("%d \n", &amp;A );
+    scanf("%d \n", &amp;B );
+    scanf("%d \n", &amp;C );
+    scanf("%d \n", &amp;D );
+    scanf("%d \n", &amp;E );
+    printf("%d \n", A );
+    printf("%d \n", B );
+    printf("%d \n", C );
+    printf("%d \n", D );
+    printf("%d \n", E );
+}
+</pre>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('417e227a-e003-41d8-9421-0e52edfb8887', 0, '19419e58-966b-4ae9-8c4a-330100c76166', 'LESSON', 'Introducing output / printing', NULL, '<h3>Welcome!</h3><p>Welcome to the course on learning Python!</p><p><br></p><p>What will you learn here?</p><ul><li>All the basic concepts of Python programming language like -&nbsp;<code>Variables, Strings, Conditions, Lists, Loops, Functions</code>&nbsp;etc</li><li>By the end of this course, you will be able to write code in Python to solve logical real world problems.</li></ul><p>Let the fun begin!</p><p><strong>Click on Next on the right hand side to start</strong>.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('3d3ec0e5-d22b-4522-b8b1-026c3cb2539a', 1, '19419e58-966b-4ae9-8c4a-330100c76166', 'LESSON', ' Printing on multiple lines', NULL, '<h3>Multiple Outputs</h3><p>You can add as many print statements as you want to your program. Each print statement outputs its content on a new line.</p><pre class="ql-syntax" spellcheck="false">print("99")
+print(100)
+</pre><p>Output:</p><pre class="ql-syntax" spellcheck="false">99
+100
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('b3a8d353-12bd-4d00-b621-8605e08eccc0', 2, '19419e58-966b-4ae9-8c4a-330100c76166', 'LESSON', 'Print text and numbers using single print', NULL, '<h3>Inserting text Between Outputs</h3><p>Remember that to print multiple values on same line, we have to use comma inside print statement.</p><p><br></p><p>We can also combine text and numbers in a single print statement by comma separating them.</p><p>For example, check the below code:</p><pre class="ql-syntax" spellcheck="false">print("My favorite number is", 10)
+</pre><p>The code will output:</p><pre class="ql-syntax" spellcheck="false">My favorite number is 10
+</pre>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('c975b04e-7f6c-4e44-a124-f2325dcfab31', 3, '19419e58-966b-4ae9-8c4a-330100c76166', 'VIDEO', 'Câu Lệnh Print Trong Python | In ra màn hình trong Python', NULL, '', 'https://www.youtube.com/watch?v=XMeYyJfbgpY');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('9b5f6a7c-6280-4eef-ba90-8ab60e189bca', 4, '19419e58-966b-4ae9-8c4a-330100c76166', 'CODE', 'Sum of two integer', 'b6484e21-6937-489c-b031-b71767994221', 'Sum of two integer', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('cf1f3dda-b8fb-4b59-9705-c6d63052a43f', 0, '94c250f7-7f2c-4cd8-a41f-5d05bbabedf6', 'LESSON', 'Introduction to variables and datatypes', NULL, '<h3>Variables in Python</h3><p>A&nbsp;<strong>variable</strong>&nbsp;is like a labelled box where you can store data. Imagine you have a box labeled "age" and you put the number 25 in it. In Python, you would do this by writing:</p><pre class="ql-syntax" spellcheck="false">age = 25
+</pre><p>When you write this, python creates a box(variable) with name&nbsp;age</p><p><br></p><p>age&nbsp;and stores 25 in that box(variable).</p><ul><li>This process of creating a variable to store a value is called&nbsp;<strong>Declaration</strong>&nbsp;and</li><li>The process of setting its value for the first time is called&nbsp;<strong>Initialization</strong>.</li></ul><p>Here''s the cool part: whenever you use&nbsp;<code>age</code>&nbsp;in your code, Python will remember it is 25. For example, if you write&nbsp;<code>print(age)</code>, Python will show 25.</p><pre class="ql-syntax" spellcheck="false">print(age) # Output: 25
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('0e8a6f51-f43c-487b-8ed1-5b3d7bf1b89e', 1, '94c250f7-7f2c-4cd8-a41f-5d05bbabedf6', 'VIDEO', 'Variables in Python', NULL, '', 'https://www.youtube.com/watch?v=X6TcB0DNLE8');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('6cc920c6-6d4b-4ed0-8606-d567b20a49ff', 2, '94c250f7-7f2c-4cd8-a41f-5d05bbabedf6', 'CODE', 'Check square number', 'b6484e21-6937-489c-b031-b71767994748', 'Check square number', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d0eb0d5d-bbe3-49fb-8bb3-2e40efc2b435', 0, '6afaf653-6486-4ffb-b2d0-1460e629933f', 'LESSON', 'Arithmetic Operators', NULL, '<h4>Lesson: Arithmetic Operators</h4><p>In Python, you can perform various basic mathematical operations with numbers. Let''s explore some commonly used arithmetic operators with examples.</p><ol><li><strong>Addition (+)</strong> You can use the plus sign (+) to add two numbers.</li></ol><pre class="ql-syntax" spellcheck="false">python
+Copy code
+a = 6
+b = 3
+print(a + b)  # prints 9
+</pre><ol><li><strong>Subtraction (-)</strong> You can use the minus sign (-) to subtract one number from another.</li></ol><pre class="ql-syntax" spellcheck="false">python
+Copy code
+print(a - b)  # prints 3
+</pre><ol><li><strong>Multiplication (*)</strong> You can use the asterisk (*) to multiply two numbers.</li></ol><pre class="ql-syntax" spellcheck="false">python
+Copy code
+print(a * b)  # prints 18
+</pre><ol><li><strong>Division (/)</strong> You can use the forward slash (/) to divide one number by another. This will give you a float (decimal number) as a result.</li></ol><pre class="ql-syntax" spellcheck="false">python
+Copy code
+print(a / b)  # prints 2.0
+</pre><ol><li><strong>Integer Division (//)</strong> You can use the double forward slash (//) to perform integer division. This will divide the numbers and return the whole number part of the result, discarding the remainder.</li></ol><pre class="ql-syntax" spellcheck="false">python
+Copy code
+result = 10 // 3
+print(result)  # prints 3
+</pre><ol><li>In this example, 10 divided by 3 equals 3.333.... The integer division returns only the whole number part, which is 3.</li><li><strong>Modulo (%)</strong> You can use the percent symbol (%), known as the modulo operator, to get the remainder of a division.</li></ol><pre class="ql-syntax" spellcheck="false">python
+Copy code
+print(a % b)  # prints 0
+</pre><ol><li>Here, <code>6 modulo 3</code> is <code>0</code> because <code>6</code> divided by <code>3</code> leaves no remainder.</li><li><strong>Exponentiation (</strong>)** You can use the double asterisk (**) to raise a number to the power of another number.</li></ol><pre class="ql-syntax" spellcheck="false">python
+Copy code
+print(a ** b)  # prints 216
+</pre><ol><li>In this example, <code>6 to the power of 3</code> is <code>216</code> (<code>6 * 6 * 6</code>).</li></ol><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('4f1a0770-17e6-4373-9ac3-61bea61d2c69', 2, '6b703088-5f16-405c-869f-2f3ecd4445ae', 'LESSON', 'Logic Building part-3', NULL, '<h4>Lesson: Logic Building Part-3</h4><p><strong>Mastering Problem Solving</strong></p><p>In this final part, we focus on mastering problem-solving techniques and preparing for competitive programming.</p><ol><li><strong>Recursive Thinking</strong>: Learn to solve problems using recursion, where a function calls itself to solve smaller instances of the same problem.</li></ol><ul><li class="ql-indent-1"><strong>Example</strong>: Solve problems like the Fibonacci sequence or tree traversals using recursion.</li></ul><ol><li><strong>Dynamic Programming (DP)</strong>: Understand the principles of DP to solve problems that involve overlapping subproblems and optimal substructure.</li></ol><ul><li class="ql-indent-1"><strong>Example</strong>: Implement DP solutions for problems like the knapsack problem or longest common subsequence.</li></ul><ol><li><strong>Graph Theory</strong>: Explore graph algorithms to solve problems involving networks, such as shortest path, connectivity, and traversals.</li></ol><ul><li class="ql-indent-1"><strong>Example</strong>: Use algorithms like Dijkstra''s or BFS/DFS for pathfinding in graphs.</li></ul><ol><li><strong>Backtracking</strong>: Practice backtracking techniques to solve problems that require exploring all possible solutions, such as puzzles and combinatorial problems.</li></ol><ul><li class="ql-indent-1"><strong>Example</strong>: Implement a backtracking solution for the N-Queens problem or Sudoku solver.</li></ul><ol><li><strong>Greedy Algorithms</strong>: Apply greedy algorithms to make locally optimal choices with the hope of finding a global optimum.</li></ol><ul><li class="ql-indent-1"><strong>Example</strong>: Solve problems like coin change or activity selection using greedy strategies.</li></ul><ol><li><strong>Complex Data Structures</strong>: Learn to use advanced data structures like heaps, segment trees, and tries to solve specific types of problems efficiently.</li></ol><ul><li class="ql-indent-1"><strong>Example</strong>: Use a segment tree for range query problems or a trie for efficient string matching.</li></ul><ol><li><strong>Competitive Programming Practice</strong>: Engage in competitive programming platforms to practice and improve your problem-solving speed and accuracy.</li></ol><ul><li class="ql-indent-1"><strong>Example</strong>: Regularly participate in contests on platforms like Codeforces, LeetCode, or HackerRank.</li></ul><ol><li><strong>Review and Reflect</strong>: After solving problems, review your solutions and compare them with others. Reflect on different approaches and learn from mistakes.</li></ol><ul><li class="ql-indent-1"><strong>Example</strong>: Analyze top solutions from coding competitions to understand different strategies and optimizations.</li></ul><p>By mastering these advanced techniques, you will be well-prepared for tackling complex programming challenges and excelling in competitive programming environments. Keep practicing, stay curious, and continue learning to enhance your problem-solving abilities.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('3427a94d-c991-43e0-9bf2-61de2b898e86', 3, '6b703088-5f16-405c-869f-2f3ecd4445ae', 'VIDEO', 'Logic Building with C', NULL, '', 'https://www.youtube.com/watch?v=NqJScDluqKI&list=PL7ersPsTyYt1I2qKWkVT8L4521MmEHdeQ');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('72c106ed-7b7f-4c32-a4f4-49d58d29f62a', 4, '6b703088-5f16-405c-869f-2f3ecd4445ae', 'CODE', 'Finding maximum sum k less than n', 'b6484e21-6937-489c-b031-b71767994744', 'Finding maximum sum k less than n', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('43438d32-5069-4a5f-b7e5-732c5f6513e8', 1, '6afaf653-6486-4ffb-b2d0-1460e629933f', 'LESSON', 'Relational Operators', NULL, '<h4>Lesson: Relational Operators</h4><p>Relational operators are used to compare two values. They return a Boolean value: <code>True</code> or <code>False</code>. Let''s explore some commonly used relational operators with examples.</p><ol><li><strong>Equal to (==)</strong> Checks if two values are equal.</li></ol><pre class="ql-syntax" spellcheck="false">python
+Copy code
+print(a == b)  # prints False
+</pre><ol><li><strong>Not equal to (!=)</strong> Checks if two values are not equal.</li></ol><pre class="ql-syntax" spellcheck="false">python
+Copy code
+print(a != b)  # prints True
+</pre><ol><li><strong>Greater than (&gt;)</strong> Checks if the left value is greater than the right value.</li></ol><pre class="ql-syntax" spellcheck="false">python
+Copy code
+print(a &gt; b)  # prints True
+</pre><ol><li><strong>Less than (&lt;)</strong> Checks if the left value is less than the right value.</li></ol><pre class="ql-syntax" spellcheck="false">python
+Copy code
+print(a &lt; b)  # prints False
+</pre><ol><li><strong>Greater than or equal to (&gt;=)</strong> Checks if the left value is greater than or equal to the right value.</li></ol><pre class="ql-syntax" spellcheck="false">python
+Copy code
+print(a &gt;= b)  # prints True
+</pre><ol><li><strong>Less than or equal to (&lt;=)</strong> Checks if the left value is less than or equal to the right value.</li></ol><pre class="ql-syntax" spellcheck="false">python
+Copy code
+print(a &lt;= b)  # prints False
+</pre><p>Relational operators are essential for making comparisons in your programs, enabling decision-making processes based on different conditions.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('5778eb72-93d4-43f9-a930-6caed7dadd11', 2, '6afaf653-6486-4ffb-b2d0-1460e629933f', 'LESSON', 'Logical Operators', NULL, '<h4>Lesson: Logical Operators</h4><p>Logical operators are used to combine multiple conditions. They return <code>True</code> or <code>False</code> based on the logical relationship between the conditions. Let''s explore some commonly used logical operators with examples.</p><ol><li><strong>AND (and)</strong> Returns <code>True</code> if both conditions are <code>True</code>.</li></ol><pre class="ql-syntax" spellcheck="false">python
+Copy code
+print((a &gt; b) and (b &gt; 0))  # prints True
+</pre><ol><li><strong>OR (or)</strong> Returns <code>True</code> if at least one of the conditions is <code>True</code>.</li></ol><pre class="ql-syntax" spellcheck="false">python
+Copy code
+print((a &gt; b) or (b &lt; 0))  # prints True
+</pre><ol><li><strong>NOT (not)</strong> Returns <code>True</code> if the condition is <code>False</code>.</li></ol><pre class="ql-syntax" spellcheck="false">python
+Copy code
+print(not(a &gt; b))  # prints False
+</pre><p>Logical operators are crucial for constructing complex conditions and controlling the flow of your programs based on multiple criteria.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('04d2a14d-4d33-4be7-9935-7c23d99eb46e', 3, '6afaf653-6486-4ffb-b2d0-1460e629933f', 'LESSON', 'Precedence and Associativity', NULL, '<h4>Lesson: Precedence and Associativity</h4><p>Operator precedence determines the order in which operations are performed in an expression. Associativity determines the order in which operators of the same precedence are processed. Let''s explore these concepts with examples.</p><ol><li><strong>Operator Precedence</strong> Operators with higher precedence are evaluated before operators with lower precedence.</li></ol><pre class="ql-syntax" spellcheck="false">python
+Copy code
+result = a + b * 2
+print(result)  # prints 12
+</pre><ol><li>In this example, multiplication has higher precedence than addition, so <code>b * 2</code> is evaluated first.</li><li><strong>Operator Associativity</strong> Associativity defines the order in which operators of the same precedence are evaluated. Most operators are left-associative, meaning they are evaluated from left to right.</li></ol><pre class="ql-syntax" spellcheck="false">python
+Copy code
+result = a - b + 2
+print(result)  # prints 5
+</pre><ol><li>In this example, both subtraction and addition have the same precedence and are left-associative, so <code>a - b</code> is evaluated first, followed by adding 2.</li></ol><p>Understanding operator precedence and associativity is essential for writing correct and efficient expressions in your programs. Use parentheses <code>()</code> to explicitly specify the order of operations when necessary.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('f44de59f-a053-4bde-9c72-2ad2cd4efdf5', 4, '6afaf653-6486-4ffb-b2d0-1460e629933f', 'VIDEO', 'Arithmetic Operators in Python', NULL, '', 'https://www.youtube.com/watch?v=GEMZpw7ug-k&list=PLBlnK6fEyqRjdKzSsGiBpr6fAxawT9WWb');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('6517cccd-0805-482a-8047-50ddc97a7b15', 5, '6afaf653-6486-4ffb-b2d0-1460e629933f', 'CODE', 'List odd divisor', 'b6484e21-6937-489c-b031-b71767994741', 'List odd divisor', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('13182de4-4078-44fe-8ffb-c9a5ca59f3fa', 0, 'ebc43b1c-2c83-4d5d-8f8d-c940bc5cc4b2', 'LESSON', 'Introduction to strings', NULL, '<h4>Lesson: Introduction to Strings</h4><p>In this lesson, we will explore the concept of strings in C programming. Strings are an essential data type used to represent and manipulate sequences of characters. Understanding strings and their operations is crucial for solving a wide range of programming problems.</p><h3>What are Strings?</h3><ul><li><strong>Definition</strong>: A string is a sequence of characters, including letters, digits, symbols, and whitespace characters.</li><li><strong>Representation</strong>: In C, strings are represented as arrays of characters terminated by a null character (<code>''\0''</code>).</li></ul><h3>Basic String Syntax</h3><ol><li><strong>String Declaration</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">char str[50]; // Declares a string of size 50
+</pre><ol><li><strong>String Initialization</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">char str1[] = "Hello, World!"; // String initialized with a value
+char str2[20] = "Programming"; // String with a specified size
+</pre><ol><li><strong>Accessing Characters</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">char firstChar = str1[0]; // Accessing the first character ''H''
+char lastChar = str1[12]; // Accessing the last character ''!''
+</pre><h3>Common String Operations</h3><ol><li><strong>String Length</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">int length = strlen(str1); // Calculates the length of str1
+</pre><ol><li><strong>String Copy</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">char dest[50];
+strcpy(dest, str1); // Copies str1 into dest
+</pre><ol><li><strong>String Concatenation</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">char str3[50] = "Hello, ";
+strcat(str3, "World!"); // Concatenates "World!" to str3
+</pre><ol><li><strong>String Comparison</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">if (strcmp(str1, str2) == 0) {
+    printf("The strings are equal.\n");
+} else {
+    printf("The strings are not equal.\n");
+}
+</pre><h3>String Input and Output</h3><ol><li><strong>Reading a String</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">char input[100];
+printf("Enter a string: ");
+scanf("%s", input); // Reads a string from user input
+</pre><ol><li><strong>Printing a String</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">printf("You entered: %s\n", input); // Prints the user input
+</pre><h3>String Manipulation Functions</h3><ol><li><strong>Finding a Substring</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">char *substr = strstr(str1, "World");
+if (substr != NULL) {
+    printf("Substring found: %s\n", substr);
+} else {
+    printf("Substring not found.\n");
+}
+</pre><ol><li><strong>String Tokenization</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">char str4[] = "Hello, World! Welcome to C programming.";
+char *token = strtok(str4, " ");
+while (token != NULL) {
+    printf("%s\n", token);
+    token = strtok(NULL, " ");
+}
+</pre><h3><br></h3><h3>Practical Example</h3><p><strong>Problem</strong>: Write a program that reverses a given string.</p><p><strong>Solution</strong>:</p><pre class="ql-syntax" spellcheck="false">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+void reverseString(char str[]) {
+    int n = strlen(str);
+    for (int i = 0; i &lt; n / 2; i++) {
+        char temp = str[i];
+        str[i] = str[n - i - 1];
+        str[n - i - 1] = temp;
+    }
+}
+
+int main() {
+    char str[100];
+    printf("Enter a string: ");
+    scanf("%s", str);
+    reverseString(str);
+    printf("Reversed string: %s\n", str);
+    return 0;
+}
+</pre><p>This program reads a string from the user, reverses it, and prints the reversed string.</p><p><br></p><h3>Conclusion</h3><p>Understanding strings and their operations is fundamental for effective programming in C. Strings are versatile and powerful tools for handling text and character data. By mastering string operations, you will be well-equipped to tackle a variety of programming challenges.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('9bd2a076-a832-4831-b69f-b2c686dbd7e5', 1, 'ebc43b1c-2c83-4d5d-8f8d-c940bc5cc4b2', 'VIDEO', 'Strings In Python', NULL, '', 'https://www.youtube.com/watch?v=iYCiWadRZ8I');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('18d0cf88-47e6-4ea9-9213-fcb70f7c3b77', 0, '80ddc21d-f973-498a-a213-c70f6a6df53a', 'LESSON', 'Taking user input', NULL, '<h3>Taking user input</h3><p>You have already learned that ''print'' is used to output values.</p><p>Now we will use ''input()'' to get user input. View this image to understand how input() function works in Python</p><p><img src="https://i.ibb.co/SyVm9Gt/image.png"></p><p>So you understood from the image the different ways in which input can be read. Let''s take another example - the following commands will be used to get the name and age from user.</p><p>The program then prints out the greeting using the variables <em>name</em>&nbsp;and&nbsp;<em>age</em>.</p><pre class="ql-syntax" spellcheck="false">name = input()
+print("Hello, " + name + "!")
+
+age = input()
+print("You are " + age + " years old.")
+</pre><p><code><strong>input()</strong></code>&nbsp;assumes that the input is a string.</p><p>You can convert it to an integer or numerical value using&nbsp;<code><strong>int()</strong></code></p><pre class="ql-syntax" spellcheck="false">age = int(input())
+print("You are", age, "years old.")
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('37028b2b-5bbf-49d5-a781-954c2d6c80ed', 1, '80ddc21d-f973-498a-a213-c70f6a6df53a', 'VIDEO', 'Python user input ⌨️', NULL, '', 'https://www.youtube.com/watch?v=DB9Cq6TSTuQ');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('4da5dea4-bfe9-45cd-8927-0198a1d542ce', 2, '80ddc21d-f973-498a-a213-c70f6a6df53a', 'CODE', 'Sum of two integer', 'b6484e21-6937-489c-b031-b71767994221', 'Sum of two integer', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('ed4da262-2ebf-4635-b448-b5962d39aacb', 0, 'f72f8157-1b3e-4de0-acf3-7da9760b9352', 'LESSON', ' Intro to if / else', NULL, '<h3>Need of If-Else</h3><p>Many times our program needs to take different actions based on some conditions.</p><p><br></p><p>For example, Let''s suppose we have to write a program that takes the user''s age and tells us if the user is old enough to vote or not. In this case our program will behave differently if the age entered by the user is below 18 and if the age is above 18.</p><p>If it is above 18, our program will print "Old enough to vote!". Otherwise, it will print "Not old enough to vote!".</p><p><img src="https://i.ibb.co/NCYKP4Q/image.png"></p><p>This different behavior in the program can be achieved through something called "If/Else" Statements in Python.</p><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('fe5d8eea-6710-428d-b7fc-40e9a60faac6', 1, 'f72f8157-1b3e-4de0-acf3-7da9760b9352', 'VIDEO', 'Python If Statements | Python Tutorial #10', NULL, '', 'https://www.youtube.com/watch?v=wKQRmXR3jhc');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('369439b7-524e-4ec7-a5b6-4415becb0c3e', 2, 'f72f8157-1b3e-4de0-acf3-7da9760b9352', 'CODE', 'Check prime number', 'b6484e21-6937-489c-b031-b71767994758', 'Check prime number', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('be8efb5d-3cab-48e0-a10d-09378525f8fa', 0, '33526918-26be-4fe4-8c92-9cc7bc0d53fd', 'LESSON', 'Introduction to arrays', NULL, '<h3>Creating Arrays</h3><p><code><strong>Arrays</strong></code>&nbsp;in Python are commonly referred to as&nbsp;<code>lists</code>.</p><p><code>Arrays</code>&nbsp;are used to store multiple values in a single variable, instead of declaring separate variables for each value.</p><p>In Python,&nbsp;<code>list</code>&nbsp;is denoted by square brackets&nbsp;<strong>[]</strong></p><ul><li>It can hold elements of different data types, such as numbers, strings, or even other lists.</li><li><code>Lists</code>&nbsp;are mutable, which means you can modify them by adding, removing, or changing elements.</li></ul><pre class="ql-syntax" spellcheck="false"># Consider the list  ''fruits''  and  ''numbers''  below
+fruits = ["apple", "banana", "orange", "grape"]
+
+numbers = [20, 10, 0, -5]
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('6da25459-c869-48e1-9ac5-5492a2559b83', 1, '33526918-26be-4fe4-8c92-9cc7bc0d53fd', 'VIDEO', 'ARRAYS in Python - Start Here!', NULL, '', 'https://www.youtube.com/watch?v=Rldzskbnjgo');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('3cb71d1f-199e-42b4-95df-69f5d3d069d4', 2, '33526918-26be-4fe4-8c92-9cc7bc0d53fd', 'CODE', 'Check 2^k', 'b6484e21-6937-489c-b031-b71767994745', 'Check 2^k', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('5ae43565-7fb7-4866-9613-c0f17d85de06', 0, '685c9fe2-e6e1-4ebc-bb1f-251a2822ca2e', 'LESSON', 'While loops', NULL, '<h4>Lesson: While Loops</h4><p><strong>While Loops</strong> allow you to execute a block of code repeatedly as long as a certain condition is true. This is useful when the number of iterations is not known beforehand.</p><p><strong>Syntax</strong>:</p><pre class="ql-syntax" spellcheck="false">while condition:
+    # Code to execute
+</pre><p><strong>Example</strong>:</p><pre class="ql-syntax" spellcheck="false">i = 1
+while i &lt;= 10:
+    print(i)
+    i += 1
+</pre><p>This loop prints numbers from 1 to 10.</p><p><strong>Key Points</strong>:</p><ul><li>Ensure the condition will eventually become false, otherwise, you might create an infinite loop.</li><li>Use while loops when the number of iterations is not predetermined.</li></ul><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('65f4995b-5191-4fa3-bf08-84ec22056687', 1, '685c9fe2-e6e1-4ebc-bb1f-251a2822ca2e', 'LESSON', 'For loops', NULL, '<h4>Lesson: For Loops</h4><p><strong>For Loops</strong> are used to iterate over a sequence (like a list, tuple, or string) or a range of numbers. This is useful when the number of iterations is known beforehand.</p><p><strong>Syntax</strong>:</p><pre class="ql-syntax" spellcheck="false">for item in sequence:
+    # Code to execute
+</pre><p><strong>Example</strong>:</p><pre class="ql-syntax" spellcheck="false">for i in range(1, 11):
+    print(i)
+</pre><p>This loop prints numbers from 1 to 10.</p><p><strong>Key Points</strong>:</p><ul><li>Use for loops when you need to iterate over a sequence or a known range of numbers.</li><li>The <code>range()</code> function is commonly used to generate a sequence of numbers.</li></ul><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('1804c24e-f56b-42bb-9d40-00c4a2f5b2f4', 2, '685c9fe2-e6e1-4ebc-bb1f-251a2822ca2e', 'LESSON', 'Break/Continue', NULL, '<h4>Lesson: Break / Continue</h4><p>The <code>break</code> and <code>continue</code> statements are used to control the flow of loops.</p><ol><li><strong>Break Statement</strong>: The <code>break</code> statement is used to exit a loop prematurely when a certain condition is met.</li></ol><pre class="ql-syntax" spellcheck="false">for i in range(1, 11):
+    if i == 5:
+        break
+    print(i)
+</pre><ol><li>This loop prints numbers from 1 to 4 and then stops.</li><li><strong>Continue Statement</strong>: The <code>continue</code> statement is used to skip the rest of the code inside a loop for the current iteration only and continue with the next iteration.</li></ol><pre class="ql-syntax" spellcheck="false">for i in range(1, 11):
+    if i % 2 == 0:
+        continue
+    print(i)
+</pre><ol><li>This loop prints all odd numbers from 1 to 10.</li></ol><p><strong>Key Points</strong>:</p><ul><li>Use <code>break</code> to exit a loop when a specific condition is met.</li><li>Use <code>continue</code> to skip the current iteration and proceed with the next one.</li></ul><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('996951d8-78de-4e01-8a45-03f1fd280b59', 3, '685c9fe2-e6e1-4ebc-bb1f-251a2822ca2e', 'LESSON', 'Nested loops', NULL, '<h4>Lesson: Nested Loops</h4><p><strong>Nested Loops</strong> are loops inside other loops. This is useful for working with multi-dimensional data structures, such as matrices.</p><p><strong>Syntax</strong>:</p><pre class="ql-syntax" spellcheck="false">for i in range(1, 4):
+    for j in range(1, 4):
+        print(i, j)
+</pre><p><strong>Example</strong>:</p><pre class="ql-syntax" spellcheck="false">for i in range(1, 4):
+    for j in range(1, 4):
+        print(f''({i}, {j})'')
+</pre><p>This nested loop prints pairs of numbers from (1, 1) to (3, 3).</p><p><strong>Key Points</strong>:</p><ul><li>The inner loop runs completely for each iteration of the outer loop.</li><li>Nested loops can be used for tasks like matrix multiplication, printing patterns, and more.</li></ul><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('c8a05f67-1688-4afc-b132-ec49e05e5428', 4, '685c9fe2-e6e1-4ebc-bb1f-251a2822ca2e', 'VIDEO', 'Loops in Python | While & For Loops | Python Full Course', NULL, '', 'https://www.youtube.com/watch?v=S73thl0AyFU');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('88ccc96a-3743-4925-af9e-8fb1916c7a23', 0, '2eaa7791-da93-45fe-b20c-20e86379d8a1', 'LESSON', 'Advanced techniques for manipulating the DOM', NULL, '<h3>Lesson: Advanced Techniques for Manipulating the DOM</h3><p><strong>Objective:</strong> Explore advanced methods for manipulating the DOM to create dynamic and interactive web applications.</p><p><strong>1. Inserting Elements:</strong> Learn various methods to insert elements into the DOM.</p><p><strong>Examples:</strong></p><ul><li><code>insertAdjacentHTML()</code>: Insert HTML directly adjacent to an element.</li></ul><pre class="ql-syntax" spellcheck="false">document.getElementById(''myDiv'').insertAdjacentHTML(''beforeend'', ''&lt;p&gt;New Paragraph&lt;/p&gt;'');
+</pre><ul><li><code>insertBefore()</code>: Insert a new node before an existing node.</li></ul><pre class="ql-syntax" spellcheck="false">const newElement = document.createElement(''p'');
+newElement.textContent = ''Inserted Paragraph'';
+document.getElementById(''myDiv'').insertBefore(newElement, document.getElementById(''myDiv'').firstChild);
+</pre><p><strong>2. Replacing Elements:</strong> Replace an existing element with a new one.</p><pre class="ql-syntax" spellcheck="false">const newElement = document.createElement(''p'');
+newElement.textContent = ''Replacement Paragraph'';
+const oldElement = document.getElementById(''oldElement'');
+oldElement.parentNode.replaceChild(newElement, oldElement);
+</pre><p><strong>3. Cloning Elements:</strong> Clone an existing element, optionally including its child nodes.</p><pre class="ql-syntax" spellcheck="false">const original = document.getElementById(''myDiv'');
+const clone = original.cloneNode(true); // true for deep clone
+document.body.appendChild(clone);
+</pre><p><strong>4. Working with Collections:</strong> Efficiently manipulate groups of elements using collections like <code>NodeList</code> or <code>HTMLCollection</code>.</p><pre class="ql-syntax" spellcheck="false">const items = document.getElementsByClassName(''item'');
+Array.from(items).forEach(item =&gt; {
+    item.style.color = ''blue'';
+});
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that inserts, replaces, and clones elements in the DOM.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Advanced DOM Manipulation&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Advanced DOM Manipulation Example&lt;/h1&gt;
+    &lt;div id="myDiv"&gt;
+        &lt;p id="oldElement"&gt;Old Paragraph&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        // Insert new element
+        document.getElementById(''myDiv'').insertAdjacentHTML(''beforeend'', ''&lt;p&gt;New Paragraph&lt;/p&gt;'');
+
+        // Replace element
+        const newElement = document.createElement(''p'');
+        newElement.textContent = ''Replacement Paragraph'';
+        const oldElement = document.getElementById(''oldElement'');
+        oldElement.parentNode.replaceChild(newElement, oldElement);
+
+        // Clone element
+        const original = document.getElementById(''myDiv'');
+        const clone = original.cloneNode(true);
+        document.body.appendChild(clone);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('25cdef6f-a440-4263-a645-2cee8aed1961', 1, '2eaa7791-da93-45fe-b20c-20e86379d8a1', 'LESSON', 'Virtual DOM', NULL, '<h3>Lesson: Virtual DOM</h3><p><strong>Objective:</strong> Understand the concept of the Virtual DOM and how it enhances the performance of web applications.</p><p><strong>1. Definition:</strong> The Virtual DOM is an abstraction of the real DOM. It is a lightweight copy of the real DOM that allows for efficient updates and rendering.</p><p><strong>2. How It Works:</strong></p><ul><li><strong>Diffing:</strong> The Virtual DOM computes the differences between the current and previous states.</li><li><strong>Batch Updates:</strong> Changes are applied to the Virtual DOM, and then the real DOM is updated in a single operation.</li><li><strong>Reconciliation:</strong> The process of updating the real DOM to match the Virtual DOM.</li></ul><p><strong>3. Benefits:</strong></p><ul><li><strong>Performance:</strong> Minimizes direct manipulation of the real DOM, reducing costly reflows and repaints.</li><li><strong>Efficiency:</strong> Efficiently updates only the parts of the DOM that have changed.</li></ul><p><strong>Example with React:</strong></p><pre class="ql-syntax" spellcheck="false">class App extends React.Component {
+    constructor() {
+        super();
+        this.state = { count: 0 };
+    }
+
+    increment = () =&gt; {
+        this.setState({ count: this.state.count + 1 });
+    }
+
+    render() {
+        return (
+            &lt;div&gt;
+                &lt;p&gt;Count: {this.state.count}&lt;/p&gt;
+                &lt;button onClick={this.increment}&gt;Increment&lt;/button&gt;
+            &lt;/div&gt;
+        );
+    }
+}
+
+ReactDOM.render(&lt;App /&gt;, document.getElementById(''root''));
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Demonstrate the use of the Virtual DOM by creating a simple React application that updates the state efficiently.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Virtual DOM&lt;/title&gt;
+    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Virtual DOM Example&lt;/h1&gt;
+    &lt;div id="root"&gt;&lt;/div&gt;
+    &lt;script type="text/javascript"&gt;
+        class App extends React.Component {
+            constructor() {
+                super();
+                this.state = { count: 0 };
+            }
+
+            increment = () =&gt; {
+                this.setState({ count: this.state.count + 1 });
+            }
+
+            render() {
+                return (
+                    &lt;div&gt;
+                        &lt;p&gt;Count: {this.state.count}&lt;/p&gt;
+                        &lt;button onClick={this.increment}&gt;Increment&lt;/button&gt;
+                    &lt;/div&gt;
+                );
+            }
+        }
+
+        ReactDOM.render(&lt;App /&gt;, document.getElementById(''root''));
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('22f74f9b-b776-438b-a3f5-c084f70cb70b', 2, '2eaa7791-da93-45fe-b20c-20e86379d8a1', 'LESSON', 'Performance optimization', NULL, '<h3>Lesson: Performance Optimization</h3><p><strong>Objective:</strong> Learn techniques to optimize DOM manipulation for better performance and responsiveness.</p><p><strong>1. Minimize Reflows and Repaints:</strong></p><ul><li><strong>Batch DOM Updates:</strong> Group multiple DOM updates together.</li><li><strong>Use Document Fragments:</strong> Update elements in a <code>DocumentFragment</code> and append it to the DOM in a single operation.</li></ul><pre class="ql-syntax" spellcheck="false">const fragment = document.createDocumentFragment();
+for (let i = 0; i &lt; 1000; i++) {
+    const div = document.createElement(''div'');
+    div.textContent = `Item ${i}`;
+    fragment.appendChild(div);
+}
+document.body.appendChild(fragment);
+</pre><p><strong>2. Efficient Event Handling:</strong></p><ul><li><strong>Event Delegation:</strong> Use event delegation to handle events efficiently.</li></ul><pre class="ql-syntax" spellcheck="false">document.getElementById(''parent'').addEventListener(''click'', function(event) {
+    if (event.target &amp;&amp; event.target.matches(''button'')) {
+        console.log(''Button clicked:'', event.target.textContent);
+    }
+});
+</pre><p><strong>3. Optimize CSS:</strong></p><ul><li><strong>Avoid Layout Thrashing:</strong> Minimize layout calculations by reading and writing to the DOM separately.</li></ul><pre class="ql-syntax" spellcheck="false">const el = document.getElementById(''myElement'');
+const height = el.offsetHeight; // Read
+el.style.height = `${height + 10}px`; // Write
+</pre><p><strong>4. Use requestAnimationFrame:</strong> Optimize animations by using <code>requestAnimationFrame</code> to ensure smooth rendering.</p><pre class="ql-syntax" spellcheck="false">function animate() {
+    // Perform animation logic
+    requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that optimizes DOM manipulation using document fragments and efficient event handling.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Performance Optimization&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Performance Optimization Example&lt;/h1&gt;
+    &lt;div id="parent"&gt;
+        &lt;!-- Buttons will be added here --&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        // Efficiently add 1000 buttons using a document fragment
+        const fragment = document.createDocumentFragment();
+        for (let i = 0; i &lt; 1000; i++) {
+            const button = document.createElement(''button'');
+            button.textContent = `Button ${i}`;
+            fragment.appendChild(button);
+        }
+        document.getElementById(''parent'').appendChild(fragment);
+
+        // Efficient event handling using event delegation
+        document.getElementById(''parent'').addEventListener(''click'', function(event) {
+            if (event.target &amp;&amp; event.target.matches(''button'')) {
+                console.log(''Button clicked:'', event.target.textContent);
+            }
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p>By mastering these advanced DOM manipulation techniques, understanding the Virtual DOM, and learning performance optimization strategies, you will be able to create highly efficient and responsive web applications. These lessons provide the foundation for building sophisticated and performant user interfaces in JavaScript.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('4ea45817-6925-448b-859f-4da157f76c72', 0, 'c982460d-a9d0-4a2c-919c-5a2dace33050', 'LESSON', ' Recap - Logic building', NULL, '<h3>Solve programming problems with Python - Part 2</h3><p>Welcome to&nbsp;<strong>Part-2</strong>&nbsp;of the Beginner''s guide to solving programming problems using Python.</p><p><br></p><p>A quick re-cap of what was covered in&nbsp;<a href="https://codedynamite.site/#/certificate-courses/d215b5f8-0249-4dc5-89a3-51fd148cfb16/introduction" rel="noopener noreferrer" target="_blank" style="color: rgb(87, 128, 176);">Part-1</a>.</p><ul><li>Getting started with programming problems</li><li>Basic math functions</li><li>Conditional statements</li><li>Logic building / Approach</li></ul><p>Let''s begin! Click on ''Next'' to proceed with&nbsp;<strong>Part-2</strong></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('3bdf38b1-de0e-4ade-a7fe-b13f2302a8d5', 0, '0b8f86c2-ceb5-4849-be55-196ee65c07fe', 'LESSON', ' Array operations part-1', NULL, '<h3>Introduction to the module on Array Operations</h3><p>All right - things are now getting serious!</p><p>In this module on&nbsp;<strong>Array Operations</strong>&nbsp;- we will learn the concepts required to successfully perform beginner level array construction and manipulation required in programming problems.</p><p>Let''s revise some basic syntax about lists / arrays in the IDE that we came across in "Learn Python".</p><ul><li>Lists are used to store multiple items in a single variable</li><li>List items can be accessed by referring to their index. List items can also have negative index </li><li class="ql-indent-1">list[3]&nbsp;refers to the&nbsp;<span class="ql-formula" data-value="4^{th}">﻿<span contenteditable="false"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>4</mn><mrow><mi>t</mi><mi>h</mi></mrow></msup></mrow><annotation encoding="application/x-tex">4^{th}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.8491em;"></span><span class="mord"><span class="mord">4</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.8491em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">h</span></span></span></span></span></span></span></span></span></span></span></span></span>﻿</span>  item of the list</li><li class="ql-indent-1">list[−2]&nbsp;refers to the&nbsp;<span class="ql-formula" data-value="2^{nd}">﻿<span contenteditable="false"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mrow><mi>n</mi><mi>d</mi></mrow></msup></mrow><annotation encoding="application/x-tex">2^{nd}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.8491em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.8491em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mord mathnormal mtight">d</span></span></span></span></span></span></span></span></span></span></span></span></span>﻿</span> last item of the list</li><li>You can slice a list to retrieve multiple items from the list</li><li class="ql-indent-1">If&nbsp;list=[4,3,5,2,1], then&nbsp;list[1:3]&nbsp;will return the values [3, 5]</li><li>append() function allows us to add items to the list</li><li class="ql-indent-1">if If&nbsp;list=[4,3,5,2,1], then&nbsp;list.append(6) will update as&nbsp;list=[4,3,5,2,1,6] </li><li>sort() function sorts the list in an ascending order</li><li class="ql-indent-1">If&nbsp;list=[4,3,5,2,1], then&nbsp;list.sort() will update as&nbsp;list=[1,2,3,4,5]</li><li class="ql-indent-1">If the list contains strings, then&nbsp;list.sort() will sort the list lexicographically</li><li class="ql-indent-1">sort() function will not work if the list contains both strings and integers</li><li>Two lists can be combined by using the&nbsp;′+′&nbsp;operator</li><li>pop() function allows us to remove an item at the defined index in the list</li><li>If&nbsp;list=[4,3,5,2,1], then&nbsp;list.pop(3)&nbsp;will update as&nbsp;list=[4,3,5,1]</li></ul><p><br></p><p>Example:</p><pre class="ql-syntax" spellcheck="false"># Click on ''Submit'' to view the results
+# Click on ''Next'' to proceed
+
+
+sample_list = [5, 3, 2, 4, 1]
+
+
+print(sample_list)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # print command for a list displays the list
+print(sample_list[2])&nbsp; &nbsp; &nbsp; &nbsp;# output specific index from the list
+print(sample_list[-3])&nbsp; &nbsp; &nbsp; # negative indexing of the list
+print(sample_list[1:4])&nbsp; &nbsp; &nbsp;# slice a list between two indices
+
+
+sample_list.append(6)&nbsp; &nbsp; &nbsp; &nbsp;# update the list by adding an element
+print(sample_list)
+
+
+sample_list.sort()&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # sort the list in an ascending order
+print(sample_list)
+
+
+sample_list.pop(2)
+print(sample_list)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # remove the item at the index 2
+
+
+print(sample_list + sample_list)&nbsp; &nbsp; # view the result of list concatenation
+</pre>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d9ea9aa2-8c0a-44b2-b4aa-8128be23213e', 0, '9f4635ae-bdb4-4ce8-954f-fe7905cf3619', 'LESSON', 'Introduction to frameworks (React, Angular, Vue)', NULL, '<h3>Lesson: Introduction to Frameworks (React, Angular, Vue)</h3><p><strong>Objective:</strong> Get an overview of the most popular JavaScript frameworks and libraries: React, Angular, and Vue. Understand their core concepts and when to use each one.</p><p><strong>1. React:</strong></p><ul><li><strong>Developed by Facebook:</strong> A library for building user interfaces.</li><li><strong>Component-Based:</strong> UI is divided into reusable components.</li><li><strong>Virtual DOM:</strong> Efficient updates and rendering.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function App() {
+    return &lt;h1&gt;Hello, React!&lt;/h1&gt;;
+}
+</pre><p><strong>2. Angular:</strong></p><ul><li><strong>Developed by Google:</strong> A full-fledged framework for building web applications.</li><li><strong>Two-Way Data Binding:</strong> Synchronizes data between the model and the view.</li><li><strong>Dependency Injection:</strong> Manages the dependencies of components.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">@Component({
+  selector: ''app-root'',
+  template: ''&lt;h1&gt;Hello, Angular!&lt;/h1&gt;''
+})
+export class AppComponent {}
+</pre><p><strong>3. Vue:</strong></p><ul><li><strong>Developed by Evan You:</strong> A progressive framework for building user interfaces.</li><li><strong>Reactive Data Binding:</strong> Updates the DOM when the data changes.</li><li><strong>Single-File Components:</strong> Combines HTML, JavaScript, and CSS in a single file.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">const app = new Vue({
+    el: ''#app'',
+    data: {
+        message: ''Hello, Vue!''
+    }
+});
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a brief introduction to React, Angular, and Vue, explaining their core features.</p><p><strong>Solution:</strong> React is a library developed by Facebook for building user interfaces with a component-based architecture and a virtual DOM for efficient updates. Angular, developed by Google, is a comprehensive framework with features like two-way data binding and dependency injection. Vue, created by Evan You, is a progressive framework that offers reactive data binding and single-file components.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('2d8b3003-948b-42d5-81c7-a576fda2a447', 1, '9f4635ae-bdb4-4ce8-954f-fe7905cf3619', 'LESSON', 'Setting up a development environment', NULL, '<h3>Lesson: Setting Up a Development Environment</h3><p><strong>Objective:</strong> Learn how to set up a development environment for building JavaScript applications with frameworks like React, Angular, and Vue.</p><p><strong>1. Install Node.js and npm:</strong></p><ul><li>Node.js is a JavaScript runtime that allows you to run JavaScript on the server.</li><li>npm (Node Package Manager) is used to manage dependencies.</li></ul><p><strong>2. Install a Code Editor:</strong></p><ul><li>Popular code editors include Visual Studio Code, Sublime Text, and Atom.</li></ul><p><strong>3. Create a New React Project:</strong></p><ul><li>Use Create React App to set up a new React project quickly.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">npx create-react-app my-react-app
+cd my-react-app
+npm start
+</pre><p><strong>4. Create a New Angular Project:</strong></p><ul><li>Use Angular CLI to set up a new Angular project.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">npm install -g @angular/cli
+ng new my-angular-app
+cd my-angular-app
+ng serve
+</pre><p><strong>5. Create a New Vue Project:</strong></p><ul><li>Use Vue CLI to set up a new Vue project.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">npm install -g @vue/cli
+vue create my-vue-app
+cd my-vue-app
+npm run serve
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write instructions to set up a new React project using Create React App.</p><p><strong>Solution:</strong></p><ol><li>Install Node.js and npm from <a href="https://nodejs.org/" rel="noopener noreferrer" target="_blank">nodejs.org</a>.</li><li>Open a terminal and run the following commands:</li></ol><pre class="ql-syntax" spellcheck="false">npx create-react-app my-react-app
+cd my-react-app
+npm start
+</pre><ol><li>Open <code>http://localhost:3000</code> in your browser to see the new React application.</li></ol><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('0fcc3e4b-fbfd-4335-babb-2e34795a40ac', 2, '9f4635ae-bdb4-4ce8-954f-fe7905cf3619', 'LESSON', 'Building a simple application with React', NULL, '<h3>Lesson: Building a Simple Application with React</h3><p><strong>Objective:</strong> Build a simple React application to understand the core concepts of React, including components, props, and state.</p><p><strong>1. Create a New React Component:</strong></p><ul><li>Define a new component using a function or a class.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function Welcome(props) {
+    return &lt;h1&gt;Hello, {props.name}!&lt;/h1&gt;;
+}
+</pre><p><strong>2. Use Props to Pass Data:</strong></p><ul><li>Props are used to pass data from parent to child components.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function App() {
+    return &lt;Welcome name="Alice" /&gt;;
+}
+</pre><p><strong>3. Manage State in a Component:</strong></p><ul><li>Use the <code>useState</code> hook to manage state in functional components.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function Counter() {
+    const [count, setCount] = React.useState(0);
+
+    return (
+        &lt;div&gt;
+            &lt;p&gt;Count: {count}&lt;/p&gt;
+            &lt;button onClick={() =&gt; setCount(count + 1)}&gt;Increment&lt;/button&gt;
+        &lt;/div&gt;
+    );
+}
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a simple React application with a counter component that increments the count when a button is clicked.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;React Application&lt;/title&gt;
+    &lt;script src="https://unpkg.com/react/umd/react.development.js"&gt;&lt;/script&gt;
+    &lt;script src="https://unpkg.com/react-dom/umd/react-dom.development.js"&gt;&lt;/script&gt;
+    &lt;script src="https://unpkg.com/@babel/standalone/babel.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="root"&gt;&lt;/div&gt;
+    &lt;script type="text/babel"&gt;
+        function Counter() {
+            const [count, setCount] = React.useState(0);
+
+            return (
+                &lt;div&gt;
+                    &lt;p&gt;Count: {count}&lt;/p&gt;
+                    &lt;button onClick={() =&gt; setCount(count + 1)}&gt;Increment&lt;/button&gt;
+                &lt;/div&gt;
+            );
+        }
+
+        function App() {
+            return (
+                &lt;div&gt;
+                    &lt;h1&gt;My React App&lt;/h1&gt;
+                    &lt;Counter /&gt;
+                &lt;/div&gt;
+            );
+        }
+
+        ReactDOM.render(&lt;App /&gt;, document.getElementById(''root''));
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('08eac43d-fff0-4340-a91c-82783f3119c9', 0, '736ddfc6-cf8b-4a9c-825e-f6529410f492', 'LESSON', ' Recap - Logic building', NULL, '<h3>Solve programming problems with CPP - Part 2</h3><p>Welcome to&nbsp;<strong>Part-2</strong>&nbsp;of the Beginner''s guide to solving programming problems using C#.</p><p><br></p><p>A quick re-cap of what was covered in&nbsp;<a href="https://codedynamite.site/#/certificate-courses/0c1a30e7-97f9-4b5d-8d35-b500e7a57f82/introduction" rel="noopener noreferrer" target="_blank" style="color: rgb(87, 128, 176);">Part-1</a>.</p><ul><li>Getting started with programming problems</li><li>Basic math functions</li><li>Conditional statements</li><li>Logic building / Approach</li></ul><p>Let''s begin! Click on ''Next'' to proceed with&nbsp;<strong>Part-2</strong></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('a0dc102d-53c8-4a5b-b0c1-9f10a5d3d31d', 1, '0b8f86c2-ceb5-4849-be55-196ee65c07fe', 'LESSON', ' Important array functions', NULL, '<h4>Lesson: Important Array Functions</h4><p>Building on the basics from Part-1, this lesson will introduce additional important functions for manipulating arrays (lists) in Python. These functions are essential for effective data manipulation and will enhance your problem-solving toolkit.</p><h3>Key Array Functions</h3><ol><li><strong>insert()</strong>: Insert an element at a specific position.</li></ol><pre class="ql-syntax" spellcheck="false">sample_list = [1, 2, 3]
+sample_list.insert(1, 4)  # Insert 4 at index 1
+print(sample_list)  # Prints: [1, 4, 2, 3]
+</pre><ol><li><strong>remove()</strong>: Remove the first occurrence of a specific element.</li></ol><pre class="ql-syntax" spellcheck="false">sample_list = [1, 2, 3, 2, 4]
+sample_list.remove(2)  # Removes the first occurrence of 2
+print(sample_list)  # Prints: [1, 3, 2, 4]
+</pre><ol><li><strong>reverse()</strong>: Reverse the elements of the list.</li></ol><pre class="ql-syntax" spellcheck="false">sample_list = [1, 2, 3, 4, 5]
+sample_list.reverse()  # Reverses the list
+print(sample_list)  # Prints: [5, 4, 3, 2, 1]
+</pre><ol><li><strong>extend()</strong>: Add all elements of another list to the current list.</li></ol><pre class="ql-syntax" spellcheck="false">list1 = [1, 2, 3]
+list2 = [4, 5, 6]
+list1.extend(list2)  # Adds all elements of list2 to list1
+print(list1)  # Prints: [1, 2, 3, 4, 5, 6]
+</pre><ol><li><strong>index()</strong>: Return the index of the first occurrence of a specific element.</li></ol><pre class="ql-syntax" spellcheck="false">sample_list = [1, 2, 3, 4, 3]
+index = sample_list.index(3)  # Finds the first occurrence of 3
+print(index)  # Prints: 2
+</pre><ol><li><strong>count()</strong>: Return the number of times a specific element appears in the list.</li></ol><pre class="ql-syntax" spellcheck="false">sample_list = [1, 2, 2, 3, 2, 4]
+count = sample_list.count(2)  # Counts the occurrences of 2
+print(count)  # Prints: 3
+</pre><h3>Practical Example</h3><p><strong>Problem</strong>: Write a program that uses these functions to manipulate a list of numbers.</p><pre class="ql-syntax" spellcheck="false">numbers = [10, 20, 30, 40, 50]
+
+# Insert 25 at index 2
+numbers.insert(2, 25)
+print(numbers)  # Prints: [10, 20, 25, 30, 40, 50]
+
+# Remove the first occurrence of 40
+numbers.remove(40)
+print(numbers)  # Prints: [10, 20, 25, 30, 50]
+
+# Reverse the list
+numbers.reverse()
+print(numbers)  # Prints: [50, 30, 25, 20, 10]
+
+# Extend the list with [60, 70, 80]
+numbers.extend([60, 70, 80])
+print(numbers)  # Prints: [50, 30, 25, 20, 10, 60, 70, 80]
+
+# Find the index of 25
+index = numbers.index(25)
+print(index)  # Prints: 2
+
+# Count the occurrences of 20
+count = numbers.count(20)
+print(count)  # Prints: 1
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('2a9cfd12-610e-41e6-a0e0-5ec9d8d32c31', 2, '0b8f86c2-ceb5-4849-be55-196ee65c07fe', 'LESSON', 'Array operations part-2', NULL, '<h4>Lesson: Array Operations Part-2</h4><p>Continuing from Part-1, this lesson will cover more advanced array operations and techniques to further enhance your ability to manipulate and work with lists in Python.</p><h3>Advanced Array Techniques</h3><ol><li><strong>List Comprehensions</strong>: Create new lists based on existing lists in a concise way.</li></ol><pre class="ql-syntax" spellcheck="false">numbers = [1, 2, 3, 4, 5]
+squares = [x ** 2 for x in numbers]
+print(squares)  # Prints: [1, 4, 9, 16, 25]
+</pre><ol><li><strong>Filtering Lists</strong>: Use list comprehensions to filter elements based on a condition.</li></ol><pre class="ql-syntax" spellcheck="false">numbers = [1, 2, 3, 4, 5, 6]
+even_numbers = [x for x in numbers if x % 2 == 0]
+print(even_numbers)  # Prints: [2, 4, 6]
+</pre><ol><li><strong>Nested Lists</strong>: Work with lists within lists (multi-dimensional arrays).</li></ol><pre class="ql-syntax" spellcheck="false">matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+print(matrix[1][2])  # Prints: 6
+</pre><ol><li><strong>Flattening Nested Lists</strong>: Convert a multi-dimensional list into a single-dimensional list.</li></ol><pre class="ql-syntax" spellcheck="false">matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+flat_list = [item for sublist in matrix for item in sublist]
+print(flat_list)  # Prints: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+</pre><ol><li><strong>Copying Lists</strong>: Understand the difference between shallow and deep copies.</li></ol><ul><li><strong>Shallow Copy</strong>:</li></ul><pre class="ql-syntax" spellcheck="false">list1 = [1, 2, 3]
+list2 = list1.copy()
+list2.append(4)
+print(list1)  # Prints: [1, 2, 3]
+print(list2)  # Prints: [1, 2, 3, 4]
+</pre><ul><li><strong>Deep Copy</strong>:</li></ul><pre class="ql-syntax" spellcheck="false">import copy
+list1 = [[1, 2], [3, 4]]
+list2 = copy.deepcopy(list1)
+list2[0][0] = 9
+print(list1)  # Prints: [[1, 2], [3, 4]]
+print(list2)  # Prints: [[9, 2], [3, 4]]
+</pre><h3>Practical Example</h3><p><strong>Problem</strong>: Write a program that performs advanced operations on a list of numbers.</p><pre class="ql-syntax" spellcheck="false">numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# Create a list of squares of even numbers
+squares = [x ** 2 for x in numbers if x % 2 == 0]
+print(squares)  # Prints: [4, 16, 36, 64]
+
+# Create a nested list (matrix) and flatten it
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+flat_list = [item for sublist in matrix for item in sublist]
+print(flat_list)  # Prints: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# Demonstrate shallow copy
+list1 = [1, 2, 3]
+list2 = list1.copy()
+list2.append(4)
+print(list1)  # Prints: [1, 2, 3]
+print(list2)  # Prints: [1, 2, 3, 4]
+
+# Demonstrate deep copy
+import copy
+list1 = [[1, 2], [3, 4]]
+list2 = copy.deepcopy(list1)
+list2[0][0] = 9
+print(list1)  # Prints: [[1, 2], [3, 4]]
+print(list2)  # Prints: [[9, 2], [3, 4]]
+</pre><p>By mastering these advanced array operations, you will enhance your ability to manipulate and analyze data effectively, making your Python programming skills more robust and versatile.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('84ecfa93-9ff0-42e3-a174-09c22620cd7c', 3, '0b8f86c2-ceb5-4849-be55-196ee65c07fe', 'VIDEO', 'Arrays In Python | Python Array Operations | Python Tutorial For Beginners | Edureka', NULL, '', 'https://www.youtube.com/watch?v=phRshQSU-xA');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('b55daaed-980b-4f97-8227-b33535ddc628', 4, '0b8f86c2-ceb5-4849-be55-196ee65c07fe', 'CODE', 'Palindrome integer', 'b6484e21-6937-489c-b031-b71767994743', 'Palindrome integer', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('8a11ecb6-d246-45c4-9839-30477d56b9a9', 0, '6b6031db-d128-40da-b3d4-4d6e8d346c5b', 'LESSON', ' String operations part-1', NULL, '<h4>Lesson: String Operations Part-1</h4><p><strong>Introduction to the Module on Strings</strong></p><p>So far, we have focused on logic, integers, and math. The module on logic building and problem-solving primarily covered number operations. It is time to add ''Strings'' to our arsenal for solving programming problems.</p><p>Let''s revise some basic syntax of strings:</p><ul><li><strong>Strings</strong> are a datatype in Python.</li><li>We can check the datatype of any variable using the <code>type()</code> function.</li><li>A string can be composed of both characters and numbers.</li><li>A <strong>binary string</strong> is one which has only ''0'' and ''1'' as component characters.</li><li>String operations can be performed on any string stored in the variable <code>S</code>.</li><li>The character at the <code>ith</code> index of a string is represented as <code>S[i]</code>.</li><li>Strings can be concatenated by addition (<code>+</code>).</li><li>A substring of <code>S</code> between the <code>ith</code> and the <code>jth</code> indices is fetched using the ''slice'' syntax <code>S[i:j]</code>, but without including <code>S[j]</code>.</li></ul><h3>Examples and Basic Operations</h3><ol><li><strong>Defining and Printing Strings</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">S = "Hello, World!"
+print(S)  # Prints: Hello, World!
+print(type(S))  # Prints: &lt;class ''str''&gt;
+</pre><ol><li><strong>Accessing Characters</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">print(S[0])  # Prints: H
+print(S[-1])  # Prints: !
+</pre><ol><li><strong>String Concatenation</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">greeting = "Hello"
+name = "Alice"
+message = greeting + ", " + name + "!"
+print(message)  # Prints: Hello, Alice!
+</pre><ol><li><strong>String Slicing</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">substring = S[7:12]
+print(substring)  # Prints: World
+</pre><h3>Practical Example</h3><p><strong>Problem</strong>: Write a program that extracts the first and last characters of a given string and concatenates them.</p><pre class="ql-syntax" spellcheck="false">S = "Programming"
+first_char = S[0]
+last_char = S[-1]
+result = first_char + last_char
+print(result)  # Prints: Pg
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('0b5af7f6-256f-4c90-92e2-9010d6a19b40', 1, '6b6031db-d128-40da-b3d4-4d6e8d346c5b', 'LESSON', ' String operations part-2', NULL, '<h4>Lesson: String Operations Part-2</h4><p><strong>Advanced String Manipulations</strong></p><p>Building on the basics from Part-1, this lesson will cover more advanced string operations and methods available in Python. These functions and methods will help you manipulate and analyze strings more effectively.</p><h3>Advanced String Methods</h3><ol><li><strong>String Length</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">length = len(S)
+print(length)  # Prints: 13
+</pre><ol><li><strong>String Methods</strong>:</li></ol><ul><li><strong>Upper and Lower Case</strong>:</li></ul><pre class="ql-syntax" spellcheck="false">print(S.upper())  # Prints: HELLO, WORLD!
+print(S.lower())  # Prints: hello, world!
+</pre><ul><li><strong>Strip Whitespace</strong>:</li></ul><pre class="ql-syntax" spellcheck="false">S = "   Hello, World!   "
+print(S.strip())  # Prints: Hello, World!
+</pre><ul><li><strong>Replace Substring</strong>:</li></ul><pre class="ql-syntax" spellcheck="false">S = "Hello, World!"
+new_S = S.replace("World", "Python")
+print(new_S)  # Prints: Hello, Python!
+</pre><ul><li><strong>Split and Join</strong>:</li></ul><pre class="ql-syntax" spellcheck="false">S = "apple,banana,cherry"
+fruits = S.split(",")
+print(fruits)  # Prints: [''apple'', ''banana'', ''cherry'']
+new_S = "-".join(fruits)
+print(new_S)  # Prints: apple-banana-cherry
+</pre><h3>Practical Example</h3><p><strong>Problem</strong>: Write a program that counts the number of vowels in a given string.</p><pre class="ql-syntax" spellcheck="false">def count_vowels(S):
+    vowels = "aeiouAEIOU"
+    count = 0
+    for char in S:
+        if char in vowels:
+            count += 1
+    return count
+
+S = "Learn Python Programming"
+vowel_count = count_vowels(S)
+print(vowel_count)  # Prints: 7
+</pre><h3>Additional String Techniques</h3><ol><li><strong>Check if Substring</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">S = "Hello, World!"
+substring = "World"
+if substring in S:
+    print(f"''{substring}'' is in ''{S}''")  # Prints: ''World'' is in ''Hello, World!''
+else:
+    print(f"''{substring}'' is not in ''{S}''")
+</pre><ol><li><strong>String Formatting</strong>:</li></ol><ul><li><strong>Using Format Method</strong>:</li></ul><pre class="ql-syntax" spellcheck="false">age = 25
+name = "Alice"
+message = "My name is {} and I am {} years old.".format(name, age)
+print(message)  # Prints: My name is Alice and I am 25 years old.
+</pre><ul><li><strong>Using f-Strings (Python 3.6+)</strong>:</li></ul><pre class="ql-syntax" spellcheck="false">message = f"My name is {name} and I am {age} years old."
+print(message)  # Prints: My name is Alice and I am 25 years old.
+</pre><h3><br></h3><h3>Conclusion</h3><p>Understanding and mastering string operations is essential for effective programming in Python. Strings are a versatile and powerful datatype that you will frequently use in various programming scenarios. By learning these advanced operations and methods, you''ll be able to manipulate and analyze strings more efficiently, enhancing your problem-solving capabilities.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('fd19aab6-dfec-417c-88f1-44f89fea0392', 0, '20035541-a9c7-488a-8cad-346841600648', 'LESSON', ' Modules', NULL, '<h3>Modules in Python</h3><p>Modules in Python are simply Python files with a&nbsp;<code>.py</code>&nbsp;extension that contain Python code. These files can define functions, classes, and variables that can be used in other Python scripts.</p><p><br></p><p>Here''s how you can create and use a module:</p><ol><li><strong>Create a Module</strong>: Write your Python code in a&nbsp;<code>.py</code>&nbsp;file. For example, let''s say you have a file named&nbsp;<code>mymodule.py</code>:</li></ol><pre class="ql-syntax" spellcheck="false"># mymodule.py
+
+def greet(name):
+    print("Hello, " + name)
+</pre><ol><li><strong>Using a Module</strong>: You can use the functions, classes, and variables defined in your module in another Python script by importing it.</li></ol><pre class="ql-syntax" spellcheck="false"># main.py
+
+import mymodule
+</pre><ol><li><strong>Accessing Module Members</strong>: You can access functions, classes, and variables defined in the module using the dot notation.</li></ol><pre class="ql-syntax" spellcheck="false"># main.py
+
+mymodule.greet("Bob")
+</pre><ol><li><strong>Importing Specific Members</strong>: If you only need specific members of a module, you can import them individually.</li></ol><pre class="ql-syntax" spellcheck="false"># main.py
+
+from mymodule import greet
+
+greet("Charlie")
+</pre><ol><li><strong>Module Aliasing</strong>: You can give a module a different alias when importing it.</li></ol><pre class="ql-syntax" spellcheck="false"># main.py
+
+import mymodule as mm
+
+mm.greet("David")
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('f7176266-1ba1-4586-8642-f44fdd1e8934', 2, '6b6031db-d128-40da-b3d4-4d6e8d346c5b', 'VIDEO', 'String methods in Python are easy 🧵', NULL, '', 'https://www.youtube.com/watch?v=tb6EYiHtcXU');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('35ee05e4-4586-4df9-87df-a8047fcaaa58', 1, '236a5c83-3d52-4a4e-9f59-7101fe603889', 'LESSON', 'Dictionary', NULL, '<h4>Lesson: Dictionary</h4><p>Dictionaries are a fundamental data structure in Python, providing a way to store data in key-value pairs. They are highly versatile and allow for efficient data retrieval, making them essential for many programming tasks.</p><h3>What is a Dictionary?</h3><p>A dictionary is an unordered collection of key-value pairs, where each key is unique. Dictionaries are mutable, meaning you can change, add, or remove key-value pairs after the dictionary is created.</p><h3>Defining and Accessing Dictionaries</h3><ol><li><strong>Defining a Dictionary</strong>: Dictionaries are defined using curly braces <code>{}</code> with key-value pairs separated by colons <code>:</code>.</li><li><strong>Example</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">my_dict = {
+    "name": "Alice",
+    "age": 25,
+    "city": "New York"
+}
+</pre><ol><li><strong>Accessing Dictionary Values</strong>: Values can be accessed by using their corresponding keys.</li><li><strong>Example</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">print(my_dict["name"])  # Prints: Alice
+print(my_dict["age"])  # Prints: 25
+</pre><h3>Dictionary Operations</h3><ol><li><strong>Adding and Updating Key-Value Pairs</strong>: You can add a new key-value pair or update an existing key-value pair.</li><li><strong>Example</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">my_dict["email"] = "alice@example.com"  # Adding a new key-value pair
+my_dict["age"] = 26  # Updating an existing key-value pair
+</pre><ol><li><strong>Removing Key-Value Pairs</strong>: Key-value pairs can be removed using the <code>del</code> statement or the <code>pop()</code> method.</li><li><strong>Example</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">del my_dict["city"]  # Removes the key "city"
+email = my_dict.pop("email")  # Removes the key "email" and returns its value
+</pre><ol><li><strong>Checking for Keys</strong>: You can check if a key exists in a dictionary using the <code>in</code> keyword.</li><li><strong>Example</strong>:</li></ol><pre class="ql-syntax" spellcheck="false">if "name" in my_dict:
+    print("Name exists in the dictionary")
+</pre><h3>Iterating Over Dictionaries</h3><p>You can iterate over the keys, values, or key-value pairs in a dictionary.</p><p><strong>Example</strong>:</p><pre class="ql-syntax" spellcheck="false">for key in my_dict:
+    print(key, my_dict[key])
+
+for key, value in my_dict.items():
+    print(key, value)
+</pre><h3>Practical Example</h3><p><strong>Problem</strong>: Write a function that counts the frequency of each character in a given string and returns a dictionary with the character counts.</p><p><strong>Solution</strong>:</p><pre class="ql-syntax" spellcheck="false">def char_frequency(s):
+    freq_dict = {}
+    for char in s:
+        if char in freq_dict:
+            freq_dict[char] += 1
+        else:
+            freq_dict[char] = 1
+    return freq_dict
+
+string = "hello world"
+frequency = char_frequency(string)
+print(frequency)  # Prints: {''h'': 1, ''e'': 1, ''l'': 3, ''o'': 2, '' '': 1, ''w'': 1, ''r'': 1, ''d'': 1}
+</pre><h3>Conclusion</h3><p>Dictionaries are a versatile and powerful data structure in Python, allowing you to efficiently store and retrieve data using key-value pairs. By mastering dictionaries, you''ll be able to handle more complex data manipulation tasks with ease. Practice using dictionaries to become proficient in their use and capabilities.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('a6889c0e-4339-4607-8902-0fe73662608d', 2, '236a5c83-3d52-4a4e-9f59-7101fe603889', 'VIDEO', 'Python Lists, Tuples And Dictionaries', NULL, '', 'https://www.youtube.com/watch?v=fXRxHrDhQuI');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('93d74a79-d69d-478e-852f-d723006eedf0', 0, '5157a1ed-4393-4d91-9d3c-f9e94589620f', 'LESSON', 'Basic math continued part-1', NULL, '<h3>Continuation of basic math</h3><p>We have covered various modules so far - Basic math, Logic building and Array operations.</p><p>These will be helpful in our current module.</p><p>Let us start with a simple problem.</p><p>You are given an integer&nbsp;N.</p><p><br></p><p>You need to create and output to the console all the&nbsp;<strong>divisors</strong>&nbsp;of this integer in an&nbsp;<strong>ascending order</strong>.</p><h3>Input Format</h3><ul><li>The first line of input will contain a single integer&nbsp;T, denoting the number of test cases.</li><li>Each test case consists of a single line of input - the integer&nbsp;N.</li></ul><h3>Sample 1:</h3><p>Input</p><pre class="ql-syntax" spellcheck="false">2
+12
+21
+</pre><p>Output</p><pre class="ql-syntax" spellcheck="false">1 2 3 4 6 12
+1 3 7 21
+</pre><h3>Code:</h3><pre class="ql-syntax" spellcheck="false"># Update the ''_'' in the code below to solve the problem
+
+
+t = int(input())
+for i in range(t):
+&nbsp; &nbsp; n = int(input())
+&nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; #declare an empty list to hold all divisors
+&nbsp; &nbsp; divisors = []&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; i = _
+&nbsp; &nbsp; while i &lt;= n:
+&nbsp; &nbsp; &nbsp; &nbsp; #check if n is divisible by each i
+&nbsp; &nbsp; &nbsp; &nbsp; if ___ == 0:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; #append each i to the list which meets this condition
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; divisors.______(i)&nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; i = i + 1
+&nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; print(*divisors)
+</pre>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('bfec5aec-f86c-421d-81c9-f618590ee6b5', 1, '5157a1ed-4393-4d91-9d3c-f9e94589620f', 'LESSON', 'Basic math continued part-2', NULL, '<h4>Lesson: Basic Math Continued Part-2</h4><p>Building on the concepts from Part-1, this lesson will explore more advanced problems and techniques in basic math operations.</p><h3>Advanced Problem</h3><p><strong>Problem</strong>: Write a program that finds the greatest common divisor (GCD) of two given integers.</p><p><strong>Input Format</strong>:</p><ul><li>The first line of input will contain a single integer T, denoting the number of test cases.</li><li>Each test case consists of two integers A and B.</li></ul><p><strong>Sample 1</strong>:</p><pre class="ql-syntax" spellcheck="false">Input:
+2
+12 15
+100 25
+
+Output:
+3
+25
+</pre><p><strong>Code</strong>:</p><pre class="ql-syntax" spellcheck="false"># Function to compute GCD using the Euclidean algorithm
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+t = int(input())
+for _ in range(t):
+    a, b = map(int, input().split())
+    print(gcd(a, b))
+</pre><h3>Another Problem</h3><p><strong>Problem</strong>: Write a program to calculate the least common multiple (LCM) of two given integers.</p><p><strong>Input Format</strong>:</p><ul><li>The first line of input will contain a single integer TT</li><li>T, denoting the number of test cases.</li><li>Each test case consists of two integers AA</li><li>A and BB</li><li>B.</li></ul><p><strong>Sample 1</strong>:</p><pre class="ql-syntax" spellcheck="false">Input:
+2
+12 15
+100 25
+
+Output:
+60
+100
+</pre><p><strong>Code</strong>:</p><pre class="ql-syntax" spellcheck="false"># Function to compute GCD using the Euclidean algorithm
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+# Function to compute LCM
+def lcm(a, b):
+    return (a * b) // gcd(a, b)
+
+t = int(input())
+for _ in range(t):
+    a, b = map(int, input().split())
+    print(lcm(a, b))
+</pre><h3>Practical Example</h3><p><strong>Problem</strong>: Write a program that finds all prime numbers up to a given integer NN</p><p>N.</p><p><strong>Input Format</strong>:</p><ul><li>The first line of input will contain a single integer NN</li><li>N.</li></ul><p><strong>Sample 1</strong>:</p><pre class="ql-syntax" spellcheck="false">Input:
+10
+
+Output:
+2 3 5 7
+</pre><p><strong>Code</strong>:</p><pre class="ql-syntax" spellcheck="false">def is_prime(n):
+    if n &lt;= 1:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+n = int(input())
+primes = []
+for i in range(2, n + 1):
+    if is_prime(i):
+        primes.append(i)
+
+print(*primes)
+</pre><h3>Conclusion</h3><p>By mastering these advanced basic math operations, you will enhance your ability to solve a wider range of programming problems efficiently. Practice these concepts to solidify your understanding and improve your problem-solving skills in Python.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('3b0e758d-2bc2-4458-a4eb-fc8fb2dd6e30', 2, '5157a1ed-4393-4d91-9d3c-f9e94589620f', 'CODE', 'Check 2^k', 'b6484e21-6937-489c-b031-b71767994745', 'Check 2^k', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('bf235e23-1457-4457-aeba-d236bb49c6de', 3, '5157a1ed-4393-4d91-9d3c-f9e94589620f', 'VIDEO', 'Python - Basic Math Tutorial', NULL, '', 'https://www.youtube.com/watch?v=JTW43OZFsZU');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('2d2edb6b-a7c1-4358-a0c6-365103db7415', 1, '20035541-a9c7-488a-8cad-346841600648', 'LESSON', 'Namespaces and Scope', NULL, '<h3>Scope in Python</h3><p>In Python, the term "scope" refers to the region of a program where a particular variable is accessible. Python has three levels of variable scope:</p><ol><li><strong>Local scope:</strong>&nbsp;Variables defined within a function are local to that function and cannot be accessed from outside the function. When the function is called, the local variables are created, and when the function exits, those variables are destroyed. Example:</li></ol><pre class="ql-syntax" spellcheck="false">def my_function():
+    x = 10
+    print("Inside the function:", x)
+
+my_function()
+# Trying to access x outside the function will result in an error
+</pre><ol><li><strong>Enclosing (non-local) scope:</strong>&nbsp;This scope applies to nested functions. A variable defined in the enclosing function can be accessed by the inner functions. However, the reverse is not true; the inner function''s variables are not accessible in the outer function. Example:</li></ol><pre class="ql-syntax" spellcheck="false">def outer_function():
+    x = 10
+    def inner_function():
+        print("Inside the inner function:", x)
+    inner_function()
+
+outer_function()
+</pre><ol><li><strong>Global scope:</strong>&nbsp;Variables defined outside of any function or class have global scope and can be accessed from anywhere within the module. Example:</li></ol><pre class="ql-syntax" spellcheck="false">x = 10
+
+def my_function():
+    print("Inside the function:", x)
+
+my_function()
+print("Outside the function:", x)
+</pre><p>In this example, when&nbsp;<code>my_function()</code>&nbsp;is called, it prints the value of the local variable&nbsp;<code>x</code>&nbsp;(which is 20). Outside the function, the global variable&nbsp;<code>x</code>&nbsp;(which is 10) is accessed.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('48bf2e87-bacc-4b83-8e7a-d5c8d9fa298c', 2, '20035541-a9c7-488a-8cad-346841600648', 'LESSON', 'Generators', NULL, '<h3>Generators in Python</h3><p>In Python, a generator is a special type of iterator that can be used to generate a sequence of values. Unlike normal functions that return a single value using the&nbsp;<code>return</code>&nbsp;statement, generators use the&nbsp;<code>yield</code>&nbsp;statement to produce a series of values, one at a time.</p><p><br></p><p>Generators are useful for generating large sequences of values without storing them all in memory at once, which can be memory-efficient. They are also used for lazy evaluation, where values are generated only when needed.</p><p>In this example:</p><ul><li>The&nbsp;<code>my_generator</code>&nbsp;function is defined with three&nbsp;<code>yield</code>&nbsp;statements. Each&nbsp;<code>yield</code>&nbsp;statement produces a value when the generator is iterated over.</li><li>A generator object&nbsp;<code>gen</code>&nbsp;is created by calling the&nbsp;<code>my_generator</code>&nbsp;function. This does not execute the function; instead, it returns a generator object.</li><li>The&nbsp;<code>next()</code>&nbsp;function is used to retrieve values from the generator one at a time. Each call to&nbsp;<code>next()</code>&nbsp;executes the generator function until the next&nbsp;<code>yield</code>&nbsp;statement is encountered, at which point it pauses and returns the value.</li><li>When there are no more values to yield, attempting to retrieve more values will raise a&nbsp;<code>StopIteration</code>&nbsp;exception, indicating that the generator has been exhausted.</li></ul><pre class="ql-syntax" spellcheck="false">def my_generator():
+&nbsp; &nbsp; yield 1
+&nbsp; &nbsp; yield 2
+&nbsp; &nbsp; yield 3
+
+
+# Create a generator object
+gen = my_generator()
+
+
+# Iterate over the generator to retrieve values
+print(next(gen))&nbsp; # Output: 1
+print(next(gen))&nbsp; # Output: 2
+print(next(gen))&nbsp; # Output: 3
+
+
+# Attempting to retrieve more values will raise a StopIteration exception
+# print(next(gen))&nbsp; # Uncommenting this line will raise StopIteration
+</pre>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('23622543-d15c-47f9-b799-148a8b17c852', 0, '9877a522-d634-4866-b9ba-159d9952d139', 'LESSON', ' Iterators', NULL, '<h3>Iterators in Python</h3><p>In Python, an iterator is an object that allows iteration over a sequence of elements. It provides a way to access elements of a container one by one without needing to know the underlying structure of the container.</p><p><br></p><p>Here''s a simple example of iterators in Python:</p><ul><li>We have a list&nbsp;<code>my_list</code>&nbsp;containing integers.</li><li>We create an iterator&nbsp;<code>my_iter</code>&nbsp;using the&nbsp;<code>iter()</code>&nbsp;function.</li><li>We use the&nbsp;<code>next()</code>&nbsp;function to access each element of the list sequentially.</li></ul><p>Each time&nbsp;<code>next()</code>&nbsp;is called on the iterator, it returns the next element of the sequence. If there are no more elements, it raises a&nbsp;<code>StopIteration</code>&nbsp;exception.</p><pre class="ql-syntax" spellcheck="false"># Define a list
+my_list = [1, 2, 3, 4, 5]
+
+
+# Get an iterator for the list
+my_iter = iter(my_list)
+
+
+# Print each element of the list using the iterator
+print(next(my_iter))&nbsp; # Output: 1
+print(next(my_iter))&nbsp; # Output: 2
+print(next(my_iter))&nbsp; # Output: 3
+print(next(my_iter))&nbsp; # Output: 4
+print(next(my_iter))&nbsp; # Output: 5
+</pre>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('185c3609-b6d6-4cdd-961a-324f4afcc5e6', 1, '9877a522-d634-4866-b9ba-159d9952d139', 'LESSON', ' Regular Expressions', NULL, '<h3>RegEx in Python</h3><p>Regular expressions (regex) are powerful tools for pattern matching and text manipulation. In Python, the&nbsp;<code>re</code>&nbsp;module provides support for working with regular expressions. Here are some common functions and methods provided by the&nbsp;<code>re</code>&nbsp;module:</p><ol><li><code><strong>re.findall(pattern, string, flags=0)</strong></code>: Finds all occurrences of the pattern in the string and returns them as a list of strings.</li><li><code><strong>re.search(pattern, string, flags=0)</strong></code>: Searches the entire string for a match to the pattern. Returns a match object if found, None otherwise.</li><li><code><strong>re.split(pattern, string, maxsplit=0, flags=0)</strong></code>: Splits the string by occurrences of the pattern and returns a list of substrings.</li><li><code><strong>re.sub(pattern, replacement, string, count=0, flags=0)</strong></code>: Replaces all occurrences of the pattern in the string with the replacement string. Returns the modified string.</li></ol><p>These are some of the key functions and methods provided by the&nbsp;<code>re</code>&nbsp;module in Python for working with regular expressions. They allow you to perform various operations such as pattern matching, searching, substitution, and splitting on strings using regex patterns.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('df9cd2e6-4f7d-457f-823c-ee9d66353266', 2, '9877a522-d634-4866-b9ba-159d9952d139', 'LESSON', ' Decorators', NULL, '<h3>Decorators in Python</h3><p>Decorators in Python are a powerful feature that allow you to modify or extend the behavior of functions or methods without changing their code. Decorators are functions themselves that wrap other functions or methods to provide additional functionality. Here''s an overview of decorators in Python:</p><p><br></p><ol><li><strong>Syntax</strong>: Decorators are written using the&nbsp;<code>@decorator_name</code>&nbsp;syntax above the function definition. When a function is decorated, it is passed to the decorator function as an argument.</li><li><br></li><li><strong>Decorator Function</strong>: A decorator function is a regular Python function that takes another function as its argument and returns a new function.</li><li><br></li><li><strong>Multiple Decorators</strong>: Multiple decorators can be applied to a single function or method, and they are applied in the order they are listed.</li></ol><p>Here''s a simple example to demonstrate the usage of decorators. In this example:</p><ul><li><code>my_decorator</code>&nbsp;is a decorator function that takes another function&nbsp;<code>func</code>&nbsp;as its argument and returns a new function&nbsp;<code>wrapper</code>.</li><li><code>say_hello</code>&nbsp;is a function decorated with&nbsp;<code>my_decorator</code>. When&nbsp;<code>say_hello</code>&nbsp;is called, it actually invokes the&nbsp;<code>wrapper</code>&nbsp;function returned by&nbsp;<code>my_decorator</code>, which in turn calls the original&nbsp;<code>say_hello</code>&nbsp;function.</li><li>The output of running this code will be:</li></ul><pre class="ql-syntax" spellcheck="false">Something is happening before the function is called.
+Hello!
+Something is happening after the function is called.
+</pre><p>This demonstrates how the decorator&nbsp;<code>my_decorator</code>&nbsp;extends the behavior of the&nbsp;<code>say_hello</code>&nbsp;function by adding some functionality before and after calling it.</p><pre class="ql-syntax" spellcheck="false"># Decorator function
+def my_decorator(func):
+&nbsp; &nbsp; def wrapper():
+&nbsp; &nbsp; &nbsp; &nbsp; print("Something is happening before the function is called.")
+&nbsp; &nbsp; &nbsp; &nbsp; func()
+&nbsp; &nbsp; &nbsp; &nbsp; print("Something is happening after the function is called.")
+&nbsp; &nbsp; return wrapper
+
+
+# Function decorated with the decorator
+@my_decorator
+def say_hello():
+&nbsp; &nbsp; print("Hello!")
+
+
+# Call the decorated function
+say_hello()
+</pre>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('a53e79b8-c685-4f5a-aca7-f8c841bc52c2', 0, '22f8b1cd-bfff-4989-8a83-9a4cd46e3870', 'LESSON', 'What is OOPs / Features of OOPs', NULL, '<h3>Introduction</h3><p>Welcome to your first journey on learning Object Oriented Programming in Python!</p><p><br></p><p>What will you learn here?</p><p>By the end of this course, you''ll not only be well-versed in the principles of object-oriented programming but also proficient in applying them to solve real-world programming challenges using Python.</p><p>This course will equip you with the knowledge and skills to elevate your programming prowess to new heights. Let''s embark on this journey to master the world of object-oriented programming in Python!</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('71b84d7e-1909-4d71-812f-cb690d6f4b67', 1, '22f8b1cd-bfff-4989-8a83-9a4cd46e3870', 'LESSON', 'Constructors, static members', NULL, '<h3>Introduction to Constructors</h3><p>In Python, a constructor is a special method that gets called when an object is created. Constructors are used to initialize the attributes of an object. In Python, there are two types of constructors:</p><p><br></p><ol><li><strong>Default Constructor (or&nbsp;</strong><code><strong>__init__</strong></code><strong>&nbsp;method):</strong></li><li class="ql-indent-1">The default constructor is the most common type in Python.</li><li class="ql-indent-1">It is automatically called when an object is created.</li><li class="ql-indent-1">It is defined using the&nbsp;<code>__init__</code>&nbsp;method.</li><li>Example:</li></ol><pre class="ql-syntax" spellcheck="false">class MyClass:
+    def __init__(self):
+        # Code
+
+# Creating an object of MyClass
+obj = MyClass()
+</pre><ol><li>In this example, the&nbsp;<code>__init__</code>&nbsp;method is the constructor that initializes the&nbsp;<code>attribute1</code>&nbsp;and&nbsp;<code>attribute2</code>&nbsp;of the&nbsp;<code>MyClass</code>&nbsp;object.</li><li><strong>Parameterized Constructor:</strong></li><li class="ql-indent-1">A parameterized constructor allows you to pass values to the constructor when creating an object.</li><li class="ql-indent-1">It allows you to initialize the attributes with the values provided during object creation.</li><li>Example:</li></ol><pre class="ql-syntax" spellcheck="false">class MyClass:
+    def __init__(self, attribute1, attribute2):
+        self.attribute1 = attribute1
+        self.attribute2 = attribute2
+
+# Creating an object of MyClass with values
+obj = MyClass("value1", "value2")
+</pre><p>In this example, the constructor takes parameters&nbsp;<code>attribute1</code>&nbsp;and&nbsp;<code>attribute2</code>, and you can pass values to them when creating an object.</p><p><br></p><p>These are the two main types of constructors in Python. The default constructor is more common, but parameterized constructors provide more flexibility when you need to initialize the object with specific values.</p><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('93860a9a-ff4c-427d-a34e-dc8c34748dd1', 0, 'fcbeaffe-82c1-4535-aa2a-246ba99adc7e', 'LESSON', 'Inheritance', NULL, '<h4>Lesson: Inheritance</h4><p>Inheritance is a fundamental concept in object-oriented programming that allows a class to inherit attributes and methods from another class. This mechanism promotes code reuse and establishes a natural hierarchy between classes.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Base Class (Super Class):</strong> The class whose attributes and methods are inherited.</li><li><strong>Derived Class (Sub Class):</strong> The class that inherits from the base class.</li></ol><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        pass
+
+class Dog(Animal):
+    def speak(self):
+        return f"{self.name} says Woof!"
+
+class Cat(Animal):
+    def speak(self):
+        return f"{self.name} says Meow!"
+</pre><p>In this example, <code>Dog</code> and <code>Cat</code> classes inherit from the <code>Animal</code> class. They override the <code>speak</code> method to provide specific implementations.</p><p>Inheritance allows for hierarchical classification, where common functionality is encapsulated in the base class, and specialized behavior is defined in derived classes.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('68bced98-e6d3-4610-bf46-22449838338e', 1, 'fcbeaffe-82c1-4535-aa2a-246ba99adc7e', 'LESSON', 'Objects as parameters & Aggregation', NULL, '<h4>Lesson: Objects as Parameters &amp; Aggregation</h4><p>In object-oriented programming, objects can be passed as parameters to functions and methods, enabling complex interactions between objects. Aggregation refers to a relationship where one class is composed of one or more objects of another class.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Objects as Parameters:</strong></li></ol><pre class="ql-syntax" spellcheck="false">class Circle:
+    def __init__(self, radius):
+        self.radius = radius
+
+def print_area(circle):
+    area = 3.14 * circle.radius ** 2
+    print(f"Area: {area}")
+
+c = Circle(5)
+print_area(c)
+</pre><ol><li><strong>Aggregation:</strong></li></ol><pre class="ql-syntax" spellcheck="false">class Engine:
+    def __init__(self, horsepower):
+        self.horsepower = horsepower
+
+class Car:
+    def __init__(self, make, engine):
+        self.make = make
+        self.engine = engine
+
+engine = Engine(300)
+car = Car("Toyota", engine)
+</pre><p>In aggregation, the <code>Car</code> class contains an <code>Engine</code> object, illustrating a "has-a" relationship. This promotes modular design and reusability of classes.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d2d4c2ce-3cc8-4c1e-92cf-cdef6786f4a0', 2, 'fcbeaffe-82c1-4535-aa2a-246ba99adc7e', 'LESSON', 'Polymorphism - Overloading', NULL, '<h4>Lesson: Polymorphism - Overloading</h4><p>Polymorphism is the ability of different objects to respond to the same method in different ways. Overloading is a form of polymorphism where multiple methods have the same name but differ in the number or type of parameters.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Method Overloading:</strong></li></ol><pre class="ql-syntax" spellcheck="false">class Math:
+    def add(self, a, b, c=0):
+        return a + b + c
+
+math = Math()
+print(math.add(2, 3))      # Output: 5
+print(math.add(2, 3, 4))   # Output: 9
+</pre><p>In this example, the <code>add</code> method is overloaded to handle two or three parameters. Python does not natively support method overloading, but default parameter values can achieve similar functionality.</p><p>Polymorphism through overloading allows methods to handle different types and numbers of inputs, enhancing flexibility and robustness.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('5cfa5fdb-a175-49f2-af1d-e13b766d09fd', 3, 'fcbeaffe-82c1-4535-aa2a-246ba99adc7e', 'LESSON', 'Method overriding', NULL, '<h4>Lesson: Method Overriding</h4><p>Method overriding occurs when a derived class provides a specific implementation of a method already defined in its base class. This enables a derived class to customize or completely replace the behavior of the base class method.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Method Overriding:</strong></li></ol><pre class="ql-syntax" spellcheck="false">class Animal:
+    def speak(self):
+        return "Some sound"
+
+class Dog(Animal):
+    def speak(self):
+        return "Woof!"
+
+animal = Animal()
+dog = Dog()
+print(animal.speak())  # Output: Some sound
+print(dog.speak())     # Output: Woof!
+</pre><p>In this example, the <code>Dog</code> class overrides the <code>speak</code> method of the <code>Animal</code> class. When <code>speak</code> is called on a <code>Dog</code> object, the overridden method is executed, demonstrating polymorphic behavior.</p><p>Method overriding is essential for implementing polymorphism, allowing derived classes to modify or extend the behavior of base class methods.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('6eb3f523-8e00-470d-ba3d-22b2a2bc8f88', 4, 'fcbeaffe-82c1-4535-aa2a-246ba99adc7e', 'LESSON', 'Interfaces & Abstract classes', NULL, '<h4>Lesson: Interfaces &amp; Abstract Classes</h4><p>Interfaces and abstract classes define methods that must be implemented by derived classes. They provide a way to enforce certain behaviors without dictating the exact implementation.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Abstract Classes:</strong></li></ol><pre class="ql-syntax" spellcheck="false">from abc import ABC, abstractmethod
+
+class Animal(ABC):
+    @abstractmethod
+    def speak(self):
+        pass
+
+class Dog(Animal):
+    def speak(self):
+        return "Woof!"
+</pre><ul><li><strong>Interfaces:</strong> In Python, interfaces can be simulated using abstract base classes. The <code>Animal</code> class above serves as an interface, requiring the <code>speak</code> method to be implemented by derived classes.</li></ul><p>Abstract classes and interfaces ensure that certain methods are implemented by derived classes, promoting consistency and adherence to a specific contract.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('4735a8b4-4752-4b0c-a0d3-cc436a7b9420', 5, 'fcbeaffe-82c1-4535-aa2a-246ba99adc7e', 'LESSON', 'Returning objects - Static, nested and inner classes', NULL, '<h4>Lesson: Returning Objects - Static, Nested and Inner Classes</h4><p>Returning objects from methods allows for dynamic object creation and interaction. Static, nested, and inner classes help organize code and encapsulate related functionality.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Returning Objects:</strong></li></ol><pre class="ql-syntax" spellcheck="false">class Circle:
+    def __init__(self, radius):
+        self.radius = radius
+
+    def clone(self):
+        return Circle(self.radius)
+</pre><ol><li><strong>Static Classes:</strong></li></ol><pre class="ql-syntax" spellcheck="false">class Math:
+    @staticmethod
+    def add(a, b):
+        return a + b
+</pre><ol><li><strong>Nested and Inner Classes:</strong></li></ol><pre class="ql-syntax" spellcheck="false">class Outer:
+    class Inner:
+        def display(self):
+            print("Inner class")
+
+outer = Outer()
+inner = Outer.Inner()
+inner.display()
+</pre><p>Static methods belong to the class rather than instances, allowing them to be called on the class itself. Nested and inner classes help logically group related classes, promoting encapsulation and modular design.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('16caf201-71bd-4aa4-a151-92c82bec1e7a', 6, 'fcbeaffe-82c1-4535-aa2a-246ba99adc7e', 'LESSON', 'Upcasting & Dynamic method dispatch', NULL, '<h4>Lesson: Upcasting &amp; Dynamic Method Dispatch</h4><p>Upcasting allows treating a derived class object as an instance of its base class, facilitating polymorphism. Dynamic method dispatch ensures that the correct method implementation is called at runtime based on the actual object type.</p><p><strong>Key Concepts:</strong></p><ul><li><strong>Upcasting:</strong></li></ul><pre class="ql-syntax" spellcheck="false">class Animal:
+    def speak(self):
+        return "Some sound"
+
+class Dog(Animal):
+    def speak(self):
+        return "Woof!"
+
+animal = Dog()  # Upcasting
+print(animal.speak())  # Output: Woof!
+</pre><ul><li><strong>Dynamic Method Dispatch:</strong></li></ul><pre class="ql-syntax" spellcheck="false">class Animal:
+    def speak(self):
+        return "Some sound"
+
+class Cat(Animal):
+    def speak(self):
+        return "Meow!"
+
+def make_animal_speak(animal):
+    print(animal.speak())
+
+animal = Cat()
+make_animal_speak(animal)  # Output: Meow!
+</pre><p>Upcasting and dynamic method dispatch allow for flexible and dynamic behavior in object-oriented programming, enabling polymorphism and efficient code reuse.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('cd5d1a2d-c9eb-4524-9b66-fb53c9f14a3f', 7, 'fcbeaffe-82c1-4535-aa2a-246ba99adc7e', 'VIDEO', 'Inheritance in Python | Types of Inheritance in Python', NULL, '', 'https://www.youtube.com/watch?v=DJqWNfu0guk');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('ad86bdcd-677d-41ca-95c3-1bc6d2ff2a69', 0, '55192438-8e60-4f3c-a8cb-a6e3e2dd164b', 'LESSON', 'Exception handling basics', NULL, '<h4>Lesson: Exception Handling Basics</h4><p>Exception handling is a crucial aspect of robust software development. It enables a program to deal with unexpected conditions and errors gracefully, maintaining normal program flow and providing meaningful feedback to users.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Try-Except Block:</strong> The <code>try</code> block allows you to test a block of code for errors. The <code>except</code> block lets you handle the error.</li></ol><pre class="ql-syntax" spellcheck="false">try:
+    x = 1 / 0
+except ZeroDivisionError:
+    print("Cannot divide by zero!")
+</pre><ol><li><strong>Finally Block:</strong> The finally block lets you execute code, regardless of whether an exception was raised or not</li></ol><pre class="ql-syntax" spellcheck="false">try:
+    x = 1 / 0
+except ZeroDivisionError:
+    print("Cannot divide by zero!")
+finally:
+    print("This will always execute.")
+</pre><ol><li><strong>Raising Exceptions:</strong> You can raise exceptions using the <code>raise</code> keyword.</li></ol><pre class="ql-syntax" spellcheck="false">if not isinstance(x, int):
+    raise TypeError("Only integers are allowed")
+</pre><p>Exception handling helps in writing clean and fault-tolerant code by managing potential runtime errors effectively.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d8a7e8a6-6ce6-47e4-b418-d05aedaaaf9b', 1, '55192438-8e60-4f3c-a8cb-a6e3e2dd164b', 'LESSON', ' Multiple catch clauses', NULL, '<h4>Lesson: Multiple Catch Clauses</h4><p>Handling different types of exceptions separately allows for more precise error management. Python supports multiple <code>except</code> blocks to handle various exceptions.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Multiple Except Blocks:</strong></li></ol><pre class="ql-syntax" spellcheck="false">try:
+    x = int(input("Enter a number: "))
+    y = 1 / x
+except ValueError:
+    print("Invalid input. Please enter a number.")
+except ZeroDivisionError:
+    print("Cannot divide by zero!")
+</pre><ol><li><strong>Catching Multiple Exceptions in a Single Block:</strong></li></ol><pre class="ql-syntax" spellcheck="false">try:
+    x = int(input("Enter a number: "))
+    y = 1 / x
+except (ValueError, ZeroDivisionError) as e:
+    print(f"An error occurred: {e}")
+</pre><p>By using multiple <code>except</code> clauses, you can handle specific errors more appropriately, providing tailored responses and maintaining better control over program behavior.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('17c18b4c-6c47-4d68-8290-7d29ad968a09', 2, '55192438-8e60-4f3c-a8cb-a6e3e2dd164b', 'LESSON', 'Nested try statements', NULL, '<h4>Lesson: Nested Try Statements</h4><p>Nested <code>try</code> statements allow for more granular error handling by embedding one <code>try</code> block within another. This is useful when different parts of a code block require distinct exception handling.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Nested Try-Except Blocks:</strong></li></ol><pre class="ql-syntax" spellcheck="false">try:
+    x = int(input("Enter a number: "))
+    try:
+        y = 1 / x
+    except ZeroDivisionError:
+        print("Inner block: Cannot divide by zero!")
+except ValueError:
+    print("Outer block: Invalid input. Please enter a number.")
+</pre><ol><li><strong>Nested Try-Finally Blocks:</strong></li></ol><pre class="ql-syntax" spellcheck="false">try:
+    file = open("test.txt", "r")
+    try:
+        content = file.read()
+    finally:
+        file.close()
+except FileNotFoundError:
+    print("File not found.")
+</pre><p>Nested <code>try</code> statements enable localized error handling within different scopes of your code, making your programs more robust and easier to debug.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('6b90ccb8-5f0b-4890-a09c-3c73d473658b', 3, '55192438-8e60-4f3c-a8cb-a6e3e2dd164b', 'LESSON', 'Multithreaded programming', NULL, '<h4>Lesson: Multithreaded Programming</h4><p>Multithreading allows a program to execute multiple threads concurrently, enabling efficient use of resources and improved performance, especially in I/O-bound and high-latency operations.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Creating and Starting Threads:</strong></li></ol><pre class="ql-syntax" spellcheck="false">import threading
+
+def print_numbers():
+    for i in range(10):
+        print(i)
+
+thread = threading.Thread(target=print_numbers)
+thread.start()
+thread.join()  # Wait for the thread to complete
+</pre><ol><li><strong>Threading with Classes:</strong></li></ol><pre class="ql-syntax" spellcheck="false">class MyThread(threading.Thread):
+    def run(self):
+        for i in range(10):
+            print(i)
+
+thread = MyThread()
+thread.start()
+thread.join()
+</pre><p>Multithreading improves program responsiveness and efficiency by allowing multiple operations to run simultaneously.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('77a5e801-5ad5-47b0-b1a6-dc8006c0908b', 4, '55192438-8e60-4f3c-a8cb-a6e3e2dd164b', 'LESSON', ' Yield method and Interupting a thread', NULL, '<h4>Lesson: Yield Method and Interrupting a Thread</h4><p>The <code>yield</code> method and interrupting threads are advanced multithreading concepts that provide more control over thread execution.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Yield Method:</strong> The <code>yield</code> method in generators allows a function to return a value and resume from where it left off.</li></ol><pre class="ql-syntax" spellcheck="false">def generator():
+    yield 1
+    yield 2
+    yield 3
+
+for value in generator():
+    print(value)
+</pre><ol><li><strong>Interrupting Threads:</strong> Threads can be interrupted or stopped using flags.</li></ol><pre class="ql-syntax" spellcheck="false">import threading
+import time
+
+class MyThread(threading.Thread):
+    def __init__(self):
+        super().__init__()
+        self._stop_event = threading.Event()
+
+    def run(self):
+        while not self._stop_event.is_set():
+            print("Running...")
+            time.sleep(1)
+
+    def stop(self):
+        self._stop_event.set()
+
+thread = MyThread()
+thread.start()
+time.sleep(5)
+thread.stop()
+thread.join()
+</pre><p>Using the <code>yield</code> method and managing thread interruptions effectively ensures smooth and controlled multithreaded execution.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('f6b08c74-165b-46e9-a707-242b300ec852', 5, '55192438-8e60-4f3c-a8cb-a6e3e2dd164b', 'LESSON', ' Priorities / synchronisation', NULL, '<h4>Lesson: Priorities and Synchronization</h4><p>Managing thread priorities and synchronization is essential for ensuring threads execute in a coordinated manner without conflicts or resource contention.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Thread Priorities:</strong> Python does not support explicit thread priorities, but you can manage execution order using synchronization mechanisms.</li><li><strong>Synchronization with Locks:</strong></li></ol><pre class="ql-syntax" spellcheck="false">import threading
+
+lock = threading.Lock()
+
+def thread_task():
+    with lock:
+        for i in range(5):
+            print(i)
+
+thread1 = threading.Thread(target=thread_task)
+thread2 = threading.Thread(target=thread_task)
+
+thread1.start()
+thread2.start()
+
+thread1.join()
+thread2.join()
+</pre><ol><li><strong>Synchronization with Semaphores:</strong></li></ol><pre class="ql-syntax" spellcheck="false">semaphore = threading.Semaphore(2)
+
+def thread_task():
+    with semaphore:
+        for i in range(5):
+            print(i)
+
+for _ in range(5):
+    thread = threading.Thread(target=thread_task)
+    thread.start()
+</pre><ol><li><strong>Synchronization with Condition Variables:</strong></li></ol><pre class="ql-syntax" spellcheck="false">condition = threading.Condition()
+
+def consumer():
+    with condition:
+        condition.wait()
+        print("Consumer consumed")
+
+def producer():
+    with condition:
+        print("Producer produced")
+        condition.notify()
+
+consumer_thread = threading.Thread(target=consumer)
+producer_thread = threading.Thread(target=producer)
+
+consumer_thread.start()
+producer_thread.start()
+
+consumer_thread.join()
+producer_thread.join()
+</pre><p>Effective use of synchronization mechanisms ensures thread-safe operations, preventing race conditions and ensuring coordinated execution in multithreaded programs.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('8f94ef68-cbdf-440a-9ffc-099b159470bd', 0, '8a4e420d-46d5-4eb2-b801-2136ad54c0fa', 'LESSON', 'Reading and writing files', NULL, '<h4>Lesson: Reading and Writing Files</h4><p>File handling is a crucial aspect of programming, enabling programs to read from and write to files. This allows for data persistence, which is essential for applications that need to store user data, configurations, logs, and more.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Opening a File:</strong></li></ol><ul><li class="ql-indent-1">The <code>open()</code> function is used to open a file.</li></ul><pre class="ql-syntax" spellcheck="false">file = open(''example.txt'', ''r'')  # Opens the file in read mode
+</pre><ol><li><strong>Reading from a File:</strong></li></ol><ul><li><strong>Read Entire File:</strong></li></ul><pre class="ql-syntax" spellcheck="false">content = file.read()
+print(content)
+</pre><ul><li><strong>Read Line by Line:</strong></li></ul><pre class="ql-syntax" spellcheck="false">for line in file:
+    print(line, end='''')
+</pre><ul><li><strong>Read Specific Number of Characters:</strong></li></ul><pre class="ql-syntax" spellcheck="false">content = file.read(10)
+print(content)
+</pre><ol><li><strong>Writing to a File:</strong></li></ol><ul><li><strong>Write String:</strong></li></ul><pre class="ql-syntax" spellcheck="false">file = open(''example.txt'', ''w'')  # Opens the file in write mode
+file.write("Hello, World!\n")
+file.write("This is a test.")
+file.close()
+</pre><ul><li><strong>Write Lines:</strong></li></ul><pre class="ql-syntax" spellcheck="false">lines = ["First line\n", "Second line\n", "Third line\n"]
+file = open(''example.txt'', ''w'')
+file.writelines(lines)
+file.close()
+</pre><ol><li><strong>Appending to a File:</strong></li></ol><ul><li class="ql-indent-1">The <code>append</code> mode (<code>''a''</code>) is used to add data to the end of the file without overwriting existing content.</li></ul><pre class="ql-syntax" spellcheck="false">file = open(''example.txt'', ''a'')
+file.write("Appending a new line.\n")
+file.close()
+</pre><ol><li><strong>Closing a File:</strong></li></ol><ul><li class="ql-indent-1">Always close a file after performing operations to free up system resources.</li></ul><pre class="ql-syntax" spellcheck="false">file.close()
+</pre><ol><li><strong>Using Context Manager (</strong><code><strong>with</strong></code><strong> statement):</strong></li></ol><ul><li class="ql-indent-1">The <code>with</code> statement is used to handle file operations more cleanly, ensuring that the file is properly closed after the block of code is executed.</li></ul><pre class="ql-syntax" spellcheck="false">with open(''example.txt'', ''r'') as file:
+    content = file.read()
+    print(content)
+</pre><p><strong>Practical Example:</strong></p><pre class="ql-syntax" spellcheck="false"># Writing to a file
+with open(''example.txt'', ''w'') as file:
+    file.write("Hello, World!\n")
+    file.write("This is a test.\n")
+
+# Reading from the file
+with open(''example.txt'', ''r'') as file:
+    content = file.read()
+    print(content)
+</pre><p>File handling is essential for managing data input and output in applications, enabling you to store and retrieve information as needed.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('26519060-af61-45a9-a38c-66557d82743c', 1, '8a4e420d-46d5-4eb2-b801-2136ad54c0fa', 'LESSON', 'Generic programming: classes, methods', NULL, '<h4>Lesson: Generic Programming: Classes, Methods</h4><p>Generic programming allows you to write flexible and reusable code that can operate on different data types. This is particularly useful in scenarios where the exact data type is not known in advance.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Generic Classes:</strong></li></ol><ul><li class="ql-indent-1">In Python, generic classes can be simulated using class templates that work with any data type.</li></ul><pre class="ql-syntax" spellcheck="false">from typing import TypeVar, Generic
+
+T = TypeVar(''T'')
+
+class Box(Generic[T]):
+    def __init__(self, content: T):
+        self.content = content
+
+    def get_content(self) -&gt; T:
+        return self.content
+
+# Example usage
+int_box = Box(123)
+print(int_box.get_content())  # Prints: 123
+
+str_box = Box("Hello")
+print(str_box.get_content())  # Prints: Hello
+</pre><ol><li><strong>Generic Methods:</strong></li></ol><ul><li class="ql-indent-1">Methods within classes can also be made generic to handle different types.</li></ul><pre class="ql-syntax" spellcheck="false">from typing import TypeVar
+
+T = TypeVar(''T'')
+
+class Utility:
+    @staticmethod
+    def print_twice(item: T) -&gt; None:
+        print(item)
+        print(item)
+
+# Example usage
+Utility.print_twice(42)
+Utility.print_twice("Generic Method")
+</pre><ol><li><strong>Type Annotations and Type Hints:</strong></li></ol><ul><li class="ql-indent-1">Using type annotations and type hints can help in defining generic classes and methods more clearly.</li></ul><pre class="ql-syntax" spellcheck="false">from typing import List, TypeVar
+
+T = TypeVar(''T'')
+
+def generic_function(items: List[T]) -&gt; T:
+    return items[0]
+
+# Example usage
+numbers = [1, 2, 3]
+print(generic_function(numbers))  # Prints: 1
+
+words = ["apple", "banana", "cherry"]
+print(generic_function(words))  # Prints: apple
+</pre><p><strong>Practical Example:</strong></p><pre class="ql-syntax" spellcheck="false">from typing import TypeVar, Generic
+
+T = TypeVar(''T'')
+
+class Pair(Generic[T]):
+    def __init__(self, first: T, second: T):
+        self.first = first
+        self.second = second
+
+    def get_first(self) -&gt; T:
+        return self.first
+
+    def get_second(self) -&gt; T:
+        return self.second
+
+# Example usage
+pair = Pair(1, 2)
+print(pair.get_first())  # Prints: 1
+print(pair.get_second())  # Prints: 2
+
+str_pair = Pair("Hello", "World")
+print(str_pair.get_first())  # Prints: Hello
+print(str_pair.get_second())  # Prints: World
+</pre><p>Generic programming enhances code reusability and flexibility, allowing you to create versatile and efficient programs that can handle various data types with ease.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('f8f52a34-bc82-42bd-95e2-4c7ed20d3b1b', 3, '9f4635ae-bdb4-4ce8-954f-fe7905cf3619', 'LESSON', 'State management with Redux', NULL, '<h3>Lesson: State Management with Redux</h3><p><strong>Objective:</strong> Understand how to manage state in a React application using Redux.</p><p><strong>1. Introduction to Redux:</strong></p><ul><li>Redux is a state management library for JavaScript applications.</li><li>It centralizes the state in a single store and uses actions to update the state.</li></ul><p><strong>2. Core Concepts:</strong></p><ul><li><strong>Store:</strong> Holds the state of the application.</li><li><strong>Actions:</strong> Describe the changes to the state.</li><li><strong>Reducers:</strong> Specify how the state changes in response to actions.</li></ul><p><strong>3. Setting Up Redux:</strong></p><ul><li>Install Redux and React-Redux.</li></ul><pre class="ql-syntax" spellcheck="false">npm install redux react-redux
+</pre><p><strong>4. Creating a Redux Store:</strong></p><ul><li>Create a store with a reducer.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">import { createStore } from ''redux'';
+
+const initialState = { count: 0 };
+
+function counterReducer(state = initialState, action) {
+    switch (action.type) {
+        case ''INCREMENT'':
+            return { count: state.count + 1 };
+        default:
+            return state;
+    }
+}
+
+const store = createStore(counterReducer);
+</pre><p><strong>5. Connecting Redux to React:</strong></p><ul><li>Use the <code>Provider</code> component to pass the store to the React application.</li><li>Use <code>useSelector</code> to access the state and <code>useDispatch</code> to dispatch actions.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">import React from ''react'';
+import ReactDOM from ''react-dom'';
+import { Provider, useSelector, useDispatch } from ''react-redux'';
+
+function Counter() {
+    const count = useSelector(state =&gt; state.count);
+    const dispatch = useDispatch();
+
+    return (
+        &lt;div&gt;
+            &lt;p&gt;Count: {count}&lt;/p&gt;
+            &lt;button onClick={() =&gt; dispatch({ type: ''INCREMENT'' })}&gt;Increment&lt;/button&gt;
+        &lt;/div&gt;
+    );
+}
+
+function App() {
+    return (
+        &lt;Provider store={store}&gt;
+            &lt;Counter /&gt;
+        &lt;/Provider&gt;
+    );
+}
+
+ReactDOM.render(&lt;App /&gt;, document.getElementById(''root''));
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a React application with Redux to manage the state of a counter.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;React with Redux&lt;/title&gt;
+    &lt;script src="https://unpkg.com/react/umd/react.development.js"&gt;&lt;/script&gt;
+    &lt;script src="https://unpkg.com/react-dom/umd/react-dom.development.js"&gt;&lt;/script&gt;
+    &lt;script src="https://unpkg.com/redux/dist/redux.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://unpkg.com/react-redux/dist/react-redux.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://unpkg.com/@babel/standalone/babel.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="root"&gt;&lt;/div&gt;
+    &lt;script type="text/babel"&gt;
+        const { createStore } = Redux;
+        const { Provider, useSelector, useDispatch } = ReactRedux;
+
+        const initialState = { count: 0 };
+
+        function counterReducer(state = initialState, action) {
+            switch (action.type) {
+                case ''INCREMENT'':
+                    return { count: state.count + 1 };
+                default:
+                    return state;
+            }
+        }
+
+        const store = createStore(counterReducer);
+
+        function Counter() {
+            const count = useSelector(state =&gt; state.count);
+            const dispatch = useDispatch();
+
+            return (
+                &lt;div&gt;
+                    &lt;p&gt;Count: {count}&lt;/p&gt;
+                    &lt;button onClick={() =&gt; dispatch({ type: ''INCREMENT'' })}&gt;Increment&lt;/button&gt;
+                &lt;/div&gt;
+            );
+        }
+
+        function App() {
+            return (
+                &lt;Provider store={store}&gt;
+                    &lt;Counter /&gt;
+                &lt;/Provider&gt;
+            );
+        }
+
+        ReactDOM.render(&lt;App /&gt;, document.getElementById(''root''));
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p>By mastering these JavaScript frameworks and libraries, including setting up development environments, building simple applications with React, and managing state with Redux, you will be equipped to create powerful and maintainable web applications. These lessons provide the foundation for leveraging modern JavaScript</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('98ae9492-3ddd-4326-8e46-0b3665868a18', 0, '807a912f-1d50-4aa0-9a65-cc3869ec70c9', 'LESSON', 'Understanding web components', NULL, '<h3>Lesson: Understanding Web Components</h3><p><strong>Objective:</strong> Get an overview of Web Components and their importance in modern web development.</p><p><strong>1. Definition:</strong> Web Components are a set of web platform APIs that allow you to create custom, reusable HTML tags to use in web pages and web apps. They encapsulate functionality, which ensures that they work independently of the rest of the code.</p><p><strong>2. Key Technologies:</strong></p><ul><li><strong>Custom Elements:</strong> Define new HTML elements.</li><li><strong>Shadow DOM:</strong> Encapsulate the internal structure and styling of web components.</li><li><strong>HTML Templates:</strong> Define reusable HTML templates.</li></ul><p><strong>3. Benefits:</strong></p><ul><li><strong>Reusability:</strong> Create components that can be reused across different projects.</li><li><strong>Encapsulation:</strong> Encapsulate styles and scripts to prevent conflicts with other components.</li><li><strong>Maintainability:</strong> Simplify the structure of your applications, making them easier to maintain.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Explain the concept of Web Components with a simple analogy.</p><p><strong>Solution:</strong> Web Components are like custom LEGO bricks. Just as you can create new shapes and structures with LEGO bricks, you can create new HTML elements with Web Components. Each component is self-contained, ensuring it doesn''t interfere with other components.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('ee61d8fe-60b2-450c-8ba7-8dbecd3b1dc5', 1, '807a912f-1d50-4aa0-9a65-cc3869ec70c9', 'LESSON', 'Custom elements', NULL, '<h3>Lesson: Custom Elements</h3><p><strong>Objective:</strong> Learn how to define and use custom elements in your web applications.</p><p><strong>1. Definition:</strong> Custom elements allow you to define your own HTML tags.</p><p><strong>2. Creating a Custom Element:</strong></p><ul><li>Use the <code>class</code> keyword to create a class that extends <code>HTMLElement</code>.</li><li>Define a constructor to initialize the element.</li><li>Use <code>customElements.define</code> to register the custom element.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">class MyElement extends HTMLElement {
+    constructor() {
+        super();
+        this.innerHTML = ''&lt;p&gt;Hello, World!&lt;/p&gt;'';
+    }
+}
+
+customElements.define(''my-element'', MyElement);
+</pre><p><strong>Usage:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;my-element&gt;&lt;/my-element&gt;
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a custom element that displays "Hello, World!" when added to the HTML.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Custom Elements&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Custom Elements Example&lt;/h1&gt;
+    &lt;my-element&gt;&lt;/my-element&gt;
+    &lt;script&gt;
+        class MyElement extends HTMLElement {
+            constructor() {
+                super();
+                this.innerHTML = ''&lt;p&gt;Hello, World!&lt;/p&gt;'';
+            }
+        }
+
+        customElements.define(''my-element'', MyElement);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('be04b601-bb45-42d2-a589-065ac3344e18', 2, '807a912f-1d50-4aa0-9a65-cc3869ec70c9', 'LESSON', 'Shadow DOM', NULL, '<h3>Lesson: Shadow DOM</h3><p><strong>Objective:</strong> Understand the concept of the Shadow DOM and how to use it to encapsulate styles and structure within a web component.</p><p><strong>1. Definition:</strong> The Shadow DOM allows you to create a separate DOM tree for your web component, which is encapsulated from the main document DOM.</p><p><strong>2. Benefits:</strong></p><ul><li><strong>Encapsulation:</strong> Ensures that styles and scripts within the Shadow DOM do not affect the main document, and vice versa.</li><li><strong>Scoped Styles:</strong> Apply styles to the component without worrying about global CSS conflicts.</li></ul><p><strong>3. Creating a Shadow DOM:</strong></p><ul><li>Use <code>attachShadow</code> to create a shadow root.</li><li>Add HTML and CSS to the shadow root.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">class MyShadowElement extends HTMLElement {
+    constructor() {
+        super();
+        const shadow = this.attachShadow({ mode: ''open'' });
+        shadow.innerHTML = `
+            &lt;style&gt;
+                p {
+                    color: blue;
+                }
+            &lt;/style&gt;
+            &lt;p&gt;Shadow DOM Content&lt;/p&gt;
+        `;
+    }
+}
+
+customElements.define(''my-shadow-element'', MyShadowElement);
+</pre><p><strong>Usage:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;my-shadow-element&gt;&lt;/my-shadow-element&gt;
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a custom element that uses the Shadow DOM to encapsulate its styles.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Shadow DOM&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Shadow DOM Example&lt;/h1&gt;
+    &lt;my-shadow-element&gt;&lt;/my-shadow-element&gt;
+    &lt;script&gt;
+        class MyShadowElement extends HTMLElement {
+            constructor() {
+                super();
+                const shadow = this.attachShadow({ mode: ''open'' });
+                shadow.innerHTML = `
+                    &lt;style&gt;
+                        p {
+                            color: blue;
+                        }
+                    &lt;/style&gt;
+                    &lt;p&gt;Shadow DOM Content&lt;/p&gt;
+                `;
+            }
+        }
+
+        customElements.define(''my-shadow-element'', MyShadowElement);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('8626977c-7944-4917-bc45-a2660c162814', 3, '807a912f-1d50-4aa0-9a65-cc3869ec70c9', 'LESSON', 'HTML templates', NULL, '<h3>Lesson: HTML Templates</h3><p><strong>Objective:</strong> Learn how to use HTML templates to define reusable HTML snippets that can be used within your web components.</p><p><strong>1. Definition:</strong> HTML templates allow you to define chunks of HTML that are not rendered when the page loads. They can be reused and stamped into the document later.</p><p><strong>2. Creating an HTML Template:</strong></p><ul><li>Use the <code>&lt;template&gt;</code> tag to define the HTML structure.</li><li>Use JavaScript to clone and insert the template content.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;template id="my-template"&gt;
+    &lt;style&gt;
+        p {
+            color: green;
+        }
+    &lt;/style&gt;
+    &lt;p&gt;Template Content&lt;/p&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+    class MyTemplateElement extends HTMLElement {
+        constructor() {
+            super();
+            const template = document.getElementById(''my-template'').content;
+            const shadow = this.attachShadow({ mode: ''open'' });
+            shadow.appendChild(template.cloneNode(true));
+        }
+    }
+
+    customElements.define(''my-template-element'', MyTemplateElement);
+&lt;/script&gt;
+</pre><p><strong>Usage:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;my-template-element&gt;&lt;/my-template-element&gt;
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a custom element that uses an HTML template to define its structure and styles.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;HTML Templates&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;HTML Templates Example&lt;/h1&gt;
+    &lt;template id="my-template"&gt;
+        &lt;style&gt;
+            p {
+                color: green;
+            }
+        &lt;/style&gt;
+        &lt;p&gt;Template Content&lt;/p&gt;
+    &lt;/template&gt;
+    &lt;my-template-element&gt;&lt;/my-template-element&gt;
+    &lt;script&gt;
+        class MyTemplateElement extends HTMLElement {
+            constructor() {
+                super();
+                const template = document.getElementById(''my-template'').content;
+                const shadow = this.attachShadow({ mode: ''open'' });
+                shadow.appendChild(template.cloneNode(true));
+            }
+        }
+
+        customElements.define(''my-template-element'', MyTemplateElement);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p>By mastering these Web Components concepts, including custom elements, the Shadow DOM, and HTML templates, you will be able to create modular, encapsulated, and reusable components for your web applications. These lessons provide the foundation for building modern and maintainable web interfaces in JavaScript.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('c16ad1c0-386b-4298-9dc8-a03ce2d1da58', 0, 'f646e38b-8dd6-4cc6-a17a-187415ee8ba2', 'LESSON', ' Array operations part-1', NULL, '<h3>Introduction to the module on Array Operations</h3><p>All right - things are now getting serious!</p><p>In this module on&nbsp;<strong>Array Operations</strong>&nbsp;- we will learn the concepts required to successfully perform beginner level array construction and manipulation required in programming problems.</p><p>Let''s revise some basic syntax about arrays in the IDE that we came across in "Learn C#".</p><ul><li>Arrays are used to store multiple items in a single variable</li><li>Array items can be accessed by referring to their index.</li><li>array[3] refers to the&nbsp;<span class="ql-formula" data-value="4^{th}">﻿<span contenteditable="false"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>4</mn><mrow><mi>t</mi><mi>h</mi></mrow></msup></mrow><annotation encoding="application/x-tex">4^{th}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.8491em;"></span><span class="mord"><span class="mord">4</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.8491em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">h</span></span></span></span></span></span></span></span></span></span></span></span></span>﻿</span>&nbsp;item of the array</li></ul><pre class="ql-syntax" spellcheck="false">// Click on ''Submit'' to view the results
+// Click on ''Next'' to proceed
+using System;
+
+
+namespace MyApplication
+{
+&nbsp; &nbsp; class Program
+&nbsp; &nbsp; {
+&nbsp; &nbsp; &nbsp; &nbsp; static void Main(string[] args)
+&nbsp; &nbsp; &nbsp; &nbsp; {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; int[] sample_array= {5, 3, 2, 4, 1};
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // command for displaying the elements of the array
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for(int i=0;i&lt;5;i++)
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Console.Write(sample_array[i]);
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Console.WriteLine();
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // output specific index from the array
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Console.WriteLine(sample_array[3]);
+&nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; }
+}
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d3a97f97-cc90-4551-b8f1-1587db8b4c7e', 0, '9f6e63e8-a037-4b51-911d-cc4da22189f1', 'LESSON', 'Understanding asynchronous programming', NULL, '<h4>Lesson: Asynchronous JavaScript</h4><p><strong>Objective:</strong> Understand the fundamental concepts of asynchronous programming in JavaScript. Learn about callbacks, promises, and the async/await syntax to handle asynchronous operations effectively.</p><p><br></p><h3>Key Concepts:</h3><h4>Understanding Asynchronous Programming</h4><p><strong>Objective:</strong> Learn the basics of asynchronous programming and understand why it is essential in JavaScript.</p><p><strong>1. Definition:</strong> Asynchronous programming allows your program to initiate potentially long-running tasks and still be able to respond to other events while awaiting results.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">console.log(''Start'');
+
+setTimeout(() =&gt; {
+    console.log(''This is an asynchronous message'');
+}, 2000);
+
+console.log(''End'');
+</pre><p><strong>Explanation:</strong></p><ul><li><code>console.log(''Start'')</code> is executed first.</li><li><code>setTimeout</code> schedules an asynchronous operation to print a message after 2 seconds.</li><li><code>console.log(''End'')</code> is executed immediately after the first log, without waiting for the <code>setTimeout</code> operation.</li></ul><p><strong>2. Why Asynchronous Programming is Important:</strong></p><ul><li>Enhances performance by preventing blocking operations.</li><li>Allows multiple operations to be handled concurrently.</li><li>Essential for operations like network requests, file I/O, and timers.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Demonstrate asynchronous behavior using a simple timer.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Asynchronous Programming&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Asynchronous Example&lt;/h1&gt;
+    &lt;script&gt;
+        console.log(''Start'');
+        setTimeout(() =&gt; {
+            console.log(''This is an asynchronous message'');
+        }, 2000);
+        console.log(''End'');
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('736310b9-cd2f-45b8-afbd-77be269931ae', 0, '4710e388-7569-4d36-ac26-4588d0da9643', 'LESSON', 'What is JavaScript?', NULL, '<h4>Lesson: What is JavaScript?</h4><p><strong>Objective:</strong> Understand the fundamental concepts of JavaScript, its history, and its role in modern web development. This lesson provides a comprehensive overview of what JavaScript is and why it is an essential tool for web developers.</p><h3>Key Concepts:</h3><p><strong>1. Introduction to JavaScript:</strong></p><p>JavaScript is a high-level, interpreted programming language that is primarily used to create interactive and dynamic content on web pages. It is one of the core technologies of the World Wide Web, alongside HTML and CSS.</p><p><strong>Key Points:</strong></p><ul><li><strong>High-Level Language:</strong> JavaScript abstracts away most of the complex details of the computer, making it easier to write and understand.</li><li><strong>Interpreted Language:</strong> JavaScript code is executed line-by-line by the web browser, without the need for prior compilation.</li><li><strong>Dynamic and Interactive:</strong> JavaScript allows developers to create dynamic web pages that can respond to user input, change content, and interact with external servers.</li></ul><p><strong>2. History of JavaScript:</strong></p><p>JavaScript was created in 1995 by Brendan Eich while he was working at Netscape Communications Corporation. It was originally named Mocha, then renamed to LiveScript, and finally to JavaScript.</p><p><strong>Key Milestones:</strong></p><ul><li><strong>1995:</strong> Creation of JavaScript by Brendan Eich.</li><li><strong>1996:</strong> Adoption by Microsoft, leading to the creation of JScript.</li><li><strong>1997:</strong> Standardization of JavaScript under the name ECMAScript by ECMA International.</li><li><strong>2009:</strong> Introduction of ECMAScript 5 (ES5) with significant improvements.</li><li><strong>2015:</strong> Release of ECMAScript 6 (ES6), also known as ECMAScript 2015, introducing major features like classes, modules, and arrow functions.</li></ul><p><strong>3. Role of JavaScript in Web Development:</strong></p><p>JavaScript is a versatile language used for both client-side and server-side development.</p><p><strong>Client-Side Development:</strong></p><ul><li>JavaScript runs in the web browser, providing interactivity to web pages.</li><li>It can manipulate HTML and CSS to update the content and style of a web page dynamically.</li><li>Common uses include form validation, creating animations, and handling events like clicks and key presses.</li></ul><p><strong>Server-Side Development:</strong></p><ul><li>With the advent of Node.js, JavaScript can also run on the server, allowing developers to build entire web applications using JavaScript alone.</li><li>Server-side JavaScript can handle database operations, user authentication, and server logic.</li></ul><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('9fc1ede2-8417-4780-9634-6b16d999efe1', 0, '76fc9f87-6f51-4416-a1f7-ee1426e46688', 'LESSON', 'Declaring Variables with `var`, `let`, and `const`', NULL, '<h4>Lesson: Declaring Variables with <code>var</code>, <code>let</code>, and <code>const</code></h4><p><strong>Objective:</strong> Understand how to declare variables in JavaScript using <code>var</code>, <code>let</code>, and <code>const</code>. Learn the differences between these three keywords and when to use each.</p><p><br></p><h3>Key Concepts:</h3><p><strong>1. Declaring Variables with </strong><code><strong>var</strong></code><strong>:</strong></p><p>The <code>var</code> keyword is used to declare a variable. It has function scope, meaning it is scoped to the function in which it is declared. If declared outside any function, it is globally scoped.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function exampleVar() {
+    var x = 10;
+    if (true) {
+        var x = 20; // Same variable!
+        console.log(x); // 20
+    }
+    console.log(x); // 20
+}
+
+exampleVar();
+</pre><p><strong>Explanation:</strong></p><ul><li>The variable <code>x</code> is declared with <code>var</code> inside the function.</li><li>The inner <code>var x = 20</code> statement re-declares and updates the same <code>x</code> variable.</li></ul><p><strong>2. Declaring Variables with </strong><code><strong>let</strong></code><strong>:</strong></p><p>The <code>let</code> keyword is used to declare a block-scoped variable, meaning it is only available within the block it is defined in.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function exampleLet() {
+    let y = 10;
+    if (true) {
+        let y = 20; // Different variable
+        console.log(y); // 20
+    }
+    console.log(y); // 10
+}
+
+exampleLet();
+</pre><p><strong>Explanation:</strong></p><ul><li>The variable <code>y</code> is declared with <code>let</code> inside the function.</li><li>The inner <code>let y = 20</code> statement declares a new <code>y</code> variable scoped to the <code>if</code> block.</li></ul><p><strong>3. Declaring Variables with </strong><code><strong>const</strong></code><strong>:</strong></p><p>The <code>const</code> keyword is used to declare a block-scoped, read-only constant. Once declared, its value cannot be reassigned.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function exampleConst() {
+    const z = 10;
+    console.log(z); // 10
+    // z = 20; // Error: Assignment to constant variable
+}
+
+exampleConst();
+</pre><p><strong>Explanation:</strong></p><ul><li>The variable <code>z</code> is declared with <code>const</code> and cannot be reassigned.</li></ul><p><strong>When to Use </strong><code><strong>var</strong></code><strong>, </strong><code><strong>let</strong></code><strong>, and </strong><code><strong>const</strong></code><strong>:</strong></p><ul><li><code><strong>var</strong></code>: Use for variables that need to be function-scoped and when you are working in older JavaScript codebases.</li><li><code><strong>let</strong></code>: Use for variables that need block-scoping and can be reassigned.</li><li><code><strong>const</strong></code>: Use for variables that should not be reassigned after their initial value is set.</li></ul><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('74bd863e-51f4-4d30-adc2-d40a56bb05e4', 1, '76fc9f87-6f51-4416-a1f7-ee1426e46688', 'LESSON', 'Understanding Data Types: Number, String, Boolean, Null, Undefined, Symbol', NULL, '<h4>Lesson: Understanding Data Types: Number, String, Boolean, Null, Undefined, Symbol</h4><p><strong>Objective:</strong> Learn about the different data types available in JavaScript, including Number, String, Boolean, Null, Undefined, and Symbol. Understand how to use each data type in your code.</p><p><br></p><h3>Key Concepts:</h3><p><strong>1. Number:</strong></p><p>The <code>Number</code> data type represents both integer and floating-point numbers.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let integer = 42;
+let float = 3.14;
+
+console.log(integer); // 42
+console.log(float);   // 3.14
+</pre><p><strong>2. String:</strong></p><p>The <code>String</code> data type represents text. Strings can be created using single quotes, double quotes, or backticks.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let singleQuoteString = ''Hello, World!'';
+let doubleQuoteString = "Hello, World!";
+let backtickString = `Hello, World!`;
+
+console.log(singleQuoteString); // Hello, World!
+console.log(doubleQuoteString); // Hello, World!
+console.log(backtickString);    // Hello, World!
+</pre><p><strong>3. Boolean:</strong></p><p>The <code>Boolean</code> data type represents a logical entity and can have two values: <code>true</code> and <code>false</code>.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let isJavaScriptFun = true;
+let isCoffeeHot = false;
+
+console.log(isJavaScriptFun); // true
+console.log(isCoffeeHot);     // false
+</pre><p><strong>4. Null:</strong></p><p>The <code>null</code> value represents the intentional absence of any object value.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let emptyValue = null;
+
+console.log(emptyValue); // null
+</pre><p><strong>5. Undefined:</strong></p><p>A variable that has been declared but has not yet been assigned a value is <code>undefined</code>.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let notAssigned;
+
+console.log(notAssigned); // undefined
+</pre><p><strong>6. Symbol:</strong></p><p>A <code>Symbol</code> is a unique and immutable primitive value and may be used as the key of an object property.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let symbol1 = Symbol(''description'');
+let symbol2 = Symbol(''description'');
+
+console.log(symbol1 === symbol2); // false
+</pre><p><strong>Explanation:</strong></p><ul><li>Each symbol is unique, even if created with the same description.</li></ul><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('98f68857-e7dd-4542-84b2-a228a492ba09', 2, '76fc9f87-6f51-4416-a1f7-ee1426e46688', 'LESSON', 'Type Conversion and Coercion', NULL, '<h4>Lesson: Type Conversion and Coercion</h4><p><strong>Objective:</strong> Understand how to convert between different data types in JavaScript and how type coercion works. Learn the differences between explicit and implicit conversion.</p><p><br></p><h3>Key Concepts:</h3><p><strong>1. Explicit Conversion:</strong></p><p>Explicit conversion involves using functions to convert values from one type to another.</p><p><strong>Examples:</strong></p><pre class="ql-syntax" spellcheck="false">// String to Number
+let str = "123";
+let num = Number(str);
+
+console.log(num); // 123
+console.log(typeof num); // "number"
+
+// Number to String
+let number = 456;
+let string = String(number);
+
+console.log(string); // "456"
+console.log(typeof string); // "string"
+
+// Boolean to String
+let bool = true;
+let boolString = String(bool);
+
+console.log(boolString); // "true"
+console.log(typeof boolString); // "string"
+</pre><p><strong>2. Implicit Conversion:</strong></p><p>Implicit conversion, or type coercion, is performed automatically by JavaScript.</p><p><strong>Examples:</strong></p><pre class="ql-syntax" spellcheck="false">// Number to String
+let result1 = "The answer is " + 42;
+console.log(result1); // "The answer is 42"
+
+// String to Number
+let result2 = "10" - 5;
+console.log(result2); // 5
+
+// Boolean to Number
+let result3 = true + 1;
+console.log(result3); // 2
+
+// Undefined to Number
+let result4 = undefined * 10;
+console.log(result4); // NaN
+</pre><p><strong>3. Checking Data Types:</strong></p><p>Use the <code>typeof</code> operator to check the type of a value.</p><p><strong>Examples:</strong></p><pre class="ql-syntax" spellcheck="false">console.log(typeof 42);           // "number"
+console.log(typeof "hello");      // "string"
+console.log(typeof true);         // "boolean"
+console.log(typeof undefined);    // "undefined"
+console.log(typeof null);         // "object" (this is a known quirk in JavaScript)
+console.log(typeof Symbol());     // "symbol"
+console.log(typeof {});           // "object"
+console.log(typeof []);           // "object"
+console.log(typeof function(){}); // "function"
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that takes a user input, converts it to a number, and performs an arithmetic operation.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Type Conversion Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Type Conversion in JavaScript&lt;/h1&gt;
+    &lt;input type="text" id="userInput" placeholder="Enter a number"&gt;
+    &lt;button onclick="performOperation()"&gt;Submit&lt;/button&gt;
+    &lt;p id="result"&gt;&lt;/p&gt;
+
+    &lt;script&gt;
+        function performOperation() {
+            let input = document.getElementById(''userInput'').value;
+            let number = Number(input);
+            let result = number + 10;
+            document.getElementById(''result'').innerText = `The result is: ${result}`;
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><strong>Explanation:</strong></p><ul><li>The HTML page contains an input field and a button.</li><li>When the button is clicked, the <code>performOperation</code> function converts the input to a number, adds 10 to it, and displays the result.</li></ul><p>By mastering variables, data types, and type conversion in JavaScript, you will be able to handle a wide range of programming tasks with ease and precision. These lessons provide the foundation for writing robust and efficient JavaScript code.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d7f54f93-cb6b-4a36-9aad-3d75a67bccdf', 3, '76fc9f87-6f51-4416-a1f7-ee1426e46688', 'VIDEO', 'JavaScript for Beginners #3 - Variables and Data Types', NULL, '', 'https://www.youtube.com/watch?v=XWo3YUblZxk');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('bfbfc990-f0aa-4d95-92e6-d0ee4204bede', 0, 'dbb26f3a-5184-49db-8d89-0e30898a470f', 'LESSON', 'Introduction to One-dimensional Arrays', NULL, '<h3>Lesson: Introduction to One-dimensional Arrays</h3><p><strong>Objective:</strong> Learn the fundamentals of one-dimensional arrays, their importance, and how to use them in programming. Understand the basic syntax and operations that can be performed on arrays.</p><h3>Key Concepts:</h3><h4>What is an Array?</h4><p><strong>1. Definition:</strong> An array is a collection of elements, all of the same type, stored in contiguous memory locations. It allows you to store multiple values in a single variable.</p><p><strong>2. Importance:</strong></p><ul><li><strong>Efficient Storage:</strong> Arrays provide an efficient way to store and access a large number of elements.</li><li><strong>Easy Access:</strong> Elements can be accessed using an index, making it easy to retrieve or update values.</li><li><strong>Memory Management:</strong> Arrays are stored in contiguous memory locations, which can improve performance due to better cache utilization.</li></ul><h4>Basic Syntax</h4><p><strong>1. Declaration and Initialization:</strong> To declare an array, specify the type of elements followed by square brackets and the array name. Arrays can be initialized at the time of declaration.</p><p><strong>Examples:</strong></p><p><strong>In C++:</strong></p><pre class="ql-syntax" spellcheck="false">int numbers[5]; // Declaration
+int numbers[5] = {1, 2, 3, 4, 5}; // Declaration and initialization
+</pre><p><strong>In Java:</strong></p><pre class="ql-syntax" spellcheck="false">int[] numbers = new int[5]; // Declaration
+int[] numbers = {1, 2, 3, 4, 5}; // Declaration and initialization
+</pre><p><strong>In Python:</strong></p><pre class="ql-syntax" spellcheck="false">numbers = [1, 2, 3, 4, 5] # Declaration and initialization
+</pre><h4>Accessing Array Elements</h4><p><strong>1. Indexing:</strong> Array elements are accessed using their index, which starts from 0. To access the nth element, use the index n-1.</p><p><strong>Examples:</strong></p><p><strong>In C++:</strong></p><pre class="ql-syntax" spellcheck="false">int firstNumber = numbers[0]; // Accessing the first element
+</pre><p><strong>In Java:</strong></p><pre class="ql-syntax" spellcheck="false">int firstNumber = numbers[0]; // Accessing the first element
+</pre><p><strong>In Python:</strong></p><pre class="ql-syntax" spellcheck="false">first_number = numbers[0] # Accessing the first element
+</pre><h4>Common Operations</h4><p><strong>1. Traversing an Array:</strong> Iterate through the array elements using loops.</p><p><strong>Examples:</strong></p><p><strong>In C++:</strong></p><pre class="ql-syntax" spellcheck="false">for(int i = 0; i &lt; 5; i++) {
+    cout &lt;&lt; numbers[i] &lt;&lt; " ";
+}
+</pre><p><strong>In Java:</strong></p><pre class="ql-syntax" spellcheck="false">for(int i = 0; i &lt; numbers.length; i++) {
+    System.out.print(numbers[i] + " ");
+}
+</pre><p><strong>In Python:</strong></p><pre class="ql-syntax" spellcheck="false">for number in numbers:
+    print(number, end=" ")
+</pre><p><strong>2. Updating Elements:</strong> Change the value of an array element by accessing it via its index.</p><p><strong>Examples:</strong></p><p><strong>In C++:</strong></p><pre class="ql-syntax" spellcheck="false">numbers[0] = 10; // Update the first element to 10
+</pre><p><strong>In Java:</strong></p><pre class="ql-syntax" spellcheck="false">numbers[0] = 10; // Update the first element to 10
+</pre><p><strong>In Python:</strong></p><pre class="ql-syntax" spellcheck="false">numbers[0] = 10 # Update the first element to 10
+</pre><p><strong>3. Finding the Length:</strong> Determine the number of elements in the array.</p><p><strong>Examples:</strong></p><p><strong>In C++:</strong></p><pre class="ql-syntax" spellcheck="false">int length = sizeof(numbers) / sizeof(numbers[0]); // Calculate the length of the array
+</pre><p><strong>In Java:</strong></p><pre class="ql-syntax" spellcheck="false">int length = numbers.length; // Get the length of the array
+</pre><p><strong>In Python:</strong></p><pre class="ql-syntax" spellcheck="false">length = len(numbers) # Get the length of the array
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program to declare an array, initialize it, and perform the following operations:</p><ol><li>Print all elements.</li><li>Update the second element.</li><li>Print the updated array.</li><li>Print the length of the array.</li></ol><p><strong>Solution:</strong></p><p><strong>In C++:</strong></p><pre class="ql-syntax" spellcheck="false">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int numbers[5] = {1, 2, 3, 4, 5};
+
+    // Print all elements
+    for(int i = 0; i &lt; 5; i++) {
+        cout &lt;&lt; numbers[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    // Update the second element
+    numbers[1] = 10;
+
+    // Print the updated array
+    for(int i = 0; i &lt; 5; i++) {
+        cout &lt;&lt; numbers[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    // Print the length of the array
+    int length = sizeof(numbers) / sizeof(numbers[0]);
+    cout &lt;&lt; "Length of the array: " &lt;&lt; length &lt;&lt; endl;
+
+    return 0;
+}
+</pre><p><strong>In Java:</strong></p><pre class="ql-syntax" spellcheck="false">public class ArrayExample {
+    public static void main(String[] args) {
+        int[] numbers = {1, 2, 3, 4, 5};
+
+        // Print all elements
+        for(int i = 0; i &lt; numbers.length; i++) {
+            System.out.print(numbers[i] + " ");
+        }
+        System.out.println();
+
+        // Update the second element
+        numbers[1] = 10;
+
+        // Print the updated array
+        for(int i = 0; i &lt; numbers.length; i++) {
+            System.out.print(numbers[i] + " ");
+        }
+        System.out.println();
+
+        // Print the length of the array
+        System.out.println("Length of the array: " + numbers.length);
+    }
+}
+</pre><p><strong>In Python:</strong></p><pre class="ql-syntax" spellcheck="false"># Declare and initialize the array
+numbers = [1, 2, 3, 4, 5]
+
+# Print all elements
+for number in numbers:
+    print(number, end=" ")
+print()
+
+# Update the second element
+numbers[1] = 10
+
+# Print the updated array
+for number in numbers:
+    print(number, end=" ")
+print()
+
+# Print the length of the array
+print("Length of the array:", len(numbers))
+</pre><p>By understanding and mastering one-dimensional arrays, you will be equipped to handle a variety of programming tasks that require efficient data storage and access. This lesson provides a solid foundation for working with arrays in different programming languages.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('b36020d5-a183-47df-bc17-677110846414', 1, 'dbb26f3a-5184-49db-8d89-0e30898a470f', 'CODE', 'List odd divisor', 'b6484e21-6937-489c-b031-b71767994741', 'List odd divisor', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('c410274a-9454-46a5-ac06-99d74787db7b', 2, 'dbb26f3a-5184-49db-8d89-0e30898a470f', 'CODE', 'Sum of an array', 'b6484e21-6937-489c-b031-b71767994736', 'Sum of an array', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('fc94ef06-4608-4f34-8f3f-696bfef9e00e', 3, 'dbb26f3a-5184-49db-8d89-0e30898a470f', 'CODE', 'Robber', 'b6484e21-6937-489c-b031-b71767994738', 'Robber', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('9da77875-d5b0-4f3b-91e1-b7fe20fe4aa7', 4, 'dbb26f3a-5184-49db-8d89-0e30898a470f', 'CODE', 'Three sum closest', 'b6484e21-6937-489c-b031-b71767994739', 'Three sum closest', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('a9c1d919-fe8f-4eea-a24c-10ff71372481', 0, '2f316c08-6f46-4fa8-8aa6-c02602556802', 'LESSON', ' Introducing printing - Console.WriteLine()', NULL, '<h4>Lesson: Introducing Printing - Console.WriteLine()</h4><p><strong>Objective:</strong> Learn how to use the <code>Console.WriteLine()</code> method to output text to the console in C#. This is the foundational step for displaying information in a C# application.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Using Console.WriteLine():</strong></li><li class="ql-indent-1">The <code>Console.WriteLine()</code> method is used to print a line of text to the console.</li><li class="ql-indent-1">It automatically appends a newline character at the end of the output.</li><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Hello, World!");
+    }
+}
+</pre><ol><li><strong>Printing Variables:</strong></li><li class="ql-indent-1">You can print the value of variables using <code>Console.WriteLine()</code>.</li><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">int number = 42;
+string message = "The answer is";
+Console.WriteLine(message);
+Console.WriteLine(number);
+</pre><ol><li><strong>Formatting Output:</strong></li><li class="ql-indent-1"><strong><span class="ql-cursor">﻿</span></strong>You can format strings using placeholders.</li><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">int number = 42;
+Console.WriteLine("The answer is {0}", number);
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('b25818f0-bf60-4614-a1e0-6b5ccedf6b1d', 1, '2f316c08-6f46-4fa8-8aa6-c02602556802', 'LESSON', ' Printing on multiple lines', NULL, '<h4>Lesson: Printing on Multiple Lines</h4><p><strong>Objective:</strong> Learn how to output multiple lines of text using multiple <code>Console.WriteLine()</code> statements and how to handle newline characters within a single <code>Console.WriteLine()</code>.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Multiple Console.WriteLine() Statements:</strong></li><li class="ql-indent-1">Use multiple <code>Console.WriteLine()</code> statements to print text on different lines.</li><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">Console.WriteLine("Hello");
+Console.WriteLine("World");
+</pre><ol><li><strong>Using Newline Characters:</strong></li><li class="ql-indent-1">Use <code>\n</code> to insert a newline character within a single <code>Console.WriteLine()</code> statement.</li><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">Console.WriteLine("Hello\nWorld");
+</pre><ol><li><strong>Combining Strings:</strong></li><li class="ql-indent-1"><strong><span class="ql-cursor">﻿</span></strong>Concatenate strings with <code>+</code> to create multi-line outputs.</li><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">string part1 = "Hello";
+string part2 = "World";
+Console.WriteLine(part1 + "\n" + part2);
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('9ea48423-1c97-4f56-a60a-ed1bdfc5caac', 2, '2f316c08-6f46-4fa8-8aa6-c02602556802', 'LESSON', 'Multiple prints using single Console.WriteLine()', NULL, '<h4>Lesson: Multiple Prints Using Single Console.WriteLine()</h4><p><strong>Objective:</strong> Learn how to print multiple variables or values using a single <code>Console.WriteLine()</code> statement for more concise and readable code.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Using Placeholders:</strong></li><li class="ql-indent-1">Use <code>{}</code> placeholders to include multiple variables in a single <code>Console.WriteLine()</code>.</li><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">int age = 25;
+string name = "Alice";
+Console.WriteLine("Name: {0}, Age: {1}", name, age);
+</pre><ol><li><strong>String Interpolation (C# 6.0+):</strong></li><li class="ql-indent-1">Use string interpolation for a more readable and concise syntax.</li><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">int age = 25;
+string name = "Alice";
+Console.WriteLine($"Name: {name}, Age: {age}");
+</pre><ol><li><strong>Combining Strings:</strong></li><li class="ql-indent-1"><strong><span class="ql-cursor">﻿</span></strong>Concatenate multiple strings and variables in a single <code>Console.WriteLine()</code>.</li><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">string city = "New York";
+string country = "USA";
+Console.WriteLine("City: " + city + ", Country: " + country);
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d9382ffd-79e0-483b-9c85-b87684bdfff2', 3, '2f316c08-6f46-4fa8-8aa6-c02602556802', 'LESSON', 'Math Operators and overall code structure', NULL, '<h4>Lesson: Math Operators and Overall Code Structure</h4><p><strong>Objective:</strong> Learn how to use basic math operators in C# and understand the overall structure of a simple C# program.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Basic Math Operators:</strong></li></ol><ul><li class="ql-indent-1">Addition (<code>+</code>), Subtraction (<code>-</code>), Multiplication (<code>*</code>), Division (<code>/</code>), Modulus (<code>%</code>).</li></ul><ol><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">int a = 10;
+int b = 5;
+Console.WriteLine("Addition: " + (a + b));
+Console.WriteLine("Subtraction: " + (a - b));
+Console.WriteLine("Multiplication: " + (a * b));
+Console.WriteLine("Division: " + (a / b));
+Console.WriteLine("Modulus: " + (a % b));
+</pre><ol><li><strong>Order of Operations:</strong></li></ol><ul><li class="ql-indent-1">Follow the standard mathematical order of operations (PEMDAS/BODMAS).</li></ul><ol><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">int result = 10 + 5 * 2;
+Console.WriteLine("Result: " + result);  // Output: 20
+</pre><ol><li><strong>Overall Code Structure:</strong></li></ol><ul><li class="ql-indent-1">Understand the basic structure of a C# program, including the <code>using</code> directives, namespace, class, and <code>Main</code> method.</li></ul><ol><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace BasicMathExample
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int a = 10;
+            int b = 5;
+            Console.WriteLine("Addition: " + (a + b));
+            Console.WriteLine("Subtraction: " + (a - b));
+            Console.WriteLine("Multiplication: " + (a * b));
+            Console.WriteLine("Division: " + (a / b));
+            Console.WriteLine("Modulus: " + (a % b));
+        }
+    }
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('8e0262a9-2d8c-447b-be19-dd9fd3b9f760', 4, '2f316c08-6f46-4fa8-8aa6-c02602556802', 'VIDEO', 'C# output 💬', NULL, '', 'https://www.youtube.com/watch?v=b8BUFfgyjK4');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('683df3b9-d9ae-4c14-9e45-5cd54000409e', 5, '2f316c08-6f46-4fa8-8aa6-c02602556802', 'CODE', 'Sum of two integer', 'b6484e21-6937-489c-b031-b71767994221', 'Sum of two integer', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('81c7d910-07b3-47fc-ac1f-0293f571b8bd', 0, '266211ad-b8ac-4d99-8618-e5567b467067', 'LESSON', 'Introduction to Variables and Data Types', NULL, '<h4>Lesson: Introduction to Variables and Data Types in C#</h4><p><strong>Objective:</strong> Understand the fundamentals of variables and data types in C#. Learn how to declare, initialize, and use variables, and understand the various data types available in C#.</p><h3>Key Concepts:</h3><p><strong>1. What are Variables?</strong></p><p>Variables are containers for storing data values. Each variable in C# has a specific type, which determines the size and layout of the variable''s memory, the range of values that can be stored, and the set of operations that can be applied.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int number;
+string name;
+</pre><p><strong>2. Declaring and Initializing Variables</strong></p><ul><li><strong>Declaration:</strong> Declaring a variable involves specifying the type and name of the variable.</li><li><strong>Initialization:</strong> Initializing a variable involves assigning a value to the declared variable.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int age = 25;          // Declaration and initialization
+string greeting = "Hello, World!";  // Declaration and initialization
+</pre><p><strong>3. Data Types in C#</strong></p><p>C# is a strongly typed language, meaning that each variable must be declared with a data type. Here are the main categories of data types:</p><ul><li><strong>Primitive Data Types:</strong></li><li class="ql-indent-1"><code>int</code>: Integer type</li><li class="ql-indent-1"><code>float</code>: Floating-point type</li><li class="ql-indent-1"><code>double</code>: Double-precision floating-point type</li><li class="ql-indent-1"><code>char</code>: Character type</li><li class="ql-indent-1"><code>bool</code>: Boolean type</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int age = 30;
+float temperature = 36.6f;
+double pi = 3.14159;
+char grade = ''A'';
+bool isActive = true;
+</pre><ul><li><strong>String Data Type:</strong></li><li class="ql-indent-1">Represents a sequence of characters.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">string name = "Alice";
+</pre><ul><li><strong>Var Keyword:</strong></li><li class="ql-indent-1"><code>var</code> is used for implicitly typed local variables.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">var count = 10;  // The type of count is inferred as int
+</pre><p><strong>4. Type Conversion</strong></p><p>Type conversion is the process of converting a value from one data type to another. There are two types of conversions:</p><ul><li><strong>Implicit Conversion:</strong> Automatically performed by the compiler when there is no risk of data loss.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int num = 10;
+double numDouble = num;  // Implicit conversion from int to double
+</pre><ul><li><strong>Explicit Conversion:</strong> Requires a cast operator because there might be data loss.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">double pi = 3.14;
+int intPi = (int)pi;  // Explicit conversion from double to int
+</pre><p><strong>5. Constants</strong></p><p>Constants are variables whose value cannot be changed once assigned. Use the <code>const</code> keyword to declare a constant.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">const int maxScore = 100;
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that declares and initializes different types of variables and prints their values.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace VariableExample
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Primitive Data Types
+            int age = 25;
+            float temperature = 36.6f;
+            double pi = 3.14159;
+            char grade = ''A'';
+            bool isActive = true;
+
+            // String Data Type
+            string name = "Alice";
+
+            // Var Keyword
+            var count = 10;
+
+            // Constants
+            const int maxScore = 100;
+
+            // Printing the values
+            Console.WriteLine("Age: " + age);
+            Console.WriteLine("Temperature: " + temperature);
+            Console.WriteLine("Pi: " + pi);
+            Console.WriteLine("Grade: " + grade);
+            Console.WriteLine("Is Active: " + isActive);
+            Console.WriteLine("Name: " + name);
+            Console.WriteLine("Count: " + count);
+            Console.WriteLine("Max Score: " + maxScore);
+        }
+    }
+}
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('9e4402ba-48f9-468e-a8e6-1a6b55d1b70a', 1, '266211ad-b8ac-4d99-8618-e5567b467067', 'VIDEO', 'C# variables ✖️', NULL, '', 'https://www.youtube.com/watch?v=IxBMVztdlr4');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('bf9e8781-17ef-45e7-a0ff-4aa7e78cc636', 2, '266211ad-b8ac-4d99-8618-e5567b467067', 'CODE', 'Calculate sum of cubes', 'b6484e21-6937-489c-b031-b71767994756', 'Calculate sum of cubes', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('e926b98c-ac29-4ac5-91c4-808d428145d2', 0, '1d9b2a8f-e543-4c4d-ae65-b82a22e234b1', 'LESSON', 'Introduction to Strings', NULL, '<h4>Lesson: Introduction to Strings in C#</h4><p><strong>Objective:</strong> Understand the fundamentals of strings in C#. Learn how to declare, initialize, and manipulate strings, and explore common string methods and properties.</p><h3>Key Concepts:</h3><p><strong>1. What are Strings?</strong></p><p>A string is a sequence of characters. In C#, strings are represented by the <code>string</code> data type, which is an alias for the <code>System.String</code> class.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">string greeting = "Hello, World!";
+</pre><p><strong>2. Declaring and Initializing Strings</strong></p><p>Strings can be declared and initialized in various ways, including using string literals and concatenation.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">string greeting = "Hello, World!";
+string name = "Alice";
+string message = greeting + " My name is " + name + ".";
+</pre><p><strong>3. String Properties and Methods</strong></p><p>C# provides a rich set of properties and methods for string manipulation. Some commonly used properties and methods include:</p><ul><li><strong>Length Property:</strong></li><li class="ql-indent-1">Returns the number of characters in the string.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">string greeting = "Hello, World!";
+int length = greeting.Length;  // Returns 13
+</pre><ul><li><strong>Substring Method:</strong></li><li class="ql-indent-1">Extracts a substring from the string.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">string greeting = "Hello, World!";
+string sub = greeting.Substring(7, 5);  // Returns "World"
+</pre><ul><li><strong>ToUpper and ToLower Methods:</strong></li><li class="ql-indent-1">Converts the string to uppercase or lowercase.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">string greeting = "Hello, World!";
+string upper = greeting.ToUpper();  // Returns "HELLO, WORLD!"
+string lower = greeting.ToLower();  // Returns "hello, world!"
+</pre><ul><li><strong>Trim Method:</strong></li><li class="ql-indent-1">Removes leading and trailing whitespace from the string.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">string message = "  Hello, World!  ";
+string trimmed = message.Trim();  // Returns "Hello, World!"
+</pre><ul><li><strong>Replace Method:</strong></li><li class="ql-indent-1">Replaces all occurrences of a specified string or character in the original string.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">string greeting = "Hello, World!";
+string newGreeting = greeting.Replace("World", "C#");  // Returns "Hello, C#!"
+</pre><ul><li><strong>Contains Method:</strong></li><li class="ql-indent-1">Checks if a substring exists within the string.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">string greeting = "Hello, World!";
+bool containsWorld = greeting.Contains("World");  // Returns true
+</pre><p><strong>4. String Interpolation</strong></p><p>String interpolation provides a convenient way to format strings using embedded expressions.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">string name = "Alice";
+int age = 25;
+string message = $"My name is {name} and I am {age} years old.";
+</pre><p><strong>5. Escape Sequences</strong></p><p>Escape sequences are used to represent special characters within strings.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">string newline = "This is the first line.\nThis is the second line.";
+string tabbed = "Name:\tAlice";
+string quote = "She said, \"Hello!\"";
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that demonstrates various string operations, including concatenation, substring extraction, case conversion, trimming, replacing, and checking for substrings.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace StringExample
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // String Declaration and Initialization
+            string greeting = "Hello, World!";
+            string name = "Alice";
+            string message = greeting + " My name is " + name + ".";
+
+            // String Properties and Methods
+            Console.WriteLine("Original message: " + message);
+            Console.WriteLine("Length: " + message.Length);
+            Console.WriteLine("Substring: " + message.Substring(7, 5));
+            Console.WriteLine("Uppercase: " + message.ToUpper());
+            Console.WriteLine("Lowercase: " + message.ToLower());
+            Console.WriteLine("Trimmed: " + message.Trim());
+            Console.WriteLine("Replaced: " + message.Replace("World", "C#"));
+            Console.WriteLine("Contains ''Alice'': " + message.Contains("Alice"));
+
+            // String Interpolation
+            int age = 25;
+            string interpolatedMessage = $"My name is {name} and I am {age} years old.";
+            Console.WriteLine("Interpolated message: " + interpolatedMessage);
+
+            // Escape Sequences
+            string newline = "This is the first line.\nThis is the second line.";
+            string tabbed = "Name:\tAlice";
+            string quote = "She said, \"Hello!\"";
+            Console.WriteLine("Newline:\n" + newline);
+            Console.WriteLine("Tabbed: " + tabbed);
+            Console.WriteLine("Quote: " + quote);
+        }
+    }
+}
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('6aff756e-e634-4bfd-9b68-dc2422ead81d', 1, '1d9b2a8f-e543-4c4d-ae65-b82a22e234b1', 'VIDEO', 'Strings in C#', NULL, '', 'https://www.youtube.com/watch?v=cTY2x8tfYN4');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('6c037e21-7a38-4bc7-afd5-c6467442b988', 0, 'aa21ea7c-eee7-482e-80d1-39d3fe5b6da4', 'LESSON', 'Introducing taking inputs - Console.ReadLine()', NULL, '<h4>Lesson: Introducing Taking Inputs - Console.ReadLine()</h4><p><strong>Objective:</strong> Learn how to use the <code>Console.ReadLine()</code> method to take input from the user in a C# program. Understanding how to handle user input is essential for creating interactive applications.</p><h3>Key Concepts:</h3><p><strong>1. What is Console.ReadLine()?</strong></p><p><code>Console.ReadLine()</code> is a method in C# that reads the next line of characters from the standard input stream. It allows you to capture user input as a string.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Please enter your name:");
+        string name = Console.ReadLine();
+        Console.WriteLine("Hello, " + name + "!");
+    }
+}
+</pre><p><strong>2. Reading Different Data Types</strong></p><p>While <code>Console.ReadLine()</code> reads input as a string, you can convert this input to other data types as needed.</p><ul><li><strong>Reading an Integer:</strong></li></ul><pre class="ql-syntax" spellcheck="false">Console.WriteLine("Please enter your age:");
+string input = Console.ReadLine();
+int age = int.Parse(input);
+Console.WriteLine("You are " + age + " years old.");
+</pre><ul><li><strong>Reading a Double:</strong></li></ul><pre class="ql-syntax" spellcheck="false">Console.WriteLine("Please enter the price:");
+string input = Console.ReadLine();
+double price = double.Parse(input);
+Console.WriteLine("The price is " + price);
+</pre><ul><li><strong>Handling Conversion Errors:</strong> It''s essential to handle potential errors that may occur during type conversion using <code>TryParse</code>.</li><li><strong>Example:</strong></li></ul><pre class="ql-syntax" spellcheck="false">Console.WriteLine("Please enter your age:");
+string input = Console.ReadLine();
+if (int.TryParse(input, out int age))
+{
+    Console.WriteLine("You are " + age + " years old.");
+}
+else
+{
+    Console.WriteLine("Invalid input. Please enter a valid number.");
+}
+</pre><p><strong>3. Using Variables to Store User Input</strong></p><p>You can use variables to store and manipulate the input received from the user.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">Console.WriteLine("Enter your first name:");
+string firstName = Console.ReadLine();
+
+Console.WriteLine("Enter your last name:");
+string lastName = Console.ReadLine();
+
+string fullName = firstName + " " + lastName;
+Console.WriteLine("Your full name is: " + fullName);
+</pre><p><strong>4. Combining Inputs and Outputs</strong></p><p>You can combine multiple inputs and outputs to create interactive and dynamic programs.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">Console.WriteLine("Enter the first number:");
+string input1 = Console.ReadLine();
+int number1 = int.Parse(input1);
+
+Console.WriteLine("Enter the second number:");
+string input2 = Console.ReadLine();
+int number2 = int.Parse(input2);
+
+int sum = number1 + number2;
+Console.WriteLine("The sum of " + number1 + " and " + number2 + " is " + sum);
+</pre><p><strong>5. Prompting the User for Input</strong></p><p>It''s good practice to prompt the user for input in a clear and concise manner, ensuring they know what kind of data is expected.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">Console.WriteLine("Enter your favorite color:");
+string color = Console.ReadLine();
+Console.WriteLine("Your favorite color is " + color + ".");
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that asks the user for their name, age, and favorite color, then prints a summary message.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Taking user''s name
+        Console.WriteLine("What is your name?");
+        string name = Console.ReadLine();
+
+        // Taking user''s age
+        Console.WriteLine("How old are you?");
+        string ageInput = Console.ReadLine();
+        int age;
+        if (!int.TryParse(ageInput, out age))
+        {
+            Console.WriteLine("Invalid age input. Please enter a valid number.");
+            return;
+        }
+
+        // Taking user''s favorite color
+        Console.WriteLine("What is your favorite color?");
+        string color = Console.ReadLine();
+
+        // Printing the summary
+        Console.WriteLine($"Hello, {name}! You are {age} years old and your favorite color is {color}.");
+    }
+}
+</pre><h3>Conclusion</h3><p>Using <code>Console.ReadLine()</code> to take input from the user is a fundamental skill in C#. It enables you to create interactive programs that can respond to user data, making your applications more dynamic and user-friendly. By mastering this method, you will be able to gather and process user inputs effectively, paving the way for more advanced programming techniques.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('87909c34-ee82-4817-b5e4-69b92668eabe', 1, 'aa21ea7c-eee7-482e-80d1-39d3fe5b6da4', 'VIDEO', 'C# user input ⌨️', NULL, '', 'https://www.youtube.com/watch?v=_SXJyA605bI');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('84840b20-cd9f-49c1-9eaf-3e115edfda91', 2, 'aa21ea7c-eee7-482e-80d1-39d3fe5b6da4', 'CODE', 'Replace negative number', 'b6484e21-6937-489c-b031-b71767994759', 'Replace negative number', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('38496181-6dd5-40a6-b272-c95cdf4d6b73', 0, 'b77003f7-a3dd-469b-b2de-99c0700233c3', 'LESSON', 'Comparison operators', NULL, '<h4>Lesson 2: Comparison Operators</h4><p><strong>Objective:</strong> Learn how to use comparison operators to compare values in JavaScript. Understand the use of equality, inequality, greater than, less than, greater than or equal to, and less than or equal to operators.</p><h3>Key Concepts:</h3><p><strong>1. Equality (</strong><code><strong>==</strong></code><strong> and </strong><code><strong>===</strong></code><strong>):</strong></p><p>The equality operator (<code>==</code>) checks if two values are equal, while the strict equality operator (<code>===</code>) checks if two values are equal and of the same type.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let a = 5;
+let b = ''5'';
+
+console.log(a == b);  // true (loose equality)
+console.log(a === b); // false (strict equality)
+</pre><p><strong>2. Inequality (</strong><code><strong>!=</strong></code><strong> and </strong><code><strong>!==</strong></code><strong>):</strong></p><p>The inequality operator (<code>!=</code>) checks if two values are not equal, while the strict inequality operator (<code>!==</code>) checks if two values are not equal or not of the same type.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let a = 5;
+let b = ''5'';
+
+console.log(a != b);  // false (loose inequality)
+console.log(a !== b); // true (strict inequality)
+</pre><p><strong>3. Greater Than (</strong><code><strong>&gt;</strong></code><strong>):</strong></p><p>The greater than operator checks if the left value is greater than the right value.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let a = 5;
+let b = 3;
+
+console.log(a &gt; b); // true
+</pre><p><strong>4. Less Than (</strong><code><strong>&lt;</strong></code><strong>):</strong></p><p>The less than operator checks if the left value is less than the right value.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let a = 5;
+let b = 3;
+
+console.log(a &lt; b); // false
+</pre><p><strong>5. Greater Than or Equal To (</strong><code><strong>&gt;=</strong></code><strong>):</strong></p><p>The greater than or equal to operator checks if the left value is greater than or equal to the right value.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let a = 5;
+let b = 5;
+
+console.log(a &gt;= b); // true
+</pre><p><strong>6. Less Than or Equal To (</strong><code><strong>&lt;=</strong></code><strong>):</strong></p><p>The less than or equal to operator checks if the left value is less than or equal to the right value.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let a = 5;
+let b = 5;
+
+console.log(a &lt;= b); // true
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that compares two numbers and prints whether the first number is greater, less, or equal to the second number.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Comparison Operators&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Compare Two Numbers&lt;/h1&gt;
+    &lt;script&gt;
+        let num1 = 10;
+        let num2 = 5;
+
+        if (num1 &gt; num2) {
+            console.log(`${num1} is greater than ${num2}`);
+        } else if (num1 &lt; num2) {
+            console.log(`${num1} is less than ${num2}`);
+        } else {
+            console.log(`${num1} is equal to ${num2}`);
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('87672bd4-9dc9-4f81-87a5-54ffbd7306d5', 1, 'b77003f7-a3dd-469b-b2de-99c0700233c3', 'LESSON', 'Logical operators', NULL, '<h4>Lesson 3: Logical Operators</h4><p><strong>Objective:</strong> Understand how to use logical operators to combine multiple conditions in JavaScript. Learn about the AND (<code>&amp;&amp;</code>), OR (<code>||</code>), and NOT (<code>!</code>) operators.</p><h3>Key Concepts:</h3><p><strong>1. AND (</strong><code><strong>&amp;&amp;</strong></code><strong>):</strong></p><p>The AND operator returns true if both operands are true.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let a = true;
+let b = false;
+
+console.log(a &amp;&amp; b); // false
+</pre><p><strong>2. OR (</strong><code><strong>||</strong></code><strong>):</strong></p><p>The OR operator returns true if at least one operand is true.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let a = true;
+let b = false;
+
+console.log(a || b); // true
+</pre><p><strong>3. NOT (</strong><code><strong>!</strong></code><strong>):</strong></p><p>The NOT operator returns the opposite boolean value of its operand.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let a = true;
+
+console.log(!a); // false
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that checks if a number is between 10 and 20 and if it is even.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Logical Operators&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Check Number Conditions&lt;/h1&gt;
+    &lt;script&gt;
+        let number = 15;
+
+        if (number &gt;= 10 &amp;&amp; number &lt;= 20 &amp;&amp; number % 2 === 0) {
+            console.log(`${number} is between 10 and 20 and is even`);
+        } else {
+            console.log(`${number} does not meet the conditions`);
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('2ae0b907-12d1-4e3b-ae45-2a0722724e30', 2, 'b77003f7-a3dd-469b-b2de-99c0700233c3', 'LESSON', 'Assignment operators', NULL, '<h4>Lesson 4: Assignment Operators</h4><p><strong>Objective:</strong> Learn about assignment operators in JavaScript. Understand how to use the basic assignment operator as well as compound assignment operators.</p><h3>Key Concepts:</h3><p><strong>1. Basic Assignment (</strong><code><strong>=</strong></code><strong>):</strong></p><p>The basic assignment operator assigns a value to a variable.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let x = 10;
+console.log(x); // 10
+</pre><p><strong>2. Addition Assignment (</strong><code><strong>+=</strong></code><strong>):</strong></p><p>The addition assignment operator adds a value to a variable and assigns the result to the variable.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let x = 10;
+x += 5; // Equivalent to x = x + 5;
+console.log(x); // 15
+</pre><p><strong>3. Subtraction Assignment (</strong><code><strong>-=</strong></code><strong>):</strong></p><p>The subtraction assignment operator subtracts a value from a variable and assigns the result to the variable.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let x = 10;
+x -= 5; // Equivalent to x = x - 5;
+console.log(x); // 5
+</pre><p><strong>4. Multiplication Assignment (</strong><code><strong>*=</strong></code><strong>):</strong></p><p>The multiplication assignment operator multiplies a variable by a value and assigns the result to the variable.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let x = 10;
+x *= 5; // Equivalent to x = x * 5;
+console.log(x); // 50
+</pre><p><strong>5. Division Assignment (</strong><code><strong>/=</strong></code><strong>):</strong></p><p>The division assignment operator divides a variable by a value and assigns the result to the variable.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let x = 10;
+x /= 5; // Equivalent to x = x / 5;
+console.log(x); // 2
+</pre><p><strong>6. Modulus Assignment (</strong><code><strong>%=</strong></code><strong>):</strong></p><p>The modulus assignment operator divides a variable by a value and assigns the remainder to the variable.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let x = 10;
+x %= 3; // Equivalent to x = x % 3;
+console.log(x); // 1
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that calculates the total cost of items in a shopping cart using assignment operators.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Assignment Operators&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Calculate Total Cost&lt;/h1&gt;
+    &lt;script&gt;
+        let totalCost = 0;
+        let item1 = 20;
+        let item2 = 30;
+        let item3 = 50;
+
+        totalCost += item1; // totalCost = totalCost + item1
+        totalCost += item2; // totalCost = totalCost + item2
+        totalCost += item3; // totalCost = totalCost + item3
+
+        console.log(`Total cost: ${totalCost}`); // Total cost: 100
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('aeecfa4b-00ea-4bc1-8aff-6f2e271bba66', 0, '9dfc1f9e-be04-448d-ae04-16cf3599e861', 'LESSON', ' Introductino to "if", "else"', NULL, '<h4>Lesson: Introduction to "if", "else"</h4><p><strong>Objective:</strong> Understand the basic conditional statements in C#, namely <code>if</code> and <code>else</code>, which allow you to execute code based on specific conditions.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>If Statement:</strong></li></ol><ul><li class="ql-indent-1">The <code>if</code> statement executes a block of code if a specified condition is true.</li></ul><ol><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">int number = 10;
+if (number &gt; 5)
+{
+    Console.WriteLine("The number is greater than 5.");
+}
+</pre><ol><li><strong>If-Else Statement:</strong></li></ol><ul><li class="ql-indent-1">The <code>else</code> statement executes a block of code if the condition in the <code>if</code> statement is false.</li></ul><ol><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">int number = 3;
+if (number &gt; 5)
+{
+    Console.WriteLine("The number is greater than 5.");
+}
+else
+{
+    Console.WriteLine("The number is 5 or less.");
+}
+</pre><ol><li><strong>Else If Statement:</strong></li></ol><ul><li class="ql-indent-1">The <code>else if</code> statement allows you to check multiple conditions.</li></ul><ol><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">int number = 7;
+if (number &gt; 10)
+{
+    Console.WriteLine("The number is greater than 10.");
+}
+else if (number &gt; 5)
+{
+    Console.WriteLine("The number is greater than 5 but less than or equal to 10.");
+}
+else
+{
+    Console.WriteLine("The number is 5 or less.");
+}
+</pre><p>Using <code>if</code>, <code>else if</code>, and <code>else</code> statements, you can control the flow of your program based on different conditions, making your applications more dynamic and responsive.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('f3c9b68d-0738-4cbe-88f3-1392891fb80e', 1, '9dfc1f9e-be04-448d-ae04-16cf3599e861', 'LESSON', 'Review problems', NULL, '<h4>Lesson: Review Problems</h4><p><strong>Objective:</strong> Practice solving problems using the <code>if</code>, <code>else if</code>, and <code>else</code> statements to reinforce your understanding and application of conditional logic.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Problem Solving:</strong></li></ol><ul><li class="ql-indent-1">Apply the concepts learned in the previous lesson to solve various problems involving conditional statements.</li></ul><p><strong>Example Problem:</strong></p><ul><li><strong>Problem:</strong> Write a program that checks if a number is positive, negative, or zero.</li><li><strong>Solution:</strong></li></ul><pre class="ql-syntax" spellcheck="false">Console.WriteLine("Enter a number:");
+int number = int.Parse(Console.ReadLine());
+
+if (number &gt; 0)
+{
+    Console.WriteLine("The number is positive.");
+}
+else if (number &lt; 0)
+{
+    Console.WriteLine("The number is negative.");
+}
+else
+{
+    Console.WriteLine("The number is zero.");
+}
+</pre><p>Review problems are designed to reinforce your understanding of conditional statements and help you become proficient in using them to solve real-world problems.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('fd27c78f-8be9-48d3-b646-784377217039', 2, '9dfc1f9e-be04-448d-ae04-16cf3599e861', 'LESSON', 'Different ways to compare elements inside if', NULL, '<h4>Lesson: Different Ways to Compare Elements Inside If</h4><p><strong>Objective:</strong> Learn about the various comparison operators available in C# and how to use them within <code>if</code> statements to compare elements.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Comparison Operators:</strong></li></ol><ul><li class="ql-indent-1"><strong>Equality (</strong><code><strong>==</strong></code><strong>):</strong> Checks if two values are equal.</li><li class="ql-indent-1"><strong>Inequality (</strong><code><strong>!=</strong></code><strong>):</strong> Checks if two values are not equal.</li><li class="ql-indent-1"><strong>Greater Than (</strong><code><strong>&gt;</strong></code><strong>):</strong> Checks if the left value is greater than the right value.</li><li class="ql-indent-1"><strong>Less Than (</strong><code><strong>&lt;</strong></code><strong>):</strong> Checks if the left value is less than the right value.</li><li class="ql-indent-1"><strong>Greater Than or Equal To (</strong><code><strong>&gt;=</strong></code><strong>):</strong> Checks if the left value is greater than or equal to the right value.</li><li class="ql-indent-1"><strong>Less Than or Equal To (</strong><code><strong>&lt;=</strong></code><strong>):</strong> Checks if the left value is less than or equal to the right value.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int a = 5;
+int b = 10;
+
+if (a == b)
+{
+    Console.WriteLine("a is equal to b");
+}
+else if (a != b)
+{
+    Console.WriteLine("a is not equal to b");
+}
+
+if (a &gt; b)
+{
+    Console.WriteLine("a is greater than b");
+}
+else if (a &lt; b)
+{
+    Console.WriteLine("a is less than b");
+}
+
+if (a &gt;= 5)
+{
+    Console.WriteLine("a is greater than or equal to 5");
+}
+
+if (b &lt;= 10)
+{
+    Console.WriteLine("b is less than or equal to 10");
+}
+</pre><p>Understanding and using different comparison operators allows you to perform a wide range of conditional checks within your programs.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('8e634e7d-4758-4fa8-8ec0-2df177355f3d', 3, '9dfc1f9e-be04-448d-ae04-16cf3599e861', 'LESSON', ' Combining Conditions - And, Or', NULL, '<h4>Lesson: Combining Conditions - And, Or</h4><p><strong>Objective:</strong> Learn how to combine multiple conditions using logical operators <code>&amp;&amp;</code> (AND) and <code>||</code> (OR) to create more complex conditional statements.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Logical AND (</strong><code><strong>&amp;&amp;</strong></code><strong>):</strong></li></ol><ul><li class="ql-indent-1">Combines two conditions and returns true only if both conditions are true.</li></ul><ol><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">int age = 25;
+bool hasLicense = true;
+
+if (age &gt;= 18 &amp;&amp; hasLicense)
+{
+    Console.WriteLine("You are eligible to drive.");
+}
+</pre><ol><li><strong>Logical OR (</strong><code><strong>||</strong></code><strong>):</strong></li></ol><ul><li class="ql-indent-1">Combines two conditions and returns true if at least one of the conditions is true.</li></ul><ol><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">bool isWeekend = true;
+bool isHoliday = false;
+
+if (isWeekend || isHoliday)
+{
+    Console.WriteLine("You have a day off.");
+}
+</pre><ol><li><strong>Combining Multiple Conditions:</strong></li></ol><ul><li class="ql-indent-1">You can combine multiple conditions using both <code>&amp;&amp;</code> and <code>||</code> to form complex logical expressions.</li></ul><ol><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">int age = 20;
+bool hasPermission = false;
+
+if ((age &gt;= 18 &amp;&amp; age &lt;= 21) || hasPermission)
+{
+    Console.WriteLine("You have limited access.");
+}
+</pre><p>Combining conditions using logical operators allows you to handle complex decision-making scenarios in your programs, enhancing their functionality and flexibility.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('7d312de7-9ceb-490f-b39a-bb062ef0d4f0', 4, '9dfc1f9e-be04-448d-ae04-16cf3599e861', 'LESSON', ' Switch', NULL, '<h4>Lesson: Switch</h4><p><strong>Objective:</strong> Learn how to use the <code>switch</code> statement in C# to simplify the process of selecting one of many code blocks to be executed.</p><p><strong>Key Concepts:</strong></p><ol><li><strong>Switch Statement:</strong></li></ol><ul><li class="ql-indent-1">The <code>switch</code> statement is used to execute one code block among many based on the value of a variable or expression.</li></ul><ol><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">int day = 3;
+
+switch (day)
+{
+    case 1:
+        Console.WriteLine("Monday");
+        break;
+    case 2:
+        Console.WriteLine("Tuesday");
+        break;
+    case 3:
+        Console.WriteLine("Wednesday");
+        break;
+    case 4:
+        Console.WriteLine("Thursday");
+        break;
+    case 5:
+        Console.WriteLine("Friday");
+        break;
+    case 6:
+        Console.WriteLine("Saturday");
+        break;
+    case 7:
+        Console.WriteLine("Sunday");
+        break;
+    default:
+        Console.WriteLine("Invalid day");
+        break;
+}
+</pre><ol><li><strong>Break Statement:</strong></li></ol><ul><li class="ql-indent-1">The <code>break</code> statement terminates the current case in the <code>switch</code> statement. Without <code>break</code>, the execution will continue to the next case.</li></ul><ol><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">int number = 2;
+
+switch (number)
+{
+    case 1:
+        Console.WriteLine("One");
+        break;
+    case 2:
+        Console.WriteLine("Two");
+        break;
+    case 3:
+        Console.WriteLine("Three");
+        break;
+    default:
+        Console.WriteLine("Other number");
+        break;
+}
+</pre><ol><li><strong>Default Case:</strong></li></ol><ul><li class="ql-indent-1">The <code>default</code> case is executed if none of the other cases match the value of the variable or expression.</li></ul><ol><li><strong>Example:</strong></li></ol><pre class="ql-syntax" spellcheck="false">int number = 10;
+
+switch (number)
+{
+    case 1:
+        Console.WriteLine("One");
+        break;
+    case 2:
+        Console.WriteLine("Two");
+        break;
+    default:
+        Console.WriteLine("Other number");
+        break;
+}
+</pre><p>Using the <code>switch</code> statement can simplify complex <code>if-else</code> chains, making your code cleaner and more readable.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('1a2b5bc4-be83-4492-b931-aecdfe473074', 5, '9dfc1f9e-be04-448d-ae04-16cf3599e861', 'VIDEO', 'Conditional Statements In C#', NULL, '', 'https://www.youtube.com/watch?v=IzzNzSXkCMM');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('a382a3ec-d692-4e14-b211-27809059910a', 6, '9dfc1f9e-be04-448d-ae04-16cf3599e861', 'CODE', 'Check square number', 'b6484e21-6937-489c-b031-b71767994748', 'Check square number', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('47b18eec-1cf2-4492-94fb-112501c49105', 3, 'b77003f7-a3dd-469b-b2de-99c0700233c3', 'LESSON', 'Conditional (ternary) operator', NULL, '<h4>Lesson 5: Conditional (Ternary) Operator</h4><p><strong>Objective:</strong> Learn how to use the conditional (ternary) operator to write concise conditional statements in JavaScript.</p><h3>Key Concepts:</h3><p><strong>1. Conditional (Ternary) Operator:</strong></p><p>The conditional (ternary) operator is a shorthand for the <code>if-else</code> statement. It takes three operands: a condition, an expression to execute if the condition is true, and an expression to execute if the condition is false.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">condition ? expressionIfTrue : expressionIfFalse;
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let age = 18;
+let canVote = age &gt;= 18 ? ''Yes'' : ''No'';
+console.log(canVote); // Yes
+</pre><p><strong>Explanation:</strong></p><ul><li>The condition <code>age &gt;= 18</code> is evaluated.</li><li>If the condition is true, <code>''Yes''</code> is assigned to <code>canVote</code>.</li><li>If the condition is false, <code>''No''</code> is assigned to <code>canVote</code>.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that determines if a student has passed based on their score using the conditional (ternary) operator.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Conditional Operator&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Check Pass or Fail&lt;/h1&gt;
+    &lt;script&gt;
+        let score = 75;
+        let result = score &gt;= 50 ? ''Pass'' : ''Fail'';
+        console.log(`Result: ${result}`); // Result: Pass
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p>By mastering these operators and expressions in JavaScript, you will be able to perform a wide range of tasks, from basic arithmetic to complex logical operations, making your code more powerful and flexible. These lessons provide the foundation for writing effective and efficient JavaScript code.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('b0e7e17b-c565-4c1b-831e-e03121db0df8', 4, 'b77003f7-a3dd-469b-b2de-99c0700233c3', 'VIDEO', 'Expressions and Operators || JavaScript tutorial for Beginners', NULL, '', 'https://www.youtube.com/watch?v=i9h4yf7euhs');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('1c2cf954-2c1a-470a-96fe-51099f9b2716', 5, 'b77003f7-a3dd-469b-b2de-99c0700233c3', 'LESSON', 'Arithmetic operators', NULL, '<h4>Lesson 1: Arithmetic Operators</h4><p><strong>Objective:</strong> Understand how to use arithmetic operators to perform mathematical operations in JavaScript. Learn how to use addition, subtraction, multiplication, division, modulus, and exponentiation operators.</p><h3>Key Concepts:</h3><p><strong>1. Addition (</strong><code><strong>+</strong></code><strong>):</strong></p><p>The addition operator adds two numbers.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let a = 5;
+let b = 3;
+let sum = a + b;
+console.log(`Sum: ${sum}`); // Sum: 8
+</pre><p><strong>2. Subtraction (</strong><code><strong>-</strong></code><strong>):</strong></p><p>The subtraction operator subtracts one number from another.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let a = 5;
+let b = 3;
+let difference = a - b;
+console.log(`Difference: ${difference}`); // Difference: 2
+</pre><p><strong>3. Multiplication (</strong><code><strong>*</strong></code><strong>):</strong></p><p>The multiplication operator multiplies two numbers.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let a = 5;
+let b = 3;
+let product = a * b;
+console.log(`Product: ${product}`); // Product: 15
+</pre><p><strong>4. Division (</strong><code><strong>/</strong></code><strong>):</strong></p><p>The division operator divides one number by another.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let a = 6;
+let b = 3;
+let quotient = a / b;
+console.log(`Quotient: ${quotient}`); // Quotient: 2
+</pre><p><strong>5. Modulus (</strong><code><strong>%</strong></code><strong>):</strong></p><p>The modulus operator returns the remainder of a division operation.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let a = 7;
+let b = 3;
+let remainder = a % b;
+console.log(`Remainder: ${remainder}`); // Remainder: 1
+</pre><p><strong>6. Exponentiation (</strong><code><strong>**</strong></code><strong>):</strong></p><p>The exponentiation operator raises a number to the power of another number.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let a = 2;
+let b = 3;
+let power = a ** b;
+console.log(`Power: ${power}`); // Power: 8
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that calculates the area of a rectangle and the volume of a cube.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Arithmetic Operators&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Calculate Area and Volume&lt;/h1&gt;
+    &lt;script&gt;
+        let length = 5;
+        let width = 3;
+        let height = 4;
+
+        let area = length * width;
+        let volume = length * width * height;
+
+        console.log(`Area of the rectangle: ${area}`); // Area: 15
+        console.log(`Volume of the cube: ${volume}`); // Volume: 60
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('24491928-3f4b-47c7-9456-b737fa05f260', 0, '20de1ddc-7dec-4e12-b833-fca267b44a91', 'LESSON', 'If...else statements', NULL, '<h3>Lesson: If...else Statements</h3><p><strong>Objective:</strong> Understand how to use <code>if...else</code> statements to execute code conditionally based on different conditions.</p><h3>Key Concepts:</h3><p><strong>1. Basic </strong><code><strong>if</strong></code><strong> Statement:</strong></p><p>The <code>if</code> statement executes a block of code if a specified condition evaluates to true.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let age = 18;
+
+if (age &gt;= 18) {
+    console.log("You are an adult.");
+}
+</pre><p><strong>Explanation:</strong></p><ul><li>The block inside <code>if</code> is executed because <code>age</code> is greater than or equal to 18.</li></ul><p><strong>2. </strong><code><strong>if...else</strong></code><strong> Statement:</strong></p><p>The <code>if...else</code> statement executes one block of code if the condition is true and another block if the condition is false.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let age = 16;
+
+if (age &gt;= 18) {
+    console.log("You are an adult.");
+} else {
+    console.log("You are not an adult.");
+}
+</pre><p><strong>Explanation:</strong></p><ul><li>The block inside <code>else</code> is executed because <code>age</code> is less than 18.</li></ul><p><strong>3. </strong><code><strong>if...else if...else</strong></code><strong> Statement:</strong></p><p>The <code>if...else if...else</code> statement checks multiple conditions sequentially and executes the corresponding block of code for the first true condition.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let score = 85;
+
+if (score &gt;= 90) {
+    console.log("Grade: A");
+} else if (score &gt;= 80) {
+    console.log("Grade: B");
+} else if (score &gt;= 70) {
+    console.log("Grade: C");
+} else {
+    console.log("Grade: F");
+}
+</pre><p><strong>Explanation:</strong></p><ul><li>The block inside <code>else if (score &gt;= 80)</code> is executed because <code>score</code> is 85.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that checks the temperature and prints whether it is cold, warm, or hot.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;If...else Statements&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Temperature Check&lt;/h1&gt;
+    &lt;script&gt;
+        let temperature = 25;
+
+        if (temperature &lt;= 15) {
+            console.log("It is cold.");
+        } else if (temperature &lt;= 25) {
+            console.log("It is warm.");
+        } else {
+            console.log("It is hot.");
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('5b42b1f2-b993-460b-8b1a-d2f111e93534', 0, '3cfbf83b-3d61-4f46-aaa8-6bbd2c07c216', 'LESSON', 'Introduction to Arrays', NULL, '<h3>Creating Arrays</h3><p>Arrays are used to store multiple values in a single variable, instead of declaring separate variables for each value.</p><p><br></p><p>To declare an array,</p><ul><li>Define the variable type,</li><li>Specify the name of the array followed by square brackets</li></ul><p>For eg</p><pre class="ql-syntax" spellcheck="false"> string[] cars = {"Ferrari","Volvo","Lambo","Tesla"}
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('03a59c6d-ac36-45e7-ab2c-a02ab0be5087', 1, '3cfbf83b-3d61-4f46-aaa8-6bbd2c07c216', 'VIDEO', 'C# arrays 🚗', NULL, '', 'https://www.youtube.com/watch?v=IHMmPVEOT64');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('ec078db8-2cba-4edf-8c92-b5fe82156f6a', 2, '3cfbf83b-3d61-4f46-aaa8-6bbd2c07c216', 'CODE', 'Sum of an array', 'b6484e21-6937-489c-b031-b71767994736', 'Sum of an array', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('6b134d99-34c5-4c64-9d58-00e7d5f231d2', 0, '1c64da87-8cf6-47d9-ad16-b2ea87945562', 'LESSON', 'While loops', NULL, '<h4>Lesson: While Loops</h4><p><strong>Objective:</strong> Understand how to use <code>while</code> loops to execute a block of code repeatedly as long as a specified condition is true.</p><h3>Key Concepts:</h3><p><strong>1. What is a While Loop?</strong></p><p>A <code>while</code> loop repeatedly executes a block of code as long as the specified condition evaluates to true. It is useful when the number of iterations is not known beforehand.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">while (condition)
+{
+    // Code to be executed
+}
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int count = 0;
+while (count &lt; 5)
+{
+    Console.WriteLine("Count: " + count);
+    count++;
+}
+</pre><p><strong>2. Infinite Loops:</strong></p><p>An infinite loop occurs if the condition never becomes false. Be cautious to ensure your <code>while</code> loop has a condition that will eventually be met to avoid infinite loops.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">while (true)
+{
+    Console.WriteLine("This will print forever");
+}
+</pre><p><strong>3. Using Conditions:</strong></p><p>The condition in a <code>while</code> loop can be any expression that returns a boolean value.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">int number = 10;
+while (number &gt; 0)
+{
+    Console.WriteLine("Number: " + number);
+    number--;
+}
+</pre><p>Using <code>while</code> loops, you can control the flow of your program to repeat tasks as long as certain conditions are met.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('863c539a-593f-4ffc-beda-bf66485cec32', 1, 'f646e38b-8dd6-4cc6-a17a-187415ee8ba2', 'LESSON', ' Array operations part-2', NULL, '<h4>Lesson: Array Operations Part-2</h4><p><strong>Objective:</strong> Build upon the foundational concepts of arrays introduced in Part-1 by exploring more advanced array operations and techniques. This lesson will enhance your ability to manipulate arrays and solve complex problems involving arrays.</p><p><br></p><h3>Key Concepts:</h3><p><strong>1. Array Initialization and Access:</strong></p><p>Revisiting the basics, let''s quickly recap how to declare, initialize, and access elements in an array.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] sample_array = {5, 3, 2, 4, 1};
+
+            // Display elements of the array
+            for(int i = 0; i &lt; sample_array.Length; i++)
+            {
+                Console.Write(sample_array[i] + " ");
+            }
+            Console.WriteLine();
+
+            // Output specific index from the array
+            Console.WriteLine(sample_array[3]);
+        }
+    }
+}
+</pre><p><strong>2. Array Sorting:</strong></p><p>Sorting is a common operation performed on arrays. C# provides built-in methods to sort arrays.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] sample_array = {5, 3, 2, 4, 1};
+
+            // Sort the array
+            Array.Sort(sample_array);
+
+            // Display sorted elements of the array
+            for(int i = 0; i &lt; sample_array.Length; i++)
+            {
+                Console.Write(sample_array[i] + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
+</pre><p><strong>3. Finding Maximum and Minimum Values:</strong></p><p>You can easily find the maximum and minimum values in an array using built-in methods.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] sample_array = {5, 3, 2, 4, 1};
+
+            // Find the maximum value
+            int maxValue = sample_array[0];
+            for(int i = 1; i &lt; sample_array.Length; i++)
+            {
+                if(sample_array[i] &gt; maxValue)
+                {
+                    maxValue = sample_array[i];
+                }
+            }
+            Console.WriteLine("Maximum value: " + maxValue);
+
+            // Find the minimum value
+            int minValue = sample_array[0];
+            for(int i = 1; i &lt; sample_array.Length; i++)
+            {
+                if(sample_array[i] &lt; minValue)
+                {
+                    minValue = sample_array[i];
+                }
+            }
+            Console.WriteLine("Minimum value: " + minValue);
+        }
+    }
+}
+</pre><p><strong>4. Reversing an Array:</strong></p><p>Reversing an array is another common operation that can be useful in various scenarios.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] sample_array = {5, 3, 2, 4, 1};
+
+            // Reverse the array
+            Array.Reverse(sample_array);
+
+            // Display reversed elements of the array
+            for(int i = 0; i &lt; sample_array.Length; i++)
+            {
+                Console.Write(sample_array[i] + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
+</pre><p><strong>5. Searching for an Element:</strong></p><p>Searching for an element within an array can be done using various techniques. The simplest is linear search.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] sample_array = {5, 3, 2, 4, 1};
+            int search_element = 4;
+            bool found = false;
+
+            // Linear search for the element
+            for(int i = 0; i &lt; sample_array.Length; i++)
+            {
+                if(sample_array[i] == search_element)
+                {
+                    found = true;
+                    Console.WriteLine("Element " + search_element + " found at index " + i);
+                    break;
+                }
+            }
+
+            if(!found)
+            {
+                Console.WriteLine("Element " + search_element + " not found.");
+            }
+        }
+    }
+}
+</pre><p><strong>6. Multi-Dimensional Arrays:</strong></p><p>Explore how to work with multi-dimensional arrays for more complex data structures.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[,] multi_array = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+            };
+
+            // Display elements of the multi-dimensional array
+            for(int i = 0; i &lt; 3; i++)
+            {
+                for(int j = 0; j &lt; 3; j++)
+                {
+                    Console.Write(multi_array[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}
+</pre><p>By mastering these advanced array operations, you will be able to handle more complex data manipulations and solve programming problems efficiently using arrays in C#. This lesson provides the building blocks to work with arrays in a sophisticated and effective manner.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('fb1621fd-2793-4c7d-9d87-f98c5f84a353', 2, 'f646e38b-8dd6-4cc6-a17a-187415ee8ba2', 'VIDEO', 'Perform Operations on Array in C#', NULL, '', 'https://www.youtube.com/watch?v=nUVv7SZv3vI');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('26e75891-d4da-4841-b487-4a4dd092de49', 0, '3a57a7e8-9989-498a-beb8-2a5a81774427', 'LESSON', ' String operations part-1', NULL, '<h3>Introduction to the module on Strings</h3><p>So far, we have focused on logic, integers, math.</p><p>The module on logic building and problem solving primarily covered number operations.</p><p>It is time to add ''Strings'' to our arsenal for solving programming problems.</p><p>Lets revise some basic syntax of strings.</p><ul><li>Strings are a&nbsp;<strong>datatype</strong>.</li><li class="ql-indent-1">A string is composed of characters. A single character can be any letter, any digit, symbol, etc.</li><li class="ql-indent-1">A&nbsp;<strong>binary string</strong>&nbsp;is one which has only ''0'' and ''1'' as component characters</li><li>The character in the&nbsp;<span class="ql-formula" data-value="i^{th}">﻿<span contenteditable="false"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>i</mi><mrow><mi>t</mi><mi>h</mi></mrow></msup></mrow><annotation encoding="application/x-tex">i^{th}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.8491em;"></span><span class="mord"><span class="mord mathnormal">i</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.8491em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">h</span></span></span></span></span></span></span></span></span></span></span></span></span>﻿</span>  index of a string is represented as&nbsp;<strong>S[i]</strong></li></ul><p>Click in&nbsp;<strong>Next</strong>&nbsp;to proceed.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('77050bd5-c3d8-4e9b-90dd-8e3f9ea681ee', 1, '3a57a7e8-9989-498a-beb8-2a5a81774427', 'LESSON', ' String operations part-2', NULL, '<h4>Lesson: String Operations Part-2</h4><p><strong>Objective:</strong> Build on the foundation of string operations introduced in Part-1 by exploring more advanced string manipulation techniques. This lesson will enhance your ability to work with strings and solve complex problems involving string data.</p><p><br></p><h3>Key Concepts:</h3><p><strong>1. String Concatenation:</strong></p><p>String concatenation is the process of combining two or more strings into one. In C#, you can use the <code>+</code> operator or the <code>String.Concat</code> method.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string firstName = "John";
+            string lastName = "Doe";
+            string fullName = firstName + " " + lastName;
+            Console.WriteLine("Full Name: " + fullName);
+        }
+    }
+}
+</pre><p><strong>2. String Interpolation:</strong></p><p>String interpolation is a more readable and convenient way to include variable values inside a string. It uses the <code>$</code> symbol followed by curly braces <code>{}</code> to embed expressions.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string firstName = "John";
+            string lastName = "Doe";
+            string fullName = $"{firstName} {lastName}";
+            Console.WriteLine($"Full Name: {fullName}");
+        }
+    }
+}
+</pre><p><strong>3. String Methods:</strong></p><p>C# provides a rich set of methods to manipulate strings. Some commonly used methods include:</p><ul><li><strong>Length</strong>: Returns the number of characters in a string.</li><li><strong>ToUpper()</strong>: Converts the string to uppercase.</li><li><strong>ToLower()</strong>: Converts the string to lowercase.</li><li><strong>Substring()</strong>: Extracts a substring from the string.</li><li><strong>IndexOf()</strong>: Finds the index of the first occurrence of a substring.</li><li><strong>Replace()</strong>: Replaces all occurrences of a specified substring with another substring.</li></ul><p><strong>Examples:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string message = "Hello, World!";
+            Console.WriteLine("Original: " + message);
+
+            // Length
+            Console.WriteLine("Length: " + message.Length);
+
+            // ToUpper
+            Console.WriteLine("Uppercase: " + message.ToUpper());
+
+            // ToLower
+            Console.WriteLine("Lowercase: " + message.ToLower());
+
+            // Substring
+            Console.WriteLine("Substring (0, 5): " + message.Substring(0, 5));
+
+            // IndexOf
+            Console.WriteLine("Index of ''World'': " + message.IndexOf("World"));
+
+            // Replace
+            Console.WriteLine("Replace ''World'' with ''C#'': " + message.Replace("World", "C#"));
+        }
+    }
+}
+</pre><p><strong>4. Splitting and Joining Strings:</strong></p><p>You can split a string into an array of substrings based on a delimiter and join an array of strings into a single string.</p><p><strong>Examples:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string names = "John, Jane, Bob, Alice";
+
+            // Splitting
+            string[] nameArray = names.Split(", ");
+            Console.WriteLine("Names after splitting:");
+            foreach (string name in nameArray)
+            {
+                Console.WriteLine(name);
+            }
+
+            // Joining
+            string joinedNames = string.Join(" | ", nameArray);
+            Console.WriteLine("Names after joining: " + joinedNames);
+        }
+    }
+}
+</pre><p><strong>5. Trimming Strings:</strong></p><p>The <code>Trim()</code>, <code>TrimStart()</code>, and <code>TrimEnd()</code> methods remove whitespace from the beginning and/or end of a string.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string message = "  Hello, World!  ";
+            Console.WriteLine("Original: ''" + message + "''");
+            Console.WriteLine("Trimmed: ''" + message.Trim() + "''");
+            Console.WriteLine("Trimmed Start: ''" + message.TrimStart() + "''");
+            Console.WriteLine("Trimmed End: ''" + message.TrimEnd() + "''");
+        }
+    }
+}
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that takes a user''s first and last name as input, concatenates them, converts the full name to uppercase, and displays the length of the full name.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter your first name:");
+            string firstName = Console.ReadLine();
+
+            Console.WriteLine("Enter your last name:");
+            string lastName = Console.ReadLine();
+
+            // Concatenate first name and last name
+            string fullName = $"{firstName} {lastName}";
+
+            // Convert full name to uppercase
+            string upperFullName = fullName.ToUpper();
+
+            // Display the full name and its length
+            Console.WriteLine($"Full Name: {upperFullName}");
+            Console.WriteLine($"Length of Full Name: {upperFullName.Length}");
+        }
+    }
+}
+</pre><p>By mastering these advanced string operations, you will be able to handle and manipulate string data effectively in your C# programs, solving complex problems with ease. This lesson builds upon the basics and prepares you for more sophisticated string manipulation tasks.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d71c8096-e00c-4a07-a655-316c3dea947d', 2, '3a57a7e8-9989-498a-beb8-2a5a81774427', 'VIDEO', 'Strings and String Manipulation', NULL, '', 'https://www.youtube.com/watch?v=oJLikNznWz8');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('3dc0fd36-9ba6-465d-b9a2-1fa5f04c1835', 0, '4a4d46dd-09d3-403e-8b9c-a42154814e27', 'LESSON', 'Basic math continued part-2', NULL, '<h4>Lesson: Basic Math Continued Part-2</h4><p><strong>Objective:</strong> Extend your mathematical capabilities in C# by exploring trigonometric functions and logarithmic calculations. This lesson will provide a deeper understanding of how to implement and use these functions in programming problems.</p><p><br></p><h3>Key Concepts:</h3><p><strong>1. Trigonometric Functions:</strong></p><p>C# provides a variety of trigonometric functions through the <code>Math</code> class, including <code>Sin()</code>, <code>Cos()</code>, and <code>Tan()</code>.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double angle = 45;
+            double radians = angle * (Math.PI / 180); // Convert degrees to radians
+
+            double sine = Math.Sin(radians);
+            double cosine = Math.Cos(radians);
+            double tangent = Math.Tan(radians);
+
+            Console.WriteLine("Trigonometric Functions:");
+            Console.WriteLine($"Sin({angle} degrees) = {sine}");
+            Console.WriteLine($"Cos({angle} degrees) = {cosine}");
+            Console.WriteLine($"Tan({angle} degrees) = {tangent}");
+        }
+    }
+}
+</pre><p><strong>2. Logarithmic Functions:</strong></p><p>Logarithmic functions are useful in many mathematical calculations. The <code>Math.Log()</code> method provides natural logarithms, and <code>Math.Log10()</code> provides base-10 logarithms.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double number = 100;
+
+            double naturalLog = Math.Log(number);
+            double base10Log = Math.Log10(number);
+
+            Console.WriteLine("Logarithmic Functions:");
+            Console.WriteLine($"Natural log of {number} = {naturalLog}");
+            Console.WriteLine($"Base-10 log of {number} = {base10Log}");
+        }
+    }
+}
+</pre><p><strong>3. Rounding Numbers:</strong></p><p>Rounding numbers to the nearest integer or specified number of decimal places is commonly required in programming. Methods like <code>Math.Round()</code>, <code>Math.Ceiling()</code>, and <code>Math.Floor()</code> are used.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double number = 12.3456;
+
+            double rounded = Math.Round(number);
+            double roundedTo2Decimals = Math.Round(number, 2);
+            double ceiling = Math.Ceiling(number);
+            double floor = Math.Floor(number);
+
+            Console.WriteLine("Rounding Numbers:");
+            Console.WriteLine($"Rounded: {rounded}");
+            Console.WriteLine($"Rounded to 2 decimals: {roundedTo2Decimals}");
+            Console.WriteLine($"Ceiling: {ceiling}");
+            Console.WriteLine($"Floor: {floor}");
+        }
+    }
+}
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that takes an angle in degrees from the user, calculates its sine, cosine, tangent, natural logarithm, and base-10 logarithm, and prints the results.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter an angle in degrees:");
+            double angle = double.Parse(Console.ReadLine());
+            double radians = angle * (Math.PI / 180); // Convert degrees to radians
+
+            // Calculate trigonometric functions
+            double sine = Math.Sin(radians);
+            double cosine = Math.Cos(radians);
+            double tangent = Math.Tan(radians);
+
+            Console.WriteLine("Trigonometric Functions:");
+            Console.WriteLine($"Sin({angle} degrees) = {sine}");
+            Console.WriteLine($"Cos({angle} degrees) = {cosine}");
+            Console.WriteLine($"Tan({angle} degrees) = {tangent}");
+
+            Console.WriteLine("Enter a number:");
+            double number = double.Parse(Console.ReadLine());
+
+            // Calculate logarithmic functions
+            double naturalLog = Math.Log(number);
+            double base10Log = Math.Log10(number);
+
+            Console.WriteLine("Logarithmic Functions:");
+            Console.WriteLine($"Natural log of {number} = {naturalLog}");
+            Console.WriteLine($"Base-10 log of {number} = {base10Log}");
+        }
+    }
+}
+</pre><p>By mastering these advanced mathematical functions, you will enhance your ability to perform complex calculations and solve a wider range of problems using C#. This lesson builds on your existing knowledge and prepares you for more sophisticated mathematical programming tasks.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('1931e081-4270-4fc8-9ac0-7e6f98318b54', 1, '4a4d46dd-09d3-403e-8b9c-a42154814e27', 'LESSON', 'Basic math continued part-1', NULL, '<h4>Lesson: Basic Math Continued Part-1</h4><p><strong>Objective:</strong> Enhance your understanding of basic mathematical operations by exploring more complex problems and implementing additional mathematical functions in C#. This lesson will focus on advanced arithmetic operations and their applications.</p><p><br></p><h3>Key Concepts:</h3><p><strong>1. Modular Arithmetic:</strong></p><p>Modular arithmetic deals with the remainder of division. The modulus operator <code>%</code> is used to find the remainder.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int a = 10;
+            int b = 3;
+            int remainder = a % b;
+
+            Console.WriteLine("Modular Arithmetic:");
+            Console.WriteLine($"{a} % {b} = {remainder}");
+        }
+    }
+}
+</pre><p><strong>2. Exponentiation:</strong></p><p>Exponentiation involves raising a number to a power. In C#, the <code>Math.Pow()</code> method is used for this purpose.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double baseNumber = 2;
+            double exponent = 3;
+            double result = Math.Pow(baseNumber, exponent);
+
+            Console.WriteLine("Exponentiation:");
+            Console.WriteLine($"{baseNumber} ^ {exponent} = {result}");
+        }
+    }
+}
+</pre><p><strong>3. Square Root:</strong></p><p>Finding the square root of a number is a common mathematical operation. In C#, the <code>Math.Sqrt()</code> method is used.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double number = 16;
+            double sqrt = Math.Sqrt(number);
+
+            Console.WriteLine("Square Root:");
+            Console.WriteLine($"The square root of {number} is {sqrt}");
+        }
+    }
+}
+</pre><p><strong>4. Absolute Value:</strong></p><p>The absolute value of a number is its distance from zero on the number line, regardless of direction. The <code>Math.Abs()</code> method is used in C#.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int negativeNumber = -10;
+            int absValue = Math.Abs(negativeNumber);
+
+            Console.WriteLine("Absolute Value:");
+            Console.WriteLine($"The absolute value of {negativeNumber} is {absValue}");
+        }
+    }
+}
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that takes a number from the user, calculates its square, square root, and absolute value, and prints the results.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">using System;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter a number:");
+            double number = double.Parse(Console.ReadLine());
+
+            // Calculate square
+            double square = Math.Pow(number, 2);
+            // Calculate square root
+            double sqrt = Math.Sqrt(number);
+            // Calculate absolute value
+            double absValue = Math.Abs(number);
+
+            // Display results
+            Console.WriteLine($"Square of {number} is {square}");
+            Console.WriteLine($"Square root of {number} is {sqrt}");
+            Console.WriteLine($"Absolute value of {number} is {absValue}");
+        }
+    }
+}
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('7e0619c2-ba38-44d2-b772-a29ae1085f36', 2, '4a4d46dd-09d3-403e-8b9c-a42154814e27', 'CODE', 'Determine the Quarter of a Given Month', 'b6484e21-6937-489c-b031-b71767994755', 'Determine the Quarter of a Given Month', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('e9ce7649-566a-4d36-9c92-a3ee71a098b7', 1, '20de1ddc-7dec-4e12-b833-fca267b44a91', 'LESSON', 'Switch statements', NULL, '<h3>Lesson: Switch Statements</h3><p><strong>Objective:</strong> Learn how to use <code>switch</code> statements to execute different blocks of code based on different conditions.</p><h3>Key Concepts:</h3><p><strong>1. Basic </strong><code><strong>switch</strong></code><strong> Statement:</strong></p><p>The <code>switch</code> statement evaluates an expression and executes the corresponding case block.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let day = 3;
+let dayName;
+
+switch (day) {
+    case 1:
+        dayName = "Monday";
+        break;
+    case 2:
+        dayName = "Tuesday";
+        break;
+    case 3:
+        dayName = "Wednesday";
+        break;
+    case 4:
+        dayName = "Thursday";
+        break;
+    case 5:
+        dayName = "Friday";
+        break;
+    case 6:
+        dayName = "Saturday";
+        break;
+    case 7:
+        dayName = "Sunday";
+        break;
+    default:
+        dayName = "Invalid day";
+}
+
+console.log(dayName); // Wednesday
+</pre><p><strong>Explanation:</strong></p><ul><li>The block for <code>case 3</code> is executed because <code>day</code> is 3.</li></ul><p><strong>2. Using </strong><code><strong>default</strong></code><strong> Case:</strong></p><p>The <code>default</code> case executes if none of the specified cases match.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let grade = ''B'';
+let feedback;
+
+switch (grade) {
+    case ''A'':
+        feedback = "Excellent!";
+        break;
+    case ''B'':
+        feedback = "Good job!";
+        break;
+    case ''C'':
+        feedback = "Well done!";
+        break;
+    case ''D'':
+        feedback = "You passed.";
+        break;
+    case ''F'':
+        feedback = "Better luck next time.";
+        break;
+    default:
+        feedback = "Invalid grade.";
+}
+
+console.log(feedback); // Good job!
+</pre><p><strong>Explanation:</strong></p><ul><li>The block for <code>case ''B''</code> is executed because <code>grade</code> is ''B''.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that takes a number between 1 and 12 and prints the corresponding month name.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Switch Statements&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Month Name&lt;/h1&gt;
+    &lt;script&gt;
+        let month = 5;
+        let monthName;
+
+        switch (month) {
+            case 1:
+                monthName = "January";
+                break;
+            case 2:
+                monthName = "February";
+                break;
+            case 3:
+                monthName = "March";
+                break;
+            case 4:
+                monthName = "April";
+                break;
+            case 5:
+                monthName = "May";
+                break;
+            case 6:
+                monthName = "June";
+                break;
+            case 7:
+                monthName = "July";
+                break;
+            case 8:
+                monthName = "August";
+                break;
+            case 9:
+                monthName = "September";
+                break;
+            case 10:
+                monthName = "October";
+                break;
+            case 11:
+                monthName = "November";
+                break;
+            case 12:
+                monthName = "December";
+                break;
+            default:
+                monthName = "Invalid month";
+        }
+
+        console.log(monthName); // May
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('fb5dd046-edd8-4667-9c26-1b693e2587c8', 2, '20de1ddc-7dec-4e12-b833-fca267b44a91', 'LESSON', 'Loops: for, while, do...while', NULL, '<h3>Lesson: Loops: for, while, do...while</h3><p><strong>Objective:</strong> Learn how to use different types of loops in JavaScript (<code>for</code>, <code>while</code>, <code>do...while</code>) to execute code repeatedly based on a condition.</p><h3>Key Concepts:</h3><p><strong>1. </strong><code><strong>for</strong></code><strong> Loop:</strong></p><p>A <code>for</code> loop is used when the number of iterations is known. It consists of three parts: initialization, condition, and increment.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">for (let i = 0; i &lt; 5; i++) {
+    console.log(i); // 0, 1, 2, 3, 4
+}
+</pre><p><strong>Explanation:</strong></p><ul><li>The loop runs 5 times, incrementing <code>i</code> from 0 to 4.</li></ul><p><strong>2. </strong><code><strong>while</strong></code><strong> Loop:</strong></p><p>A <code>while</code> loop executes as long as the specified condition evaluates to true.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let i = 0;
+while (i &lt; 5) {
+    console.log(i); // 0, 1, 2, 3, 4
+    i++;
+}
+</pre><p><strong>Explanation:</strong></p><ul><li>The loop runs while <code>i</code> is less than 5.</li></ul><p><strong>3. </strong><code><strong>do...while</strong></code><strong> Loop:</strong></p><p>A <code>do...while</code> loop is similar to a <code>while</code> loop, but it guarantees at least one execution of the loop body.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let i = 0;
+do {
+    console.log(i); // 0, 1, 2, 3, 4
+    i++;
+} while (i &lt; 5);
+</pre><p><strong>Explanation:</strong></p><ul><li>The loop runs while <code>i</code> is less than 5, but executes the loop body at least once.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that prints numbers from 1 to 10 using <code>for</code>, <code>while</code>, and <code>do...while</code> loops.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Loops in JavaScript&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Loops Example&lt;/h1&gt;
+    &lt;script&gt;
+        // For loop
+        console.log("For loop:");
+        for (let i = 1; i &lt;= 10; i++) {
+            console.log(i);
+        }
+
+        // While loop
+        console.log("While loop:");
+        let i = 1;
+        while (i &lt;= 10) {
+            console.log(i);
+            i++;
+        }
+
+        // Do...while loop
+        console.log("Do...while loop:");
+        i = 1;
+        do {
+            console.log(i);
+            i++;
+        } while (i &lt;= 10);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('5a0afa41-7279-4f28-b5ca-4ddc23b0ecdd', 3, '20de1ddc-7dec-4e12-b833-fca267b44a91', 'LESSON', 'Breaking and continuing loops', NULL, '<h3>Lesson: Breaking and Continuing Loops</h3><p><strong>Objective:</strong> Learn how to use <code>break</code> and <code>continue</code> statements to control the execution of loops.</p><h3>Key Concepts:</h3><p><strong>1. </strong><code><strong>break</strong></code><strong> Statement:</strong></p><p>The <code>break</code> statement exits the loop immediately.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">for (let i = 0; i &lt; 10; i++) {
+    if (i === 5) {
+        break;
+    }
+    console.log(i); // 0, 1, 2, 3, 4
+}
+</pre><p><strong>Explanation:</strong></p><ul><li>The loop exits when <code>i</code> equals 5.</li></ul><p><strong>2. </strong><code><strong>continue</strong></code><strong> Statement:</strong></p><p>The <code>continue</code> statement skips the current iteration and proceeds to the next iteration.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">for (let i = 0; i &lt; 10; i++) {
+    if (i === 5) {
+        continue;
+    }
+    console.log(i); // 0, 1, 2, 3, 4, 6, 7, 8, 9
+}
+</pre><p><strong>Explanation:</strong></p><ul><li>The loop skips the iteration when <code>i</code> equals 5.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that prints numbers from 1 to 10 but skips multiples of 3 and stops when the number is greater than 7.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Break and Continue&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Break and Continue Example&lt;/h1&gt;
+    &lt;script&gt;
+        for (let i = 1; i &lt;= 10; i++) {
+            if (i &gt; 7) {
+                break;
+            }
+            if (i % 3 === 0) {
+                continue;
+            }
+            console.log(i); // 1, 2, 4, 5, 7
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p>By mastering control structures in JavaScript, you will be able to write more efficient and flexible code, handling complex logic and iterations with ease. These lessons provide the foundation for building robust JavaScript applications.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('cf5a707c-6d32-4c21-84f5-c1d5a5c4843d', 4, '20de1ddc-7dec-4e12-b833-fca267b44a91', 'VIDEO', 'Control Statements | Theory', NULL, '', 'https://www.youtube.com/watch?v=p-JoZ_UxwB8');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d8e7eb2a-74d9-4987-94cd-9ee207d51680', 0, 'e8860811-7ecd-44fc-8719-17b680ac5441', 'LESSON', 'Function declarations and expressions', NULL, '<h4>Lesson: Function Declarations and Expressions</h4><p><strong>Objective:</strong> Understand the differences between function declarations and function expressions in JavaScript. Learn how to define and use both types of functions effectively.</p><h3>Key Concepts:</h3><p><strong>1. Function Declarations:</strong></p><p>A function declaration defines a function with a specified name and can be called before it is defined due to hoisting.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">function functionName(parameters) {
+    // function body
+}
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function greet(name) {
+    return `Hello, ${name}!`;
+}
+
+console.log(greet(''Alice'')); // Hello, Alice!
+</pre><p><strong>Explanation:</strong></p><ul><li>The function <code>greet</code> is declared and can be called with an argument.</li></ul><p><strong>2. Function Expressions:</strong></p><p>A function expression defines a function as part of an expression and can be named or anonymous. It is not hoisted.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">const functionName = function(parameters) {
+    // function body
+};
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">const greet = function(name) {
+    return `Hello, ${name}!`;
+};
+
+console.log(greet(''Bob'')); // Hello, Bob!
+</pre><p><strong>Explanation:</strong></p><ul><li>The function <code>greet</code> is defined as an anonymous function expression and assigned to a variable.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that defines a function to add two numbers using both function declarations and expressions.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Function Declarations and Expressions&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Function Examples&lt;/h1&gt;
+    &lt;script&gt;
+        // Function declaration
+        function add(a, b) {
+            return a + b;
+        }
+
+        // Function expression
+        const addExpression = function(a, b) {
+            return a + b;
+        };
+
+        console.log(add(2, 3)); // 5
+        console.log(addExpression(2, 3)); // 5
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('c31ad8a3-4cc0-4122-8e1d-65fb5d0885c7', 1, 'e8860811-7ecd-44fc-8719-17b680ac5441', 'LESSON', 'Arrow functions', NULL, '<h4>Lesson: Arrow Functions</h4><p><strong>Objective:</strong> Learn how to define and use arrow functions in JavaScript for more concise function syntax.</p><h3>Key Concepts:</h3><p><strong>1. Arrow Function Syntax:</strong></p><p>Arrow functions provide a shorter syntax for defining functions. They do not have their own <code>this</code> value.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">const functionName = (parameters) =&gt; {
+    // function body
+};
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">const greet = (name) =&gt; {
+    return `Hello, ${name}!`;
+};
+
+console.log(greet(''Charlie'')); // Hello, Charlie!
+</pre><p><strong>Explanation:</strong></p><ul><li>The arrow function <code>greet</code> is defined with a single parameter and a return statement.</li></ul><p><strong>2. Implicit Return:</strong></p><p>If the function body contains only a single expression, you can omit the curly braces and the <code>return</code> keyword.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">const greet = name =&gt; `Hello, ${name}!`;
+
+console.log(greet(''Daisy'')); // Hello, Daisy!
+</pre><p><strong>Explanation:</strong></p><ul><li>The arrow function <code>greet</code> implicitly returns the string.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that defines an arrow function to multiply two numbers and use implicit return.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Arrow Functions&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Arrow Function Example&lt;/h1&gt;
+    &lt;script&gt;
+        const multiply = (a, b) =&gt; a * b;
+
+        console.log(multiply(4, 5)); // 20
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('ac266f01-8881-4e78-b732-56f6d4765a22', 2, 'e8860811-7ecd-44fc-8719-17b680ac5441', 'LESSON', 'Parameters and arguments', NULL, '<h4>Lesson: Parameters and Arguments</h4><p><strong>Objective:</strong> Understand how to define parameters in functions and pass arguments to functions in JavaScript.</p><h3>Key Concepts:</h3><p><strong>1. Function Parameters:</strong></p><p>Parameters are variables listed as part of the function definition.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function greet(name, age) {
+    return `Hello, ${name}! You are ${age} years old.`;
+}
+
+console.log(greet(''Emily'', 30)); // Hello, Emily! You are 30 years old.
+</pre><p><strong>Explanation:</strong></p><ul><li>The function <code>greet</code> has two parameters: <code>name</code> and <code>age</code>.</li></ul><p><strong>2. Function Arguments:</strong></p><p>Arguments are the values passed to the function when it is called.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">console.log(greet(''Frank'', 25)); // Hello, Frank! You are 25 years old.
+</pre><p><strong>Explanation:</strong></p><ul><li>The function <code>greet</code> is called with arguments <code>''Frank''</code> and <code>25</code>.</li></ul><p><strong>3. Default Parameters:</strong></p><p>You can assign default values to parameters.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function greet(name = ''Guest'', age = ''unknown'') {
+    return `Hello, ${name}! Your age is ${age}.`;
+}
+
+console.log(greet()); // Hello, Guest! Your age is unknown.
+console.log(greet(''Grace'')); // Hello, Grace! Your age is unknown.
+</pre><p><strong>Explanation:</strong></p><ul><li>The function <code>greet</code> uses default values if no arguments are provided.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that defines a function with default parameters to calculate the area of a rectangle.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Parameters and Arguments&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Default Parameters Example&lt;/h1&gt;
+    &lt;script&gt;
+        function calculateArea(length = 1, width = 1) {
+            return length * width;
+        }
+
+        console.log(calculateArea()); // 1
+        console.log(calculateArea(5)); // 5
+        console.log(calculateArea(5, 3)); // 15
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('75554fcb-a041-4a46-9d49-c785f14aa138', 3, 'e8860811-7ecd-44fc-8719-17b680ac5441', 'LESSON', 'Return statements', NULL, '<h4>Lesson: Return Statements</h4><p><strong>Objective:</strong> Learn how to use return statements in functions to return values.</p><h3>Key Concepts:</h3><p><strong>1. Returning Values:</strong></p><p>A function can return a value using the <code>return</code> statement.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function add(a, b) {
+    return a + b;
+}
+
+console.log(add(2, 3)); // 5
+</pre><p><strong>Explanation:</strong></p><ul><li>The function <code>add</code> returns the sum of <code>a</code> and <code>b</code>.</li></ul><p><strong>2. Returning Early:</strong></p><p>A function can return early by using the <code>return</code> statement.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function checkNumber(num) {
+    if (num &gt; 0) {
+        return ''Positive'';
+    }
+    return ''Non-positive'';
+}
+
+console.log(checkNumber(5)); // Positive
+console.log(checkNumber(-3)); // Non-positive
+</pre><p><strong>Explanation:</strong></p><ul><li>The function <code>checkNumber</code> returns <code>''Positive''</code> if <code>num</code> is greater than 0, otherwise it returns <code>''Non-positive''</code>.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that defines a function to calculate the factorial of a number using return statements.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Return Statements&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Return Statements Example&lt;/h1&gt;
+    &lt;script&gt;
+        function factorial(n) {
+            if (n === 0) {
+                return 1;
+            }
+            return n * factorial(n - 1);
+        }
+
+        console.log(factorial(5)); // 120
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('83f44b41-1e34-41c9-847b-4511734a0ace', 4, 'e8860811-7ecd-44fc-8719-17b680ac5441', 'LESSON', 'Scope and closures', NULL, '<h4>Lesson: Scope and Closures</h4><p><strong>Objective:</strong> Understand the concepts of scope and closures in JavaScript, and how they affect variable accessibility and lifetime.</p><h3>Key Concepts:</h3><p><strong>1. Scope:</strong></p><p>Scope determines the accessibility of variables. JavaScript has function scope and block scope.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function outerFunction() {
+    let outerVariable = ''I am outside!'';
+
+    function innerFunction() {
+        let innerVariable = ''I am inside!'';
+        console.log(outerVariable); // Accessible
+        console.log(innerVariable); // Accessible
+    }
+
+    innerFunction();
+    console.log(outerVariable); // Accessible
+    // console.log(innerVariable); // Error: innerVariable is not defined
+}
+
+outerFunction();
+</pre><p><strong>Explanation:</strong></p><ul><li>Variables declared in an outer scope are accessible in inner scopes, but not vice versa.</li></ul><p><strong>2. Closures:</strong></p><p>A closure is a function that retains access to its lexical scope even when the function is executed outside that scope.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function makeCounter() {
+    let count = 0;
+
+    return function() {
+        count++;
+        return count;
+    };
+}
+
+const counter = makeCounter();
+console.log(counter()); // 1
+console.log(counter()); // 2
+console.log(counter()); // 3
+</pre><p><strong>Explanation:</strong></p><ul><li>The returned function retains access to the <code>count</code> variable, demonstrating closure.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that defines a function to create a counter using closures.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Scope and Closures&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Closures Example&lt;/h1&gt;
+    &lt;script&gt;
+        function createCounter() {
+            let count = 0;
+
+            return function() {
+                count++;
+                return count;
+            };
+        }
+
+        const myCounter = createCounter();
+        console.log(myCounter()); // 1
+        console.log(myCounter()); // 2
+        console.log(myCounter()); // 3
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p>By mastering functions in JavaScript, including declarations and expressions, arrow functions, parameters and arguments, return statements, and scope and closures, you will be able to write more modular, reusable, and maintainable code. These lessons provide the foundation for advanced JavaScript programming techniques.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('23c969cd-0dc7-46fc-80d1-aec3fa827a91', 0, '66442f0b-4d4f-4eb4-9d0a-dc0fbe9ae914', 'LESSON', 'Creating and manipulating objects', NULL, '<h4>Lesson: Creating and Manipulating Objects</h4><p><strong>Objective:</strong> Learn how to create and manipulate objects in JavaScript. Understand how to define properties and methods, access and modify object properties, and use built-in object methods.</p><h3>Key Concepts:</h3><p><strong>1. Creating Objects:</strong></p><p>Objects in JavaScript are collections of key-value pairs. They can be created using object literals or the <code>Object</code> constructor.</p><p><strong>Example (Object Literal):</strong></p><pre class="ql-syntax" spellcheck="false">let person = {
+    firstName: ''John'',
+    lastName: ''Doe'',
+    age: 30,
+    greet: function() {
+        return `Hello, my name is ${this.firstName} ${this.lastName}.`;
+    }
+};
+
+console.log(person.greet()); // Hello, my name is John Doe.
+</pre><p><strong>Example (Object Constructor):</strong></p><pre class="ql-syntax" spellcheck="false">let person = new Object();
+person.firstName = ''Jane'';
+person.lastName = ''Doe'';
+person.age = 25;
+person.greet = function() {
+    return `Hello, my name is ${this.firstName} ${this.lastName}.`;
+};
+
+console.log(person.greet()); // Hello, my name is Jane Doe.
+</pre><p><strong>2. Accessing and Modifying Object Properties:</strong></p><p>Object properties can be accessed and modified using dot notation or bracket notation.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let car = {
+    make: ''Toyota'',
+    model: ''Camry'',
+    year: 2020
+};
+
+// Accessing properties
+console.log(car.make); // Toyota
+console.log(car[''model'']); // Camry
+
+// Modifying properties
+car.year = 2021;
+car[''color''] = ''red'';
+
+console.log(car.year); // 2021
+console.log(car.color); // red
+</pre><p><strong>3. Deleting Properties:</strong></p><p>Properties can be deleted using the <code>delete</code> keyword.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">delete car.color;
+console.log(car.color); // undefined
+</pre><p><strong>4. Built-in Object Methods:</strong></p><p>JavaScript provides built-in methods to work with objects, such as <code>Object.keys()</code>, <code>Object.values()</code>, and <code>Object.entries()</code>.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let keys = Object.keys(person);
+let values = Object.values(person);
+let entries = Object.entries(person);
+
+console.log(keys); // ["firstName", "lastName", "age", "greet"]
+console.log(values); // ["Jane", "Doe", 25, ƒ]
+console.log(entries); // [["firstName", "Jane"], ["lastName", "Doe"], ["age", 25], ["greet", ƒ]]
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that creates a student object and adds a method to calculate the student''s average grade.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Creating and Manipulating Objects&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Student Object Example&lt;/h1&gt;
+    &lt;script&gt;
+        let student = {
+            name: ''Alice'',
+            grades: [85, 90, 78, 92],
+            calculateAverage: function() {
+                let sum = this.grades.reduce((a, b) =&gt; a + b, 0);
+                return sum / this.grades.length;
+            }
+        };
+
+        console.log(`Student Name: ${student.name}`);
+        console.log(`Average Grade: ${student.calculateAverage()}`); // Average Grade: 86.25
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('9690419c-e937-4991-a608-7c8ff6456bc8', 1, '66442f0b-4d4f-4eb4-9d0a-dc0fbe9ae914', 'LESSON', 'Array methods and properties', NULL, '<h4>Lesson: Array Methods and Properties</h4><p><strong>Objective:</strong> Understand the various methods and properties available for arrays in JavaScript. Learn how to manipulate arrays using built-in methods.</p><h3>Key Concepts:</h3><p><strong>1. Array Properties:</strong></p><p>Arrays have several properties, the most common being <code>length</code>.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let fruits = [''Apple'', ''Banana'', ''Cherry''];
+console.log(fruits.length); // 3
+</pre><p><strong>2. Common Array Methods:</strong></p><ul><li><code><strong>push()</strong></code><strong>:</strong> Adds one or more elements to the end of an array.</li><li><code><strong>pop()</strong></code><strong>:</strong> Removes the last element from an array.</li><li><code><strong>shift()</strong></code><strong>:</strong> Removes the first element from an array.</li><li><code><strong>unshift()</strong></code><strong>:</strong> Adds one or more elements to the beginning of an array.</li><li><code><strong>splice()</strong></code><strong>:</strong> Adds or removes elements from an array.</li><li><code><strong>slice()</strong></code><strong>:</strong> Returns a shallow copy of a portion of an array.</li><li><code><strong>concat()</strong></code><strong>:</strong> Merges two or more arrays.</li><li><code><strong>indexOf()</strong></code><strong>:</strong> Returns the first index of a specified element.</li><li><code><strong>includes()</strong></code><strong>:</strong> Checks if an array includes a specified element.</li><li><code><strong>forEach()</strong></code><strong>:</strong> Executes a provided function once for each array element.</li><li><code><strong>map()</strong></code><strong>:</strong> Creates a new array with the results of calling a provided function on every element.</li><li><code><strong>filter()</strong></code><strong>:</strong> Creates a new array with all elements that pass the test implemented by the provided function.</li><li><code><strong>reduce()</strong></code><strong>:</strong> Executes a reducer function on each element of the array, resulting in a single output value.</li></ul><p><strong>Examples:</strong></p><pre class="ql-syntax" spellcheck="false">let numbers = [1, 2, 3, 4, 5];
+
+// push
+numbers.push(6);
+console.log(numbers); // [1, 2, 3, 4, 5, 6]
+
+// pop
+numbers.pop();
+console.log(numbers); // [1, 2, 3, 4, 5]
+
+// shift
+numbers.shift();
+console.log(numbers); // [2, 3, 4, 5]
+
+// unshift
+numbers.unshift(1);
+console.log(numbers); // [1, 2, 3, 4, 5]
+
+// splice
+numbers.splice(2, 0, ''a'', ''b'');
+console.log(numbers); // [1, 2, ''a'', ''b'', 3, 4, 5]
+
+// slice
+let newNumbers = numbers.slice(1, 4);
+console.log(newNumbers); // [2, ''a'', ''b'']
+
+// concat
+let moreNumbers = newNumbers.concat([6, 7, 8]);
+console.log(moreNumbers); // [2, ''a'', ''b'', 6, 7, 8]
+
+// indexOf
+console.log(numbers.indexOf(3)); // 4
+
+// includes
+console.log(numbers.includes(''a'')); // true
+
+// forEach
+numbers.forEach(num =&gt; console.log(num));
+
+// map
+let squared = numbers.map(num =&gt; typeof num === ''number'' ? num * num : num);
+console.log(squared); // [1, 4, ''a'', ''b'', 9, 16, 25]
+
+// filter
+let filtered = numbers.filter(num =&gt; typeof num === ''number'');
+console.log(filtered); // [1, 2, 3, 4, 5]
+
+// reduce
+let sum = filtered.reduce((acc, num) =&gt; acc + num, 0);
+console.log(sum); // 15
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that creates an array of numbers and performs various manipulations using array methods.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Array Methods and Properties&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Array Methods Example&lt;/h1&gt;
+    &lt;script&gt;
+        let numbers = [10, 20, 30, 40, 50];
+
+        // Add a number to the end
+        numbers.push(60);
+        console.log(numbers); // [10, 20, 30, 40, 50, 60]
+
+        // Remove the first number
+        numbers.shift();
+        console.log(numbers); // [20, 30, 40, 50, 60]
+
+        // Find the index of 40
+        let index = numbers.indexOf(40);
+        console.log(index); // 2
+
+        // Check if 25 is in the array
+        let hasTwentyFive = numbers.includes(25);
+        console.log(hasTwentyFive); // false
+
+        // Create a new array with squared values
+        let squared = numbers.map(num =&gt; num * num);
+        console.log(squared); // [400, 900, 1600, 2500, 3600]
+
+        // Filter numbers greater than 1000
+        let filtered = squared.filter(num =&gt; num &gt; 1000);
+        console.log(filtered); // [1600, 2500, 3600]
+
+        // Calculate the sum of the numbers
+        let sum = numbers.reduce((acc, num) =&gt; acc + num, 0);
+        console.log(sum); // 200
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('5a3fd787-4c2b-4d30-b0f8-837287651d12', 2, '66442f0b-4d4f-4eb4-9d0a-dc0fbe9ae914', 'LESSON', 'Iterating over arrays', NULL, '<h4>Lesson: Iterating Over Arrays</h4><p><strong>Objective:</strong> Learn how to iterate over arrays using different methods in JavaScript, including <code>for</code>, <code>for...of</code>, and <code>forEach</code>.</p><h3>Key Concepts:</h3><p><strong>1. </strong><code><strong>for</strong></code><strong> Loop:</strong></p><p>The <code>for</code> loop iterates over array elements using an index.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let fruits = [''Apple'', ''Banana'', ''Cherry''];
+
+for (let i = 0; i &lt; fruits.length; i++) {
+    console.log(fruits[i]); // Apple, Banana, Cherry
+}
+</pre><p><strong>2. </strong><code><strong>for...of</strong></code><strong> Loop:</strong></p><p>The <code>for...of</code> loop iterates over array elements directly.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">for (let fruit of fruits) {
+    console.log(fruit); // Apple, Banana, Cherry
+}
+</pre><p><strong>3. </strong><code><strong>forEach</strong></code><strong> Method:</strong></p><p>The <code>forEach</code> method executes a provided function once for each array element.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">fruits.forEach(fruit =&gt; console.log(fruit)); // Apple, Banana, Cherry
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that creates an array of numbers and iterates over it using <code>for</code>, <code>for...of</code>, and <code>forEach</code>.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Iterating Over Arrays&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Array Iteration Example&lt;/h1&gt;
+    &lt;script&gt;
+        let numbers = [1, 2, 3, 4, 5];
+
+        // Using for loop
+        console.log(''Using for loop:'');
+        for (let i = 0; i &lt; numbers.length; i++) {
+            console.log(numbers[i]);
+        }
+
+        // Using for...of loop
+        console.log(''Using for...of loop:'');
+        for (let num of numbers) {
+            console.log(num);
+        }
+
+        // Using forEach method
+        console.log(''Using forEach method:'');
+        numbers.forEach(num =&gt; console.log(num));
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('45e0e809-e4d1-4ac3-b13d-3854da307d6a', 3, '66442f0b-4d4f-4eb4-9d0a-dc0fbe9ae914', 'LESSON', 'Nested objects and arrays', NULL, '<h4>Lesson: Nested Objects and Arrays</h4><p><strong>Objective:</strong> Understand how to create and manipulate nested objects and arrays in JavaScript. Learn how to access and modify elements in complex data structures.</p><h3>Key Concepts:</h3><p><strong>1. Nested Objects:</strong></p><p>Objects can contain other objects as properties.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let company = {
+    name: ''Tech Corp'',
+    address: {
+        street: ''123 Main St'',
+        city: ''Techville'',
+        state: ''TX''
+    },
+    employees: [
+        {
+            name: ''Alice'',
+            position: ''Developer''
+        },
+        {
+            name: ''Bob'',
+            position: ''Designer''
+        }
+    ]
+};
+
+console.log(company.address.city); // Techville
+console.log(company.employees[1].name); // Bob
+</pre><p><strong>2. Nested Arrays:</strong></p><p>Arrays can contain other arrays as elements.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+
+console.log(matrix[1][2]); // 6
+</pre><p><strong>3. Combining Objects and Arrays:</strong></p><p>Objects and arrays can be combined in various ways to create complex data structures.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let school = {
+    name: ''Greenwood High'',
+    classes: [
+        {
+            name: ''Math 101'',
+            students: [''John'', ''Jane'', ''Jack'']
+        },
+        {
+            name: ''Science 101'',
+            students: [''Mary'', ''Mark'', ''Mia'']
+        }
+    ]
+};
+
+console.log(school.classes[0].students[1]); // Jane
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that creates a nested object representing a library and prints the name of the second book''s author.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Nested Objects and Arrays&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Library Example&lt;/h1&gt;
+    &lt;script&gt;
+        let library = {
+            name: ''City Library'',
+            books: [
+                {
+                    title: ''The Great Gatsby'',
+                    author: ''F. Scott Fitzgerald''
+                },
+                {
+                    title: ''To Kill a Mockingbird'',
+                    author: ''Harper Lee''
+                },
+                {
+                    title: ''1984'',
+                    author: ''George Orwell''
+                }
+            ]
+        };
+
+        console.log(`The author of the second book is ${library.books[1].author}.`); // The author of the second book is Harper Lee.
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p>By mastering the creation and manipulation of objects and arrays in JavaScript, including understanding array methods and properties, iterating over arrays, and working with nested objects and arrays, you will be able to handle complex data structures with ease. These lessons provide the foundation for building sophisticated JavaScript applications.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('ef2f990e-0773-4a89-aa12-9437cdeec8ec', 0, '4487ad9c-6b9d-4002-b1d9-f47ea0b40982', 'LESSON', 'Selecting DOM elements', NULL, '<h4>Lesson: Selecting DOM Elements</h4><p><strong>Objective:</strong> Learn how to select and manipulate DOM (Document Object Model) elements using JavaScript. Understand the different methods available for selecting elements.</p><h3>Key Concepts:</h3><p><strong>1. Selecting Elements by ID:</strong></p><p>Use <code>document.getElementById()</code> to select an element by its ID.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let element = document.getElementById(''myElement'');
+console.log(element);
+</pre><p><strong>2. Selecting Elements by Class Name:</strong></p><p>Use <code>document.getElementsByClassName()</code> to select elements by their class name. This method returns a live HTMLCollection.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let elements = document.getElementsByClassName(''myClass'');
+console.log(elements);
+</pre><p><strong>3. Selecting Elements by Tag Name:</strong></p><p>Use <code>document.getElementsByTagName()</code> to select elements by their tag name. This method returns a live HTMLCollection.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let elements = document.getElementsByTagName(''p'');
+console.log(elements);
+</pre><p><strong>4. Selecting Elements with Query Selector:</strong></p><p>Use <code>document.querySelector()</code> to select the first element that matches a CSS selector.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let element = document.querySelector(''.myClass'');
+console.log(element);
+</pre><p><strong>5. Selecting Multiple Elements with Query Selector All:</strong></p><p>Use <code>document.querySelectorAll()</code> to select all elements that match a CSS selector. This method returns a static NodeList.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let elements = document.querySelectorAll(''.myClass'');
+console.log(elements);
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that selects an element by its ID and changes its text content.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Selecting DOM Elements&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1 id="myElement"&gt;Hello, World!&lt;/h1&gt;
+    &lt;script&gt;
+        let element = document.getElementById(''myElement'');
+        element.textContent = ''Hello, JavaScript!'';
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('1a6fb965-2b88-4d18-9087-5a2b06e522ca', 1, '4487ad9c-6b9d-4002-b1d9-f47ea0b40982', 'LESSON', 'Modifying element content and attributes', NULL, '<h4>Lesson: Modifying Element Content and Attributes</h4><p><strong>Objective:</strong> Learn how to modify the content and attributes of DOM elements using JavaScript.</p><h3>Key Concepts:</h3><p><strong>1. Modifying Text Content:</strong></p><p>Use <code>textContent</code> to change the text content of an element.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let element = document.getElementById(''myElement'');
+element.textContent = ''New Text Content'';
+</pre><p><strong>2. Modifying Inner HTML:</strong></p><p>Use <code>innerHTML</code> to change the HTML content of an element.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let element = document.getElementById(''myElement'');
+element.innerHTML = ''&lt;strong&gt;Bold Text&lt;/strong&gt;'';
+</pre><p><strong>3. Changing Attributes:</strong></p><p>Use <code>setAttribute()</code> to change an attribute of an element.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let element = document.getElementById(''myElement'');
+element.setAttribute(''class'', ''newClass'');
+</pre><p><strong>4. Removing Attributes:</strong></p><p>Use <code>removeAttribute()</code> to remove an attribute from an element.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let element = document.getElementById(''myElement'');
+element.removeAttribute(''class'');
+</pre><p><strong>5. Modifying Style:</strong></p><p>Use the <code>style</code> property to change the CSS style of an element.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let element = document.getElementById(''myElement'');
+element.style.color = ''blue'';
+element.style.fontSize = ''20px'';
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that changes the text content, HTML content, and style of an element.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Modifying Element Content and Attributes&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1 id="myElement"&gt;Hello, World!&lt;/h1&gt;
+    &lt;script&gt;
+        let element = document.getElementById(''myElement'');
+
+        // Change text content
+        element.textContent = ''Hello, JavaScript!'';
+
+        // Change HTML content
+        element.innerHTML = ''&lt;strong&gt;Hello, JavaScript!&lt;/strong&gt;'';
+
+        // Change style
+        element.style.color = ''green'';
+        element.style.fontSize = ''24px'';
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('a07e3a44-4daf-45c1-bc29-a87a116251e9', 2, '4487ad9c-6b9d-4002-b1d9-f47ea0b40982', 'LESSON', 'Creating and removing elements', NULL, '<h4>Lesson: Creating and Removing Elements</h4><p><strong>Objective:</strong> Learn how to create and remove DOM elements dynamically using JavaScript.</p><h3>Key Concepts:</h3><p><strong>1. Creating Elements:</strong></p><p>Use <code>document.createElement()</code> to create a new element.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let newElement = document.createElement(''p'');
+newElement.textContent = ''This is a new paragraph.'';
+document.body.appendChild(newElement);
+</pre><p><strong>2. Appending Elements:</strong></p><p>Use <code>appendChild()</code> to append a new element as the last child of a parent element.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let parentElement = document.getElementById(''parent'');
+parentElement.appendChild(newElement);
+</pre><p><strong>3. Removing Elements:</strong></p><p>Use <code>removeChild()</code> to remove an element from the DOM.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let elementToRemove = document.getElementById(''myElement'');
+elementToRemove.parentNode.removeChild(elementToRemove);
+</pre><p><strong>4. Replacing Elements:</strong></p><p>Use <code>replaceChild()</code> to replace an existing element with a new element.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let newElement = document.createElement(''div'');
+newElement.textContent = ''This is a new div.'';
+let oldElement = document.getElementById(''oldElement'');
+oldElement.parentNode.replaceChild(newElement, oldElement);
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that creates a new list item and adds it to an existing list. Then remove the first item from the list.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Creating and Removing Elements&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;ul id="myList"&gt;
+        &lt;li&gt;Item 1&lt;/li&gt;
+        &lt;li&gt;Item 2&lt;/li&gt;
+        &lt;li&gt;Item 3&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;script&gt;
+        let newItem = document.createElement(''li'');
+        newItem.textContent = ''Item 4'';
+
+        let list = document.getElementById(''myList'');
+        list.appendChild(newItem); // Add new item
+
+        let firstItem = list.getElementsByTagName(''li'')[0];
+        list.removeChild(firstItem); // Remove first item
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('c0f99505-f67c-4e32-aa43-00be86727417', 3, '4487ad9c-6b9d-4002-b1d9-f47ea0b40982', 'LESSON', 'Event handling and listeners', NULL, '<h4>Lesson: Event Handling and Listeners</h4><p><strong>Objective:</strong> Understand how to handle events in JavaScript. Learn how to add and remove event listeners to DOM elements.</p><h3>Key Concepts:</h3><p><strong>1. Adding Event Listeners:</strong></p><p>Use <code>addEventListener()</code> to attach an event handler to an element.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let button = document.getElementById(''myButton'');
+button.addEventListener(''click'', function() {
+    alert(''Button clicked!'');
+});
+</pre><p><strong>2. Removing Event Listeners:</strong></p><p>Use <code>removeEventListener()</code> to remove an event handler from an element.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function handleClick() {
+    alert(''Button clicked!'');
+}
+
+let button = document.getElementById(''myButton'');
+button.addEventListener(''click'', handleClick);
+
+// Later in the code
+button.removeEventListener(''click'', handleClick);
+</pre><p><strong>3. Event Object:</strong></p><p>Event handlers can access the event object, which contains information about the event.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let button = document.getElementById(''myButton'');
+button.addEventListener(''click'', function(event) {
+    console.log(event.type); // "click"
+    console.log(event.target); // The button element
+});
+</pre><p><strong>4. Event Propagation:</strong></p><p>Understand event propagation phases: capturing, target, and bubbling.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let parent = document.getElementById(''parent'');
+let child = document.getElementById(''child'');
+
+parent.addEventListener(''click'', function() {
+    console.log(''Parent clicked!'');
+}, true); // Capturing phase
+
+child.addEventListener(''click'', function() {
+    console.log(''Child clicked!'');
+}); // Bubbling phase
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that changes the background color of a div when it is clicked.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Event Handling and Listeners&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="colorBox" style="width: 100px; height: 100px; background-color: lightgray;"&gt;
+        Click me!
+    &lt;/div&gt;
+    &lt;script&gt;
+        let colorBox = document.getElementById(''colorBox'');
+
+        colorBox.addEventListener(''click'', function() {
+            this.style.backgroundColor = ''lightblue'';
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p>By mastering DOM manipulation, including selecting elements, modifying content and attributes, creating and removing elements, and handling events, you will be able to create dynamic and interactive web pages with ease. These lessons provide the foundation for building sophisticated client-side applications in JavaScript.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('61309ec2-01fb-4173-8bae-ac9c9935921a', 1, '9f6e63e8-a037-4b51-911d-cc4da22189f1', 'LESSON', 'Callbacks', NULL, '<h4>Lesson: Callbacks</h4><p><strong>Objective:</strong> Understand how callbacks work and how they are used to handle asynchronous operations.</p><p><strong>1. Definition:</strong> A callback is a function passed into another function as an argument, which is then invoked inside the outer function to complete some kind of routine or action.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function fetchData(callback) {
+    setTimeout(() =&gt; {
+        const data = { name: ''John'', age: 30 };
+        callback(data);
+    }, 1000);
+}
+
+function displayData(data) {
+    console.log(`Name: ${data.name}, Age: ${data.age}`);
+}
+
+fetchData(displayData);
+</pre><p><strong>Explanation:</strong></p><ul><li><code>fetchData</code> simulates an asynchronous operation using <code>setTimeout</code> and invokes the callback function <code>displayData</code> with the fetched data.</li></ul><p><strong>2. Handling Errors with Callbacks:</strong></p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function fetchData(callback) {
+    setTimeout(() =&gt; {
+        const error = false; // Simulate an error
+        if (error) {
+            callback(''Error occurred'', null);
+        } else {
+            const data = { name: ''John'', age: 30 };
+            callback(null, data);
+        }
+    }, 1000);
+}
+
+function displayData(err, data) {
+    if (err) {
+        console.error(err);
+    } else {
+        console.log(`Name: ${data.name}, Age: ${data.age}`);
+    }
+}
+
+fetchData(displayData);
+</pre><p><strong>Explanation:</strong></p><ul><li><code>fetchData</code> simulates error handling by calling the callback with an error message if an error occurs, or with data if successful.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that fetches data and handles errors using callbacks.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Callbacks&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Callbacks Example&lt;/h1&gt;
+    &lt;script&gt;
+        function fetchData(callback) {
+            setTimeout(() =&gt; {
+                const error = false; // Change to true to simulate an error
+                if (error) {
+                    callback(''Error occurred'', null);
+                } else {
+                    const data = { name: ''Jane'', age: 25 };
+                    callback(null, data);
+                }
+            }, 1000);
+        }
+
+        function displayData(err, data) {
+            if (err) {
+                console.error(err);
+            } else {
+                console.log(`Name: ${data.name}, Age: ${data.age}`);
+            }
+        }
+
+        fetchData(displayData);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('03f49914-b74e-4110-ad02-e89b22eabc8c', 2, '9f6e63e8-a037-4b51-911d-cc4da22189f1', 'LESSON', 'Promises', NULL, '<h4>Lesson: Promises</h4><p><strong>Objective:</strong> Learn about promises, how to create them, and how to use them to handle asynchronous operations more effectively than callbacks.</p><p><strong>1. Definition:</strong> A promise is an object representing the eventual completion or failure of an asynchronous operation.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let promise = new Promise((resolve, reject) =&gt; {
+    let success = true; // Change to false to simulate an error
+    setTimeout(() =&gt; {
+        if (success) {
+            resolve(''Operation succeeded'');
+        } else {
+            reject(''Operation failed'');
+        }
+    }, 1000);
+});
+
+promise
+    .then(result =&gt; console.log(result))
+    .catch(error =&gt; console.error(error));
+</pre><p><strong>Explanation:</strong></p><ul><li>The promise is created with an executor function that performs an asynchronous operation and calls <code>resolve</code> if successful or <code>reject</code> if an error occurs.</li><li>The <code>then</code> method handles the resolved value, and the <code>catch</code> method handles any errors.</li></ul><p><strong>2. Chaining Promises:</strong></p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let promise = new Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; resolve(1), 1000);
+});
+
+promise
+    .then(result =&gt; {
+        console.log(result); // 1
+        return result * 2;
+    })
+    .then(result =&gt; {
+        console.log(result); // 2
+        return result * 2;
+    })
+    .then(result =&gt; {
+        console.log(result); // 4
+    });
+</pre><p><strong>Explanation:</strong></p><ul><li>Promises can be chained to handle sequences of asynchronous operations.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that uses promises to fetch data and handle errors.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Promises&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Promises Example&lt;/h1&gt;
+    &lt;script&gt;
+        function fetchData() {
+            return new Promise((resolve, reject) =&gt; {
+                setTimeout(() =&gt; {
+                    let success = true; // Change to false to simulate an error
+                    if (success) {
+                        resolve({ name: ''Jake'', age: 28 });
+                    } else {
+                        reject(''Error occurred'');
+                    }
+                }, 1000);
+            });
+        }
+
+        fetchData()
+            .then(data =&gt; console.log(`Name: ${data.name}, Age: ${data.age}`))
+            .catch(error =&gt; console.error(error));
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('888a20aa-c9a0-41a1-90ce-b8c625fb6376', 3, '9f6e63e8-a037-4b51-911d-cc4da22189f1', 'LESSON', 'Async/await', NULL, '<h4>Lesson: Async/Await</h4><p><strong>Objective:</strong> Understand how to use the async/await syntax to write cleaner and more readable asynchronous code.</p><p><strong>1. Definition:</strong> <code>async</code> functions are functions that return a promise. <code>await</code> pauses the execution of the function, waiting for the promise to resolve.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">async function fetchData() {
+    let promise = new Promise((resolve, reject) =&gt; {
+        setTimeout(() =&gt; resolve(''Data fetched successfully''), 1000);
+    });
+
+    let result = await promise;
+    console.log(result); // Data fetched successfully
+}
+
+fetchData();
+</pre><p><strong>Explanation:</strong></p><ul><li><code>fetchData</code> is an async function that waits for the promise to resolve before logging the result.</li></ul><p><strong>2. Handling Errors with Async/Await:</strong></p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">async function fetchData() {
+    let promise = new Promise((resolve, reject) =&gt; {
+        setTimeout(() =&gt; reject(''Error fetching data''), 1000);
+    });
+
+    try {
+        let result = await promise;
+        console.log(result);
+    } catch (error) {
+        console.error(error); // Error fetching data
+    }
+}
+
+fetchData();
+</pre><p><strong>Explanation:</strong></p><ul><li>The <code>try...catch</code> block is used to handle errors when using async/await.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that fetches data using async/await and handles errors.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Async/Await&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Async/Await Example&lt;/h1&gt;
+    &lt;script&gt;
+        async function fetchData() {
+            let promise = new Promise((resolve, reject) =&gt; {
+                setTimeout(() =&gt; {
+                    let success = true; // Change to false to simulate an error
+                    if (success) {
+                        resolve({ name: ''Lily'', age: 22 });
+                    } else {
+                        reject(''Error occurred'');
+                    }
+                }, 1000);
+            });
+
+            try {
+                let data = await promise;
+                console.log(`Name: ${data.name}, Age: ${data.age}`);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        fetchData();
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p>By mastering asynchronous JavaScript, including understanding asynchronous programming, using callbacks, promises, and the async/await syntax, you will be able to handle asynchronous operations more effectively and write cleaner, more maintainable code. These lessons provide the foundation for building sophisticated JavaScript applications that can manage multiple tasks concurrently.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('7071345a-70e6-4976-935b-d9ffd3cf5405', 0, 'b1f13eaf-9fd1-4b93-8bab-71cc3b1ee9b0', 'LESSON', 'Higher-order functions', NULL, '<h4>Lesson: Advanced Functions</h4><p><strong>Objective:</strong> Understand advanced concepts of JavaScript functions including higher-order functions, callback functions, function currying, and recursion. These concepts will allow you to write more powerful and flexible code.</p><h3>Key Concepts:</h3><h4>Higher-Order Functions</h4><p><strong>Objective:</strong> Learn what higher-order functions are and how to use them to create more modular and reusable code.</p><p><strong>1. Definition:</strong> A higher-order function is a function that either takes one or more functions as arguments or returns a function as its result.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function higherOrder(fn) {
+    return function(value) {
+        return fn(value);
+    };
+}
+
+function greet(name) {
+    return `Hello, ${name}!`;
+}
+
+const greetUser = higherOrder(greet);
+console.log(greetUser(''Alice'')); // Hello, Alice!
+</pre><p><strong>Explanation:</strong></p><ul><li><code>higherOrder</code> is a higher-order function because it takes a function (<code>fn</code>) as an argument and returns a new function.</li></ul><p><strong>2. Common Higher-Order Functions:</strong></p><ul><li><code>map()</code>, <code>filter()</code>, <code>reduce()</code> are common higher-order functions used with arrays.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">const numbers = [1, 2, 3, 4, 5];
+
+const doubled = numbers.map(num =&gt; num * 2);
+console.log(doubled); // [2, 4, 6, 8, 10]
+
+const evens = numbers.filter(num =&gt; num % 2 === 0);
+console.log(evens); // [2, 4]
+
+const sum = numbers.reduce((total, num) =&gt; total + num, 0);
+console.log(sum); // 15
+</pre><p><strong>Explanation:</strong></p><ul><li><code>map</code> transforms each element in the array.</li><li><code>filter</code> creates a new array with elements that pass a condition.</li><li><code>reduce</code> accumulates a single value from the array.</li></ul>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('739c23f1-fbb8-4f82-9eb5-66678c4a7160', 1, 'b1f13eaf-9fd1-4b93-8bab-71cc3b1ee9b0', 'LESSON', 'Callback functions', NULL, '<h4>Lesson: Callback Functions</h4><p><strong>Objective:</strong> Understand what callback functions are and how they are used to handle asynchronous operations.</p><p><strong>1. Definition:</strong> A callback function is a function that is passed as an argument to another function and is executed after some operation has been completed.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function fetchData(callback) {
+    setTimeout(() =&gt; {
+        const data = { name: ''John'', age: 30 };
+        callback(data);
+    }, 1000);
+}
+
+function displayData(data) {
+    console.log(`Name: ${data.name}, Age: ${data.age}`);
+}
+
+fetchData(displayData);
+</pre><p><strong>Explanation:</strong></p><ul><li><code>fetchData</code> takes a <code>callback</code> function and simulates an asynchronous operation using <code>setTimeout</code>.</li><li><code>displayData</code> is passed as the callback and is executed after the data is fetched.</li></ul><p><strong>2. Using Callbacks with Event Listeners:</strong> Callbacks are commonly used with event listeners.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">document.getElementById(''myButton'').addEventListener(''click'', function() {
+    alert(''Button was clicked!'');
+});
+</pre><p><strong>Explanation:</strong></p><ul><li>The anonymous function is a callback that is executed when the button is clicked.</li></ul>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('6297bafe-9ba4-4445-88ed-e5f69135b6c9', 2, 'b1f13eaf-9fd1-4b93-8bab-71cc3b1ee9b0', 'LESSON', 'Function currying', NULL, '<h4>Lesson: Function Currying</h4><p><strong>Objective:</strong> Learn about function currying and how it helps in creating reusable and configurable functions.</p><p><strong>1. Definition:</strong> Currying is the process of transforming a function that takes multiple arguments into a sequence of functions that each take a single argument.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function multiply(a) {
+    return function(b) {
+        return a * b;
+    };
+}
+
+const double = multiply(2);
+console.log(double(5)); // 10
+
+const triple = multiply(3);
+console.log(triple(5)); // 15
+</pre><p><strong>Explanation:</strong></p><ul><li><code>multiply</code> is a curried function that returns another function.</li><li><code>double</code> and <code>triple</code> are functions created by currying that can be reused with different values.</li></ul><p><strong>2. Using Currying with More Arguments:</strong></p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function add(a) {
+    return function(b) {
+        return function(c) {
+            return a + b + c;
+        };
+    };
+}
+
+console.log(add(1)(2)(3)); // 6
+</pre><p><strong>Explanation:</strong></p><ul><li><code>add</code> is a curried function that takes three arguments in sequence.</li></ul>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('7e57f2f7-52fb-443c-8009-a55f6085150e', 0, '0802330e-801e-4560-837e-ec318192f029', 'LESSON', 'Try...catch statements', NULL, '<h4>Lesson: Error Handling and Debugging</h4><p><strong>Objective:</strong> Learn how to handle errors gracefully and debug your JavaScript code effectively using various techniques and tools. Understand the use of <code>try...catch</code> statements, throwing custom errors, debugging techniques, and console methods for debugging.</p><h3>Key Concepts:</h3><h4>Try...catch Statements</h4><p><strong>Objective:</strong> Understand how to use <code>try...catch</code> statements to handle errors in JavaScript.</p><p><strong>1. Definition:</strong> The <code>try...catch</code> statement allows you to test a block of code for errors and handle them gracefully if they occur.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">try {
+    // Block of code to try
+} catch (error) {
+    // Block of code to handle errors
+}
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">try {
+    let result = riskyOperation(); // Assume this may throw an error
+    console.log(result);
+} catch (error) {
+    console.error(''An error occurred:'', error.message);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li>The <code>try</code> block contains code that may throw an error.</li><li>If an error occurs, the code in the <code>catch</code> block is executed, allowing you to handle the error.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that attempts to parse a JSON string and handles any errors that occur.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Try...catch Statements&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;JSON Parsing Example&lt;/h1&gt;
+    &lt;script&gt;
+        let jsonString = ''{"name": "John", "age": 30}'';
+
+        try {
+            let user = JSON.parse(jsonString);
+            console.log(user);
+        } catch (error) {
+            console.error(''Invalid JSON:'', error.message);
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('304c428a-4daa-487b-9beb-2feea4898648', 1, '0802330e-801e-4560-837e-ec318192f029', 'LESSON', 'Throwing custom errors', NULL, '<h4>Lesson: Throwing Custom Errors</h4><p><strong>Objective:</strong> Learn how to throw custom errors in JavaScript to provide more meaningful error messages.</p><p><strong>1. Definition:</strong> You can throw custom errors using the <code>throw</code> statement along with an <code>Error</code> object.</p><p><strong>Syntax:</strong></p><pre class="ql-syntax" spellcheck="false">throw new Error(''Custom error message'');
+</pre><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function validateAge(age) {
+    if (age &lt; 0 || age &gt; 120) {
+        throw new Error(''Invalid age provided'');
+    }
+    return true;
+}
+
+try {
+    validateAge(150);
+} catch (error) {
+    console.error(''Error:'', error.message);
+}
+</pre><p><strong>Explanation:</strong></p><ul><li>The <code>throw</code> statement is used to throw a custom error with a specific message.</li><li>The <code>catch</code> block handles the custom error.</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that validates user input and throws custom errors if the input is invalid.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Throwing Custom Errors&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Input Validation Example&lt;/h1&gt;
+    &lt;script&gt;
+        function validateInput(input) {
+            if (input === '''') {
+                throw new Error(''Input cannot be empty'');
+            }
+            if (input.length &lt; 5) {
+                throw new Error(''Input must be at least 5 characters long'');
+            }
+            return true;
+        }
+
+        try {
+            let userInput = ''abc''; // Change this to test different inputs
+            validateInput(userInput);
+        } catch (error) {
+            console.error(''Validation Error:'', error.message);
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('e58654a7-0161-4470-a980-7ff0c33f4a4e', 2, '0802330e-801e-4560-837e-ec318192f029', 'LESSON', 'Debugging techniques and tools', NULL, '<h4>Lesson: Debugging Techniques and Tools</h4><p><strong>Objective:</strong> Learn various techniques and tools for debugging JavaScript code to identify and fix issues effectively.</p><p><strong>1. Using Breakpoints:</strong> Set breakpoints in your code to pause execution and inspect variables and state.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let x = 10;
+let y = 20;
+let sum = x + y; // Set a breakpoint here
+console.log(sum);
+</pre><p><strong>2. Debugger Statement:</strong> Use the <code>debugger</code> statement to pause execution and open the debugging tool.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let x = 10;
+let y = 20;
+debugger;
+let sum = x + y;
+console.log(sum);
+</pre><p><strong>3. Browser Developer Tools:</strong> Most browsers have built-in developer tools that provide a range of debugging features, including:</p><ul><li>Console for logging output</li><li>Sources for viewing and debugging JavaScript code</li><li>Network for inspecting network requests</li><li>Elements for viewing and manipulating the DOM</li></ul><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program and demonstrate using breakpoints and the <code>debugger</code> statement for debugging.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Debugging Techniques&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Debugging Example&lt;/h1&gt;
+    &lt;script&gt;
+        let numbers = [1, 2, 3, 4, 5];
+        let sum = 0;
+
+        numbers.forEach(num =&gt; {
+            sum += num;
+            debugger; // Pause here to inspect the value of sum
+        });
+
+        console.log(''Total Sum:'', sum);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('86b2926a-bdab-4312-a1b3-33e88de972fb', 3, '0802330e-801e-4560-837e-ec318192f029', 'LESSON', 'Console methods for debugging', NULL, '<h4>Lesson: Console Methods for Debugging</h4><p><strong>Objective:</strong> Learn various console methods to output information and debug your code.</p><p><strong>1. </strong><code><strong>console.log()</strong></code><strong>:</strong> Logs a message to the console.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">console.log(''This is a log message'');
+</pre><p><strong>2. </strong><code><strong>console.error()</strong></code><strong>:</strong> Logs an error message to the console.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">console.error(''This is an error message'');
+</pre><p><strong>3. </strong><code><strong>console.warn()</strong></code><strong>:</strong> Logs a warning message to the console.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">console.warn(''This is a warning message'');
+</pre><p><strong>4. </strong><code><strong>console.info()</strong></code><strong>:</strong> Logs an informational message to the console.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">console.info(''This is an info message'');
+</pre><p><strong>5. </strong><code><strong>console.table()</strong></code><strong>:</strong> Displays data in a table format.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let users = [
+    { name: ''Alice'', age: 25 },
+    { name: ''Bob'', age: 30 },
+    { name: ''Charlie'', age: 35 }
+];
+console.table(users);
+</pre><p><strong>6. </strong><code><strong>console.group()</strong></code><strong> and </strong><code><strong>console.groupEnd()</strong></code><strong>:</strong> Creates and ends a group of messages.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">console.group(''User Details'');
+console.log(''Name: Alice'');
+console.log(''Age: 25'');
+console.groupEnd();
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that uses various console methods to log messages and display data.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Console Methods for Debugging&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Console Methods Example&lt;/h1&gt;
+    &lt;script&gt;
+        console.log(''This is a log message'');
+        console.error(''This is an error message'');
+        console.warn(''This is a warning message'');
+        console.info(''This is an info message'');
+
+        let users = [
+            { name: ''Alice'', age: 25 },
+            { name: ''Bob'', age: 30 },
+            { name: ''Charlie'', age: 35 }
+        ];
+        console.table(users);
+
+        console.group(''User Details'');
+        console.log(''Name: Alice'');
+        console.log(''Age: 25'');
+        console.groupEnd();
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p>By mastering error handling and debugging techniques, including using <code>try...catch</code> statements, throwing custom errors, employing debugging techniques and tools, and leveraging console methods, you will be able to identify and fix issues in your JavaScript code more efficiently. These lessons provide the foundation for building robust and error-free applications.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('d1e4f0e6-b526-4eae-a472-2aa2ff39ad22', 0, '1114db30-77a8-402e-a56f-64de3c93d36d', 'LESSON', 'Classes and modules', NULL, '<h3>Lesson: Classes and Modules</h3><p><strong>Objective:</strong> Understand how to define and use classes and modules to create modular and reusable code.</p><p><strong>1. Classes:</strong></p><ul><li>Define classes with constructor and methods.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">class Person {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    greet() {
+        return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
+    }
+}
+
+const person1 = new Person(''Frank'', 35);
+console.log(person1.greet()); // Hello, my name is Frank and I am 35 years old.
+</pre><p><strong>2. Modules:</strong></p><ul><li>Use <code>export</code> and <code>import</code> to share code between files.</li></ul><p><strong>Example (module.js):</strong></p><pre class="ql-syntax" spellcheck="false">export const PI = 3.14;
+export function calculateCircumference(radius) {
+    return 2 * PI * radius;
+}
+</pre><p><strong>Example (main.js):</strong></p><pre class="ql-syntax" spellcheck="false">import { PI, calculateCircumference } from ''./module.js'';
+
+console.log(`PI is ${PI}`);
+console.log(`Circumference: ${calculateCircumference(10)}`);
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that defines a class and uses modules to separate the code.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Classes and Modules&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Classes and Modules Example&lt;/h1&gt;
+    &lt;script type="module"&gt;
+        class Car {
+            constructor(make, model) {
+                this.make = make;
+                this.model = model;
+            }
+            getDetails() {
+                return `Car: ${this.make} ${this.model}`;
+            }
+        }
+
+        export { Car };
+
+        import { Car } from ''./car.js'';
+
+        const myCar = new Car(''Toyota'', ''Corolla'');
+        console.log(myCar.getDetails()); // Car: Toyota Corolla
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p>By mastering these ES6+ features, you will be able to write more modern, efficient, and maintainable JavaScript code. These lessons provide the foundation for building sophisticated JavaScript applications that leverage the latest language features.</p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('ccecffa4-1494-4d36-80c3-d57fd25a0e6d', 1, '1114db30-77a8-402e-a56f-64de3c93d36d', 'LESSON', 'Let and const', NULL, '<h3>Lesson: Let and Const</h3><p><strong>Objective:</strong> Understand the differences between <code>let</code>, <code>const</code>, and <code>var</code>, and learn when to use each for variable declarations.</p><p><strong>1. Let:</strong></p><ul><li><strong>Block-scoped:</strong> Variables declared with <code>let</code> are only accessible within the block they are defined.</li><li><strong>Can be updated:</strong> Variables can be reassigned new values.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">let x = 10;
+if (true) {
+    let x = 20;
+    console.log(x); // 20
+}
+console.log(x); // 10
+</pre><p><strong>2. Const:</strong></p><ul><li><strong>Block-scoped:</strong> Similar to <code>let</code>.</li><li><strong>Cannot be updated or re-declared:</strong> Once assigned, the value of a <code>const</code> variable cannot be changed.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">const y = 30;
+if (true) {
+    const y = 40;
+    console.log(y); // 40
+}
+console.log(y); // 30
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that demonstrates the block-scoping nature of <code>let</code> and <code>const</code>.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Let and Const&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Let and Const Example&lt;/h1&gt;
+    &lt;script&gt;
+        let x = 10;
+        const y = 20;
+
+        if (true) {
+            let x = 30;
+            const y = 40;
+            console.log(''Inside block:'', x, y); // 30, 40
+        }
+
+        console.log(''Outside block:'', x, y); // 10, 20
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('67a9428a-5913-458d-afa6-430b0cc68125', 2, '1114db30-77a8-402e-a56f-64de3c93d36d', 'LESSON', 'Template literals', NULL, '<h3>Lesson: Template Literals</h3><p><strong>Objective:</strong> Learn how to use template literals to create strings with embedded expressions and multi-line strings.</p><p><strong>1. Basic Syntax:</strong></p><ul><li>Template literals are enclosed by backticks (<code>`</code>).</li><li>Embedded expressions are indicated by <code>${expression}</code>.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">const name = ''Alice'';
+const greeting = `Hello, ${name}!`;
+console.log(greeting); // Hello, Alice!
+</pre><p><strong>2. Multi-line Strings:</strong></p><ul><li>Template literals preserve whitespace and new lines.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">const multiLine = `This is a
+multi-line string.`;
+console.log(multiLine);
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that uses template literals to create a multi-line string with embedded expressions.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Template Literals&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Template Literals Example&lt;/h1&gt;
+    &lt;script&gt;
+        const name = ''Bob'';
+        const age = 25;
+        const greeting = `Hello, ${name}!
+You are ${age} years old.`;
+        console.log(greeting);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('31a28ce8-1cff-488b-bd31-7a29e5100a40', 3, '1114db30-77a8-402e-a56f-64de3c93d36d', 'LESSON', 'Destructuring assignment', NULL, '<h3>Lesson: Destructuring Assignment</h3><p><strong>Objective:</strong> Learn how to unpack values from arrays or properties from objects into distinct variables using destructuring assignment.</p><p><strong>1. Array Destructuring:</strong></p><ul><li>Extract values from arrays.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">const numbers = [1, 2, 3];
+const [a, b, c] = numbers;
+console.log(a, b, c); // 1, 2, 3
+</pre><p><strong>2. Object Destructuring:</strong></p><ul><li>Extract properties from objects.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">const person = { name: ''Carol'', age: 28 };
+const { name, age } = person;
+console.log(name, age); // Carol, 28
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that uses destructuring to extract values from an array and properties from an object.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Destructuring Assignment&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Destructuring Assignment Example&lt;/h1&gt;
+    &lt;script&gt;
+        const colors = [''red'', ''green'', ''blue''];
+        const [primary, secondary, tertiary] = colors;
+        console.log(primary, secondary, tertiary); // red, green, blue
+
+        const student = { name: ''Dave'', grade: ''A'' };
+        const { name, grade } = student;
+        console.log(name, grade); // Dave, A
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('84394fb5-24fd-46f4-8706-5019964b3819', 4, '1114db30-77a8-402e-a56f-64de3c93d36d', 'LESSON', 'Spread and rest operators', NULL, '<h3>Lesson: Spread and Rest Operators</h3><p><strong>Objective:</strong> Learn how to use the spread (<code>...</code>) and rest (<code>...</code>) operators to work with arrays and function parameters.</p><p><strong>1. Spread Operator:</strong></p><ul><li>Expands an array into individual elements.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">const arr = [1, 2, 3];
+const newArr = [...arr, 4, 5];
+console.log(newArr); // [1, 2, 3, 4, 5]
+</pre><p><strong>2. Rest Operator:</strong></p><ul><li>Collects multiple elements into an array.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function sum(...args) {
+    return args.reduce((acc, val) =&gt; acc + val, 0);
+}
+console.log(sum(1, 2, 3)); // 6
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that uses the spread operator to merge arrays and the rest operator to handle variable function parameters.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Spread and Rest Operators&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Spread and Rest Operators Example&lt;/h1&gt;
+    &lt;script&gt;
+        const arr1 = [1, 2, 3];
+        const arr2 = [4, 5, 6];
+        const mergedArr = [...arr1, ...arr2];
+        console.log(mergedArr); // [1, 2, 3, 4, 5, 6]
+
+        function multiply(multiplier, ...numbers) {
+            return numbers.map(num =&gt; num * multiplier);
+        }
+        console.log(multiply(2, 1, 2, 3)); // [2, 4, 6]
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('43df0457-1bd8-4903-9c70-3a93ad77779d', 5, '1114db30-77a8-402e-a56f-64de3c93d36d', 'LESSON', 'Default parameters', NULL, '<h3>Lesson: Default Parameters</h3><p><strong>Objective:</strong> Learn how to set default values for function parameters to handle cases where arguments are not provided.</p><p><strong>1. Basic Syntax:</strong></p><ul><li>Assign default values in function parameters.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function greet(name = ''Guest'') {
+    return `Hello, ${name}!`;
+}
+console.log(greet()); // Hello, Guest!
+console.log(greet(''Eva'')); // Hello, Eva!
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that uses default parameters in a function to handle missing arguments.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Default Parameters&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Default Parameters Example&lt;/h1&gt;
+    &lt;script&gt;
+        function calculateArea(width = 10, height = 5) {
+            return width * height;
+        }
+        console.log(calculateArea()); // 50
+        console.log(calculateArea(7, 3)); // 21
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('387a4548-d099-477f-9483-fb9f792824ba', 0, '8df85dd0-20a1-42fa-96bb-78cc90ee6187', 'LESSON', 'Understanding events', NULL, '<h3>Lesson: Understanding Events</h3><p><strong>Objective:</strong> Learn the basics of events and how to handle them in JavaScript.</p><p><strong>1. Definition:</strong> Events are actions or occurrences that happen in the browser and can be detected by JavaScript.</p><p><strong>2. Event Types:</strong> Common event types include:</p><ul><li>Mouse events: <code>click</code>, <code>dblclick</code>, <code>mouseover</code>, <code>mouseout</code>, <code>mousemove</code></li><li>Keyboard events: <code>keydown</code>, <code>keyup</code>, <code>keypress</code></li><li>Form events: <code>submit</code>, <code>change</code>, <code>focus</code>, <code>blur</code></li><li>Document events: <code>DOMContentLoaded</code>, <code>scroll</code>, <code>resize</code></li></ul><p><strong>3. Adding Event Listeners:</strong> Use <code>addEventListener</code> to attach an event handler to an element.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">document.getElementById(''myButton'').addEventListener(''click'', function() {
+    alert(''Button clicked!'');
+});
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that listens for a button click and displays an alert message.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Understanding Events&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Event Listener Example&lt;/h1&gt;
+    &lt;button id="myButton"&gt;Click Me&lt;/button&gt;
+    &lt;script&gt;
+        document.getElementById(''myButton'').addEventListener(''click'', function() {
+            alert(''Button clicked!'');
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('a33f08cc-9c09-4d24-8a78-eae90a960e5f', 1, '8df85dd0-20a1-42fa-96bb-78cc90ee6187', 'LESSON', 'Event propagation: capturing and bubbling', NULL, '<h3>Lesson: Event Propagation: Capturing and Bubbling</h3><p><strong>Objective:</strong> Understand the phases of event propagation, including capturing and bubbling, and learn how to control event propagation.</p><p><strong>1. Event Propagation:</strong> Event propagation determines the order in which events are received by the target element and its ancestors.</p><p><strong>2. Phases of Event Propagation:</strong></p><ul><li>Capturing phase: The event travels from the root to the target element.</li><li>Target phase: The event reaches the target element.</li><li>Bubbling phase: The event travels from the target element back to the root.</li></ul><p><strong>3. Controlling Propagation:</strong></p><ul><li><code>stopPropagation()</code>: Stops the event from propagating further.</li><li><code>stopImmediatePropagation()</code>: Stops the event from propagating and prevents other handlers from being called.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">document.getElementById(''parent'').addEventListener(''click'', function() {
+    console.log(''Parent clicked!'');
+}, true); // Capturing phase
+
+document.getElementById(''child'').addEventListener(''click'', function(event) {
+    console.log(''Child clicked!'');
+    event.stopPropagation(); // Stops bubbling
+});
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that demonstrates event capturing and bubbling.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Event Propagation&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Event Propagation Example&lt;/h1&gt;
+    &lt;div id="parent" style="padding: 50px; background-color: lightblue;"&gt;
+        Parent
+        &lt;div id="child" style="padding: 50px; background-color: lightcoral;"&gt;
+            Child
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        document.getElementById(''parent'').addEventListener(''click'', function() {
+            console.log(''Parent clicked!'');
+        }, true); // Capturing phase
+
+        document.getElementById(''child'').addEventListener(''click'', function(event) {
+            console.log(''Child clicked!'');
+            event.stopPropagation(); // Stops bubbling
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('e76fdda4-b4d1-40ac-ae53-ceeed6ed0822', 2, '8df85dd0-20a1-42fa-96bb-78cc90ee6187', 'LESSON', 'Event delegation', NULL, '<h3>Lesson: Event Delegation</h3><p><strong>Objective:</strong> Learn how to use event delegation to handle events efficiently.</p><p><strong>1. Definition:</strong> Event delegation is a technique where you attach a single event listener to a parent element to manage events for multiple child elements.</p><p><strong>2. Benefits:</strong></p><ul><li>Reduces the number of event listeners, improving performance.</li><li>Simplifies code for dynamically added elements.</li></ul><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">document.getElementById(''parent'').addEventListener(''click'', function(event) {
+    if (event.target &amp;&amp; event.target.matches(''button'')) {
+        console.log(''Button clicked:'', event.target.textContent);
+    }
+});
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that uses event delegation to handle button clicks within a parent element.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Event Delegation&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Event Delegation Example&lt;/h1&gt;
+    &lt;div id="parent"&gt;
+        &lt;button&gt;Button 1&lt;/button&gt;
+        &lt;button&gt;Button 2&lt;/button&gt;
+        &lt;button&gt;Button 3&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        document.getElementById(''parent'').addEventListener(''click'', function(event) {
+            if (event.target &amp;&amp; event.target.matches(''button'')) {
+                console.log(''Button clicked:'', event.target.textContent);
+            }
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p><br></p>', '');
+INSERT INTO "public"."chapter_resource" ("id", "no", "chapter_id", "resource_type", "title", "question_id", "lesson_html", "youtube_video_url") VALUES ('b4aad3fe-adcb-4c9d-be42-839bdedbc864', 3, '8df85dd0-20a1-42fa-96bb-78cc90ee6187', 'LESSON', 'Debouncing and throttling', NULL, '<h3>Lesson: Debouncing and Throttling</h3><p><strong>Objective:</strong> Learn the techniques of debouncing and throttling to optimize event handling and improve performance.</p><p><strong>1. Debouncing:</strong> Debouncing ensures that a function is only called once after a specified delay.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function debounce(func, delay) {
+    let timeoutId;
+    return function(...args) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() =&gt; func.apply(this, args), delay);
+    };
+}
+
+const debouncedFunction = debounce(() =&gt; {
+    console.log(''Debounced function called'');
+}, 300);
+
+window.addEventListener(''resize'', debouncedFunction);
+</pre><p><strong>2. Throttling:</strong> Throttling ensures that a function is called at most once in a specified interval.</p><p><strong>Example:</strong></p><pre class="ql-syntax" spellcheck="false">function throttle(func, interval) {
+    let lastCall = 0;
+    return function(...args) {
+        const now = Date.now();
+        if (now - lastCall &gt;= interval) {
+            lastCall = now;
+            func.apply(this, args);
+        }
+    };
+}
+
+const throttledFunction = throttle(() =&gt; {
+    console.log(''Throttled function called'');
+}, 300);
+
+window.addEventListener(''scroll'', throttledFunction);
+</pre><h3>Practical Example</h3><p><strong>Problem:</strong> Write a program that demonstrates debouncing for window resize and throttling for window scroll events.</p><p><strong>Solution:</strong></p><pre class="ql-syntax" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Debouncing and Throttling&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Debouncing and Throttling Example&lt;/h1&gt;
+    &lt;script&gt;
+        function debounce(func, delay) {
+            let timeoutId;
+            return function(...args) {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() =&gt; func.apply(this, args), delay);
+            };
+        }
+
+        function throttle(func, interval) {
+            let lastCall = 0;
+            return function(...args) {
+                const now = Date.now();
+                if (now - lastCall &gt;= interval) {
+                    lastCall = now;
+                    func.apply(this, args);
+                }
+            };
+        }
+
+        const debouncedResize = debounce(() =&gt; {
+            console.log(''Window resized'');
+        }, 300);
+
+        const throttledScroll = throttle(() =&gt; {
+            console.log(''Window scrolled'');
+        }, 300);
+
+        window.addEventListener(''resize'', debouncedResize);
+        window.addEventListener(''scroll'', throttledScroll);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><p>By mastering event-driven programming, including understanding events, event propagation (capturing and bubbling), event delegation, and techniques like debouncing and throttling, you will be able to create interactive and efficient web applications. These lessons provide the foundation for building responsive and performance-optimized user interfaces.</p>', '');
 
 
 INSERT INTO public.contest(id, name, description, prizes, rules, scoring, thumbnail_url, start_time, end_time, created_by, updated_by, is_public, org_id, is_disabled_forum)
