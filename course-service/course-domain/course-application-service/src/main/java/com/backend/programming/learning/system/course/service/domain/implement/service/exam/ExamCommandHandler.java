@@ -1,7 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.exam;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.calendarevent.CreateCalendarEventCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.create.calendarevent.CreateCalendarEventResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam.CreateExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam.CreateExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.CreateExamQuestionCommand;
@@ -26,18 +25,13 @@ import com.backend.programming.learning.system.course.service.domain.entity.Exam
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
 import com.backend.programming.learning.system.course.service.domain.entity.Question;
 import com.backend.programming.learning.system.course.service.domain.entity.QuestionBankCategory;
-import com.backend.programming.learning.system.course.service.domain.entity.Section;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.implement.service.calendarevent.CalendarEventCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.implement.service.exam_question.ExamQuestionCreateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.exam_question.ExamQuestionDeleteHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.module.ModuleCreateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.module.ModuleQueryHelper;
-import com.backend.programming.learning.system.course.service.domain.implement.service.question_bank_category.QuestionBankCategoryCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.implement.service.question_bank_category.QuestionBankCategoryCreateHelper;
-import com.backend.programming.learning.system.course.service.domain.implement.service.section.SectionCreateHelper;
-import com.backend.programming.learning.system.course.service.domain.implement.service.section.SectionQueryHelper;
-import com.backend.programming.learning.system.course.service.domain.implement.service.user.UserQueryHelper;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam.ExamDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamQuestionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
@@ -93,7 +87,7 @@ public class ExamCommandHandler {
                 .orElseThrow(() -> new RuntimeException("User not found"));
         CreateQuestionBankCategoryCommand createQuestionBankCategoryCommand = CreateQuestionBankCategoryCommand.builder()
                 .organizationId(user.getOrganization().getId().getValue())
-                .name(examCreated.getName())
+                .name(String.format("%s - %s",examCreated.getCourse().getName(), examCreated.getName()))
                 .description(examCreated.getIntro())
                 .isOrgQuestionBank(true)
                 .createdBy(createExamCommand.createdBy())

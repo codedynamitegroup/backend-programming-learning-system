@@ -542,4 +542,10 @@ public class QuestionDataMapper {
                         .build())
                 .toArray(QueryAnswerOfQuestionResponse[]::new));
     }
+
+    public List<Question> questionCreatedEventListToQuestionList(List<QuestionCreatedEvent> questions) {
+        return List.of(questions.stream()
+                .map(QuestionCreatedEvent::getQuestion)
+                .toArray(Question[]::new));
+    }
 }

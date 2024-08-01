@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
+import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import org.springframework.data.domain.Page;
 
@@ -30,7 +31,7 @@ public interface QuestionRepository {
             QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand,
             boolean isBasicType);
 
-    List<Question> cloneQuestion(List<CreateQuestionClone> questionClones);
+    List<QuestionCreatedEvent> cloneQuestion(List<CreateQuestionClone> questionClones);
 
     Page<Question> findAllQuestionWithPagination(String qtype, String searchName, int pageNo, int pageSize);
 

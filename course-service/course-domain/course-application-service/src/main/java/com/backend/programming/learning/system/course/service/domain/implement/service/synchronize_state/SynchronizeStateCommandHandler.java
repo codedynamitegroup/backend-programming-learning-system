@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -20,4 +21,11 @@ public class SynchronizeStateCommandHandler {
         SynchronizeState synchronizeState = synchronizeStateQueryHelper.querySynchronizeStateByOrganizationIdAndStep(organizationId, step);
         return synchronizeStateDataMapper.mapSynchronizeStateToQuerySynchronizeStateResponse(synchronizeState);
     }
+
+    List<QuerySynchronizeStateResponse> querySynchronizeByOrganizationId(UUID organizationId) {
+        List<SynchronizeState> synchronizeStates = synchronizeStateQueryHelper.querySynchronizeStateByOrganizationId(organizationId);
+        return synchronizeStateDataMapper.mapSynchronizeStateToQuerySynchronizeStateResponse(synchronizeStates);
+    }
+
+
 }
