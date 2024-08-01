@@ -99,7 +99,8 @@ public class CodeQuestionController {
                 .build();
 
         GetCodeQuestionsResponse response = null;
-        if ((query.getTagIds() == null || query.getTagIds().isEmpty())
+        if (email == null &&
+                (query.getTagIds() == null || query.getTagIds().isEmpty())
                 && (query.getSearch() == null || query.getSearch().trim().isEmpty() || query.getSearch().trim().isBlank())
                     && query.getSolved() == null) {
             try {
