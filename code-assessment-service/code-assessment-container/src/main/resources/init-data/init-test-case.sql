@@ -616,7 +616,7 @@ VALUES ('0668fbc4-85f0-4786-bb27-5a5df6543fb3', '219cafcd-d4fe-4fb0-81fd-be2da86
 INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
 VALUES ('3a645e59-063c-4e05-b2e8-b866b04abe9b', '219cafcd-d4fe-4fb0-81fd-be2da867f9d4', '2024-02-29', 'Thursday', false);
 
---27 copy of 6
+-- copy of 6
 INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
 VALUES
     ('d8383655-d5a9-4daa-8261-9f97c56ebeb9', '9922c45b-fe25-4539-8c4b-4d247473b127', '7', '1 7', true),
@@ -634,3 +634,134 @@ VALUES
     ('6bd0b423-0694-45d6-9a7a-c1cfd8993cfa', '9922c45b-fe25-4539-8c4b-4d247473b127', '21', '1 3 7 21', false),
     ('b78b286b-dca0-4a6a-ac85-acf129ce33a7', '9922c45b-fe25-4539-8c4b-4d247473b127', '99999', '1 3 9 11 33 101 303 909 1111 3333 9091 27273 99999', false)
     ;
+
+--27
+INSERT INTO test_cases(id, code_question_id, input_data, output_data, is_sample)
+VALUES
+    ('2fa04182-4cd9-4d10-ad40-a4fada7906c1', 'bdc0ef30-46e2-407d-84a8-91462d1de97a', 'Hello world', '2', true),
+    ('753828f1-70a6-4f53-b61c-01945b7843d3', 'bdc0ef30-46e2-407d-84a8-91462d1de97a', 'This is a test', '4', false),
+    ('8b24a843-c149-4549-ae85-637989a1f970', 'bdc0ef30-46e2-407d-84a8-91462d1de97a', 'OpenAI GPT 4', '3', false),
+    ('5f5e1a59-3ae1-494a-8e5d-5a791658cce6', 'bdc0ef30-46e2-407d-84a8-91462d1de97a', '   Leading spaces', '2', true),
+    ('eaa95f5f-753a-4b09-ad41-e32e417f27b6', 'bdc0ef30-46e2-407d-84a8-91462d1de97a', 'Trailing spaces   ', '2', false),
+    ('ed1a9fe9-c765-4011-9b81-904a1f102b0e', 'bdc0ef30-46e2-407d-84a8-91462d1de97a', '  Multiple   spaces  between   words  ', '4', false),
+    ('77ec3cf1-d635-43ff-92df-6da1ba90ab81', 'bdc0ef30-46e2-407d-84a8-91462d1de97a', 'SingleWord', '1', false),
+    ('43f4bf15-eb9e-4c0b-9229-fb5bd937cc06', 'bdc0ef30-46e2-407d-84a8-91462d1de97a', '', '0', false),
+    ('4ab3ea4d-ad5d-4448-9346-b31fa1efd2dc', 'bdc0ef30-46e2-407d-84a8-91462d1de97a', '      ', '0', false),
+    ('1f68cfc5-8350-430e-91ca-b1d0510eec31', 'bdc0ef30-46e2-407d-84a8-91462d1de97a', 'New\nLine', '2', true);
+
+--28
+INSERT INTO test_cases(id, code_question_id, input_data, output_data, is_sample) VALUES
+    ('951deace-e320-4c39-8d41-ae3988a91b4d', '32459c31-e4b5-47a8-9625-76889c861914', 'Hello world', 'dlrow olleH', true),
+    ('1b14ba06-bc3b-4eca-a186-01e5e4be4039', '32459c31-e4b5-47a8-9625-76889c861914', 'abcdef', 'fedcba', false),
+    ('1d825e4f-90cf-4c3b-b15c-c741d7067515', '32459c31-e4b5-47a8-9625-76889c861914', '12345', '54321', false),
+    ('c08139b8-223e-4f29-9288-aadc0a6285ff', '32459c31-e4b5-47a8-9625-76889c861914', 'racecar', 'racecar', false),
+    ('e459c368-8e56-4048-a1ea-30c717b92b53', '32459c31-e4b5-47a8-9625-76889c861914', 'A man a plan a canal Panama', 'amanaP lanac a nalp a nam A', false),
+    ('d7f445d9-c328-4270-96ac-cc441d769981', '32459c31-e4b5-47a8-9625-76889c861914', 'OpenAI', 'IAnepO', false),
+    ('2dd0f8d5-4748-4118-918b-1d9603570119', '32459c31-e4b5-47a8-9625-76889c861914', '', '', false),
+    ('6ae146bf-3112-4fc9-b270-936599c05efa', '32459c31-e4b5-47a8-9625-76889c861914', 'a', 'a', false),
+    ('cdb2dad0-fe8a-455b-87bc-27ece94ccb63', '32459c31-e4b5-47a8-9625-76889c861914', 'ab', 'ba', false),
+    ('f520b9dc-3fc8-4412-b96d-0977f6e52cab', '32459c31-e4b5-47a8-9625-76889c861914', '  spaces  ', '  secaps  ', false);
+
+--29
+INSERT INTO test_cases(id, code_question_id, input_data, output_data, is_sample) VALUES
+    ('522f5b30-d36e-463e-9f8c-6764ca594f3a', '7c2bb851-a179-455a-a0f4-7d1de202ceb5', 'racecar', 'YES', true),
+    ('2df4ee17-5951-4dd1-b8b2-8f7ee84dbcc0', '7c2bb851-a179-455a-a0f4-7d1de202ceb5', 'hello', 'NO', false),
+    ('88b7cc94-6e54-4723-a1dd-6959bab77af8', '7c2bb851-a179-455a-a0f4-7d1de202ceb5', 'A man a plan a canal Panama', 'NO', false),
+    ('ee5a88d7-418d-41dc-928b-c2140af0f85b', '7c2bb851-a179-455a-a0f4-7d1de202ceb5', 'madam', 'YES', false),
+    ('5260b365-2412-4569-88be-16d4b22f185e', '7c2bb851-a179-455a-a0f4-7d1de202ceb5', 'step on no pets', 'YES', false),
+    ('f40ec3ae-09e8-4f0f-bfba-ba54b8f95ecd', '7c2bb851-a179-455a-a0f4-7d1de202ceb5', '12321', 'YES', false),
+    ('6b82c41a-1ce8-4711-b180-ab7ebeea67e7', '7c2bb851-a179-455a-a0f4-7d1de202ceb5', '12345', 'NO', false),
+    ('700dc779-25be-4770-bad1-163228cfbdac', '7c2bb851-a179-455a-a0f4-7d1de202ceb5', 'Was it a car or a cat I saw', 'NO', false),
+    ('8e6bede7-e642-43f4-9ab6-22e8c79c5fa7', '7c2bb851-a179-455a-a0f4-7d1de202ceb5', 'No lemon no melon', 'YES', false),
+    ('746e9f2f-b110-4a99-82d1-0d4276789383', '7c2bb851-a179-455a-a0f4-7d1de202ceb5', '', 'YES', false);
+
+--30
+INSERT INTO test_cases(id, code_question_id, input_data, output_data, is_sample) VALUES
+    ('b8aa0d61-1809-416a-8140-f8032cc89298', '2314f334-86be-44da-ab5a-f12edd3c6a94', 'aabbcc', 'abc', true),
+    ('96614d5e-41e0-425d-b680-e044591b0cd0', '2314f334-86be-44da-ab5a-f12edd3c6a94', 'hellooo', 'helo', false),
+    ('86f67eef-4af8-4b61-bd15-ac80f20a6640', '2314f334-86be-44da-ab5a-f12edd3c6a94', 'aaabbbccc', 'abc', false),
+    ('568ba06e-51ef-408f-8bcc-919ed11f492b', '2314f334-86be-44da-ab5a-f12edd3c6a94', 'abcd', 'abcd', false),
+    ('5eff09e3-eac1-41e3-8f0e-2c84b0dd9109', '2314f334-86be-44da-ab5a-f12edd3c6a94', 'a', 'a', false),
+    ('6b8aa910-236a-437d-b64f-80127dda3740', '2314f334-86be-44da-ab5a-f12edd3c6a94', '', '', false),
+    ('9bc8ece4-00e2-4492-8897-c7730c97c145', '2314f334-86be-44da-ab5a-f12edd3c6a94', 'aaAAaa', 'aAa', false),
+    ('cb2c2964-a9d3-41b8-a901-8cae6b3b2dfb', '2314f334-86be-44da-ab5a-f12edd3c6a94', '112233', '123', false),
+    ('04613d25-46fc-4f74-a55f-5b34171f47bc', '2314f334-86be-44da-ab5a-f12edd3c6a94', 'Mississippi', 'Misisipi', false),
+    ('15c8dc18-81be-48f8-9f28-853b143dd850', '2314f334-86be-44da-ab5a-f12edd3c6a94', '!!!!!', '!', false);
+
+--31
+INSERT INTO test_cases(id, code_question_id, input_data, output_data, is_sample) VALUES
+    ('5affa0e1-8a93-4883-8e5f-3801067d0404', 'ce18bd5a-5fc3-4ffd-b72a-7b23378d9c16', 'hello\nl', '2', true),
+    ('39ae9090-38c3-4817-8644-43526b91a9b3', 'ce18bd5a-5fc3-4ffd-b72a-7b23378d9c16', 'abcdefg\na', '1', false),
+    ('8cd29b50-7f91-473f-b9ec-7a6f827d6daa', 'ce18bd5a-5fc3-4ffd-b72a-7b23378d9c16', 'mississippi\ni', '4', false),
+    ('83786fca-8d64-4a6d-a9d6-62188edf1a55', 'ce18bd5a-5fc3-4ffd-b72a-7b23378d9c16', '123451234\n1', '2', false),
+    ('30ab1c33-b8a4-4f3a-89a9-eb5b71775b7b', 'ce18bd5a-5fc3-4ffd-b72a-7b23378d9c16', 'OpenAI\nO', '1', false),
+    ('ca5904f6-7f65-4b38-b359-4319522be439', 'ce18bd5a-5fc3-4ffd-b72a-7b23378d9c16', 'character count\nc', '3', false),
+    ('5f08b2c0-74ee-4333-9925-f6040a7117d7', 'ce18bd5a-5fc3-4ffd-b72a-7b23378d9c16', 'abcdefg\nd', '1', false),
+    ('6f3e0464-9a84-4730-8fa6-8b5b91dbfd62', 'ce18bd5a-5fc3-4ffd-b72a-7b23378d9c16', 'abcdefg\nz', '0', false),
+    ('712b232a-44c5-4fc9-bcd7-0d56f12eafc1', 'ce18bd5a-5fc3-4ffd-b72a-7b23378d9c16', '\na', '0', false),
+    ('417a3307-4b59-4fdb-b33b-5b66376059b4', 'ce18bd5a-5fc3-4ffd-b72a-7b23378d9c16', 'aaaaaa\na', '6', false);
+
+--32
+INSERT INTO test_cases(id, code_question_id, input_data, output_data, is_sample) VALUES
+    ('a2607680-8857-4768-b4d3-329e51379e91', '39628971-3bbc-4e10-ad17-266bd1910aa3', 'leetcode', 'l', true),
+    ('ee992d19-ddcf-4d86-b52e-56ded681d0ae', '39628971-3bbc-4e10-ad17-266bd1910aa3', 'aabbcc', '_', true),
+    ('1ebbfd95-4651-41ac-9842-31b4dd147294', '39628971-3bbc-4e10-ad17-266bd1910aa3', 'abcabc', '_', false),
+    ('8eb62639-3b72-4884-898a-14581e395962', '39628971-3bbc-4e10-ad17-266bd1910aa3', 'aabbccd', 'd', false),
+    ('e7bd483b-853b-407b-9823-2eb15677439f', '39628971-3bbc-4e10-ad17-266bd1910aa3', 'xxyz', 'y', false),
+    ('3f6e645d-3824-4339-945d-0ddd3c90e6ef', '39628971-3bbc-4e10-ad17-266bd1910aa3', 'a', 'a', false),
+    ('32f6b16a-fc56-49d5-afc2-633089579e0b', '39628971-3bbc-4e10-ad17-266bd1910aa3', '', '_', false),
+    ('5443611b-867e-4f2b-a66d-bd4bbd68ab46', '39628971-3bbc-4e10-ad17-266bd1910aa3', 'abcd', 'a', false),
+    ('06386842-9784-4b46-b67d-984f7aa25efc', '39628971-3bbc-4e10-ad17-266bd1910aa3', 'abac', 'b', false),
+    ('d87c8e00-6458-4ac5-bb92-9b4042a2f262', '39628971-3bbc-4e10-ad17-266bd1910aa3', 'aabbccdde', 'e', false);
+
+--33
+INSERT INTO test_cases(id, code_question_id, input_data, output_data, is_sample) VALUES
+    ('08cb52b1-c694-4611-8678-f2929d632f41', '95d876bb-2b16-4b90-b305-58d24b46ffc0', 'hello', '2', true),
+    ('533ef098-4003-4eea-8768-ea53c5c9269f', '95d876bb-2b16-4b90-b305-58d24b46ffc0', 'abcdefg', '2', false),
+    ('b1310c5a-d3eb-4366-a6fe-30aca3a3f3d4', '95d876bb-2b16-4b90-b305-58d24b46ffc0', 'mississippi', '4', false),
+    ('8b331f02-8108-460b-bea8-c6f25e8e8029', '95d876bb-2b16-4b90-b305-58d24b46ffc0', '12345', '0', false),
+    ('c8ed6d8e-e15f-4e67-953d-655d263e180b', '95d876bb-2b16-4b90-b305-58d24b46ffc0', 'OpenAI', '3', false),
+    ('fd1af57f-134a-41d1-b2c0-96b5a972ba65', '95d876bb-2b16-4b90-b305-58d24b46ffc0', 'character count', '5', false),
+    ('9919afd9-b900-49ba-bd2a-1bb004959cf3', '95d876bb-2b16-4b90-b305-58d24b46ffc0', 'abcdefg', '2', false),
+    ('3511f375-32e2-4fe3-a494-2f35a125a8ab', '95d876bb-2b16-4b90-b305-58d24b46ffc0', 'aeiou', '5', false),
+    ('e97b8ca9-4656-497c-b09d-9a9c652032ff', '95d876bb-2b16-4b90-b305-58d24b46ffc0', 'bcdfg', '0', false),
+    ('1e8fd5a0-101c-43cb-87eb-6a16eeef5ab2', '95d876bb-2b16-4b90-b305-58d24b46ffc0', '', '0', false);
+
+--34
+INSERT INTO test_cases(id, code_question_id, input_data, output_data, is_sample) VALUES
+    ('50b35bdc-c3cc-47d3-9f99-01b67f7b759e', '518e1f5c-f46b-4862-811c-c6c19f35b433', 'This is a test', 'This', true),
+    ('b6ed8c19-a8b8-42b9-ad88-d387157f2b2b', '518e1f5c-f46b-4862-811c-c6c19f35b433', 'hello world', 'hello', false),
+    ('9b7f3b20-d564-4d2c-b949-ba68a956b519', '518e1f5c-f46b-4862-811c-c6c19f35b433', 'OpenAI is amazing', 'amazing', false),
+    ('f0a0e5ed-3b3e-4bc3-a85f-5272b43bb767', '518e1f5c-f46b-4862-811c-c6c19f35b433', 'a bb ccc dddd eeeee', 'eeeee', false),
+    ('c2d5e92e-ebcf-4e25-a2f8-a0dcebbfa2ba', '518e1f5c-f46b-4862-811c-c6c19f35b433', 'one two three four', 'three', false),
+    ('21bc7651-672c-48ef-aebc-07b1763dce51', '518e1f5c-f46b-4862-811c-c6c19f35b433', 'a', 'a', false),
+    ('37a598e7-dd52-471d-b2e8-8b1607bd110e', '518e1f5c-f46b-4862-811c-c6c19f35b433', '', '', false),
+    ('357904c3-d330-4a7a-80db-fde8fd6c58f3', '518e1f5c-f46b-4862-811c-c6c19f35b433', 'equal size words', 'equal', false),
+    ('bbd0009d-d710-4329-b70b-3cc176f9e86b', '518e1f5c-f46b-4862-811c-c6c19f35b433', 'many spaces    between words', 'between', false),
+    ('7e06e531-ea6c-4e5d-9e15-e180d3a97d22', '518e1f5c-f46b-4862-811c-c6c19f35b433', 'short longest word', 'longest', false);
+
+--35
+INSERT INTO test_cases(id, code_question_id, input_data, output_data, is_sample) VALUES
+    ('9eefb4b9-6582-4a54-a0ff-378a7b839638', '927ad7dd-b9a1-4909-b5ea-c3dbd34b6023', 'hello123', 'YES', true),
+    ('d32dc32e-e12c-45b9-8a1a-61617daff936', '927ad7dd-b9a1-4909-b5ea-c3dbd34b6023', 'abc456def', 'YES', true),
+    ('1ebada07-9189-47b0-a3da-f97668be411e', '927ad7dd-b9a1-4909-b5ea-c3dbd34b6023', 'prime7number', 'YES', false),
+    ('23723f2b-0e0b-427a-b6d8-6555ec6fdc6a', '927ad7dd-b9a1-4909-b5ea-c3dbd34b6023', 'no primes here', 'NO', false),
+    ('668ff3cc-2aab-4f0a-a53a-2cdfe4446fb3', '927ad7dd-b9a1-4909-b5ea-c3dbd34b6023', '235711', 'YES', false),
+    ('8c2361e4-6302-433f-8634-684c79e36e45', '927ad7dd-b9a1-4909-b5ea-c3dbd34b6023', '24680', 'NO', false),
+    ('c3465796-d26f-4849-bc42-b5539b7d7348', '927ad7dd-b9a1-4909-b5ea-c3dbd34b6023', '101', 'YES', false),
+    ('37d11c63-3698-4cd7-97bc-e54115f9ed53', '927ad7dd-b9a1-4909-b5ea-c3dbd34b6023', 'abcdefghijk', 'NO', false),
+    ('e44176c9-0f0d-4203-908d-7a237dad6f0d', '927ad7dd-b9a1-4909-b5ea-c3dbd34b6023', '2isprime', 'YES', false),
+    ('84c39479-0e76-4183-9583-018aa0412268', '927ad7dd-b9a1-4909-b5ea-c3dbd34b6023', '89', 'YES', false);
+
+--36
+INSERT INTO test_cases(id, code_question_id, input_data, output_data, is_sample) VALUES
+    ('789bb8f1-81a4-4f77-be61-6ece6c32f439', 'e228e9cd-205a-4af2-bf17-a69fef609f82', 'abcabcbb', '3', true),
+    ('95596d03-2a90-455b-8a2e-a2ac85be8d08', 'e228e9cd-205a-4af2-bf17-a69fef609f82', 'bbbbb', '1', false),
+    ('3962f88c-ccb3-4977-aa2f-56b8b75a87b2', 'e228e9cd-205a-4af2-bf17-a69fef609f82', 'pwwkew', '3', false),
+    ('18886f1c-d3c5-4808-8cbf-a3a1a1ddb77f', 'e228e9cd-205a-4af2-bf17-a69fef609f82', 'abcdabcde', '5', false),
+    ('f3b9ef3c-07cb-45cc-a7a1-d078e65761b8', 'e228e9cd-205a-4af2-bf17-a69fef609f82', 'a', '1', false),
+    ('b21eec1d-e1ac-4aba-b68c-e28b2f365613', 'e228e9cd-205a-4af2-bf17-a69fef609f82', '', '0', false),
+    ('f552f9a9-c5b5-4e1e-aca3-d95d19072f3a', 'e228e9cd-205a-4af2-bf17-a69fef609f82', 'au', '2', false),
+    ('1fcbcbaa-d92d-4177-9d19-64f2c0bb0c3b', 'e228e9cd-205a-4af2-bf17-a69fef609f82', 'dvdf', '3', false),
+    ('9a928c75-851e-4452-b378-1e0960a4bb28', 'e228e9cd-205a-4af2-bf17-a69fef609f82', 'anviaj', '5', false),
+    ('b6f88393-8408-4489-a2a6-6ec7a58dca2c', 'e228e9cd-205a-4af2-bf17-a69fef609f82', 'abcabcbbdef', '4', false);
