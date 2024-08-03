@@ -151,7 +151,19 @@ values
 --26
     ('219cafcd-d4fe-4fb0-81fd-be2da867f9d4', 'cd55e806-5d20-4813-b2ce-f8a235fc9151'),
     ('219cafcd-d4fe-4fb0-81fd-be2da867f9d4', '2a11f923-7574-466f-a030-374ae5b18700'),
-    ('219cafcd-d4fe-4fb0-81fd-be2da867f9d4', '5ef5d400-575b-4e85-82f2-d2cfe5d97378')
+    ('219cafcd-d4fe-4fb0-81fd-be2da867f9d4', '5ef5d400-575b-4e85-82f2-d2cfe5d97378'),
+
+--27 -> 36
+    ('bdc0ef30-46e2-407d-84a8-91462d1de97a', '9d752cc0-75b3-4dce-b92e-21375e2d61c5'),
+    ('32459c31-e4b5-47a8-9625-76889c861914', '9d752cc0-75b3-4dce-b92e-21375e2d61c5'),
+    ('7c2bb851-a179-455a-a0f4-7d1de202ceb5', '9d752cc0-75b3-4dce-b92e-21375e2d61c5'),
+    ('2314f334-86be-44da-ab5a-f12edd3c6a94', '9d752cc0-75b3-4dce-b92e-21375e2d61c5'),
+    ('ce18bd5a-5fc3-4ffd-b72a-7b23378d9c16', '9d752cc0-75b3-4dce-b92e-21375e2d61c5'),
+    ('39628971-3bbc-4e10-ad17-266bd1910aa3', '9d752cc0-75b3-4dce-b92e-21375e2d61c5'),
+    ('95d876bb-2b16-4b90-b305-58d24b46ffc0', '9d752cc0-75b3-4dce-b92e-21375e2d61c5'),
+    ('518e1f5c-f46b-4862-811c-c6c19f35b433', '9d752cc0-75b3-4dce-b92e-21375e2d61c5'),
+    ('927ad7dd-b9a1-4909-b5ea-c3dbd34b6023', '9d752cc0-75b3-4dce-b92e-21375e2d61c5'),
+    ('e228e9cd-205a-4af2-bf17-a69fef609f82', '9d752cc0-75b3-4dce-b92e-21375e2d61c5')
     ;
 
 --        ('4d5d31cc-6386-4ef5-903d-625e64b122d7', 'Array', 'ALGORITHM'),
