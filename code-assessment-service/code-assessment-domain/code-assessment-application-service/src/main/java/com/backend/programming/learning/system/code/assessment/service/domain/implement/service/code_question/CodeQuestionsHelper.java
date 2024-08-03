@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.code_question;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.CodeQuestionDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.ProgrammingLanguageDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.langauge.UpdateLanguageOfCodeQuestionCommand;
@@ -9,6 +10,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.tag.DeleteCodeQuestionTagCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.AdminDetailCodeQuestionQuery;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsQuery;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetDetailCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_question.UpdateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
@@ -17,6 +19,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.ex
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.GenericHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.ValidateHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_question.CodeQuestionDataMapper;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.redis.CodeQuestionRedisService;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.ProgrammingLanguageCodeQuestionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.ProgrammingLanguageRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.TestCaseRepository;
@@ -28,6 +31,9 @@ import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +43,7 @@ import java.util.*;
 @Component
 public class CodeQuestionsHelper {
     private final CodeAssessmentDomainService codeAssessmentDomainService;
+    private final CodeQuestionRedisService codeQuestionRedisService;
 
     private final CodeQuestionRepository codeQuestionRepository;
 //    private final QuestionRepository   questionRepository;
@@ -48,8 +55,9 @@ public class CodeQuestionsHelper {
     private final ProgrammingLanguageRepository programmingLanguageRepository;
     private final ProgrammingLanguageCodeQuestionRepository programmingLanguageCodeQuestionRepository;
 
-    public CodeQuestionsHelper(CodeAssessmentDomainService codeAssessmentDomainService, CodeQuestionRepository codeQuestionRepository, CodeQuestionDataMapper codeQuestionDataMaper, ValidateHelper validateHelper, GenericHelper genericHelper, CodeSubmissionRepository codeSubmissionRepository, TestCaseRepository testCaseRepository, ProgrammingLanguageRepository programmingLanguageRepository, ProgrammingLanguageCodeQuestionRepository programmingLanguageCodeQuestionRepository) {
+    public CodeQuestionsHelper(CodeAssessmentDomainService codeAssessmentDomainService, CodeQuestionRedisService codeQuestionRedisService, CodeQuestionRepository codeQuestionRepository, CodeQuestionDataMapper codeQuestionDataMaper, ValidateHelper validateHelper, GenericHelper genericHelper, CodeSubmissionRepository codeSubmissionRepository, TestCaseRepository testCaseRepository, ProgrammingLanguageRepository programmingLanguageRepository, ProgrammingLanguageCodeQuestionRepository programmingLanguageCodeQuestionRepository) {
         this.codeAssessmentDomainService = codeAssessmentDomainService;
+        this.codeQuestionRedisService = codeQuestionRedisService;
         this.codeQuestionRepository = codeQuestionRepository;
         this.codeQuestionDataMaper = codeQuestionDataMaper;
         this.validateHelper = validateHelper;
@@ -141,34 +149,93 @@ public class CodeQuestionsHelper {
 
     @Transactional
     public Page<CodeQuestion> getPublicCodeQuestions(GetCodeQuestionsQuery query) {
-        User user = query.getEmail() != null? validateHelper.validateUserByEmail(query.getEmail()): null;
-        List<TagId> tagIds = query.getTagIds() == null || query.getTagIds().isEmpty()? null:
-                query.getTagIds().stream().map(item->{
-                            try {
-                                return validateHelper.validateTagById(item).getId();
-                            } catch (Exception e) {
-                                return null;
-                            }
-                        })
-                        .filter(Objects::nonNull)
-                        .toList();
+        User user = query.getEmail() != null ? validateHelper.validateUserByEmail(query.getEmail()): null;
 
-        Page<CodeQuestion> codeQuestions = codeQuestionRepository
-                .findAll(user != null? user.getId(): null,
-                        tagIds,
-                        query.getOrderBy(),
-                        query.getSortBy(),
+        Page<CodeQuestion> codeQuestions = null;
+
+        if (user == null &&
+                (query.getTagIds() == null || query.getTagIds().isEmpty())
+                && (query.getSearch() == null || query.getSearch().trim().isEmpty() || query.getSearch().trim().isBlank())
+                    && query.getSolved() == null) {
+            try {
+                GetCodeQuestionsResponse response = codeQuestionRedisService.getAllCodeQuestions(
+                        query.getPageNum(), query.getPageSize(), query.getOrderBy(), query.getDifficulty());
+                if (response != null) {
+                    log.info("Get code questions from redis");
+                    List<CodeQuestionDto> codeQuestionDtos = response.getCodeQuestions();
+                    Pageable pageable = PageRequest.of(response.getCurrentPage(), query.getPageSize());
+                    Page<CodeQuestionDto> codeQuestionDtoPage =
+                            new PageImpl<>(codeQuestionDtos, pageable, response.getTotalItems());
+                    codeQuestions = codeQuestionDtoPage.map(codeQuestionDataMaper::codeQuestionDtoToCodeQuestion);
+                } else {
+                    log.info("response in redis is null");
+                    log.info("Get code questions from database");
+                    codeQuestions = codeQuestionRepository
+                            .findAll(user != null ? user.getId(): null,
+                                    new ArrayList<>(),
+                                    query.getOrderBy(),
+                                    query.getSortBy(),
+                                    query.getPageNum(),
+                                    query.getPageSize(),
+                                    query.getDifficulty(),
+                                    query.getSolved(),
+                                    query.getSearch(),
+                                    true);
+                }
+            } catch (Exception e) {
+                log.error("Error while getting code questions from redis", e);
+                log.info("Get code questions from database");
+                codeQuestions = codeQuestionRepository
+                        .findAll(user != null ? user.getId(): null,
+                                new ArrayList<>(),
+                                query.getOrderBy(),
+                                query.getSortBy(),
+                                query.getPageNum(),
+                                query.getPageSize(),
+                                query.getDifficulty(),
+                                query.getSolved(),
+                                query.getSearch(),
+                                true);
+                GetCodeQuestionsResponse response =
+                        codeQuestionDataMaper.pagableCodeQuestionsToGetCodeQuestionsResponse(codeQuestions);
+                codeQuestionRedisService.saveAllCodeQuestions(
+                        response,
                         query.getPageNum(),
                         query.getPageSize(),
-                        query.getDifficulty(),
-                        query.getSolved(),
-                        query.getSearch(),
-                        true);
-        codeQuestions.map(item->{
-            Integer countPeople = codeSubmissionRepository.countPeopleAttend(item.getId());
-            item.setNumberOfPeopleAttend(countPeople);
-            return item;
-        });
+                        query.getOrderBy(),
+                        query.getDifficulty());
+            }
+        } else {
+            List<TagId> tagIds = query.getTagIds() == null || query.getTagIds().isEmpty()? null:
+                    query.getTagIds().stream().map(item->{
+                                try {
+                                    return validateHelper.validateTagById(item).getId();
+                                } catch (Exception e) {
+                                    return null;
+                                }
+                            })
+                            .filter(Objects::nonNull)
+                            .toList();
+
+            codeQuestions = codeQuestionRepository
+                    .findAll(user != null ? user.getId(): null,
+                            tagIds,
+                            query.getOrderBy(),
+                            query.getSortBy(),
+                            query.getPageNum(),
+                            query.getPageSize(),
+                            query.getDifficulty(),
+                            query.getSolved(),
+                            query.getSearch(),
+                            true);
+        }
+        if (codeQuestions != null) {
+            codeQuestions.map(item->{
+                Integer countPeople = codeSubmissionRepository.countPeopleAttend(item.getId());
+                item.setNumberOfPeopleAttend(countPeople);
+                return item;
+            });
+        }
         return codeQuestions;
     }
 
