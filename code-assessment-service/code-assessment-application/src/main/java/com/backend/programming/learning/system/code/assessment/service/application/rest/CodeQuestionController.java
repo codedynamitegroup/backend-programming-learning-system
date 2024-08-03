@@ -98,32 +98,7 @@ public class CodeQuestionController {
                 .solved(solved)
                 .build();
 
-        GetCodeQuestionsResponse response = null;
-        if (email == null &&
-                (query.getTagIds() == null || query.getTagIds().isEmpty())
-                && (query.getSearch() == null || query.getSearch().trim().isEmpty() || query.getSearch().trim().isBlank())
-                    && query.getSolved() == null) {
-            try {
-                response = codeQuestionRedisService.getAllCodeQuestions(
-                        pageNo, pageSize, orderBy, difficulty);
-                if (response != null) {
-                    log.info("Get code questions from redis");
-                    return ResponseEntity.ok(response);
-                } else {
-                    log.info("Get code questions from database");
-                    response = codeQuestionApplicationService.getPublicCodeQuestions(query);
-                    codeQuestionRedisService.saveAllCodeQuestions(response, pageNo, pageSize, orderBy, difficulty);
-                }
-            } catch (Exception e) {
-                log.error("Error while getting code questions from redis", e);
-                log.info("Get code questions from database");
-                response = codeQuestionApplicationService.getPublicCodeQuestions(query);
-                codeQuestionRedisService.saveAllCodeQuestions(response, pageNo, pageSize, orderBy, difficulty);
-            }
-        } else {
-            log.info("Get code questions from database");
-            response = codeQuestionApplicationService.getPublicCodeQuestions(query);
-        }
+        GetCodeQuestionsResponse response = codeQuestionApplicationService.getPublicCodeQuestions(query);
 
         return ResponseEntity.ok(response);
     }

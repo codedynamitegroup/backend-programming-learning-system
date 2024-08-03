@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_question;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.CodeQuestionDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.DtoMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionResponse;
@@ -13,7 +14,9 @@ import com.backend.programming.learning.system.code.assessment.service.domain.va
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.code_question_tag.CodeQuestionTagId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
+import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -100,6 +103,19 @@ public class CodeQuestionDataMapper {
                 .isPublic(command.getIsPublic())
                 .allowImport(command.getAllowImport())
                 .isQuestionBank(command.getIsQuestionBank())
+                .build();
+    }
+
+    public CodeQuestion codeQuestionDtoToCodeQuestion(CodeQuestionDto dto) {
+        return CodeQuestion.builder()
+                .codeQuestionId(new CodeQuestionId(dto.getId()))
+                .questionId(new QuestionId(dto.getQuestionId()))
+                .name(dto.getName())
+                .numberOfPeopleAttend(dto.getNumOfPeopleAttend())
+                .solved(dto.getDone())
+                .difficulty(dto.getDifficulty())
+                .allowImport(dto.getAllowImport())
+                .isPublic(dto.getIsPublic())
                 .build();
     }
 
