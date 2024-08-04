@@ -95,11 +95,6 @@ public class MoodleCommandHandler {
 
     String GET_MODULE="core_course_get_course_module";
     String GET_USERS = "core_user_get_users";
-    String MOODLE_URL = "http://62.171.185.208:8081/webservice/rest/server.php";
-    //    String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
-    String TOKEN = "cdf90b5bf53bcae577c60419702dbee7";
-//    String TOKEN = "c22b03ca9c0a3c8431cd6b57bd4c8b04";
-//    String TOKEN = "60d437ef3f02dded9a7b097a8a81bf61";
 
 
     @Transactional
@@ -765,29 +760,10 @@ public class MoodleCommandHandler {
         return result;
     }
 
-    public ListCourseModel getCourses() {
-        String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s",
-                MOODLE_URL, TOKEN, GET_COURSES);
-        RestTemplate restTemplate = new RestTemplate();
-        String model = restTemplate.getForObject(apiURL, String.class);
-        model = "{\"courses\":" + model + "}";
-        ObjectMapper objectMapper = new ObjectMapper();
-        ListCourseModel listCourseModel = null;
-        if (model.equals("{\"courses\":[]}"))
-            return null;
-        try {
-            listCourseModel = objectMapper.readValue(model, ListCourseModel.class);
-            log.info("Course model: {}", listCourseModel);
 
-            return listCourseModel;
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public CourseModel getCourse(String courseId) {
+    public CourseModel getCourse(String courseId,String apiKey, String moodleUrl) {
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&options[ids][0]=%s",
-                MOODLE_URL, TOKEN, GET_COURSES, courseId);
+                moodleUrl,apiKey, GET_COURSES, courseId);
         RestTemplate restTemplate = new RestTemplate();
         String model = restTemplate.getForObject(apiURL, String.class);
         model = "{\"courses\":" + model + "}";
@@ -808,9 +784,9 @@ public class MoodleCommandHandler {
     }
 
     // Get user by id
-    public UserModel getUser(String userId) {
+    public UserModel getUser(String userId,String apiKey, String moodleUrl) {
         String apiUrl = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&userlist[0][courseid]=1&userlist[0][userid]=%s",
-                MOODLE_URL, TOKEN, GET_USER_PROFILE, userId);
+                moodleUrl,apiKey, GET_USER_PROFILE, userId);
         RestTemplate restTemplate = new RestTemplate();
         String model = restTemplate.getForObject(apiUrl, String.class);
         model = "{\"users\":"+model+"}";
@@ -831,9 +807,9 @@ public class MoodleCommandHandler {
     }
 
     @Transactional
-    public List<UserCourseModel> getCoursesByUser(String userId) {
+    public List<UserCourseModel> getCoursesByUser(String userId,String apiKey, String moodleUrl) {
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&userid=%s",
-                MOODLE_URL, TOKEN, GET_USER_COURSES, userId);
+                moodleUrl,apiKey, GET_USER_COURSES, userId);
         RestTemplate restTemplate = new RestTemplate();
         String model = restTemplate.getForObject(apiURL, String.class);
         model = "{\"courses\":" + model + "}";
@@ -944,9 +920,9 @@ public class MoodleCommandHandler {
     }
 
 
-    public String syncCourseExam() {
+    public String syncCourseExam(String apiKey, String moodleUrl) {
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s",
-                MOODLE_URL, TOKEN, GET_COURSES);
+                moodleUrl,apiKey, GET_COURSES);
         RestTemplate restTemplate = new RestTemplate();
         String model = restTemplate.getForObject(apiURL, String.class);
         ObjectMapper objectMapper = new ObjectMapper();
@@ -986,7 +962,7 @@ public class MoodleCommandHandler {
 
         String courseIdsString = String.join(",", courseIds);
         String apiURLQuiz = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s",
-                MOODLE_URL, TOKEN, GET_QUIZZES);
+                moodleUrl,apiKey, GET_QUIZZES);
         String modelQuiz = restTemplate.getForObject(apiURLQuiz, String.class);
         ListQuizModel listQuizModel = null;
         try {

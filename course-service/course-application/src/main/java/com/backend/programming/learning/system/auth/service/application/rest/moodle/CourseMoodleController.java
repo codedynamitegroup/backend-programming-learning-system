@@ -32,8 +32,8 @@ public class CourseMoodleController {
     public ResponseEntity<String> syncResource(@PathVariable UUID organizationId) {
         return ResponseEntity.ok(moodleApplicationService.syncResource(organizationId));
     }
-    @PostMapping("exam/sync")
-    public ResponseEntity<String> syncCourseExam() {
-        return ResponseEntity.ok(moodleApplicationService.syncCourseExam());
-    }
+//    @PostMapping("exam/sync")
+//    public ResponseEntity<String> syncCourseExam() {
+//        return ResponseEntity.ok(moodleApplicationService.syncCourseExam());
+//    }
 }

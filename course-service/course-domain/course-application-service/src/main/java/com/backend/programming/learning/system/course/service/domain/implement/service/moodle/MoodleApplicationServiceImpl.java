@@ -29,8 +29,5 @@ public class MoodleApplicationServiceImpl implements MoodleApplicationService {
         return moodleCommandHandler.syncResource(organizationId);
     }
 
-    @Override
-    public String syncCourseExam() {
-        return moodleCommandHandler.syncCourseExam();
-    }
+
 }
