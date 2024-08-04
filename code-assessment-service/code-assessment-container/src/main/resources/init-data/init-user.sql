@@ -53,3 +53,4 @@ INSERT INTO "public"."user" VALUES ('e1ac8c3c-1c60-4c14-8143-84c3c8c66934', '201
 INSERT INTO "public"."user" VALUES ('bfca2841-ee2c-4981-9c74-3ef605fc1c3d', '20127562@student.hcmus.edu.vn', NULL, 'Nguyễn Đăng', 'Minh', NULL, NULL, NULL, '2024-08-04 14:16:55.984+07', '2024-08-04 14:16:55.984+07', 'f');
 INSERT INTO "public"."user" VALUES ('588636d6-7193-4a2b-be5f-cafe112d3bf5', '20127569@student.hcmus.edu.vn', NULL, 'Tô Đình Phương', 'Nam', NULL, NULL, NULL, '2024-08-04 14:16:56.841+07', '2024-08-04 14:16:56.841+07', 'f');
 INSERT INTO "public"."user" VALUES ('7179898a-c353-4917-8dbd-62e10ea3249e', 'tmhung2024@gmail.com', NULL, 'Hùng', 'Trần Mạnh', NULL, NULL, NULL, '2024-08-04 14:16:57.431+07', '2024-08-04 14:16:57.431+07', 'f');
+INSERT INTO "public"."user" VALUES ('1e327a63-b0d6-476f-bb99-8c594560f971', 'truonggiatien456@gmail.com', NULL, 'Tiến', 'Trương Gia', NULL, NULL, NULL, '2024-06-04 19:54:23.789236+07', '2024-06-04 19:54:23.789748+07', 'f');
