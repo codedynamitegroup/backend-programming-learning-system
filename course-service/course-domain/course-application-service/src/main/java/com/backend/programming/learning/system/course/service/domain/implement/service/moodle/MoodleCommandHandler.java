@@ -73,17 +73,16 @@ public class MoodleCommandHandler {
     private final RestTemplate restTemplate = new RestTemplate();
 
     Map<String, Course> courseIdsMap = new HashMap<>();
-    private Integer ROLE_STUDENT = 5;
-    private String GET_COURSES = "core_course_get_courses";
-    private String GET_QUIZZES = "mod_quiz_get_quizzes_by_courses";
+    private final Integer ROLE_STUDENT = 5;
+    private final String GET_COURSES = "core_course_get_courses";
+    private final String GET_QUIZZES = "mod_quiz_get_quizzes_by_courses";
 
-    String GET_ASSIGNMENTS = "mod_assign_get_assignments";
-    String GET_ASSIGNMENTS_USER = "mod_assign_get_user_mappings";
+    private final String  GET_ASSIGNMENTS = "mod_assign_get_assignments";
+    private final String GET_ASSIGNMENTS_USER = "mod_assign_get_user_mappings";
 
-    String GET_SUBMISSION_STATUS = "mod_assign_get_submission_status";
-    String GET_ENROLLED_USERS = "core_enrol_get_enrolled_users";
-    String GET_CONTENTS = "core_course_get_contents";
-
+    private final String GET_SUBMISSION_STATUS = "mod_assign_get_submission_status";
+    private final String GET_ENROLLED_USERS = "core_enrol_get_enrolled_users";
+    private final String GET_CONTENTS = "core_course_get_contents";
 
     String GET_CATEGORY = "core_course_get_categories";
     String GET_SUBMISSION_ASSIGNMENTS = "mod_assign_get_submissions";
@@ -98,7 +97,6 @@ public class MoodleCommandHandler {
     String GET_USERS = "core_user_get_users";
     String MOODLE_URL = "http://62.171.185.208:8081/webservice/rest/server.php";
     //    String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
-    String MOODLE_URL_TOKEN = "http://62.171.185.208/login/token.php";
     String TOKEN = "cdf90b5bf53bcae577c60419702dbee7";
 //    String TOKEN = "c22b03ca9c0a3c8431cd6b57bd4c8b04";
 //    String TOKEN = "60d437ef3f02dded9a7b097a8a81bf61";
@@ -207,6 +205,8 @@ public class MoodleCommandHandler {
     @Transactional
     public void createSection(List<Course>courseList,String apiKey, String moodleUrl){
         courseList.forEach(course -> {
+            if (Objects.isNull(course.getCourseIdMoodle()))
+                return;
             List<SectionModel> allSection = getAllSection(course.getCourseIdMoodle().toString(),apiKey,moodleUrl);
             if (allSection.isEmpty()) {
                 return;
@@ -228,8 +228,11 @@ public class MoodleCommandHandler {
                                 moduleRepository.save(moduleUpdate);
                             }
                             else {
-                                Assignment assignment = assignmentRepository.findByAssignmentIdMoodleAndCourseId(Integer.valueOf(module.getInstance()),course.getId().getValue()).get();
-                                Module moduleCreate = moodleDataMapper.createModule(sectionUpdate, module,assignment);
+                                Optional<Assignment> assignment = assignmentRepository.findByAssignmentIdMoodleAndCourseId(Integer.valueOf(module.getInstance()),course.getId().getValue());
+                                if (assignment.isEmpty()) {
+                                    continue;
+                                }
+                                Module moduleCreate = moodleDataMapper.createModule(sectionUpdate, module, assignment.get());
                                 moduleRepository.save(moduleCreate);
                             }
 
@@ -247,8 +250,11 @@ public class MoodleCommandHandler {
 //                            module.getModplural().equals("URLs")||
 //                            module.getModplural().equals("Files"))
                         {
-                            Assignment assignment = assignmentRepository.findByAssignmentIdMoodleAndCourseId(Integer.valueOf(module.getInstance()),course.getId().getValue()).get();
-                            Module moduleCreate = moodleDataMapper.createModule(section, module,assignment);
+                            Optional<Assignment> assignment = assignmentRepository.findByAssignmentIdMoodleAndCourseId(Integer.valueOf(module.getInstance()),course.getId().getValue());
+                            if (assignment.isEmpty()) {
+                                continue;
+                            }
+                            Module moduleCreate = moodleDataMapper.createModule(section, module, assignment.get());
                             moduleRepository.save(moduleCreate);
                         }
                     }
@@ -579,9 +585,9 @@ public class MoodleCommandHandler {
         for (Map.Entry<String, Course> entry : courseIdsMap.entrySet()) {
             String courseId = entry.getKey();
             Course course = entry.getValue();
-            if (course.getCourseIdMoodle() == null || course.getName().equals("code dynamite"))
+            if (Objects.isNull(course.getCourseIdMoodle()))
                 continue;
-            List<UserModel> allUser = getAllUser(course.getCourseIdMoodle().toString(),apiKey,moodleUrl);
+            List<UserModel> allUser = getAllUser(course.getCourseIdMoodle().toString(), apiKey, moodleUrl);
             for (UserModel userModel : allUser) {
                 Optional<User> userResult = userRepository.findUserByEmail(userModel.getEmail());
                 if (userResult.isEmpty()) {
@@ -654,6 +660,8 @@ public class MoodleCommandHandler {
         String apiKey = organization.getApiKey();
         String moodleUrl = organization.getMoodleUrl();
         courseList.forEach(course -> {
+                    if (Objects.isNull(course.getCourseIdMoodle()))
+                        return;
                     List<AssignmentCourseModel> allAssignment = getAllAssignments(course.getCourseIdMoodle().toString(),apiKey,moodleUrl);
                     allAssignment.forEach(assignmentCourseModel -> {
                         assignmentCourseModel.getAssignments().forEach(assignmentModel -> {

@@ -33,6 +33,7 @@ public class MoodleDataMapper {
     private final ActivityAttachmentRepository activityAttachmentRepository;
 
     private final OrganizationRepository organizationRepository;
+    private final Integer SKIPPED_COURSE_DEFAULT = 1;
 
     public MoodleDataMapper(CourseTypeRepository courseTypeRepository, IntroAttachmentRepository introAttachmentRepository, ActivityAttachmentRepository activityAttachmentRepository, OrganizationRepository organizationRepository) {
         this.courseTypeRepository = courseTypeRepository;
@@ -261,7 +262,7 @@ public class MoodleDataMapper {
                 .name(courseModel.getFullname())
                 .organization(course.getOrganization())
 //                .courseType("MOODLE")
-                .visible(courseModel.getVisible().equals("1"))
+                .visible(courseModel.getVisible().equals(SKIPPED_COURSE_DEFAULT))
                 .posts(course.getPosts())
                 .exams(course.getExams())
                 .assignments(course.getAssignments())
@@ -277,7 +278,7 @@ public class MoodleDataMapper {
 //                .courseType("MOODLE")
                 .organization(user.getOrganization())
 
-                .visible(courseModel.getVisible().equals("1"))
+                .visible(courseModel.getVisible().equals(SKIPPED_COURSE_DEFAULT))
                 .build();
     }
 
@@ -355,7 +356,7 @@ public class MoodleDataMapper {
                 .courseIdMoodle(Integer.valueOf(courseModel.getId()))
                 .courseType(course.getCourseType())
                 .organization(organization)
-                .visible(courseModel.getVisible().equals("1"))
+                .visible(courseModel.getVisible().equals(SKIPPED_COURSE_DEFAULT))
                 .createdAt(course.getCreatedAt())
                 .updatedAt(course.getUpdatedAt())
                 .build();

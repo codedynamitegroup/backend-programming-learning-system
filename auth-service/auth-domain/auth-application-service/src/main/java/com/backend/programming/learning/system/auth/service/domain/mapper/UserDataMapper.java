@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 @Component
 public class UserDataMapper {
     private final RoleDataMapper roleDataMapper;
-    private final String DEFAULT_PASSWORD = "123456789oO#";
+    private final String DEFAULT_PASSWORD = "Hh123456@";
 
     public UserDataMapper(RoleDataMapper roleDataMapper) {
         this.roleDataMapper = roleDataMapper;
