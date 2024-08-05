@@ -20742,3 +20742,373 @@ INSERT INTO public.chapter_resource
 (id, "no", chapter_id, resource_type, title, question_id, lesson_html, youtube_video_url)
 VALUES('b2cf3c1a-6d3d-42ec-a2ef-0ae43b5cfe5f'::uuid, 11, 'cd30fadf-0b6b-4e46-8632-d76392e72883'::uuid, 'VIDEO'::public.resource_type, 'Simplex Equations', NULL, '', 'https://www.youtube.com/watch?v=Qmm2zdrPz28');
 -- end of chapter resource dsa 1
+
+
+-------------- add question
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('560c0865-35df-486d-b886-5189c0a5d66f'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Một hàm đệ quy là một hàm tự gọi lại chính nó.', '<p>Một hàm đệ quy là một hàm tự gọi lại chính nó.</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:31:35.376', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:31:35.376', '2eb6711f-5759-43e2-ab56-d00d572db220'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('01f3b10a-43b4-4400-863a-bf02fee2c7a7'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Ngôn ngữ lập trình C++ không hỗ trợ lập trình hướng đối tượng.', '<p>Ngôn ngữ lập trình C++ không hỗ trợ lập trình hướng đối tượng.</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:31:53.135', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:31:53.135', '2eb6711f-5759-43e2-ab56-d00d572db220'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('c3a2ceac-f0f3-4ed1-8083-a851af7e563a'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Trong lập trình, vòng lặp "for" chỉ có thể sử dụng để lặp lại một khối lệnh với số lần cố định.', '<p>Trong lập trình, vòng lặp "for" chỉ có thể sử dụng để lặp lại một khối lệnh với số lần cố định.</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:33:10.280', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:33:10.280', '2eb6711f-5759-43e2-ab56-d00d572db220'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('a267478d-407d-490a-a771-6575db96cf03'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Mảng trong ngôn ngữ lập trình C có thể thay đổi kích thước sau khi được khai báo.', '<p>Mảng trong ngôn ngữ lập trình C có thể thay đổi kích thước sau khi được khai báo.</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:33:41.809', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:33:41.809', '2eb6711f-5759-43e2-ab56-d00d572db220'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('1278efc3-479f-4bb8-a839-10cf23e95788'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Phương pháp lập trình mà trong đó các đối tượng tương tác với nhau thông qua các phương thức được gọi là ___.', '<p>Phương pháp lập trình mà trong đó các đối tượng tương tác với nhau thông qua các phương thức được gọi là ___.</p>', '', 1.00, 'SHORT_ANSWER'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:34:35.148', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:34:35.148', '2eb6711f-5759-43e2-ab56-d00d572db220'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('e99a6172-ef91-4b99-b800-d76b9c74a1d3'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Trong ngôn ngữ lập trình C++, từ khóa dùng để tạo một lớp mới là ___.', '<p>Trong ngôn ngữ lập trình C++, từ khóa dùng để tạo một lớp mới là ___.</p>', '', 1.00, 'SHORT_ANSWER'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:34:59.806', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:34:59.806', '2eb6711f-5759-43e2-ab56-d00d572db220'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('193a4ec2-af70-4fb7-ae2e-b4bf3e11dbad'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Cấu trúc dữ liệu mà trong đó phần tử cuối cùng được thêm vào sẽ là phần tử đầu tiên được lấy ra được gọi là ___.', '<p>Cấu trúc dữ liệu mà trong đó phần tử cuối cùng được thêm vào sẽ là phần tử đầu tiên được lấy ra được gọi là ___.</p>', '', 1.00, 'SHORT_ANSWER'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:35:31.203', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:35:31.203', '2eb6711f-5759-43e2-ab56-d00d572db220'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('496b4abe-ee7b-47b4-9553-004729a3587e'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Phương pháp lập trình mà trong đó một hàm gọi lại chính nó được gọi là ___.', '<p>Phương pháp lập trình mà trong đó một hàm gọi lại chính nó được gọi là ___.</p>', '', 1.00, 'SHORT_ANSWER'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:36:07.969', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:36:07.969', '2eb6711f-5759-43e2-ab56-d00d572db220'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('382f4794-f1c8-4b32-bac5-8654ad46b6e8'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Các ngôn ngữ lập trình nào sau đây là ngôn ngữ lập trình hướng đối tượng?', '<p>Các ngôn ngữ lập trình nào sau đây là ngôn ngữ lập trình hướng đối tượng?</p>', '', 1.00, 'MULTIPLE_CHOICE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:37:07.838', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:37:07.838', '2eb6711f-5759-43e2-ab56-d00d572db220'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('a5d85c32-a968-4f0b-8072-99e652887a9f'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Các cấu trúc dữ liệu nào sau đây được coi là cấu trúc dữ liệu tuyến tính?', '<p>Các cấu trúc dữ liệu nào sau đây được coi là cấu trúc dữ liệu tuyến tính?</p>', '', 1.00, 'MULTIPLE_CHOICE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:38:36.084', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:38:36.084', '2eb6711f-5759-43e2-ab56-d00d572db220'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('0df9d983-e43f-4ee3-b832-51acce5669e7'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Những khái niệm nào sau đây là nguyên tắc cơ bản của lập trình hướng đối tượng?', '<p>Những khái niệm nào sau đây là nguyên tắc cơ bản của lập trình hướng đối tượng?</p>', '', 1.00, 'MULTIPLE_CHOICE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:39:39.589', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:39:39.589', '2eb6711f-5759-43e2-ab56-d00d572db220'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('143b4f9a-2bf2-45e7-9b3d-047414b85226'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'HTML là ngôn ngữ lập trình.', '<p>HTML là ngôn ngữ lập trình.</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:41:35.351', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:41:35.351', '607e34b1-0af0-435c-85a0-68409acf5834'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('83ab4947-2289-4432-9cb4-5a391c7b8f4f'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'CSS được sử dụng để định kiểu cho các thành phần HTML.', '<p>CSS được sử dụng để định kiểu cho các thành phần HTML.</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:41:57.487', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:41:57.487', '607e34b1-0af0-435c-85a0-68409acf5834'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('7c923a3b-aee6-4890-b96f-7f0a812d1021'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Node.js là một môi trường chạy JavaScript trên phía server.', '<p>Node.js là một môi trường chạy JavaScript trên phía server.</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:42:11.262', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:42:11.262', '607e34b1-0af0-435c-85a0-68409acf5834'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('2ec85315-a873-4b65-a4f3-4c86d60d2fb7'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Angular là một framework cho phát triển ứng dụng web front-end.', '<p>Angular là một framework cho phát triển ứng dụng web front-end.</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:42:22.198', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:42:22.198', '607e34b1-0af0-435c-85a0-68409acf5834'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('57fd911a-3ca5-4316-90e3-a582dfc7f3b1'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Ngôn ngữ đánh dấu được sử dụng để tạo cấu trúc của trang web là ___.', '<p>Ngôn ngữ đánh dấu được sử dụng để tạo cấu trúc của trang web là ___.</p>', '', 1.00, 'SHORT_ANSWER'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:42:49.021', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:42:49.021', '607e34b1-0af0-435c-85a0-68409acf5834'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('c43ef98c-79bd-4dc2-9877-3a826c641a3f'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Framework JavaScript phổ biến được phát triển bởi Facebook để xây dựng giao diện người dùng là ___.', '<p>Framework JavaScript phổ biến được phát triển bởi Facebook để xây dựng giao diện người dùng là ___.</p>', '', 1.00, 'SHORT_ANSWER'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:43:13.311', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:43:13.311', '607e34b1-0af0-435c-85a0-68409acf5834'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('81fb484b-e882-4b97-865c-4b486a3090d6'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Giao thức bảo mật được sử dụng để truyền tải dữ liệu một cách an toàn giữa trình duyệt và server là ___.', '<p>Giao thức bảo mật được sử dụng để truyền tải dữ liệu một cách an toàn giữa trình duyệt và server là ___.</p>', '', 1.00, 'SHORT_ANSWER'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:43:41.605', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:43:41.605', '607e34b1-0af0-435c-85a0-68409acf5834'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('ff9e5072-6d48-4e97-a059-54729cbf7526'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Những công nghệ nào sau đây thường được sử dụng trong phát triển ứng dụng web front-end?', '<p>Những công nghệ nào sau đây thường được sử dụng trong phát triển ứng dụng web front-end?</p>', '', 1.00, 'MULTIPLE_CHOICE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:45:21.242', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:45:21.242', '607e34b1-0af0-435c-85a0-68409acf5834'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('6335b900-459f-4ded-a78d-d3e9d84ce78b'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Những framework nào sau đây là framework phổ biến cho phát triển ứng dụng web back-end?', '<p>Những framework nào sau đây là framework phổ biến cho phát triển ứng dụng web back-end?</p>', '', 1.00, 'MULTIPLE_CHOICE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:46:18.492', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:46:18.492', '607e34b1-0af0-435c-85a0-68409acf5834'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('bd5963e5-a5a9-4a9b-8f30-061dcea3988a'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Những phương pháp nào sau đây có thể giúp tối ưu hóa hiệu suất của trang web?', '<p>Những phương pháp nào sau đây có thể giúp tối ưu hóa hiệu suất của trang web?</p>', '', 1.00, 'MULTIPLE_CHOICE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:47:35.939', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:47:35.939', '607e34b1-0af0-435c-85a0-68409acf5834'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('38ad9c73-9f87-4106-879a-6c7b6352453c'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Những thành phần nào sau đây là thành phần cơ bản của hệ thống thông tin?', '<p>Những thành phần nào sau đây là thành phần cơ bản của hệ thống thông tin?</p>', '', 1.00, 'MULTIPLE_CHOICE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:49:45.880', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:49:45.880', '2ae708a8-3e07-4b53-91ff-32e005bf289c'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('54252d90-a401-4a28-88a0-1d9f53d0f7d6'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Những loại hệ thống thông tin nào sau đây thường được sử dụng trong các tổ chức?', '<p>Những loại hệ thống thông tin nào sau đây thường được sử dụng trong các tổ chức?</p>', '', 1.00, 'MULTIPLE_CHOICE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:51:06.613', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:51:06.613', '2ae708a8-3e07-4b53-91ff-32e005bf289c'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('a498bde0-a531-4dc4-a11f-61a685f03d58'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Những yếu tố nào sau đây có thể ảnh hưởng đến hiệu quả của hệ thống thông tin?', '<p>Những yếu tố nào sau đây có thể ảnh hưởng đến hiệu quả của hệ thống thông tin?</p>', '', 1.00, 'MULTIPLE_CHOICE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:52:35.145', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:52:35.145', '2ae708a8-3e07-4b53-91ff-32e005bf289c'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('f5b1e99a-9c1a-4f1d-b469-2a6aa6f1fe14'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Dữ liệu trong hệ thống thông tin luôn phải được mã hóa để đảm bảo an toàn.', '<p>Dữ liệu trong hệ thống thông tin luôn phải được mã hóa để đảm bảo an toàn.</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:55:06.497', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:55:06.497', '2ae708a8-3e07-4b53-91ff-32e005bf289c'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('f324a283-eb75-44ee-a87d-95c8557e3afe'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Hệ thống thông tin có khả năng hỗ trợ các quyết định bán cấu trúc và không cấu trúc thường được gọi là ___.', '<p>Hệ thống thông tin có khả năng hỗ trợ các quyết định bán cấu trúc và không cấu trúc thường được gọi là ___.</p>', '', 1.00, 'SHORT_ANSWER'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:53:04.535', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:53:04.535', '2ae708a8-3e07-4b53-91ff-32e005bf289c'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('4817c348-c195-4cb5-aa9a-1605d0bf85cb'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Quá trình thu thập, xử lý, lưu trữ và phân phối thông tin để hỗ trợ các quyết định và kiểm soát trong một tổ chức được gọi là ___.', '<p>Quá trình thu thập, xử lý, lưu trữ và phân phối thông tin để hỗ trợ các quyết định và kiểm soát trong một tổ chức được gọi là ___.</p>', '', 1.00, 'SHORT_ANSWER'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:53:25.180', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:53:25.180', '2ae708a8-3e07-4b53-91ff-32e005bf289c'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('887dc519-25fd-4756-a1bb-282d51c3c1c0'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Một phần mềm được sử dụng để quản lý và tương tác với cơ sở dữ liệu là ___.', '<p>Một phần mềm được sử dụng để quản lý và tương tác với cơ sở dữ liệu là ___.</p>', '', 1.00, 'SHORT_ANSWER'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:53:50.757', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:53:50.757', '2ae708a8-3e07-4b53-91ff-32e005bf289c'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('a83546aa-471e-4e6a-9b60-72a8bb18e768'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Hệ thống thông tin tích hợp các chức năng quản lý tài chính, nhân sự, sản xuất và các chức năng kinh doanh khác vào một hệ thống duy nhất là ___.', '<p>Hệ thống thông tin tích hợp các chức năng quản lý tài chính, nhân sự, sản xuất và các chức năng kinh doanh khác vào một hệ thống duy nhất là ___.</p>', '', 1.00, 'SHORT_ANSWER'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:54:16.484', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:54:16.484', '2ae708a8-3e07-4b53-91ff-32e005bf289c'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('777eacb8-9d55-4192-9c16-6f2eddca0c7d'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Hệ thống thông tin chỉ bao gồm phần cứng và phần mềm.', '<p>Hệ thống thông tin chỉ bao gồm phần cứng và phần mềm.</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:54:31.532', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:54:31.532', '2ae708a8-3e07-4b53-91ff-32e005bf289c'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('2ab7f04f-0c51-46dc-a492-50af3a21945a'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Hệ thống thông tin quản lý (MIS) thường được sử dụng để hỗ trợ các quyết định chiến lược trong một tổ chức.', '<p>Hệ thống thông tin quản lý (MIS) thường được sử dụng để hỗ trợ các quyết định chiến lược trong một tổ chức.</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:54:43.792', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:54:43.792', '2ae708a8-3e07-4b53-91ff-32e005bf289c'::uuid, true, false);
+INSERT INTO public.question
+(id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, copy_state, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank, is_lecturer_private)
+VALUES('f16a9095-5c9b-4bc3-a82c-eeb9227842d0'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'ERP (Enterprise Resource Planning) là một loại hệ thống thông tin tích hợp nhiều chức năng kinh doanh khác nhau vào một hệ thống duy nhất.', '<p>ERP (Enterprise Resource Planning) là một loại hệ thống thông tin tích hợp nhiều chức năng kinh doanh khác nhau vào một hệ thống duy nhất.</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, 'CREATED'::public."copystate", '2024-08-04 23:55:20.352', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:55:20.352', '2ae708a8-3e07-4b53-91ff-32e005bf289c'::uuid, true, false);
+
+
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('ea162b45-3761-4169-848b-4bc56faac0c6'::uuid, '560c0865-35df-486d-b886-5189c0a5d66f'::uuid, true, false, '', NULL, '', NULL, 1, '1');
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('4792a347-cfaa-46fe-b2a7-08183654d852'::uuid, '01f3b10a-43b4-4400-863a-bf02fee2c7a7'::uuid, true, false, '', NULL, '', NULL, 0, '1');
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('9f976883-9272-4229-a7e6-016b40c14b92'::uuid, 'c3a2ceac-f0f3-4ed1-8083-a851af7e563a'::uuid, true, false, '', NULL, '', NULL, 0, '1');
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('bcb7a506-ced8-4e1d-8acf-d711c9290ae0'::uuid, 'a267478d-407d-490a-a771-6575db96cf03'::uuid, true, false, '', NULL, '', NULL, 0, '1');
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('420d8926-91cd-4a4e-9038-22f0e2bcd177'::uuid, '382f4794-f1c8-4b32-bac5-8654ad46b6e8'::uuid, false, true, '', NULL, '', 'abc', 1, '1');
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('8a152cce-a05c-44f4-9e55-a8b4692df47b'::uuid, 'a5d85c32-a968-4f0b-8072-99e652887a9f'::uuid, false, true, '', NULL, '', 'abc', 1, '1');
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('1facb3d1-76bd-436c-88fa-e962280fc986'::uuid, '0df9d983-e43f-4ee3-b832-51acce5669e7'::uuid, false, true, '', NULL, '', 'abc', 1, '1');
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('741171f4-6fb3-4b01-baca-91726284fb56'::uuid, '143b4f9a-2bf2-45e7-9b3d-047414b85226'::uuid, true, false, '', NULL, '', NULL, 0, '1');
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('518c2c5e-1566-4fc4-bfe4-14cd8b56b062'::uuid, '83ab4947-2289-4432-9cb4-5a391c7b8f4f'::uuid, true, false, '', NULL, '', NULL, 1, '1');
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('245a0e7b-837a-4957-9078-6ec100eedbdc'::uuid, '7c923a3b-aee6-4890-b96f-7f0a812d1021'::uuid, true, false, '', NULL, '', NULL, 1, '1');
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('93b8550d-c196-4391-a5b0-b41c65da57e1'::uuid, '2ec85315-a873-4b65-a4f3-4c86d60d2fb7'::uuid, true, false, '', NULL, '', NULL, 1, '1');
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('dd50241f-c064-40cc-9370-32dd9444e706'::uuid, 'ff9e5072-6d48-4e97-a059-54729cbf7526'::uuid, false, true, '', NULL, '', 'abc', 1, '1');
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('c1d4163c-fbda-4dc4-a366-a85cab91fc9d'::uuid, '6335b900-459f-4ded-a78d-d3e9d84ce78b'::uuid, true, true, '', NULL, '', 'abc', 1, '1');
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('fcafa3ea-4d2d-4f3a-a4c2-b286729ea2fa'::uuid, 'bd5963e5-a5a9-4a9b-8f30-061dcea3988a'::uuid, false, true, '', NULL, '', 'abc', 1, '1');
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('5d9e7f92-f7ef-42d5-9cc6-cab8eea75b8b'::uuid, '38ad9c73-9f87-4106-879a-6c7b6352453c'::uuid, false, true, '', NULL, '', 'abc', 1, '1');
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('1cd8f5dd-a98c-4497-8c95-1426faf39ac7'::uuid, '54252d90-a401-4a28-88a0-1d9f53d0f7d6'::uuid, false, true, '', NULL, '', 'abc', 1, '1');
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('ed79c3d9-c43b-4247-a740-f61764225a87'::uuid, 'a498bde0-a531-4dc4-a11f-61a685f03d58'::uuid, false, true, '', NULL, '', 'abc', 1, '1');
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('204a9793-366e-471a-a97e-9013424572e2'::uuid, '777eacb8-9d55-4192-9c16-6f2eddca0c7d'::uuid, true, false, '', NULL, '', NULL, 0, '1');
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('59911874-752b-4ad0-99b0-5b1ac844e7d1'::uuid, '2ab7f04f-0c51-46dc-a492-50af3a21945a'::uuid, true, false, '', NULL, '', NULL, 1, '1');
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('1171ae28-6012-4eda-a738-ad173b929053'::uuid, 'f5b1e99a-9c1a-4f1d-b469-2a6aa6f1fe14'::uuid, true, false, '', NULL, '', NULL, 0, '1');
+INSERT INTO public.qtype_multichoice_question
+(id, question_id, single, shuffle_answers, correct_feedback, partially_correct_feedback, incorrect_feedback, answer_numbering, show_num_correct, show_standard_instruction)
+VALUES('3106c905-0ce3-49e9-8ccb-ddcb127fdbeb'::uuid, 'f16a9095-5c9b-4bc3-a82c-eeb9227842d0'::uuid, true, false, '', NULL, '', NULL, 1, '1');
+
+
+INSERT INTO public.qtype_shortanswer_question
+(id, question_id, case_sensitive)
+VALUES('343a67c0-4a33-46ff-84e1-edd0c978336a'::uuid, '1278efc3-479f-4bb8-a839-10cf23e95788'::uuid, true);
+INSERT INTO public.qtype_shortanswer_question
+(id, question_id, case_sensitive)
+VALUES('72b4e99f-0380-4aca-90da-d77872f0dee9'::uuid, 'e99a6172-ef91-4b99-b800-d76b9c74a1d3'::uuid, true);
+INSERT INTO public.qtype_shortanswer_question
+(id, question_id, case_sensitive)
+VALUES('7557053b-4ddc-4328-9bba-6ebd707bdef7'::uuid, '193a4ec2-af70-4fb7-ae2e-b4bf3e11dbad'::uuid, true);
+INSERT INTO public.qtype_shortanswer_question
+(id, question_id, case_sensitive)
+VALUES('f6acf353-b589-4f49-a27d-e6990b856454'::uuid, '496b4abe-ee7b-47b4-9553-004729a3587e'::uuid, true);
+INSERT INTO public.qtype_shortanswer_question
+(id, question_id, case_sensitive)
+VALUES('2f6480d6-8576-4d6a-aa9c-868c5233a1d0'::uuid, '57fd911a-3ca5-4316-90e3-a582dfc7f3b1'::uuid, true);
+INSERT INTO public.qtype_shortanswer_question
+(id, question_id, case_sensitive)
+VALUES('8d9e205e-0a26-4b17-a403-70e7d5b35938'::uuid, 'c43ef98c-79bd-4dc2-9877-3a826c641a3f'::uuid, true);
+INSERT INTO public.qtype_shortanswer_question
+(id, question_id, case_sensitive)
+VALUES('20be5964-84e0-42df-8296-fc64cff4dad8'::uuid, '81fb484b-e882-4b97-865c-4b486a3090d6'::uuid, true);
+INSERT INTO public.qtype_shortanswer_question
+(id, question_id, case_sensitive)
+VALUES('d97113e1-bbe3-4492-bfc9-a23d699f58d3'::uuid, 'f324a283-eb75-44ee-a87d-95c8557e3afe'::uuid, true);
+INSERT INTO public.qtype_shortanswer_question
+(id, question_id, case_sensitive)
+VALUES('0cda64a7-ad74-465a-af44-e9a597b65aec'::uuid, '4817c348-c195-4cb5-aa9a-1605d0bf85cb'::uuid, true);
+INSERT INTO public.qtype_shortanswer_question
+(id, question_id, case_sensitive)
+VALUES('e386b73c-b1fe-4a0f-bf11-187a00ba9a2b'::uuid, '887dc519-25fd-4756-a1bb-282d51c3c1c0'::uuid, true);
+INSERT INTO public.qtype_shortanswer_question
+(id, question_id, case_sensitive)
+VALUES('5d84d176-06a0-4cfc-98f3-f57f8156ad29'::uuid, 'a83546aa-471e-4e6a-9b60-72a8bb18e768'::uuid, true);
+
+
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('7ba6c701-ea50-4350-854f-804904f04d21'::uuid, '560c0865-35df-486d-b886-5189c0a5d66f'::uuid, 'Correct', 'true', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('846462a1-729d-4c14-a533-0d61268e503a'::uuid, '01f3b10a-43b4-4400-863a-bf02fee2c7a7'::uuid, 'Correct', 'false', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('aaf4f04a-57d8-4477-8133-c1914f88bf2c'::uuid, 'c3a2ceac-f0f3-4ed1-8083-a851af7e563a'::uuid, 'Correct', 'false', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('8d3badbf-cc9d-4d5e-9a94-4f1d7d740efa'::uuid, 'a267478d-407d-490a-a771-6575db96cf03'::uuid, 'Correct', 'false', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('ab1849cc-766a-4a8c-8d4b-f16a6c68ece6'::uuid, '1278efc3-479f-4bb8-a839-10cf23e95788'::uuid, '<p>lập trình hướng đối tượng</p>', 'lập trình hướng đối tượng', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('524d7eed-b802-482b-8a8c-0cb964453657'::uuid, 'e99a6172-ef91-4b99-b800-d76b9c74a1d3'::uuid, '<p>class</p>', 'class', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('5f72a734-e87b-46b6-a5b4-85d7348b9fe9'::uuid, '193a4ec2-af70-4fb7-ae2e-b4bf3e11dbad'::uuid, '<p>stack</p>', 'stack', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('0a0bea20-0f9f-464a-9b91-7164ec93a212'::uuid, '496b4abe-ee7b-47b4-9553-004729a3587e'::uuid, '<p>đệ quy</p>', 'đệ quy', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('9fce4acb-b806-41f4-9cf1-4894df7f9542'::uuid, '382f4794-f1c8-4b32-bac5-8654ad46b6e8'::uuid, '<p>Python</p>', '<p>Python</p>', 0.50);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('2d2a055d-554c-4302-9042-05f807f5f974'::uuid, 'a5d85c32-a968-4f0b-8072-99e652887a9f'::uuid, '<p>Danh sách liên kết</p>', '<p>Danh sách liên kết</p>', 0.50);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('f3e5baa7-f80c-4f15-a46c-5c1f6e0ff5e5'::uuid, 'a5d85c32-a968-4f0b-8072-99e652887a9f'::uuid, '<p>Cây nhị phân</p>', '<p>Cây nhị phân</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('910e49f0-8784-4ecf-bf57-e17b0b533335'::uuid, 'a5d85c32-a968-4f0b-8072-99e652887a9f'::uuid, '<p>Ngăn xếp</p>', '<p>Ngăn xếp</p>', 0.50);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('11bb7b97-1eb9-46d8-a795-1a8dd0de4616'::uuid, 'a5d85c32-a968-4f0b-8072-99e652887a9f'::uuid, '<p>Đồ thị</p>', '<p>Đồ thị</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('6c4b8f8d-34ef-47c7-a601-39471c343235'::uuid, '0df9d983-e43f-4ee3-b832-51acce5669e7'::uuid, '<p>Đóng gói</p>', '<p>Đóng gói</p>', 0.50);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('98cc1506-97ed-438d-9a14-f53290296eff'::uuid, '0df9d983-e43f-4ee3-b832-51acce5669e7'::uuid, '<p>Hàm đệ quy</p>', '<p>Hàm đệ quy</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('37853f30-ae7b-4367-9c05-3d168cfb8541'::uuid, '0df9d983-e43f-4ee3-b832-51acce5669e7'::uuid, '<p>Kế thừa</p>', '<p>Kế thừa</p>', 0.50);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('6555aaba-4f72-45ba-be99-dc8beaa266a1'::uuid, '0df9d983-e43f-4ee3-b832-51acce5669e7'::uuid, '<p>Phân tích dữ liệu</p>', '<p>Phân tích dữ liệu</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('126f915b-eaf1-45b6-bcd7-b0f470aeb92d'::uuid, '143b4f9a-2bf2-45e7-9b3d-047414b85226'::uuid, 'Correct', 'false', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('1aa00b7e-f048-4fa2-b09f-713a7dc627ce'::uuid, '83ab4947-2289-4432-9cb4-5a391c7b8f4f'::uuid, 'Correct', 'true', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('67c48f30-b05a-4c47-9a12-a7cf175fa90c'::uuid, '7c923a3b-aee6-4890-b96f-7f0a812d1021'::uuid, 'Correct', 'true', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('658ba633-baf2-4332-a567-90fdedcf1830'::uuid, '2ec85315-a873-4b65-a4f3-4c86d60d2fb7'::uuid, 'Correct', 'true', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('4615bf88-b9cf-4217-943b-ba2654ac3669'::uuid, '57fd911a-3ca5-4316-90e3-a582dfc7f3b1'::uuid, '<p>HTML</p>', 'HTML', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('6691a1ca-a4b8-4b6c-b0a1-7b1dc818651c'::uuid, 'c43ef98c-79bd-4dc2-9877-3a826c641a3f'::uuid, '<p>React</p>', 'React', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('b385ca6c-6e92-4cf8-a67a-3e02e3609458'::uuid, '81fb484b-e882-4b97-865c-4b486a3090d6'::uuid, '<p>HTTPS</p>', 'HTTPS', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('41ac4267-5cef-478c-9d78-b60538484c66'::uuid, 'ff9e5072-6d48-4e97-a059-54729cbf7526'::uuid, '<p>HTML</p>', '<p>HTML</p>', 0.50);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('3f203216-22fd-4f15-8146-ef343e9adcfa'::uuid, 'ff9e5072-6d48-4e97-a059-54729cbf7526'::uuid, '<p>CSS</p>', '<p>CSS</p>', 0.50);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('9daa71b2-353d-4290-ab08-51cfa8910964'::uuid, 'ff9e5072-6d48-4e97-a059-54729cbf7526'::uuid, '<p>Java</p>', '<p>Java</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('132e1fcf-f86c-450a-b202-18156a5987e6'::uuid, 'ff9e5072-6d48-4e97-a059-54729cbf7526'::uuid, '<p>Node.js</p>', '<p>Node.js</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('43345703-f725-4411-b1f1-d80b1bc49b73'::uuid, '6335b900-459f-4ded-a78d-d3e9d84ce78b'::uuid, '<p>React</p>', '<p>React</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('16fa6bd0-ea1a-43ad-9142-0a2f2beb3461'::uuid, '6335b900-459f-4ded-a78d-d3e9d84ce78b'::uuid, '<p>Django</p>', '<p>Django</p>', 0.50);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('96d5db66-74b5-4d96-94f0-8c04b0df3469'::uuid, '6335b900-459f-4ded-a78d-d3e9d84ce78b'::uuid, '<p>Laravel</p>', '<p>Laravel</p>', 0.50);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('b4c83d5d-3033-45e0-bc95-82f9c1a3da28'::uuid, '6335b900-459f-4ded-a78d-d3e9d84ce78b'::uuid, '<p>Angular</p>', '<p>Angular</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('664657dc-6d9b-4c4e-b4b3-3892d0d29152'::uuid, 'bd5963e5-a5a9-4a9b-8f30-061dcea3988a'::uuid, '<p>Sử dụng bộ nhớ đệm (caching)</p>', '<p>Sử dụng bộ nhớ đệm (caching)</p>', 0.30);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('9455b8a7-063a-481a-848a-d668455a49ec'::uuid, 'bd5963e5-a5a9-4a9b-8f30-061dcea3988a'::uuid, '<p>Tối ưu hóa hình ảnh</p>', '<p>Tối ưu hóa hình ảnh</p>', 0.30);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('9be1affd-9f8f-474a-810a-093814d1fc2a'::uuid, 'bd5963e5-a5a9-4a9b-8f30-061dcea3988a'::uuid, '<p>Sử dụng nhiều font chữ</p>', '<p>Sử dụng nhiều font chữ</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('3ebcbb0c-4915-4bde-8b8f-9735bdf2402b'::uuid, 'bd5963e5-a5a9-4a9b-8f30-061dcea3988a'::uuid, '<p>Giảm thiểu số lượng yêu cầu HTTP</p>', '<p>Giảm thiểu số lượng yêu cầu HTTP</p>', 0.40);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('4b22022f-f3c4-4080-8e86-ee8e04705c4e'::uuid, '38ad9c73-9f87-4106-879a-6c7b6352453c'::uuid, '<p>Phần cứng</p>', '<p>Phần cứng</p>', 0.25);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('279e01a8-8cbd-4a19-b35f-1b6d6d599ee1'::uuid, '38ad9c73-9f87-4106-879a-6c7b6352453c'::uuid, '<p>Phần mềm</p>', '<p>Phần mềm</p>', 0.25);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('4984e0d6-9254-4c96-870d-cb4a4d90db71'::uuid, '38ad9c73-9f87-4106-879a-6c7b6352453c'::uuid, '<p>Dữ liệu</p>', '<p>Dữ liệu</p>', 0.25);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('86a989e4-d74c-4a2d-850f-61797ed0e8d9'::uuid, '38ad9c73-9f87-4106-879a-6c7b6352453c'::uuid, '<p>Người sử dụng</p>', '<p>Người sử dụng</p>', 0.25);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('351facaa-52fc-4dab-ac90-501cd42ab2a3'::uuid, '54252d90-a401-4a28-88a0-1d9f53d0f7d6'::uuid, '<p>Hệ thống xử lý giao dịch (TPS)</p>', '<p>Hệ thống xử lý giao dịch (TPS)</p>', 0.30);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('8b7080d1-dafe-4697-b585-32b66dbc7c59'::uuid, '54252d90-a401-4a28-88a0-1d9f53d0f7d6'::uuid, '<p>Hệ thống hỗ trợ quyết định (DSS)</p>', '<p>Hệ thống hỗ trợ quyết định (DSS)</p>', 0.30);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('3edb6097-4caf-4b82-b907-b57a82d4a9ee'::uuid, '54252d90-a401-4a28-88a0-1d9f53d0f7d6'::uuid, '<p>Hệ thống thông tin điều hành (EIS)</p>', '<p>Hệ thống thông tin điều hành (EIS)</p>', 0.40);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('acac9865-8066-4efe-b6ef-a5486d168fc7'::uuid, '54252d90-a401-4a28-88a0-1d9f53d0f7d6'::uuid, '<p>Hệ thống quản lý cơ sở dữ liệu (DBMS)</p>', '<p>Hệ thống quản lý cơ sở dữ liệu (DBMS)</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('4c3eb786-3c24-4b0f-ad3d-11ba2420fbf9'::uuid, 'a498bde0-a531-4dc4-a11f-61a685f03d58'::uuid, '<p>Công nghệ</p>', '<p>Công nghệ</p>', 0.25);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('4c23e2fc-cf00-45b9-820a-0b9b5d156f21'::uuid, 'a498bde0-a531-4dc4-a11f-61a685f03d58'::uuid, '<p>Quản lý</p>', '<p>Quản lý</p>', 0.25);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('934a4f13-3402-4616-bbb9-d59fd2b2992c'::uuid, 'a498bde0-a531-4dc4-a11f-61a685f03d58'::uuid, '<p>Người sử dụng</p>', '<p>Người sử dụng</p>', 0.25);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('ba617f29-f2f7-4eab-95c8-ba12cc2aeb04'::uuid, 'a498bde0-a531-4dc4-a11f-61a685f03d58'::uuid, '<p>Chính sách công ty</p>', '<p>Chính sách công ty</p>', 0.25);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('7936790c-2f00-41c3-a7bd-e20a10e365da'::uuid, 'f324a283-eb75-44ee-a87d-95c8557e3afe'::uuid, '<p>hệ thống hỗ trợ quyết định (DSS)</p>', 'hệ thống hỗ trợ quyết định (DSS)', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('72f1589a-ceb8-40fc-8ab8-13ad1ce2d751'::uuid, '4817c348-c195-4cb5-aa9a-1605d0bf85cb'::uuid, '<p>hệ thống thông tin quản lý (MIS)</p>', 'hệ thống thông tin quản lý (MIS)', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('671f458f-ca6c-473c-ace4-ac7a59311cfb'::uuid, '887dc519-25fd-4756-a1bb-282d51c3c1c0'::uuid, '<p>hệ thống quản lý cơ sở dữ liệu (DBMS)</p>', 'hệ thống quản lý cơ sở dữ liệu (DBMS)', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('7e3aed82-27ab-4e97-a8c9-6d23a0a7b889'::uuid, 'a83546aa-471e-4e6a-9b60-72a8bb18e768'::uuid, '<p>hệ thống hoạch định nguồn lực doanh nghiệp (ERP)</p>', 'hệ thống hoạch định nguồn lực doanh nghiệp (ERP)', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('76459464-0cad-4d40-9344-502742ba4403'::uuid, '777eacb8-9d55-4192-9c16-6f2eddca0c7d'::uuid, 'Correct', 'false', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('8c6a2ff9-7f6c-4023-aa19-d613e148ef96'::uuid, '2ab7f04f-0c51-46dc-a492-50af3a21945a'::uuid, 'Correct', 'true', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('41fbe710-cfd6-4043-bbc1-2b78ca1896db'::uuid, 'f5b1e99a-9c1a-4f1d-b469-2a6aa6f1fe14'::uuid, 'Correct', 'false', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('416d1b89-d3fb-430e-8024-89f33548fe46'::uuid, 'f16a9095-5c9b-4bc3-a82c-eeb9227842d0'::uuid, 'Correct', 'true', 1.00);
+-----------
