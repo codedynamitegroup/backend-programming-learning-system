@@ -64,6 +64,7 @@ public class MoodleDataMapper {
                 .course(course)
                 .user(user)
                 .roleMoodle(roleMoodle)
+                .createdAt(ZonedDateTime.now())
                 .build();
     }
 
