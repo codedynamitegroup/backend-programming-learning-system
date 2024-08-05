@@ -7,8 +7,8 @@ INSERT INTO "public"."organization" VALUES ('08b65a39-394f-4977-a5fa-3fe145b620f
 -- ----------------------------
 INSERT INTO "public"."role_moodle" VALUES (1, 'Quản lý');
 INSERT INTO "public"."role_moodle" VALUES (2, 'Người tạo khóa học');
-INSERT INTO "public"."role_moodle" VALUES (3, 'Giảng viên 1');
-INSERT INTO "public"."role_moodle" VALUES (4, 'Giảng viên');
+INSERT INTO "public"."role_moodle" VALUES (3, 'Giảng viên');
+INSERT INTO "public"."role_moodle" VALUES (4, 'Giảng viên không được chỉnh sửa');
 INSERT INTO "public"."role_moodle" VALUES (5, 'Học sinh');
 INSERT INTO "public"."role_moodle" VALUES (6, 'Guest');
 
@@ -85,7 +85,7 @@ INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994735', 
 INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994752', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'K Divisible Elements Subarrays', 'Question Wow Text', 'Question Amazing feedback', 1, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'SHORT_ANSWER', 'MEDIUM');
 INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994753', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Total Appeal of A String', 'Question Speaker Text', 'Good Job', 1, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'MULTIPLE_CHOICE', 'HARD');
 INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994751', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Minimum Consecutive Cards to Pick Up', 'Question Wire Text', 'Question Gold feedback', 1, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'ESSAY', 'EASY');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994221', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Sum of two integer', '<div class="elfjS" data-track-load="description_content"><p>Given two integer number A and B.</p><p>Calculate the sum of A and B.</p><p>&nbsp;</p><p><strong class="example">Example 1:</strong></p><pre>
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994221', null, 'Sum of two integer', '<div class="elfjS" data-track-load="description_content"><p>Given two integer number A and B.</p><p>Calculate the sum of A and B.</p><p>&nbsp;</p><p><strong class="example">Example 1:</strong></p><pre>
 Input:
 1
 1
@@ -95,72 +95,72 @@ Input:
 13
 10
 Output: 23 
-</pre><p>&nbsp;</p></div>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994736', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Sum of an array', '<p>Write a function that takes an array of numbers as input and returns the sum of all the elements in the array.</p><blockquote>Example:</blockquote><pre class="ql-syntax" spellcheck="false"> Input:
+</pre><p>&nbsp;</p></div>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994736', null, 'Sum of an array', '<p>Write a function that takes an array of numbers as input and returns the sum of all the elements in the array.</p><blockquote>Example:</blockquote><pre class="ql-syntax" spellcheck="false"> Input:
  3
  1 2 3
  Output: 6    
-</pre><p><br></p>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994737', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'FizzBuzz', '<p>Write a program that prints the numbers from 1 to n. But for multiples of three, print "Fizz" instead of the number, and for the multiples of five, print "Buzz". For numbers that are multiples of both three and five, print "FizzBuzz".</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input: 15
+</pre><p><br></p>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994737', null, 'FizzBuzz', '<p>Write a program that prints the numbers from 1 to n. But for multiples of three, print "Fizz" instead of the number, and for the multiples of five, print "Buzz". For numbers that are multiples of both three and five, print "FizzBuzz".</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input: 15
 Output:
 1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz
-</pre>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
+</pre>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
 INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994738', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Robber', '<p>You are given a list of non-negative integers representing the amount of money of each house in a row of houses. Each house has a certain amount of money stashed, but you cannot rob two adjacent houses at the same time because the police will be alerted. Your task is to determine the maximum amount of money you can rob tonight without alerting the police.</p><p>Example 1:</p><pre class="ql-syntax" spellcheck="false">Input: 
 4
 1 2 3 1
 Output: 4
 Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3). Total amount = 1 + 3 = 4.
-</pre>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'MEDIUM');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994739', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Three sum closest', '<p>You are given an array <code>nums</code> of integers. Write a function to find three numbers in <code>nums</code> such that the sum is closest to a given target <code>target</code>. Return the sum of the three integers. You may assume that each input would have exactly one solution.</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
+</pre>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'MEDIUM');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994739', null, 'Three sum closest', '<p>You are given an array <code>nums</code> of integers. Write a function to find three numbers in <code>nums</code> such that the sum is closest to a given target <code>target</code>. Return the sum of the three integers. You may assume that each input would have exactly one solution.</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
 4
 -1 2 1 -4
 1
 Output: 2
 Explanation: The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
-</pre>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'MEDIUM');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994740', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'List divisor', '<p>List all divisor of number <code>n</code></p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
+</pre>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'MEDIUM');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994740', null, 'List divisor', '<p>List all divisor of number <code>n</code></p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
 10
 Output:
 1 2 5 10
-</pre>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994741', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'List odd divisor', '<p>List all odd divisor of number <code>n</code></p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input: 9
+</pre>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994741', null, 'List odd divisor', '<p>List all odd divisor of number <code>n</code></p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input: 9
 Output:
 1, 3, 9
-</pre>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994742', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Entirely odd digit', '<p>Check if the positive integer <code>n</code> consists entirely of odd digits.</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
+</pre>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994742', null, 'Entirely odd digit', '<p>Check if the positive integer <code>n</code> consists entirely of odd digits.</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
 11
 Output:
 true
-</pre>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994743', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Palindrome integer', '<p>Check if the positive integer n is a palindrome or not</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
+</pre>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994743', null, 'Palindrome integer', '<p>Check if the positive integer n is a palindrome or not</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
 11
 Output:
 true
-</pre>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'MEDIUM');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994744', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Finding maximum sum k less than n', '<p>Given <code>n</code> is a positive integer. Find the largest positive integer <code>k</code> such that S(k)&lt;n, where S(k) is defined as follows: S(k)=1+2+3+…+k.</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
+</pre>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'MEDIUM');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994744', null, 'Finding maximum sum k less than n', '<p>Given <code>n</code> is a positive integer. Find the largest positive integer <code>k</code> such that S(k)&lt;n, where S(k) is defined as follows: S(k)=1+2+3+…+k.</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
 15
 Output:
 4
-</pre>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'MEDIUM');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994745', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Check 2^k', '<p>Check if a 4-byte integer is of the form 2^k</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
+</pre>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'MEDIUM');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994745', null, 'Check 2^k', '<p>Check if a 4-byte integer is of the form 2^k</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
 4
 Output:
 true
-</pre>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'MEDIUM');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994746', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Check 3^k', '<p>Check if a 4-byte integer is of the form 3^k</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
+</pre>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'MEDIUM');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994746', null, 'Check 3^k', '<p>Check if a 4-byte integer is of the form 3^k</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
 4
 Output:
 false
-</pre>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'MEDIUM');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994747', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Calculate S(n, x) with Summation and Exponential Series', '<p>Calculate&nbsp;<span class="ql-formula" data-value="S(n, x) = x + \frac{x^2}{1 + 2} + \frac{x^3}{1 + 2 + 3} + \cdots + \frac{x^n}{1 + 2 + 3 + \cdots + n}">﻿<span contenteditable="false"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo stretchy="false">(</mo><mi>n</mi><mo separator="true">,</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>x</mi><mo>+</mo><mfrac><msup><mi>x</mi><mn>2</mn></msup><mrow><mn>1</mn><mo>+</mo><mn>2</mn></mrow></mfrac><mo>+</mo><mfrac><msup><mi>x</mi><mn>3</mn></msup><mrow><mn>1</mn><mo>+</mo><mn>2</mn><mo>+</mo><mn>3</mn></mrow></mfrac><mo>+</mo><mo>⋯</mo><mo>+</mo><mfrac><msup><mi>x</mi><mi>n</mi></msup><mrow><mn>1</mn><mo>+</mo><mn>2</mn><mo>+</mo><mn>3</mn><mo>+</mo><mo>⋯</mo><mo>+</mo><mi>n</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">S(n, x) = x + \frac{x^2}{1 + 2} + \frac{x^3}{1 + 2 + 3} + \cdots + \frac{x^n}{1 + 2 + 3 + \cdots + n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mord mathnormal" style="margin-right: 0.0576em;">S</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.1667em;"></span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut" style="height: 0.6667em; vertical-align: -0.0833em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 1.4213em; vertical-align: -0.4033em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.0179em;"><span class="" style="top: -2.655em;"><span class="pstrut" style="height: 3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mbin mtight">+</span><span class="mord mtight">2</span></span></span></span><span class="" style="top: -3.23em;"><span class="pstrut" style="height: 3em;"></span><span class="frac-line" style="border-bottom-width: 0.04em;"></span></span><span class="" style="top: -3.394em;"><span class="pstrut" style="height: 3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.8913em;"><span class="" style="top: -2.931em; margin-right: 0.0714em;"><span class="pstrut" style="height: 2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.4033em;"><span class=""></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 1.4213em; vertical-align: -0.4033em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.0179em;"><span class="" style="top: -2.655em;"><span class="pstrut" style="height: 3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mbin mtight">+</span><span class="mord mtight">2</span><span class="mbin mtight">+</span><span class="mord mtight">3</span></span></span></span><span class="" style="top: -3.23em;"><span class="pstrut" style="height: 3em;"></span><span class="frac-line" style="border-bottom-width: 0.04em;"></span></span><span class="" style="top: -3.394em;"><span class="pstrut" style="height: 3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.8913em;"><span class="" style="top: -2.931em; margin-right: 0.0714em;"><span class="pstrut" style="height: 2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.4033em;"><span class=""></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 0.6667em; vertical-align: -0.0833em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 1.3143em; vertical-align: -0.4033em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.911em;"><span class="" style="top: -2.655em;"><span class="pstrut" style="height: 3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mbin mtight">+</span><span class="mord mtight">2</span><span class="mbin mtight">+</span><span class="mord mtight">3</span><span class="mbin mtight">+</span><span class="minner mtight">⋯</span><span class="mbin mtight">+</span><span class="mord mathnormal mtight">n</span></span></span></span><span class="" style="top: -3.23em;"><span class="pstrut" style="height: 3em;"></span><span class="frac-line" style="border-bottom-width: 0.04em;"></span></span><span class="" style="top: -3.394em;"><span class="pstrut" style="height: 3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.7385em;"><span class="" style="top: -2.931em; margin-right: 0.0714em;"><span class="pstrut" style="height: 2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.4033em;"><span class=""></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>﻿</span> , rounded to three decimal places.</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
+</pre>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'MEDIUM');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994747', null, 'Calculate S(n, x) with Summation and Exponential Series', '<p>Calculate&nbsp;<span class="ql-formula" data-value="S(n, x) = x + \frac{x^2}{1 + 2} + \frac{x^3}{1 + 2 + 3} + \cdots + \frac{x^n}{1 + 2 + 3 + \cdots + n}">﻿<span contenteditable="false"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo stretchy="false">(</mo><mi>n</mi><mo separator="true">,</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>x</mi><mo>+</mo><mfrac><msup><mi>x</mi><mn>2</mn></msup><mrow><mn>1</mn><mo>+</mo><mn>2</mn></mrow></mfrac><mo>+</mo><mfrac><msup><mi>x</mi><mn>3</mn></msup><mrow><mn>1</mn><mo>+</mo><mn>2</mn><mo>+</mo><mn>3</mn></mrow></mfrac><mo>+</mo><mo>⋯</mo><mo>+</mo><mfrac><msup><mi>x</mi><mi>n</mi></msup><mrow><mn>1</mn><mo>+</mo><mn>2</mn><mo>+</mo><mn>3</mn><mo>+</mo><mo>⋯</mo><mo>+</mo><mi>n</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">S(n, x) = x + \frac{x^2}{1 + 2} + \frac{x^3}{1 + 2 + 3} + \cdots + \frac{x^n}{1 + 2 + 3 + \cdots + n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mord mathnormal" style="margin-right: 0.0576em;">S</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.1667em;"></span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut" style="height: 0.6667em; vertical-align: -0.0833em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 1.4213em; vertical-align: -0.4033em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.0179em;"><span class="" style="top: -2.655em;"><span class="pstrut" style="height: 3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mbin mtight">+</span><span class="mord mtight">2</span></span></span></span><span class="" style="top: -3.23em;"><span class="pstrut" style="height: 3em;"></span><span class="frac-line" style="border-bottom-width: 0.04em;"></span></span><span class="" style="top: -3.394em;"><span class="pstrut" style="height: 3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.8913em;"><span class="" style="top: -2.931em; margin-right: 0.0714em;"><span class="pstrut" style="height: 2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.4033em;"><span class=""></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 1.4213em; vertical-align: -0.4033em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.0179em;"><span class="" style="top: -2.655em;"><span class="pstrut" style="height: 3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mbin mtight">+</span><span class="mord mtight">2</span><span class="mbin mtight">+</span><span class="mord mtight">3</span></span></span></span><span class="" style="top: -3.23em;"><span class="pstrut" style="height: 3em;"></span><span class="frac-line" style="border-bottom-width: 0.04em;"></span></span><span class="" style="top: -3.394em;"><span class="pstrut" style="height: 3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.8913em;"><span class="" style="top: -2.931em; margin-right: 0.0714em;"><span class="pstrut" style="height: 2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.4033em;"><span class=""></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 0.6667em; vertical-align: -0.0833em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 1.3143em; vertical-align: -0.4033em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.911em;"><span class="" style="top: -2.655em;"><span class="pstrut" style="height: 3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mbin mtight">+</span><span class="mord mtight">2</span><span class="mbin mtight">+</span><span class="mord mtight">3</span><span class="mbin mtight">+</span><span class="minner mtight">⋯</span><span class="mbin mtight">+</span><span class="mord mathnormal mtight">n</span></span></span></span><span class="" style="top: -3.23em;"><span class="pstrut" style="height: 3em;"></span><span class="frac-line" style="border-bottom-width: 0.04em;"></span></span><span class="" style="top: -3.394em;"><span class="pstrut" style="height: 3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.7385em;"><span class="" style="top: -2.931em; margin-right: 0.0714em;"><span class="pstrut" style="height: 2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.4033em;"><span class=""></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>﻿</span> , rounded to three decimal places.</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
 2 1.5
 Output:
 2.250
-</pre>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'MEDIUM');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994748', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Check square number', 'Given an integer number n, check if it is a square number', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994749', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Find the nax number from the set of float number a, b, c', 'A line with three number separated by a space character', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994750', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Same sign number', 'Check if Two Real Numbers Have the Same Sign', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994754', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Solve ax+b=0', '<p>Write a program to solve the linear equation <span class="ql-formula" data-value="ax + b = 0">﻿<span contenteditable="false"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>x</mi><mo>+</mo><mi>b</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">ax + b = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.6667em; vertical-align: -0.0833em;"></span><span class="mord mathnormal">a</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut" style="height: 0.6444em;"></span><span class="mord">0</span></span></span></span></span>﻿</span> </p><p>Example 1:</p><pre class="ql-syntax" spellcheck="false">Input: 
+</pre>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'MEDIUM');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994748', null, 'Check square number', 'Given an integer number n, check if it is a square number', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994749', null, 'Find the nax number from the set of float number a, b, c', 'A line with three number separated by a space character', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994750', null, 'Same sign number', 'Check if Two Real Numbers Have the Same Sign', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994754', null, 'Solve ax+b=0', '<p>Write a program to solve the linear equation <span class="ql-formula" data-value="ax + b = 0">﻿<span contenteditable="false"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>x</mi><mo>+</mo><mi>b</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">ax + b = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.6667em; vertical-align: -0.0833em;"></span><span class="mord mathnormal">a</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut" style="height: 0.6444em;"></span><span class="mord">0</span></span></span></span></span>﻿</span> </p><p>Example 1:</p><pre class="ql-syntax" spellcheck="false">Input:
 0 0
 Output:
 Infinite solutions
@@ -172,49 +172,61 @@ No solution
 3 0
 Output:
 0
-</pre>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'MEDIUM');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994755', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Determine the Quarter of a Given Month', '<p>Input a month of a year. Determine which quarter the month belongs to</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
+</pre>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'MEDIUM');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994755', null, 'Determine the Quarter of a Given Month', '<p>Input a month of a year. Determine which quarter the month belongs to</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
 1
 Output:
 Quarter 1
-</pre>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994756', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Calculate sum of cubes', '<p>Calculate <span class="ql-formula" data-value="S(n) = 1^3 + 2^3 + \ldots + n^3">﻿<span contenteditable="false"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><msup><mn>1</mn><mn>3</mn></msup><mo>+</mo><msup><mn>2</mn><mn>3</mn></msup><mo>+</mo><mo>…</mo><mo>+</mo><msup><mi>n</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">S(n) = 1^3 + 2^3 + \ldots + n^3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mord mathnormal" style="margin-right: 0.0576em;">S</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut" style="height: 0.8974em; vertical-align: -0.0833em;"></span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.8141em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 0.8974em; vertical-align: -0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.8141em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 0.6667em; vertical-align: -0.0833em;"></span><span class="minner">…</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 0.8141em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.8141em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span>﻿</span> </p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
+</pre>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994756', null, 'Calculate sum of cubes', '<p>Calculate <span class="ql-formula" data-value="S(n) = 1^3 + 2^3 + \ldots + n^3">﻿<span contenteditable="false"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><msup><mn>1</mn><mn>3</mn></msup><mo>+</mo><msup><mn>2</mn><mn>3</mn></msup><mo>+</mo><mo>…</mo><mo>+</mo><msup><mi>n</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">S(n) = 1^3 + 2^3 + \ldots + n^3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mord mathnormal" style="margin-right: 0.0576em;">S</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut" style="height: 0.8974em; vertical-align: -0.0833em;"></span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.8141em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 0.8974em; vertical-align: -0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.8141em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 0.6667em; vertical-align: -0.0833em;"></span><span class="minner">…</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 0.8141em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.8141em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span>﻿</span> </p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
 2
 Output:
 9
-</pre>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994757', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'English alphabet printing', 'Print from A to the nth character in the English alphabet', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994758', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Check prime number', 'Check if n is a prime number or not', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'MEDIUM');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994759', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Replace negative number', '<p>Write a program to input three real numbers. Replace all negative numbers with their absolute values</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
+</pre>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994757', null, 'English alphabet printing', 'Print from A to the nth character in the English alphabet', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994758', null, 'Check prime number', 'Check if n is a prime number or not', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'MEDIUM');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994759', null, 'Replace negative number', '<p>Write a program to input three real numbers. Replace all negative numbers with their absolute values</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
 1 -1.1 -2
 Output:
 1 1.1 2
-</pre>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994760', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Check triangle from side length', '<p>Write a program to input the lengths of the three sides of a triangle and determine the type of triangle</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
+</pre>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994760', null, 'Check triangle from side length', '<p>Write a program to input the lengths of the three sides of a triangle and determine the type of triangle</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
 1 1 1
 Output:
 Equilateral triangle
-</pre>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'HARD');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994761', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Determine number of days in a month', '<p>Write a program to input a month and a year. Determine the number of days in that month</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
+</pre>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'HARD');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994761', null, 'Determine number of days in a month', '<p>Write a program to input a month and a year. Determine the number of days in that month</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
 1 2020
 Output:
 31
-</pre>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994762', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Previous and next day', '<p>Write a program to input a date, find the previous day and the next day</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
+</pre>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'EASY');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994762', null, 'Previous and next day', '<p>Write a program to input a date, find the previous day and the next day</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
 2024 6 26
 Output:
 2024-06-25, 2024-06-27
-</pre>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'MEDIUM');
-INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994763', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Determine the Day of the Week from a Given Date', '<p>Write a program to input a day, month, and year. Determine the day of the week for that date</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
+</pre>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'MEDIUM');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994763', null, 'Determine the Day of the Week from a Given Date', '<p>Write a program to input a day, month, and year. Determine the day of the week for that date</p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
 2024-03-01
 Output:
 Friday
-</pre>', 'Good Job', 10, '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'HARD');
+</pre>', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.681623+07', '2024-08-04 14:14:27.681623+07', NULL, 'f', 'CODE', 'HARD');
 INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994764', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'List divisor', '<p>List all divisor of number <code>n</code></p><p>Example:</p><pre class="ql-syntax" spellcheck="false">Input:
 10
 Output:
 1 2 5 10
 </pre>', 'Good Job', 10, '64412e27-169e-44ea-a101-74ebf8cb82d9', '64412e27-169e-44ea-a101-74ebf8cb82d9', '2024-08-04 14:14:27.688013+07', '2024-08-04 14:14:27.688013+07', 'd8fed7b0-bd98-436e-9c4d-36b8fe9f372e', 'f', 'CODE', 'EASY');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994765', null, 'Count words', '', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.688013+07', '2024-08-04 14:14:27.688013+07', null, 'f', 'CODE', 'EASY');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994766', null, 'Reverse string', '', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.688013+07', '2024-08-04 14:14:27.688013+07', null, 'f', 'CODE', 'EASY');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994767', null, 'Palindrome string', '', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.688013+07', '2024-08-04 14:14:27.688013+07', null, 'f', 'CODE', 'MEDIUM');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994768', null, 'Delete consecutive duplicate characters', '', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.688013+07', '2024-08-04 14:14:27.688013+07', null, 'f', 'CODE', 'MEDIUM');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994769', null, 'Count the number of times a character appears', '', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.688013+07', '2024-08-04 14:14:27.688013+07', null, 'f', 'CODE', 'EASY');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994770', null, 'Find the first non-repeating character', '', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.688013+07', '2024-08-04 14:14:27.688013+07', null, 'f', 'CODE', 'MEDIUM');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994771', null, 'Count the vowels in the string', '', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.688013+07', '2024-08-04 14:14:27.688013+07', null, 'f', 'CODE', 'EASY');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994772', null, 'Find the longest word in the string', '', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.688013+07', '2024-08-04 14:14:27.688013+07', null, 'f', 'CODE', 'MEDIUM');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994773', null, 'Check string contains prime number', '', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.688013+07', '2024-08-04 14:14:27.688013+07', null, 'f', 'CODE', 'HARD');
+INSERT INTO "public"."question" VALUES ('b6484e21-6937-489c-b031-b71767994774', null, 'Find the substring with the greatest length that does not contain repeated characters', '', 'Good Job', 10, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-08-04 14:14:27.688013+07', '2024-08-04 14:14:27.688013+07', null, 'f', 'CODE', 'HARD');
+
+
 INSERT INTO "public"."question" VALUES ('20d06a81-f597-41bc-a60c-480d5c38eb80', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Câu 1', '<p><span style="color: rgb(51, 51, 51);">Hãy cho biết ý tưởng nào sau đây nói về phương pháp sắp xếp chọn tăng dần (select sort)?</span></p>', '', 1, '64412e27-169e-44ea-a101-74ebf8cb82d9', '64412e27-169e-44ea-a101-74ebf8cb82d9', '2024-06-20 21:22:33.943+07', '2024-06-20 21:22:33.943+07', NULL, 'f', 'MULTIPLE_CHOICE', 'EASY');
 INSERT INTO "public"."question" VALUES ('82a72f33-69d1-417a-bc4a-54e4a3f42a06', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Câu 2', '<h4><a href="https://khoahoc.vietjack.com/question/958165/phuong-phap-nao-sau-day-chinh-la-phuong-phap-sap-xep-nhanh-quick-sort" rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0); background-color: transparent;">Phương pháp nào sau đây chính là phương pháp sắp xếp nhanh (Quick sort)?</a></h4><p><br></p>', '', 1, '64412e27-169e-44ea-a101-74ebf8cb82d9', '64412e27-169e-44ea-a101-74ebf8cb82d9', '2024-06-20 21:24:18.255+07', '2024-06-20 21:24:18.255+07', NULL, 'f', 'MULTIPLE_CHOICE', 'EASY');
 INSERT INTO "public"."question" VALUES ('fe65d7df-69ac-4a17-805c-f1f2b65b9972', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'Câu 3', '<h4><a href="https://khoahoc.vietjack.com/question/958164/hay-cho-biet-y-tuong-nao-sau-day-noi-ve-phuong-phap-sap-xep-nhanh-quick-sort" rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0); background-color: transparent;">Hãy cho biết ý tưởng nào sau đây nói về phương pháp sắp xếp nhanh (Quick sort)?</a></h4><p><br></p>', '', 1, '64412e27-169e-44ea-a101-74ebf8cb82d9', '64412e27-169e-44ea-a101-74ebf8cb82d9', '2024-06-20 21:25:56.678+07', '2024-06-20 21:25:56.678+07', NULL, 'f', 'MULTIPLE_CHOICE', 'EASY');
@@ -674,535 +686,535 @@ INSERT INTO "public"."course_user" VALUES ('441b9962-ff25-4398-940c-81fc267d599f
 INSERT INTO "public"."course_user" VALUES ('11f47469-4833-40d7-944d-a88e9c8b693a', 'ca3040f2-e173-40a5-aab7-6ef15965ce43', '62943cbb-5bc5-4cef-b9a9-e33c82ecf984', 5, '2024-08-04 14:14:27.616122+07');
 INSERT INTO "public"."course_user" VALUES ('c0b733e9-bbc0-4d65-b546-6688bd970157', '64412e27-169e-44ea-a101-74ebf8cb82d9', '0888fabf-acd7-4ffa-9978-51558e5a0ee1', 3, '2024-08-04 14:14:27.621045+07');
 INSERT INTO "public"."course_user" VALUES ('80cb9f8f-2336-4dd7-93ce-435fb690df09', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'c31382b2-2fbd-43ae-89de-12b6614fc8ab', 3, '2024-08-04 14:14:27.621045+07');
-INSERT INTO "public"."course_user" VALUES ('69b831e8-7e35-48c4-bcce-20811569be49', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('450e19f4-08ba-4306-aaef-fa65624a51b2', 'cb2c22ac-87de-44e4-9638-35979f6af667', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('8923bc82-1ecd-4592-9915-806df18361bc', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('9337351f-9171-4754-8dc3-1ec6404d607b', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f1b31b15-63f2-4ef5-a16e-e5e0f7c5efc5', '444bbc7d-86f8-4258-9429-e73ce69a9e41', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('1fe9d6ba-0d73-440f-b23a-749b916b4480', 'c2f39b5b-6aeb-4b82-8541-d25920314339', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('e3c5fbe2-2d41-4586-adec-29ad20ca77a9', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('df3f0771-0d5b-4b9f-9eb7-f7770b98cca9', 'fcf62145-e196-4777-a201-77f6693810c4', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('904cc8c1-bd1d-4006-bbb0-a4ba043de465', '87076e41-40fd-4832-bbbc-1e5211878264', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('e2cf4f6d-d053-457d-96ff-a882ae823652', '2df936cc-f04a-4269-85ca-5dcf8099e184', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('3150d63b-3498-4e25-bb0d-abe02725e504', 'b887e221-2edd-4a37-9b65-209c92b8997d', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('06bea5cc-a69e-4f6c-ab10-d7781fc49ad7', 'ee83822a-75aa-4b08-8772-c2cd40443532', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('73c6afc4-94cd-49fd-a495-b6d29564f4d0', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('05a0ae23-c09d-4249-8a2e-7e490b96d520', 'fff06898-5361-4464-9e75-8b1435e46d15', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('e7871db1-1c86-40df-b12f-ec2f6e4925fc', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('7223bcdc-d9ee-4aa2-83a5-2c38de34802c', '64412e27-169e-44ea-a101-74ebf8cb82d9', '10d4cf23-afb3-448b-be5f-893dc4058444', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('40eff8f3-ef77-4e34-ad3e-37bb71f19a8e', 'cb2c22ac-87de-44e4-9638-35979f6af667', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('dddedac4-cfcc-4bbb-b596-6b72d3e4d39b', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('a17ef002-6759-4ad0-8524-6e5fd1586c29', 'c2f39b5b-6aeb-4b82-8541-d25920314339', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('11c65e2e-cf57-4595-803d-8599551362b4', '182709ef-635b-40a4-9ccd-774dd39b380f', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('cbfc1cb3-a3ab-45f4-bc5f-7a0542945fda', '4a182d8b-a553-455c-8485-f834da6de4e9', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('6285cd85-b61c-49ce-8de2-4eab168ff081', 'b887e221-2edd-4a37-9b65-209c92b8997d', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('60cd9152-e8fc-4860-936f-97eda04c79bb', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('27f1ddcd-238a-4efa-9570-650c04972d7c', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('5f3cacdc-717d-4a61-9735-32e33abd77fc', 'ffed4ce4-53b7-497e-a449-e3dee93aec1d', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('ab79939c-d8a9-460f-b546-5a83985077a5', '06ccbc31-e870-41c9-9293-b54aef58de21', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('29b306ac-bf50-45e8-a6a9-e9665d6c6df8', 'ee83822a-75aa-4b08-8772-c2cd40443532', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('ca0e55bc-3b66-458e-a26c-e91ca8e79e35', 'bfca2841-ee2c-4981-9c74-3ef605fc1c3d', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('63b1a055-a11d-423d-8a09-eeb13bf17105', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('c874549c-1983-434c-ba4f-64ce047ce5c0', 'fff06898-5361-4464-9e75-8b1435e46d15', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('97fed459-b69c-4713-994d-8695da223d81', 'e45e5e33-d62e-47cb-9d54-cee790fc6b5f', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('824dc0c2-317b-478e-ad4a-79fcebad35e1', '730f379c-986b-4274-8b88-3e90e5bbba25', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f0888fa2-c3fc-4cb2-bfe9-3c840a3da4d8', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('ae4ec71d-3d52-4800-8e5d-3794221725cc', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', '10d4cf23-afb3-448b-be5f-893dc4058444', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('8c763e10-8ae6-4565-a192-c28ffc09766b', '62973440-0374-4c2c-a49b-b771b7640912', '10d4cf23-afb3-448b-be5f-893dc4058444', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('fb6bfaf9-209f-48e0-a9b8-35b868597814', '7179898a-c353-4917-8dbd-62e10ea3249e', '10d4cf23-afb3-448b-be5f-893dc4058444', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('96ae65b2-f78b-48b0-9b08-767419daf27f', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'a9946969-f2a0-461d-a6e5-9de47426d352', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('dd1e8dc5-34d4-4dbf-8691-f1fdba440057', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('bfadf84b-416c-4498-bd13-1ea6c3458ede', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('2245bc0e-ee36-43d0-bb9a-7672b0a6cf17', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('49f08274-5e5a-4ba4-8bad-7f0f2c2688c5', '444bbc7d-86f8-4258-9429-e73ce69a9e41', 'a9946969-f2a0-461d-a6e5-9de47426d352', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('83bb00bf-774b-4f20-98fc-11f8b5974844', 'fcf62145-e196-4777-a201-77f6693810c4', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('aa3e96b8-681b-436a-9b21-59c83b8339ae', '853b8f16-20c9-42e9-a04d-daa0237823ca', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('1261dff3-02a8-48fe-b18d-c5702ce5d562', 'baddeb10-3f99-4843-859c-50cc51659153', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('12537adb-5f34-4fdf-a1ec-0d4e249d86ae', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d3e2ef99-f158-4a2c-8837-f7824f99758a', '06ccbc31-e870-41c9-9293-b54aef58de21', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('9f45e883-3c68-4cf2-b901-2d2e6ad75037', 'ee83822a-75aa-4b08-8772-c2cd40443532', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('89669fdb-253c-4a7c-aa93-2425b66abe4c', '097ad133-9434-44d0-ad2f-16db49f0be9c', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d89409b8-b773-4b8c-b82c-a991ad96ff93', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('193f35df-9bd1-4726-9ed0-61c88501e995', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('20b7e82a-ace4-4412-b897-8f46b90cbfca', 'a1845f87-cece-4cb0-91c7-7bd68f439063', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('cb5f0f5e-0b97-48c5-b44d-758c6a29cfef', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('504307b3-0d1a-4e0e-b00d-d52c885830b9', 'fff06898-5361-4464-9e75-8b1435e46d15', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('8f6f0b85-c528-4225-8ea6-a0f0adfec25c', 'e1ac8c3c-1c60-4c14-8143-84c3c8c66934', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('b1023771-63f8-4b7e-b056-8095cb483ee9', '730f379c-986b-4274-8b88-3e90e5bbba25', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d0a5f71e-1bf0-4480-9c4f-25e1be9aa29b', '588636d6-7193-4a2b-be5f-cafe112d3bf5', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('4582d6ea-63e9-405d-9dfa-e77942264eb3', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('9aff6fea-1091-45df-8a2a-cef27d713b1f', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', 'a9946969-f2a0-461d-a6e5-9de47426d352', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('f6850b5a-e4e1-4125-8945-f574174d4d24', '62973440-0374-4c2c-a49b-b771b7640912', 'a9946969-f2a0-461d-a6e5-9de47426d352', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('2e68f073-edbe-4206-ad8c-beb57b0bd7be', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('f303ab3e-30d7-495b-957c-2e5fe7240004', 'cb2c22ac-87de-44e4-9638-35979f6af667', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f47a2655-3663-4c2d-87a8-623af7736f4b', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('40a2caba-5c67-4c01-840b-5d38c29cb4ff', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('ec9dc8dc-81d7-4b1a-8916-7184b02e80ac', 'ad3c4eb3-8ddb-45a0-9df2-d6ec5d14fbbc', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('da51b34a-1a24-4331-9a33-b8b92b82f87c', 'c2f39b5b-6aeb-4b82-8541-d25920314339', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d6e151f4-e123-4a3e-a7da-2e8cb62e0579', 'fcf62145-e196-4777-a201-77f6693810c4', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('b6ef2244-6b0b-4c0c-bb48-0d2d9cadec2a', '87076e41-40fd-4832-bbbc-1e5211878264', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('870db9c0-2a3b-42c2-961f-fee46a27da53', 'b887e221-2edd-4a37-9b65-209c92b8997d', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('5e9b0896-0c32-4f12-bb6f-ceeada3324d8', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('20339a21-fef9-4ced-849e-5df6ec067d98', '06ccbc31-e870-41c9-9293-b54aef58de21', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('687498f1-b033-4f97-8c8a-0f6cff0a5398', 'ee83822a-75aa-4b08-8772-c2cd40443532', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('1267f9a2-a59b-41b6-8688-fb9794059271', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('4a8214a9-a91c-479f-9fbe-4c06d4e7c688', 'a1845f87-cece-4cb0-91c7-7bd68f439063', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('df3b12cf-e8ff-4ee1-8830-794041cfe3ef', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('9dab077e-c746-412d-9542-623a728c0eb6', '730f379c-986b-4274-8b88-3e90e5bbba25', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('5cf848d8-1ad9-4d60-bada-88d4244569f2', '588636d6-7193-4a2b-be5f-cafe112d3bf5', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('ecd43026-b80d-4a6c-93a5-f4f41b4be070', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('2ec34d64-6851-4889-a890-6e50e78233e8', '62973440-0374-4c2c-a49b-b771b7640912', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('e2689bc8-96e4-4a5f-938d-8168fd48d349', '7179898a-c353-4917-8dbd-62e10ea3249e', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('cbe59aef-a085-448f-b10d-ddbf59b839bb', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('e6377909-e343-40b6-8fc3-6ba689c67c52', 'cb2c22ac-87de-44e4-9638-35979f6af667', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('3ad04eb1-b015-4fed-ba20-2a3f431a627c', '2d3c1e66-1835-457f-93e9-265fe483feee', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f41f0eae-f31e-4986-8b3e-084736d82ad1', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('e0f615ca-2f00-4b1c-827c-a3af14f7c1d1', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('56653f25-0910-40af-9144-e7891cf8b35e', 'ad3c4eb3-8ddb-45a0-9df2-d6ec5d14fbbc', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('8e4e0316-9e14-45ff-a11f-612920a2b776', 'c2f39b5b-6aeb-4b82-8541-d25920314339', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('07234125-90d6-4829-8b29-0a35617176a8', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('10f47d3a-f7f3-4f41-9784-82305dbcf557', '4526d150-cfcf-4b04-ab54-12789b788829', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('c6283e94-e1d8-4fe9-8229-860555bb5e39', '853b8f16-20c9-42e9-a04d-daa0237823ca', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('0878a947-648b-4c15-aa98-02fb3c314642', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('019734c0-2a83-4293-9de7-d48f99092c14', '182709ef-635b-40a4-9ccd-774dd39b380f', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('c8b70483-1ea4-4e08-8e8a-1d63a4d9554b', 'b887e221-2edd-4a37-9b65-209c92b8997d', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('848b3497-3453-461e-adbe-e177fe1e8338', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('1ff3744b-986d-4e29-a981-4424465eeaec', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f3302084-93f5-4025-bd40-bbe3e6e7e9f3', '06ccbc31-e870-41c9-9293-b54aef58de21', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f87959ae-709d-46cb-a169-3695482c7565', 'ee83822a-75aa-4b08-8772-c2cd40443532', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('239ce38f-14d6-4e9b-8f66-ffb5e3e19621', 'a1845f87-cece-4cb0-91c7-7bd68f439063', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('377e85ec-1929-4b1b-b21f-b57168e9efe0', '730f379c-986b-4274-8b88-3e90e5bbba25', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('0a217bec-6cac-4838-a289-6eab9aa2d5ad', '588636d6-7193-4a2b-be5f-cafe112d3bf5', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('cb398bac-3780-4abf-a3da-309e70d065f9', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('3f14aa6c-73d7-41f3-b169-35e4b62f92d8', '64412e27-169e-44ea-a101-74ebf8cb82d9', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('c7c2e9d0-0fe3-4994-bdff-37c5fed7d308', 'cb2c22ac-87de-44e4-9638-35979f6af667', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('bd6a588f-077d-471d-a77e-856162e044ff', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('56df779f-ece2-41fb-8909-59ac03bce904', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('3c39c7a5-287c-4872-bce7-d1d5fa936e86', '444bbc7d-86f8-4258-9429-e73ce69a9e41', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('8c7f82a7-39a2-4845-afa4-832e346cdc02', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('c33a53de-508a-44ae-a6fc-7403793f5623', 'baddeb10-3f99-4843-859c-50cc51659153', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('3fcc2a94-ff41-4d37-ac7b-1554bb21d962', 'b887e221-2edd-4a37-9b65-209c92b8997d', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('03de6c68-8175-4f98-93b1-e6514f53c582', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('81bac593-648e-4236-a88f-1d5acd1ecd31', 'ee83822a-75aa-4b08-8772-c2cd40443532', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('baee53ae-3bfe-4c06-8668-dad18894e998', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('9a84a198-b735-4c5b-9364-d02dab15cd70', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('4784b6e1-f965-4815-a1df-7eaa10a034e7', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('dc424835-9955-4d21-98d8-292d0b296b13', 'fff06898-5361-4464-9e75-8b1435e46d15', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('8532b6b1-4488-41bd-8c37-e2f7364ce648', 'e1ac8c3c-1c60-4c14-8143-84c3c8c66934', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('006d065b-e4fe-40ac-b21d-5fa125475a60', '730f379c-986b-4274-8b88-3e90e5bbba25', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('416fa7d3-00cd-4dc1-82ef-bec6d09a23d6', '588636d6-7193-4a2b-be5f-cafe112d3bf5', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('7c6b189e-b85f-4b64-ae07-171a9452de46', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d8b77a47-f327-48b0-bb5d-0913cf60deea', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('7f5e7b68-227a-47b7-a634-f8239e86009a', '62973440-0374-4c2c-a49b-b771b7640912', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('d9d876b8-fbab-4cba-85cc-1fbc55cace59', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('b4389eba-6e72-43e4-9da3-10e8fdd270de', '2d7ed5a0-fb21-4927-9a25-647c17d29668', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('a5fb815d-3197-429c-8e16-c2d642e409c0', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d72b6349-8348-4457-9d67-c83be2939aa9', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('7b341230-5cfb-406d-9bda-b951bbfc26f7', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('05594f89-96d9-4cd0-b891-761cd6fc6825', 'ad3c4eb3-8ddb-45a0-9df2-d6ec5d14fbbc', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f0737f7c-42cb-4bd7-badf-1b479fa31008', 'c2f39b5b-6aeb-4b82-8541-d25920314339', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('e31805b8-719b-4779-9347-deddf29e161d', '87076e41-40fd-4832-bbbc-1e5211878264', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('3a3a6f1f-e3a8-46a6-808c-7036cfe9575c', '2d5137ae-9d77-4a12-94ea-fda383a8db10', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('01258e17-6d81-4544-9c44-9aa1f9a54f3f', '205b0afa-3efa-4bdf-9bc0-3f6449ff5c1a', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('fa6ca842-4751-4876-a7c0-ded96275ddf4', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('954466cb-25a3-4523-a326-d9e5cbe8a107', 'baddeb10-3f99-4843-859c-50cc51659153', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('b8c1de23-bb58-4026-af41-678eaa5268a5', '2df936cc-f04a-4269-85ca-5dcf8099e184', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('2f2ee475-aedf-4b18-a75c-5c00a0620654', 'b887e221-2edd-4a37-9b65-209c92b8997d', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d06d429b-c53a-43ac-8d88-e5766e4167bd', '58b79c83-ba88-430b-a9c9-d549d43b3600', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('b6c64e9d-70de-47d9-941d-c812c8a2a3e1', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f54f3a33-c4e2-4177-8795-d92ddedbeb20', '0bea60a7-9789-42bb-a217-22d142cf3b1b', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f2abc211-a2a1-4122-99f5-41261e9a8f33', 'ffed4ce4-53b7-497e-a449-e3dee93aec1d', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('05f39d05-8166-4251-a115-1573da550d46', 'ee83822a-75aa-4b08-8772-c2cd40443532', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('28d55cdf-12af-4e0c-ba1a-c96969009d77', 'a1845f87-cece-4cb0-91c7-7bd68f439063', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('7a273dcc-e844-40f8-b9fe-160aafc00602', '730f379c-986b-4274-8b88-3e90e5bbba25', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('963fdef5-94f9-4baf-b98b-6de44864e094', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('08e0118b-eab4-45de-aaf5-367e98d9adb1', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('0cced576-c847-4f6c-a2f9-53c875f951fd', 'cb2c22ac-87de-44e4-9638-35979f6af667', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('41983a6a-4955-4f93-a422-2e31f6ef6e9a', 'ca3040f2-e173-40a5-aab7-6ef15965ce43', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('2ec3f26a-2139-4cd8-b77b-cb6f33490104', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('20bc24aa-34be-4994-b711-772dd1d8911f', 'fcf62145-e196-4777-a201-77f6693810c4', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('73836408-e053-43ce-b761-bec35f113683', '87076e41-40fd-4832-bbbc-1e5211878264', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f87508ee-06bc-494f-abb0-bcfda4a94f81', '853b8f16-20c9-42e9-a04d-daa0237823ca', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('9db18261-b198-4cf6-ab3d-ec1c68742278', '2c4e42ab-be60-439f-95dc-28ccd7c75411', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('0b0f1450-5108-49b6-b30b-d8510d3613dd', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('9c0ef287-0070-438d-a624-541d338ef346', 'db95956f-786e-46c7-87c1-ad5ebaacf355', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('acfe5d14-3a7a-43a7-b5c5-7ef071248a70', 'baddeb10-3f99-4843-859c-50cc51659153', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('a04cd9d6-5f22-4849-891f-a9b3450ea8cc', '182709ef-635b-40a4-9ccd-774dd39b380f', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('dd2871a2-d239-49db-85e7-4caf39e7ab85', '2df936cc-f04a-4269-85ca-5dcf8099e184', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('9b0bdc7c-34c4-4240-998f-305ad037fad0', '58b79c83-ba88-430b-a9c9-d549d43b3600', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d8b7d6ac-e4b4-46ee-9f92-3d186d61d231', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('010c5ec1-a193-45d6-8eee-bff298dbf23c', '0bea60a7-9789-42bb-a217-22d142cf3b1b', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('cd134ec1-d0a9-4ab9-ae5a-6d4b17793a96', '097ad133-9434-44d0-ad2f-16db49f0be9c', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('1bb3016c-0937-4e71-bf57-dcd6042a7993', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('a5d72aa6-ff54-454f-9835-5343c943c0e1', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('92d791cd-a405-49e3-b90c-72c5186778e6', 'bfca2841-ee2c-4981-9c74-3ef605fc1c3d', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('aca66376-8f08-4c32-ad5e-7dbd7b67b742', 'a1845f87-cece-4cb0-91c7-7bd68f439063', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('0667cff4-a42a-4b28-890f-15489547f218', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('be7c2275-8c58-4d7c-8979-219a7960f66b', 'fff06898-5361-4464-9e75-8b1435e46d15', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('881b4349-aceb-413c-bc80-8ba58fb64e82', 'e1ac8c3c-1c60-4c14-8143-84c3c8c66934', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('a6390dcb-3438-4a3d-8b59-2d5d51157372', '588636d6-7193-4a2b-be5f-cafe112d3bf5', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f809a5b8-bda7-46f5-b7e8-0f3f20d79360', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('c08d1f07-0915-448a-86cc-1998fa772138', '7179898a-c353-4917-8dbd-62e10ea3249e', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('2f3a912a-3403-44d9-8022-30ff79224d17', '64412e27-169e-44ea-a101-74ebf8cb82d9', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('344c8526-189b-4c04-944a-7be57fbc03c6', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f28ced09-1147-4dff-a788-22f79c0bb504', '87031f89-d9b0-449f-84f4-c9b6dff15a9a', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('e248813a-8cdc-4986-a0a5-9f38adf06728', '853b8f16-20c9-42e9-a04d-daa0237823ca', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('cda44ad2-8459-466f-a6de-6423df6bdba1', '205b0afa-3efa-4bdf-9bc0-3f6449ff5c1a', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('a078df3f-41a5-405a-a2c6-7d909228d31c', 'baddeb10-3f99-4843-859c-50cc51659153', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('4b179023-1859-4767-b28b-bc12e97645db', 'b887e221-2edd-4a37-9b65-209c92b8997d', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('11b1ec82-4059-45c4-9e92-d4b291d23699', '58b79c83-ba88-430b-a9c9-d549d43b3600', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f9648898-4e3f-4539-b360-f21f1de6bff4', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('3941c1bf-a92b-4faa-8ff4-e618ef8a008b', '0bea60a7-9789-42bb-a217-22d142cf3b1b', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('2e8c4bc2-8d28-4735-a976-53df2a0347b5', 'ffed4ce4-53b7-497e-a449-e3dee93aec1d', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('1ec0f851-aaf5-45ec-9feb-9a91e41f29e7', 'ee83822a-75aa-4b08-8772-c2cd40443532', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('3c17e6a5-9229-4be3-be05-eaf9e4c5cb5a', '097ad133-9434-44d0-ad2f-16db49f0be9c', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('831bdebc-4618-491f-b1b4-203d05fbdeb2', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('b0e7fd94-0b14-4159-b1b5-3ab370684779', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('020ab256-632a-4a69-a7df-208ce21e0eaa', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('a8e0b587-dae7-41f5-a5b8-4d514f158b55', 'fff06898-5361-4464-9e75-8b1435e46d15', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('5d5f1e86-dd78-4398-bc6a-bd220f46194a', 'e1ac8c3c-1c60-4c14-8143-84c3c8c66934', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('cce2f358-11d1-4547-8449-954afd0e0b9c', 'e45e5e33-d62e-47cb-9d54-cee790fc6b5f', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d1837a5f-dc39-4a34-8228-863bb9e2e8da', '588636d6-7193-4a2b-be5f-cafe112d3bf5', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('fe27a284-e6f5-4224-91b3-02d58e5a33e6', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('c484e8a4-1fec-4452-87fc-2b10f6cde6de', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('88be0322-b156-4dd5-8259-86a05caf1314', '64412e27-169e-44ea-a101-74ebf8cb82d9', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('4c9cbdcd-609c-4994-8762-f2b42e844331', 'cb2c22ac-87de-44e4-9638-35979f6af667', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('4746de93-3420-4848-9963-4030e2ec0375', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('ea719bc3-bf6b-4b57-8622-7ce443402522', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('b8be93c2-77c6-4f56-a74b-5107ad719273', '444bbc7d-86f8-4258-9429-e73ce69a9e41', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('ba1292e6-f2ee-4b59-9338-b1eece7ce750', 'c2f39b5b-6aeb-4b82-8541-d25920314339', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('6d7a87f6-b409-4ba8-a682-99cc25e6c9d6', '4526d150-cfcf-4b04-ab54-12789b788829', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('617c3a81-345f-49b6-86ed-b2389eeedfd7', '2d5137ae-9d77-4a12-94ea-fda383a8db10', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('246af371-3670-49e9-8b6c-717fc5dce0c5', '205b0afa-3efa-4bdf-9bc0-3f6449ff5c1a', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('2cd58f2f-f2e6-475e-a5bb-f94f01ada7ec', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('7cc312ce-29cb-4c5e-a9ab-3cf96d86e74e', 'baddeb10-3f99-4843-859c-50cc51659153', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('44e42834-950a-4880-897c-2e6526c71eb7', '182709ef-635b-40a4-9ccd-774dd39b380f', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('e59717c5-49e5-40e1-920c-aae3ff2d910e', '2df936cc-f04a-4269-85ca-5dcf8099e184', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('0d4feaa4-a201-45b2-90e7-6778f8753e7d', '58b79c83-ba88-430b-a9c9-d549d43b3600', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('21940a17-b0c5-4f67-aed5-d83ff23d32c5', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('2ac2ca54-1877-4a88-8653-3fc6e403b9ea', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('8dbc9cd0-70f3-43a4-a3cc-5eeb1c9af509', 'fff06898-5361-4464-9e75-8b1435e46d15', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f4049645-1b68-42bb-9db5-44fbe8ab0407', 'e45e5e33-d62e-47cb-9d54-cee790fc6b5f', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('149eaa27-7590-4c98-bb5a-0636f11420f4', '730f379c-986b-4274-8b88-3e90e5bbba25', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('185e8982-5895-4428-ae29-b7e0c7c43d1f', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('d914c57a-cad9-48e1-a69c-5a4c7b2dd7e5', '64412e27-169e-44ea-a101-74ebf8cb82d9', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('6be1608b-24d9-4251-bfbe-2ea2ece16bbc', 'cb2c22ac-87de-44e4-9638-35979f6af667', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('2ca25e27-eb20-4b2e-85f7-02807c3d67cc', '2d3c1e66-1835-457f-93e9-265fe483feee', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('7756ccc9-d469-4336-a5a7-2f7f100265a0', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('11bd2c9c-f8cb-4e12-b152-2bcd38000e5b', 'ad3c4eb3-8ddb-45a0-9df2-d6ec5d14fbbc', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('81647a0b-607d-4147-a5c0-fe9a60519da5', '444bbc7d-86f8-4258-9429-e73ce69a9e41', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('494d8dca-7179-496f-b81c-2b72a5fa1f10', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('22147c60-db11-4d8c-95cd-8024e1dbf3f7', '2d5137ae-9d77-4a12-94ea-fda383a8db10', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('07d9fbff-fbf4-480a-8ea1-686f0fd1a51a', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('bc1c2f85-0c87-451c-8fe0-506d4ce1dbab', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('463dd0a0-1684-4b0f-876a-bd2a8993c669', '0bea60a7-9789-42bb-a217-22d142cf3b1b', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('5ecaa144-c79c-432e-8235-4845b7271697', 'ffed4ce4-53b7-497e-a449-e3dee93aec1d', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f0e7723a-fc42-493c-b1ce-601a313055aa', '097ad133-9434-44d0-ad2f-16db49f0be9c', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('257a70ea-aed4-4e6c-b99e-86f13522c7c9', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('611a516c-8543-4aa7-b99b-8ca94747b05e', 'e45e5e33-d62e-47cb-9d54-cee790fc6b5f', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('2cb7e91e-61a7-4b52-b09f-2d457cd7aa5c', '730f379c-986b-4274-8b88-3e90e5bbba25', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d4880d17-c95e-4ed2-9680-6f06ccd5aad6', '62973440-0374-4c2c-a49b-b771b7640912', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('1c508372-56ed-4141-a562-8937a53792b1', '64412e27-169e-44ea-a101-74ebf8cb82d9', '30fc358d-b78f-40cb-ad67-51ca279e649b', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('b9f046a3-a2d8-4b0a-b8ce-e104b4f145be', 'cb2c22ac-87de-44e4-9638-35979f6af667', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('aab5aed0-1317-48c1-8383-3483928b2b77', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('4801c702-2c23-4e1d-b38d-985907fe5e2c', 'ad3c4eb3-8ddb-45a0-9df2-d6ec5d14fbbc', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f387eac2-9c35-4e09-b72b-010effa69a7c', '444bbc7d-86f8-4258-9429-e73ce69a9e41', '30fc358d-b78f-40cb-ad67-51ca279e649b', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('6f045721-d174-488b-b2a2-b7e3ea099bb1', 'c2f39b5b-6aeb-4b82-8541-d25920314339', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('c1a05c6c-a9fb-41f3-a15f-83610f2d0703', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f5668005-6ec3-46f6-97e1-b15911544fd7', 'fcf62145-e196-4777-a201-77f6693810c4', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('8b4cfd58-3591-4d67-be45-85ac038be199', '87076e41-40fd-4832-bbbc-1e5211878264', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('222d6b44-ab9a-4dda-9a4b-b1adbdeb0fd1', '4526d150-cfcf-4b04-ab54-12789b788829', '30fc358d-b78f-40cb-ad67-51ca279e649b', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('2eb3a282-3e74-4223-a954-527235afb87b', '182709ef-635b-40a4-9ccd-774dd39b380f', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('0bf61a2e-6ed2-444d-89ce-9c63683392e8', '2df936cc-f04a-4269-85ca-5dcf8099e184', '30fc358d-b78f-40cb-ad67-51ca279e649b', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('043447af-a475-4c4e-ade1-673b892951cc', '4a182d8b-a553-455c-8485-f834da6de4e9', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('007ef5d8-9464-4d26-9e63-54a6fb2f1ff2', 'b887e221-2edd-4a37-9b65-209c92b8997d', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('6353a8be-b2ea-4d7a-bdec-626fa37ae718', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('cb6e1eb8-7518-44da-ae6f-419f6fb14701', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('c375f316-c143-4298-91b8-e88b4c003532', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('1ba02a5c-5824-4a2d-962e-f0652983bde9', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d494cde9-ace2-4e71-a4af-3207913503e7', 'e1ac8c3c-1c60-4c14-8143-84c3c8c66934', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('c003e6d7-9b47-4b89-a4d9-1d443e34e51c', '588636d6-7193-4a2b-be5f-cafe112d3bf5', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('90f78b68-e09b-4846-91d6-68bf60243010', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d40689e2-3dd3-4d6d-bc7c-b4a538aa318f', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('9f28a89f-9b69-4ed0-986b-58e0d8f6f4aa', 'cb2c22ac-87de-44e4-9638-35979f6af667', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('20ead2b0-1a68-4671-8eb6-675652f5a9d1', '2d3c1e66-1835-457f-93e9-265fe483feee', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('0725147e-ba8b-43a8-86bd-ef52901e4ed5', 'ca3040f2-e173-40a5-aab7-6ef15965ce43', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('3b4a38cd-cdf9-4978-a1a8-6116a0895933', 'c2f39b5b-6aeb-4b82-8541-d25920314339', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('8b233e06-de78-42f6-a854-e995284db277', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('fe294dba-60f9-4f74-a2ad-cee75362364f', '87031f89-d9b0-449f-84f4-c9b6dff15a9a', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('4470a560-cff2-4024-a75d-fc97abf1f97d', 'fcf62145-e196-4777-a201-77f6693810c4', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('fba11400-9b07-4f7e-8e0e-e466575e5ea7', '87076e41-40fd-4832-bbbc-1e5211878264', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('b169a793-2a4e-4118-be12-f910bc57c233', 'ee83822a-75aa-4b08-8772-c2cd40443532', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('61c47050-c6c9-4098-8b34-e3d9a79036ac', '097ad133-9434-44d0-ad2f-16db49f0be9c', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('a645f468-95e1-4351-9f97-464dfb0cbfc6', 'a1845f87-cece-4cb0-91c7-7bd68f439063', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('bd8b28d7-bf60-4493-8779-d0b4d93290d1', '588636d6-7193-4a2b-be5f-cafe112d3bf5', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('ab8cc9da-ec9d-4f12-b3a2-0c54dbda6bc9', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('8e6b9f1e-9a0e-42b5-8f3a-2170ddb9019f', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('919f5cea-0e12-4f6e-90b8-0f77b0a7a2be', '64412e27-169e-44ea-a101-74ebf8cb82d9', '4076715f-9263-494e-8dbf-7a9024c9aa30', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('ae403152-1a88-4cf7-a703-3f4801614048', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('c3dbf46d-df46-4579-b75b-736c56d187e5', 'c2f39b5b-6aeb-4b82-8541-d25920314339', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('cb86c376-4e79-4435-b3d6-573d5721698f', 'fcf62145-e196-4777-a201-77f6693810c4', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f7f4b998-eca8-4fd6-ab10-525c119593ab', '87076e41-40fd-4832-bbbc-1e5211878264', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f14819ba-47e4-45f5-bd13-327ee0240b71', '4526d150-cfcf-4b04-ab54-12789b788829', '4076715f-9263-494e-8dbf-7a9024c9aa30', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('d0d3aa44-be79-4660-9889-93b55ea3d765', '853b8f16-20c9-42e9-a04d-daa0237823ca', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('3714bc98-dd8b-4065-9822-6ab4872a1a0b', '205b0afa-3efa-4bdf-9bc0-3f6449ff5c1a', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('df05b953-ec21-4187-89b0-432c98b817ce', '182709ef-635b-40a4-9ccd-774dd39b380f', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('ee343881-743b-43e8-9278-8d5c88b5000c', 'b887e221-2edd-4a37-9b65-209c92b8997d', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('dcb45a60-4b76-40b8-8810-447d6ecc5b1a', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('30ec4093-6c56-441d-b97c-f6967a5001d8', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('007181f4-1ad3-4ced-8591-31875f5545d4', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('432a406f-52b0-4485-a54d-e46387e975c6', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('ec277c06-6490-43d4-ba5b-e7ef4cbb20f0', 'fff06898-5361-4464-9e75-8b1435e46d15', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('960cb34f-d92a-4bfc-ab50-6a6802ff0fb7', '588636d6-7193-4a2b-be5f-cafe112d3bf5', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('e6c2631a-077c-403e-8907-dff7b187fedc', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('be68d4b6-9d5f-424f-9901-7f6dbb5ae445', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', '4076715f-9263-494e-8dbf-7a9024c9aa30', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('a8a1e92f-da12-49fa-bcd7-fff0cd5c3c99', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'eb71854b-2850-45e0-bece-7728aaecb035', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('efd065f9-abdc-4736-8931-1956af8992e0', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('704d2d0e-42d4-4928-83d8-a50d1efe49a3', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('6109564d-f09e-4543-a9b0-f557013a0949', '87031f89-d9b0-449f-84f4-c9b6dff15a9a', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('ee21a429-3f11-41df-8acd-ffc6477598f3', 'fcf62145-e196-4777-a201-77f6693810c4', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('96415fda-e770-4b1e-ae88-1030f21db061', '4526d150-cfcf-4b04-ab54-12789b788829', 'eb71854b-2850-45e0-bece-7728aaecb035', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('ad49afcd-6a4b-4d4b-9f8d-594ba76c0be2', '853b8f16-20c9-42e9-a04d-daa0237823ca', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('8fe7d2f8-4d58-4d69-bb60-fc0f541b2500', '205b0afa-3efa-4bdf-9bc0-3f6449ff5c1a', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('60e90141-123b-4a5a-95f6-c9fc428ca2fb', 'baddeb10-3f99-4843-859c-50cc51659153', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('223f5a91-a638-4176-8973-6db1da336d46', '2df936cc-f04a-4269-85ca-5dcf8099e184', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('b68d6033-94d4-4216-b63f-ec1aa03f4607', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('30203787-6085-4025-9cc8-6c75ee094f2d', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('75c348d3-e2cc-44bd-a6c2-03155ad9251a', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('c564e36b-6b78-4be9-82cf-256e1ab78311', 'a1845f87-cece-4cb0-91c7-7bd68f439063', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('dfc086a0-7542-4af3-958f-7c62f247c631', '730f379c-986b-4274-8b88-3e90e5bbba25', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d2783ecc-e32d-4bca-9b70-b11dbf20b856', '588636d6-7193-4a2b-be5f-cafe112d3bf5', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('dd6cc6e0-9c41-4a1e-a793-6228f788b6aa', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('6c1d18d1-319f-40ae-a418-0e36f580a6a9', '62973440-0374-4c2c-a49b-b771b7640912', 'eb71854b-2850-45e0-bece-7728aaecb035', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('9896fa6d-5294-423d-8ad9-7feec60f05af', '64412e27-169e-44ea-a101-74ebf8cb82d9', '0ab93253-b022-4706-8e47-75934c3f084c', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('25f772b0-9f4c-4483-bf61-d441e57091d8', 'cb2c22ac-87de-44e4-9638-35979f6af667', '0ab93253-b022-4706-8e47-75934c3f084c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('1c966eaf-c72d-4867-873e-1bf7583368fc', '9ba179ed-d26d-4828-a0f6-8836c2063992', '0ab93253-b022-4706-8e47-75934c3f084c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('6d1def6d-750c-47f5-9826-80dd8426d75e', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', '0ab93253-b022-4706-8e47-75934c3f084c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f279d0b8-3256-4762-ac34-044ebbdd3784', 'fcf62145-e196-4777-a201-77f6693810c4', '0ab93253-b022-4706-8e47-75934c3f084c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('c9bedffd-163c-48d5-8334-70d2223cfe62', '4526d150-cfcf-4b04-ab54-12789b788829', '0ab93253-b022-4706-8e47-75934c3f084c', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('e4845638-203e-4cc3-874e-4fc08bb4cf4b', '853b8f16-20c9-42e9-a04d-daa0237823ca', '0ab93253-b022-4706-8e47-75934c3f084c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('40d6c5df-b300-4aa2-bf01-4658ea40e267', '2d5137ae-9d77-4a12-94ea-fda383a8db10', '0ab93253-b022-4706-8e47-75934c3f084c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('15547bd4-6c6a-421c-80c6-877690132612', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', '0ab93253-b022-4706-8e47-75934c3f084c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('a6e3e9de-7244-467f-ab9d-dc04aa21657b', 'baddeb10-3f99-4843-859c-50cc51659153', '0ab93253-b022-4706-8e47-75934c3f084c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('ee7babc4-47c2-4e82-8c1f-c15cd739bd27', 'b887e221-2edd-4a37-9b65-209c92b8997d', '0ab93253-b022-4706-8e47-75934c3f084c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('9fad2b44-3b23-413f-8151-d790fab22315', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '0ab93253-b022-4706-8e47-75934c3f084c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('1cc276dc-22b6-49af-92ec-c126a1eea289', '097ad133-9434-44d0-ad2f-16db49f0be9c', '0ab93253-b022-4706-8e47-75934c3f084c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('381b6d26-956f-4cb6-ba55-13e51fff8efc', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', '0ab93253-b022-4706-8e47-75934c3f084c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('5be7ba2c-75e2-4744-a28b-ad7bc9009481', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', '0ab93253-b022-4706-8e47-75934c3f084c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('0c2bff14-4662-4bcf-9252-b1c7653dc2b9', 'fff06898-5361-4464-9e75-8b1435e46d15', '0ab93253-b022-4706-8e47-75934c3f084c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('0909d012-370e-4bde-be4c-7e34490b2de5', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', '0ab93253-b022-4706-8e47-75934c3f084c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('ea877c96-60a3-4b33-8e93-ac2213f06e88', '7179898a-c353-4917-8dbd-62e10ea3249e', '0ab93253-b022-4706-8e47-75934c3f084c', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('9271e238-1a66-400d-8f46-6b42181b0874', '64412e27-169e-44ea-a101-74ebf8cb82d9', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('0eb8e92a-d0f8-4d83-b4b8-a1eadd25470c', 'cb2c22ac-87de-44e4-9638-35979f6af667', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('26b8a5b8-e26b-4573-970f-fb6976b0c013', '9ba179ed-d26d-4828-a0f6-8836c2063992', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('ae218b4b-5930-4c79-af26-66b7892c0379', '444bbc7d-86f8-4258-9429-e73ce69a9e41', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('ee464af1-79d1-41c7-b191-cfdb7ba8599a', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('05635029-832b-42ec-9076-05f4d7f8c94b', '87031f89-d9b0-449f-84f4-c9b6dff15a9a', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('60abafcb-fc42-4d7b-9402-6b5e1666ee82', '853b8f16-20c9-42e9-a04d-daa0237823ca', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('8b65e8b0-333a-434b-81bd-187da3f1eecf', '2df936cc-f04a-4269-85ca-5dcf8099e184', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('28ece90d-51f2-4b9d-8e84-7cce7a876072', '58b79c83-ba88-430b-a9c9-d549d43b3600', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('560b7560-c057-4841-a221-cd59881d0b96', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('a6edef27-9507-43d9-9e72-0f2b20e289b0', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('ced13799-a211-40b9-ad55-e19032478328', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('0b87803b-7194-4fdc-ac19-023879c370eb', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('6e1d66f6-ca2d-432a-8abc-d1eaa1712c17', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('b2e8de60-b3e5-4294-8785-05554d556092', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('8e1a6cc9-c83c-4ab5-8221-9ca900a96f85', 'fff06898-5361-4464-9e75-8b1435e46d15', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('8d3f4eee-29be-4126-b6d5-dd907e194ad6', '588636d6-7193-4a2b-be5f-cafe112d3bf5', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('cf6ffced-520f-499e-aade-ca9a6b6f9ccc', '64412e27-169e-44ea-a101-74ebf8cb82d9', '28cb6008-bddc-4894-83de-7919a02db956', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('075c947c-ca7a-4ee3-ad50-143ca765f999', 'cb2c22ac-87de-44e4-9638-35979f6af667', '28cb6008-bddc-4894-83de-7919a02db956', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('b5cf1214-4a79-4c1a-b32d-1e577ca5d7af', '2d7ed5a0-fb21-4927-9a25-647c17d29668', '28cb6008-bddc-4894-83de-7919a02db956', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('eaba76d8-eda5-4928-a195-18d180769181', '9ba179ed-d26d-4828-a0f6-8836c2063992', '28cb6008-bddc-4894-83de-7919a02db956', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('e8138628-aa14-42ca-b133-62407c4b3dd3', '444bbc7d-86f8-4258-9429-e73ce69a9e41', '28cb6008-bddc-4894-83de-7919a02db956', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('79060e46-c57d-4ee1-a4e0-1b4a1fb77f0d', 'c2f39b5b-6aeb-4b82-8541-d25920314339', '28cb6008-bddc-4894-83de-7919a02db956', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('dd7cbfe9-00a8-40fe-be49-0a1e62315e12', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', '28cb6008-bddc-4894-83de-7919a02db956', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('95c2f8da-1aed-4521-814f-35cfb66777a7', 'fcf62145-e196-4777-a201-77f6693810c4', '28cb6008-bddc-4894-83de-7919a02db956', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('972d377c-8131-4406-833a-cb7e19a20e90', '87076e41-40fd-4832-bbbc-1e5211878264', '28cb6008-bddc-4894-83de-7919a02db956', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('412a1dd0-41d9-452d-b4c4-04c90bc942d1', '4526d150-cfcf-4b04-ab54-12789b788829', '28cb6008-bddc-4894-83de-7919a02db956', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('388323e1-cff2-4e89-a7c9-24724a0c6759', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', '28cb6008-bddc-4894-83de-7919a02db956', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('be599070-7149-40c6-9c90-128018290dd1', 'baddeb10-3f99-4843-859c-50cc51659153', '28cb6008-bddc-4894-83de-7919a02db956', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('8ee1df06-86bf-4337-8d0b-408352696da7', '182709ef-635b-40a4-9ccd-774dd39b380f', '28cb6008-bddc-4894-83de-7919a02db956', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('7bd85834-a925-4d9e-9fba-029e07ae6052', 'b887e221-2edd-4a37-9b65-209c92b8997d', '28cb6008-bddc-4894-83de-7919a02db956', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f9c77d16-85d2-4bae-9ff2-298c36b957f7', '58b79c83-ba88-430b-a9c9-d549d43b3600', '28cb6008-bddc-4894-83de-7919a02db956', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('322eebef-efd3-41f4-ae1b-a3817c6e5f35', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', '28cb6008-bddc-4894-83de-7919a02db956', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('5146ab5f-290a-4d68-8226-6b4e7f21b6cd', 'ee83822a-75aa-4b08-8772-c2cd40443532', '28cb6008-bddc-4894-83de-7919a02db956', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('921844c3-7d28-43cd-a617-5bc49a7210fa', 'bfca2841-ee2c-4981-9c74-3ef605fc1c3d', '28cb6008-bddc-4894-83de-7919a02db956', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('c9263fdb-8209-48ea-993d-2806a71ef3d5', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '28cb6008-bddc-4894-83de-7919a02db956', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('aaeefd7f-854a-4ebd-95e7-d5e7929f70e7', 'fff06898-5361-4464-9e75-8b1435e46d15', '28cb6008-bddc-4894-83de-7919a02db956', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('657d3810-8a4d-43b5-b530-9010d39c6605', '730f379c-986b-4274-8b88-3e90e5bbba25', '28cb6008-bddc-4894-83de-7919a02db956', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('fdbc16c0-6a5f-441b-9c89-83be6d0aa759', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', '28cb6008-bddc-4894-83de-7919a02db956', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('ac58d0c9-0cfb-4d25-9756-24947532fe5d', '64412e27-169e-44ea-a101-74ebf8cb82d9', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('55b84f7c-ab8f-4d7f-83b8-fd059b1f2d2f', 'cb2c22ac-87de-44e4-9638-35979f6af667', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('88984278-f3c6-4342-b70a-96312b163dac', '2d7ed5a0-fb21-4927-9a25-647c17d29668', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d97ebc9b-a90e-4069-acb5-35f60120ad3d', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('a8273cea-c24f-4a9d-932c-71eaa1052099', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('29e4dede-b2aa-4b03-b22d-12cbad1a4eed', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d1fb6aa3-eb46-4f9e-85f4-1d53f7a043bb', '444bbc7d-86f8-4258-9429-e73ce69a9e41', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('fbd88e3e-b9a2-48b0-a2ff-d5bb79933196', '205b0afa-3efa-4bdf-9bc0-3f6449ff5c1a', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('7b9b9aa7-fe55-4f87-954e-47b7712310d2', '2df936cc-f04a-4269-85ca-5dcf8099e184', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('0f8c0238-ee42-41fb-a455-4b815d112f8d', 'b887e221-2edd-4a37-9b65-209c92b8997d', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('24bde89b-d5a8-49dd-bf5a-e7529afbce75', '58b79c83-ba88-430b-a9c9-d549d43b3600', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('ca5b3d75-caa7-4609-905b-dad1b3576a77', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('54f32c2e-34e1-464c-ad7c-2f89be1efcd7', '0bea60a7-9789-42bb-a217-22d142cf3b1b', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('2bc8a589-def1-484c-98ee-544c1e5d0f4c', 'ee83822a-75aa-4b08-8772-c2cd40443532', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('6eb1583b-14a9-47cf-bb60-5eede398a7d8', '097ad133-9434-44d0-ad2f-16db49f0be9c', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d4cbec5e-7cab-46e7-83ee-b736aa9f4085', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('086b55ea-9a3f-48f5-852c-b9f4d9deeac5', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('396b7228-d9a6-4168-8c29-e239c95737ab', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('a15cfbcd-4128-46d6-bbd5-a18996308cdb', 'e45e5e33-d62e-47cb-9d54-cee790fc6b5f', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('b77457a4-3ccf-4b29-a2f3-7110c8e44df7', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('53756ce1-0ece-49b3-abff-a0f9a16443c2', '64412e27-169e-44ea-a101-74ebf8cb82d9', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('5fbb92ea-d56a-44f8-96d2-e61201a1066d', 'cb2c22ac-87de-44e4-9638-35979f6af667', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('5be31ea5-51f9-4a35-96d1-1dcf7dfff3dc', '2d3c1e66-1835-457f-93e9-265fe483feee', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('23d3ff7e-a1f7-4b49-a1ae-37b768799533', '9ba179ed-d26d-4828-a0f6-8836c2063992', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('c0f77e47-6914-41aa-99ef-1e9fa7a66430', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('054a364c-358e-45c6-a30a-9ae914749d1c', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('576d017e-dd72-4e7e-a8d1-0dbc40545b22', '87076e41-40fd-4832-bbbc-1e5211878264', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('fe3c3750-4634-484e-8b10-bc8277580955', '4526d150-cfcf-4b04-ab54-12789b788829', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('3c2959a3-3a21-44b3-b1bf-5e4bda4ca528', '2d5137ae-9d77-4a12-94ea-fda383a8db10', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('02e445a5-aa3a-4345-81ce-ec483b026174', '205b0afa-3efa-4bdf-9bc0-3f6449ff5c1a', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('64e11b7d-3935-476d-9b4a-2f5d707af392', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('2fbcc974-f2c9-4405-af48-47b43ca45cf7', 'db95956f-786e-46c7-87c1-ad5ebaacf355', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('7839cb6c-73ee-400a-9d8b-1d6e38184824', '2df936cc-f04a-4269-85ca-5dcf8099e184', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('73902ab8-86ad-47c5-b082-6dc560ce22e8', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('b436102f-13ef-4ddb-984e-6f3cf53ea44d', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('8b20ec58-0be2-413a-b96b-71f0a89b225e', 'ffed4ce4-53b7-497e-a449-e3dee93aec1d', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('846482ed-fc3c-4eac-aeb8-0dac6ec773fb', 'ee83822a-75aa-4b08-8772-c2cd40443532', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f75c9df3-5ae2-4bff-b9eb-2ab6c7f49436', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('aae9f601-59c5-4eb1-a204-b8ca8d4d0702', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('3376cbfc-bdf6-461b-b646-f0de8aa9df11', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('cb758758-faae-4735-a126-5107b3dfb9e2', 'e1ac8c3c-1c60-4c14-8143-84c3c8c66934', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('4f8dcddc-9cb9-4c5d-9f67-b71dca2c7963', '730f379c-986b-4274-8b88-3e90e5bbba25', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('b483fb14-1e38-4f73-b7da-d5e2c4106778', '64412e27-169e-44ea-a101-74ebf8cb82d9', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('00eb0b4e-97eb-430d-8bcd-02425a0e5cf0', 'cb2c22ac-87de-44e4-9638-35979f6af667', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('8b0c01d8-4078-467d-9939-e95191a7ed5d', '2d7ed5a0-fb21-4927-9a25-647c17d29668', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('325b8295-5386-4300-8328-34a804bce116', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('9e03896a-a68c-40c5-add0-a3db58360737', 'ad3c4eb3-8ddb-45a0-9df2-d6ec5d14fbbc', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('58367d5d-8f3f-4819-9f34-cb5642f2b043', '87031f89-d9b0-449f-84f4-c9b6dff15a9a', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('be7ec0d3-8a09-46bc-b9f7-a5e7c00698cf', 'fcf62145-e196-4777-a201-77f6693810c4', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('7009680c-1a82-48d6-9b7d-553634234bc8', '4526d150-cfcf-4b04-ab54-12789b788829', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('6352368d-a41c-4176-b045-484eb7fb0b02', '205b0afa-3efa-4bdf-9bc0-3f6449ff5c1a', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('10b40c66-45c9-428e-9299-3640244832f2', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('01524478-45ae-47ce-a683-81bd0c44c525', '2df936cc-f04a-4269-85ca-5dcf8099e184', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('2ab45cb4-016e-4737-b5af-9606cf324cc7', 'b887e221-2edd-4a37-9b65-209c92b8997d', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d7f46909-83e9-482a-a723-c7e98315c660', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('07e05f34-2c13-4b2f-b696-5fad2ecdbf59', 'ffed4ce4-53b7-497e-a449-e3dee93aec1d', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('7d5ffe6b-0d51-44a4-af41-0632e14deddd', 'ee83822a-75aa-4b08-8772-c2cd40443532', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('38eb4c7c-651c-4640-8e9c-7e1a3ed23b49', '097ad133-9434-44d0-ad2f-16db49f0be9c', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('7c1523f5-db95-4346-9ca8-f655114f9915', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('e9fd8a16-aa10-4f95-8897-d0eef02afc8b', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('173365ac-8474-4677-bf01-6a17d07a512a', 'e1ac8c3c-1c60-4c14-8143-84c3c8c66934', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('e42b762a-2b64-4e7f-b752-02e378a33914', '730f379c-986b-4274-8b88-3e90e5bbba25', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('ad013830-2219-43af-aa39-1dbfeda6abfe', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('50a44bfd-fedd-44f2-b828-4ec23ec1dc5d', '64412e27-169e-44ea-a101-74ebf8cb82d9', '547b7170-078e-4d3a-a702-178d22490cf9', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('52d7e010-45b8-48d4-9f14-750adc041d82', 'cb2c22ac-87de-44e4-9638-35979f6af667', '547b7170-078e-4d3a-a702-178d22490cf9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('4f5f6455-1eba-4993-9cc0-8b2c53363cc8', '2d7ed5a0-fb21-4927-9a25-647c17d29668', '547b7170-078e-4d3a-a702-178d22490cf9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('febd9996-ad78-466d-82db-c21e52e30b5b', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', '547b7170-078e-4d3a-a702-178d22490cf9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('796c7303-d91d-4750-a302-57212f0b70db', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', '547b7170-078e-4d3a-a702-178d22490cf9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('5afe71bf-1224-44a7-8e8f-11ccbf3cd33d', '853b8f16-20c9-42e9-a04d-daa0237823ca', '547b7170-078e-4d3a-a702-178d22490cf9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('a55edd12-3f8d-49b7-8715-0bd85214590c', '2d5137ae-9d77-4a12-94ea-fda383a8db10', '547b7170-078e-4d3a-a702-178d22490cf9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('40b3ae52-b377-4941-9370-cfc6ea19718f', 'b887e221-2edd-4a37-9b65-209c92b8997d', '547b7170-078e-4d3a-a702-178d22490cf9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('531b2146-0b24-4677-bc92-8c770d9ed06b', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '547b7170-078e-4d3a-a702-178d22490cf9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('73cee4ff-9201-4754-beae-9aa241a0e908', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', '547b7170-078e-4d3a-a702-178d22490cf9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('7e93be9b-5d4f-4dfb-9cdb-b1770c6e1020', 'ffed4ce4-53b7-497e-a449-e3dee93aec1d', '547b7170-078e-4d3a-a702-178d22490cf9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('18727629-4c88-4b55-9365-6e93b2c2dfde', 'ee83822a-75aa-4b08-8772-c2cd40443532', '547b7170-078e-4d3a-a702-178d22490cf9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('0d998038-7e61-4426-a4a3-981c894e355a', '097ad133-9434-44d0-ad2f-16db49f0be9c', '547b7170-078e-4d3a-a702-178d22490cf9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('fb0f59e4-cfaa-4d1c-8f00-1486e10f30a6', 'bfca2841-ee2c-4981-9c74-3ef605fc1c3d', '547b7170-078e-4d3a-a702-178d22490cf9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('4252d9b1-7b16-424c-b6fb-4280e9b81752', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '547b7170-078e-4d3a-a702-178d22490cf9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('7f889713-9cc4-4183-8d9a-928875e34751', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', '547b7170-078e-4d3a-a702-178d22490cf9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('5cdcae70-178b-4a98-98ad-01aa09f3651f', 'fff06898-5361-4464-9e75-8b1435e46d15', '547b7170-078e-4d3a-a702-178d22490cf9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('521da264-e477-4b84-b824-ba0489450e28', 'e45e5e33-d62e-47cb-9d54-cee790fc6b5f', '547b7170-078e-4d3a-a702-178d22490cf9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('e33c126c-1020-44fb-8065-204034336284', '730f379c-986b-4274-8b88-3e90e5bbba25', '547b7170-078e-4d3a-a702-178d22490cf9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('be9f6f6b-4edd-4137-b7ea-cbca75ec6d53', '588636d6-7193-4a2b-be5f-cafe112d3bf5', '547b7170-078e-4d3a-a702-178d22490cf9', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('0473558c-af50-4c93-bf80-f4e3da6b636d', '62973440-0374-4c2c-a49b-b771b7640912', '547b7170-078e-4d3a-a702-178d22490cf9', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('f43c5d94-ffe7-4c55-a2dd-a9f5bb3bd003', '7179898a-c353-4917-8dbd-62e10ea3249e', '547b7170-078e-4d3a-a702-178d22490cf9', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('185f97dc-dca4-4999-8bdf-9a3f01c2d0d6', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('634dae86-3a9a-4b00-95dc-6cf0f8c43f00', 'cb2c22ac-87de-44e4-9638-35979f6af667', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('7e9e7c53-8aac-44ec-aab4-58096d3cc69a', '2d3c1e66-1835-457f-93e9-265fe483feee', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('c9889788-3cbd-4cbf-9fb4-e7ce8525f9db', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('6ffac56d-ceb4-4f31-805d-ecebd5e593d3', 'ca3040f2-e173-40a5-aab7-6ef15965ce43', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('b6e86488-d847-4561-a6dc-2e07e01e1e26', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('7063e94b-e39c-4650-8727-f6e55557d19f', 'ad3c4eb3-8ddb-45a0-9df2-d6ec5d14fbbc', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('0b11f5ec-c750-4f88-9db4-37166e5eed6d', '205b0afa-3efa-4bdf-9bc0-3f6449ff5c1a', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('fea12d26-654e-483b-903e-7663272ffa1b', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('0bf2b480-8a94-445c-8c5c-40a46c919def', 'db95956f-786e-46c7-87c1-ad5ebaacf355', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('5c89f6ef-2ccd-4cc0-a4ba-d4e6ec1e911d', 'baddeb10-3f99-4843-859c-50cc51659153', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('1cd35141-9142-462a-9ece-b74827435a7d', '182709ef-635b-40a4-9ccd-774dd39b380f', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('0e6fb9f3-6f10-4b15-aeb2-765745a2d782', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('5b7925d8-4694-4c66-87ac-d8773aff6551', 'a1845f87-cece-4cb0-91c7-7bd68f439063', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('9e73be7d-762d-48af-be1b-cb4af317bd4d', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('500edc65-b0f2-466f-be62-d3b6be4101fe', '62973440-0374-4c2c-a49b-b771b7640912', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('0cd191ee-455b-4670-af62-351195764282', '64412e27-169e-44ea-a101-74ebf8cb82d9', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('1cf0fa5d-5586-4336-b0f0-ec53ca80513b', '2d7ed5a0-fb21-4927-9a25-647c17d29668', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('928e67d9-fa2f-445a-a2a9-7101474b3f81', '444bbc7d-86f8-4258-9429-e73ce69a9e41', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('8ff1b049-1372-494c-aa2f-10114182154c', '87076e41-40fd-4832-bbbc-1e5211878264', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('91defb35-a4f4-4dc1-88bb-dedff87abdb2', '4526d150-cfcf-4b04-ab54-12789b788829', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('e5494928-396f-40e3-972d-477596f4e8bb', '853b8f16-20c9-42e9-a04d-daa0237823ca', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('7d324869-2ea6-49bd-91d3-91e6bbf630f4', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('0bcacee6-89de-4136-a809-7c73f22df0af', '182709ef-635b-40a4-9ccd-774dd39b380f', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('eeb2bab1-d71f-4641-b69a-c1a08d804a52', '4a182d8b-a553-455c-8485-f834da6de4e9', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('91221e67-53a1-4548-8b63-34fdd7cc6cb5', 'b887e221-2edd-4a37-9b65-209c92b8997d', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('21890728-5b03-45e5-9340-526b742a9152', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('e742e922-9c4a-474e-9058-3bd116a01439', '06ccbc31-e870-41c9-9293-b54aef58de21', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('a4dff2b6-f172-438d-adc4-7c9c1cd59db2', '097ad133-9434-44d0-ad2f-16db49f0be9c', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('211526e9-ef11-4b55-a338-35dea9ccbc1f', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('2f70f19c-9c70-4dbe-a158-c0f7b537dd09', 'bfca2841-ee2c-4981-9c74-3ef605fc1c3d', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('71ba72d5-ebf7-440a-b1c0-bc424af940d3', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('924c2996-7b3f-4383-b201-c07212a8a0db', 'fff06898-5361-4464-9e75-8b1435e46d15', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('0454b453-b5b2-4d0d-a301-fbca1abb5230', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('5ca40baf-2c43-4c41-84ea-de43880003e8', 'cb2c22ac-87de-44e4-9638-35979f6af667', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('8593feeb-1350-4063-a25c-c37c1dfb7183', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('291950c0-b740-4e4c-8f31-a02ca7c040f7', 'c2f39b5b-6aeb-4b82-8541-d25920314339', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('64e7f01f-8b4f-4988-be69-5b3837b622ec', '87076e41-40fd-4832-bbbc-1e5211878264', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('4fdce85e-6b63-4245-a1f1-74e918afaffb', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('433d77e3-31bf-4e85-a17b-38f0825c2425', '182709ef-635b-40a4-9ccd-774dd39b380f', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('ce129456-04bd-4f3a-a906-8ab91baf2c1d', '06ccbc31-e870-41c9-9293-b54aef58de21', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('914e2574-0dc1-4301-95b8-4cda2cf91b59', '097ad133-9434-44d0-ad2f-16db49f0be9c', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('4cd78118-19de-4357-a847-a2f353a38b20', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('a9c5da25-ac01-4dd4-a243-ad150bbd0339', 'bfca2841-ee2c-4981-9c74-3ef605fc1c3d', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('78c06a1f-26c0-4c99-aeb4-9f9ff6cb25a5', 'fff06898-5361-4464-9e75-8b1435e46d15', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d53efb02-248a-4791-a72b-97aa4959e0b8', 'e1ac8c3c-1c60-4c14-8143-84c3c8c66934', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('6958e12c-f3e4-4ea6-8394-bce05cbf6fe1', '730f379c-986b-4274-8b88-3e90e5bbba25', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('58a1ef74-3e11-4781-8d89-4b4e857e107f', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('2c83f469-6aad-492e-9f71-83bdac217045', '62973440-0374-4c2c-a49b-b771b7640912', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('99b75385-fda1-4ad6-b071-3c2b08bc3467', '7179898a-c353-4917-8dbd-62e10ea3249e', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('a9f7701c-405a-44a0-ad3e-d751105ed6b1', '64412e27-169e-44ea-a101-74ebf8cb82d9', '6c1be796-e383-4344-80eb-1d24392eb0a8', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('88051b96-3896-4c8b-9b8e-95cf57e58dfa', 'cb2c22ac-87de-44e4-9638-35979f6af667', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('ac38c444-5b6f-4f58-a441-73b928e4e29f', '2d7ed5a0-fb21-4927-9a25-647c17d29668', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('88bd6ea9-481f-4446-ab5f-f337610175f3', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('9b6d64b9-5724-48e1-bf3d-f74d3a6580ad', 'c2f39b5b-6aeb-4b82-8541-d25920314339', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('7cc1d28e-1224-4d23-8295-f9f979170ee4', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('8e661566-a140-4fec-b693-e5f1b34a575b', '87031f89-d9b0-449f-84f4-c9b6dff15a9a', '6c1be796-e383-4344-80eb-1d24392eb0a8', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('71ab4d60-9b0a-4c23-86b2-3fada1b19036', 'fcf62145-e196-4777-a201-77f6693810c4', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('225439bf-8412-403d-aa51-e21bf754b9ca', '87076e41-40fd-4832-bbbc-1e5211878264', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f584f382-520c-48c5-b73a-7772ca677cda', '4526d150-cfcf-4b04-ab54-12789b788829', '6c1be796-e383-4344-80eb-1d24392eb0a8', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('22699cd2-2f9c-444f-af75-e6b0e8be9e96', 'b887e221-2edd-4a37-9b65-209c92b8997d', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('1bc25880-dbe0-4e96-a651-16c459ecfbb2', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d485d16b-0d4d-4b42-abdd-6e835e276a4f', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('0c1e075a-88a4-4dce-ac5e-9997192d622f', 'ee83822a-75aa-4b08-8772-c2cd40443532', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('8c133343-78dc-4d4c-8338-bb0dc99e0889', '097ad133-9434-44d0-ad2f-16db49f0be9c', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('304a6ccd-0e69-4ae7-9b55-3ee77b84024a', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('c2e75822-0045-4bd7-a89a-ed1dfde242ae', '730f379c-986b-4274-8b88-3e90e5bbba25', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('69d75afd-83fa-4d3b-a783-b0bd4f397c3a', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d842c3cc-3b13-4460-a6bf-18d2451f13e9', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', '6c1be796-e383-4344-80eb-1d24392eb0a8', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('db582abe-0edc-4003-b654-2ebf72999373', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('b27af338-00d1-456d-ad70-5b1107465a14', 'cb2c22ac-87de-44e4-9638-35979f6af667', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('571d3e0c-53b4-4110-865f-d5a1e2dda5db', '2d7ed5a0-fb21-4927-9a25-647c17d29668', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('f1b25277-9797-4c4f-9039-93b020616352', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('0b8bd3bc-0401-44c9-93a2-1c3425b09772', '444bbc7d-86f8-4258-9429-e73ce69a9e41', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 3, NULL);
-INSERT INTO "public"."course_user" VALUES ('17b4f8dd-d66a-4217-b12f-2ebd9940c131', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('9a39ed20-5039-419e-9d30-107f53946030', '2d5137ae-9d77-4a12-94ea-fda383a8db10', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('91245fdd-34c8-43bd-a1f0-e17afdbf512e', '205b0afa-3efa-4bdf-9bc0-3f6449ff5c1a', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('d21b6259-1723-4822-9564-90f917c5bad7', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('c4ead630-7d52-4346-863f-7d18182b8659', 'b887e221-2edd-4a37-9b65-209c92b8997d', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('74ba3705-bc6d-42db-8b9e-226dc0cbc850', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('a6e51efe-0905-4e0b-ae72-5f50a4203ecf', 'ffed4ce4-53b7-497e-a449-e3dee93aec1d', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('7968378f-9061-495b-8fc6-1c52e929e327', '097ad133-9434-44d0-ad2f-16db49f0be9c', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('1ac484fe-0968-471f-a187-163e7522803e', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('54075355-3740-447b-9f8f-6f9f4a96ce8f', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('3d359cb3-d4a0-427b-aeab-5c863cc90b40', '588636d6-7193-4a2b-be5f-cafe112d3bf5', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('7089acf6-eda5-480c-8b2f-9ed77205789b', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, NULL);
-INSERT INTO "public"."course_user" VALUES ('2851d8be-a407-4a9d-852c-09c2f9a43192', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 3, NULL);
+INSERT INTO "public"."course_user" VALUES ('69b831e8-7e35-48c4-bcce-20811569be49', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('450e19f4-08ba-4306-aaef-fa65624a51b2', 'cb2c22ac-87de-44e4-9638-35979f6af667', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8923bc82-1ecd-4592-9915-806df18361bc', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('9337351f-9171-4754-8dc3-1ec6404d607b', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f1b31b15-63f2-4ef5-a16e-e5e0f7c5efc5', '444bbc7d-86f8-4258-9429-e73ce69a9e41', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('1fe9d6ba-0d73-440f-b23a-749b916b4480', 'c2f39b5b-6aeb-4b82-8541-d25920314339', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('e3c5fbe2-2d41-4586-adec-29ad20ca77a9', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('df3f0771-0d5b-4b9f-9eb7-f7770b98cca9', 'fcf62145-e196-4777-a201-77f6693810c4', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('904cc8c1-bd1d-4006-bbb0-a4ba043de465', '87076e41-40fd-4832-bbbc-1e5211878264', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('e2cf4f6d-d053-457d-96ff-a882ae823652', '2df936cc-f04a-4269-85ca-5dcf8099e184', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('3150d63b-3498-4e25-bb0d-abe02725e504', 'b887e221-2edd-4a37-9b65-209c92b8997d', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('06bea5cc-a69e-4f6c-ab10-d7781fc49ad7', 'ee83822a-75aa-4b08-8772-c2cd40443532', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('73c6afc4-94cd-49fd-a495-b6d29564f4d0', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('05a0ae23-c09d-4249-8a2e-7e490b96d520', 'fff06898-5361-4464-9e75-8b1435e46d15', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('e7871db1-1c86-40df-b12f-ec2f6e4925fc', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', 'f4eaeacd-e560-4839-a473-e92e7197a8bb', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7223bcdc-d9ee-4aa2-83a5-2c38de34802c', '64412e27-169e-44ea-a101-74ebf8cb82d9', '10d4cf23-afb3-448b-be5f-893dc4058444', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('40eff8f3-ef77-4e34-ad3e-37bb71f19a8e', 'cb2c22ac-87de-44e4-9638-35979f6af667', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('dddedac4-cfcc-4bbb-b596-6b72d3e4d39b', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('a17ef002-6759-4ad0-8524-6e5fd1586c29', 'c2f39b5b-6aeb-4b82-8541-d25920314339', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('11c65e2e-cf57-4595-803d-8599551362b4', '182709ef-635b-40a4-9ccd-774dd39b380f', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('cbfc1cb3-a3ab-45f4-bc5f-7a0542945fda', '4a182d8b-a553-455c-8485-f834da6de4e9', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('6285cd85-b61c-49ce-8de2-4eab168ff081', 'b887e221-2edd-4a37-9b65-209c92b8997d', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('60cd9152-e8fc-4860-936f-97eda04c79bb', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('27f1ddcd-238a-4efa-9570-650c04972d7c', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('5f3cacdc-717d-4a61-9735-32e33abd77fc', 'ffed4ce4-53b7-497e-a449-e3dee93aec1d', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ab79939c-d8a9-460f-b546-5a83985077a5', '06ccbc31-e870-41c9-9293-b54aef58de21', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('29b306ac-bf50-45e8-a6a9-e9665d6c6df8', 'ee83822a-75aa-4b08-8772-c2cd40443532', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ca0e55bc-3b66-458e-a26c-e91ca8e79e35', 'bfca2841-ee2c-4981-9c74-3ef605fc1c3d', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('63b1a055-a11d-423d-8a09-eeb13bf17105', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('c874549c-1983-434c-ba4f-64ce047ce5c0', 'fff06898-5361-4464-9e75-8b1435e46d15', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('97fed459-b69c-4713-994d-8695da223d81', 'e45e5e33-d62e-47cb-9d54-cee790fc6b5f', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('824dc0c2-317b-478e-ad4a-79fcebad35e1', '730f379c-986b-4274-8b88-3e90e5bbba25', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f0888fa2-c3fc-4cb2-bfe9-3c840a3da4d8', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', '10d4cf23-afb3-448b-be5f-893dc4058444', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ae4ec71d-3d52-4800-8e5d-3794221725cc', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', '10d4cf23-afb3-448b-be5f-893dc4058444', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8c763e10-8ae6-4565-a192-c28ffc09766b', '62973440-0374-4c2c-a49b-b771b7640912', '10d4cf23-afb3-448b-be5f-893dc4058444', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('fb6bfaf9-209f-48e0-a9b8-35b868597814', '7179898a-c353-4917-8dbd-62e10ea3249e', '10d4cf23-afb3-448b-be5f-893dc4058444', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('96ae65b2-f78b-48b0-9b08-767419daf27f', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'a9946969-f2a0-461d-a6e5-9de47426d352', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('dd1e8dc5-34d4-4dbf-8691-f1fdba440057', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('bfadf84b-416c-4498-bd13-1ea6c3458ede', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('2245bc0e-ee36-43d0-bb9a-7672b0a6cf17', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('49f08274-5e5a-4ba4-8bad-7f0f2c2688c5', '444bbc7d-86f8-4258-9429-e73ce69a9e41', 'a9946969-f2a0-461d-a6e5-9de47426d352', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('83bb00bf-774b-4f20-98fc-11f8b5974844', 'fcf62145-e196-4777-a201-77f6693810c4', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('aa3e96b8-681b-436a-9b21-59c83b8339ae', '853b8f16-20c9-42e9-a04d-daa0237823ca', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('1261dff3-02a8-48fe-b18d-c5702ce5d562', 'baddeb10-3f99-4843-859c-50cc51659153', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('12537adb-5f34-4fdf-a1ec-0d4e249d86ae', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d3e2ef99-f158-4a2c-8837-f7824f99758a', '06ccbc31-e870-41c9-9293-b54aef58de21', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('9f45e883-3c68-4cf2-b901-2d2e6ad75037', 'ee83822a-75aa-4b08-8772-c2cd40443532', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('89669fdb-253c-4a7c-aa93-2425b66abe4c', '097ad133-9434-44d0-ad2f-16db49f0be9c', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d89409b8-b773-4b8c-b82c-a991ad96ff93', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('193f35df-9bd1-4726-9ed0-61c88501e995', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('20b7e82a-ace4-4412-b897-8f46b90cbfca', 'a1845f87-cece-4cb0-91c7-7bd68f439063', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('cb5f0f5e-0b97-48c5-b44d-758c6a29cfef', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('504307b3-0d1a-4e0e-b00d-d52c885830b9', 'fff06898-5361-4464-9e75-8b1435e46d15', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8f6f0b85-c528-4225-8ea6-a0f0adfec25c', 'e1ac8c3c-1c60-4c14-8143-84c3c8c66934', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('b1023771-63f8-4b7e-b056-8095cb483ee9', '730f379c-986b-4274-8b88-3e90e5bbba25', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d0a5f71e-1bf0-4480-9c4f-25e1be9aa29b', '588636d6-7193-4a2b-be5f-cafe112d3bf5', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('4582d6ea-63e9-405d-9dfa-e77942264eb3', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', 'a9946969-f2a0-461d-a6e5-9de47426d352', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('9aff6fea-1091-45df-8a2a-cef27d713b1f', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', 'a9946969-f2a0-461d-a6e5-9de47426d352', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f6850b5a-e4e1-4125-8945-f574174d4d24', '62973440-0374-4c2c-a49b-b771b7640912', 'a9946969-f2a0-461d-a6e5-9de47426d352', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('2e68f073-edbe-4206-ad8c-beb57b0bd7be', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f303ab3e-30d7-495b-957c-2e5fe7240004', 'cb2c22ac-87de-44e4-9638-35979f6af667', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f47a2655-3663-4c2d-87a8-623af7736f4b', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('40a2caba-5c67-4c01-840b-5d38c29cb4ff', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ec9dc8dc-81d7-4b1a-8916-7184b02e80ac', 'ad3c4eb3-8ddb-45a0-9df2-d6ec5d14fbbc', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('da51b34a-1a24-4331-9a33-b8b92b82f87c', 'c2f39b5b-6aeb-4b82-8541-d25920314339', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d6e151f4-e123-4a3e-a7da-2e8cb62e0579', 'fcf62145-e196-4777-a201-77f6693810c4', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('b6ef2244-6b0b-4c0c-bb48-0d2d9cadec2a', '87076e41-40fd-4832-bbbc-1e5211878264', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('870db9c0-2a3b-42c2-961f-fee46a27da53', 'b887e221-2edd-4a37-9b65-209c92b8997d', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('5e9b0896-0c32-4f12-bb6f-ceeada3324d8', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('20339a21-fef9-4ced-849e-5df6ec067d98', '06ccbc31-e870-41c9-9293-b54aef58de21', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('687498f1-b033-4f97-8c8a-0f6cff0a5398', 'ee83822a-75aa-4b08-8772-c2cd40443532', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('1267f9a2-a59b-41b6-8688-fb9794059271', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('4a8214a9-a91c-479f-9fbe-4c06d4e7c688', 'a1845f87-cece-4cb0-91c7-7bd68f439063', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('df3b12cf-e8ff-4ee1-8830-794041cfe3ef', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('9dab077e-c746-412d-9542-623a728c0eb6', '730f379c-986b-4274-8b88-3e90e5bbba25', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('5cf848d8-1ad9-4d60-bada-88d4244569f2', '588636d6-7193-4a2b-be5f-cafe112d3bf5', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ecd43026-b80d-4a6c-93a5-f4f41b4be070', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('2ec34d64-6851-4889-a890-6e50e78233e8', '62973440-0374-4c2c-a49b-b771b7640912', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('e2689bc8-96e4-4a5f-938d-8168fd48d349', '7179898a-c353-4917-8dbd-62e10ea3249e', 'f8c020b8-5eae-491e-83b7-e8327b6f5ec9', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('cbe59aef-a085-448f-b10d-ddbf59b839bb', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('e6377909-e343-40b6-8fc3-6ba689c67c52', 'cb2c22ac-87de-44e4-9638-35979f6af667', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('3ad04eb1-b015-4fed-ba20-2a3f431a627c', '2d3c1e66-1835-457f-93e9-265fe483feee', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f41f0eae-f31e-4986-8b3e-084736d82ad1', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('e0f615ca-2f00-4b1c-827c-a3af14f7c1d1', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('56653f25-0910-40af-9144-e7891cf8b35e', 'ad3c4eb3-8ddb-45a0-9df2-d6ec5d14fbbc', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8e4e0316-9e14-45ff-a11f-612920a2b776', 'c2f39b5b-6aeb-4b82-8541-d25920314339', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('07234125-90d6-4829-8b29-0a35617176a8', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('10f47d3a-f7f3-4f41-9784-82305dbcf557', '4526d150-cfcf-4b04-ab54-12789b788829', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('c6283e94-e1d8-4fe9-8229-860555bb5e39', '853b8f16-20c9-42e9-a04d-daa0237823ca', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0878a947-648b-4c15-aa98-02fb3c314642', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('019734c0-2a83-4293-9de7-d48f99092c14', '182709ef-635b-40a4-9ccd-774dd39b380f', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('c8b70483-1ea4-4e08-8e8a-1d63a4d9554b', 'b887e221-2edd-4a37-9b65-209c92b8997d', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('848b3497-3453-461e-adbe-e177fe1e8338', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('1ff3744b-986d-4e29-a981-4424465eeaec', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f3302084-93f5-4025-bd40-bbe3e6e7e9f3', '06ccbc31-e870-41c9-9293-b54aef58de21', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f87959ae-709d-46cb-a169-3695482c7565', 'ee83822a-75aa-4b08-8772-c2cd40443532', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('239ce38f-14d6-4e9b-8f66-ffb5e3e19621', 'a1845f87-cece-4cb0-91c7-7bd68f439063', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('377e85ec-1929-4b1b-b21f-b57168e9efe0', '730f379c-986b-4274-8b88-3e90e5bbba25', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0a217bec-6cac-4838-a289-6eab9aa2d5ad', '588636d6-7193-4a2b-be5f-cafe112d3bf5', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('cb398bac-3780-4abf-a3da-309e70d065f9', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', 'c6d45de3-900b-4ac5-b080-de222ac3bebd', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('3f14aa6c-73d7-41f3-b169-35e4b62f92d8', '64412e27-169e-44ea-a101-74ebf8cb82d9', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('c7c2e9d0-0fe3-4994-bdff-37c5fed7d308', 'cb2c22ac-87de-44e4-9638-35979f6af667', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('bd6a588f-077d-471d-a77e-856162e044ff', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('56df779f-ece2-41fb-8909-59ac03bce904', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('3c39c7a5-287c-4872-bce7-d1d5fa936e86', '444bbc7d-86f8-4258-9429-e73ce69a9e41', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8c7f82a7-39a2-4845-afa4-832e346cdc02', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('c33a53de-508a-44ae-a6fc-7403793f5623', 'baddeb10-3f99-4843-859c-50cc51659153', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('3fcc2a94-ff41-4d37-ac7b-1554bb21d962', 'b887e221-2edd-4a37-9b65-209c92b8997d', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('03de6c68-8175-4f98-93b1-e6514f53c582', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('81bac593-648e-4236-a88f-1d5acd1ecd31', 'ee83822a-75aa-4b08-8772-c2cd40443532', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('baee53ae-3bfe-4c06-8668-dad18894e998', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('9a84a198-b735-4c5b-9364-d02dab15cd70', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('4784b6e1-f965-4815-a1df-7eaa10a034e7', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('dc424835-9955-4d21-98d8-292d0b296b13', 'fff06898-5361-4464-9e75-8b1435e46d15', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8532b6b1-4488-41bd-8c37-e2f7364ce648', 'e1ac8c3c-1c60-4c14-8143-84c3c8c66934', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('006d065b-e4fe-40ac-b21d-5fa125475a60', '730f379c-986b-4274-8b88-3e90e5bbba25', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('416fa7d3-00cd-4dc1-82ef-bec6d09a23d6', '588636d6-7193-4a2b-be5f-cafe112d3bf5', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7c6b189e-b85f-4b64-ae07-171a9452de46', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d8b77a47-f327-48b0-bb5d-0913cf60deea', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7f5e7b68-227a-47b7-a634-f8239e86009a', '62973440-0374-4c2c-a49b-b771b7640912', '8b5ab515-a9ab-4e9f-a9c4-efe58c6970f7', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d9d876b8-fbab-4cba-85cc-1fbc55cace59', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('b4389eba-6e72-43e4-9da3-10e8fdd270de', '2d7ed5a0-fb21-4927-9a25-647c17d29668', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('a5fb815d-3197-429c-8e16-c2d642e409c0', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d72b6349-8348-4457-9d67-c83be2939aa9', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7b341230-5cfb-406d-9bda-b951bbfc26f7', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('05594f89-96d9-4cd0-b891-761cd6fc6825', 'ad3c4eb3-8ddb-45a0-9df2-d6ec5d14fbbc', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f0737f7c-42cb-4bd7-badf-1b479fa31008', 'c2f39b5b-6aeb-4b82-8541-d25920314339', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('e31805b8-719b-4779-9347-deddf29e161d', '87076e41-40fd-4832-bbbc-1e5211878264', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('3a3a6f1f-e3a8-46a6-808c-7036cfe9575c', '2d5137ae-9d77-4a12-94ea-fda383a8db10', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('01258e17-6d81-4544-9c44-9aa1f9a54f3f', '205b0afa-3efa-4bdf-9bc0-3f6449ff5c1a', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('fa6ca842-4751-4876-a7c0-ded96275ddf4', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('954466cb-25a3-4523-a326-d9e5cbe8a107', 'baddeb10-3f99-4843-859c-50cc51659153', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('b8c1de23-bb58-4026-af41-678eaa5268a5', '2df936cc-f04a-4269-85ca-5dcf8099e184', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('2f2ee475-aedf-4b18-a75c-5c00a0620654', 'b887e221-2edd-4a37-9b65-209c92b8997d', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d06d429b-c53a-43ac-8d88-e5766e4167bd', '58b79c83-ba88-430b-a9c9-d549d43b3600', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('b6c64e9d-70de-47d9-941d-c812c8a2a3e1', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f54f3a33-c4e2-4177-8795-d92ddedbeb20', '0bea60a7-9789-42bb-a217-22d142cf3b1b', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f2abc211-a2a1-4122-99f5-41261e9a8f33', 'ffed4ce4-53b7-497e-a449-e3dee93aec1d', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('05f39d05-8166-4251-a115-1573da550d46', 'ee83822a-75aa-4b08-8772-c2cd40443532', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('28d55cdf-12af-4e0c-ba1a-c96969009d77', 'a1845f87-cece-4cb0-91c7-7bd68f439063', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7a273dcc-e844-40f8-b9fe-160aafc00602', '730f379c-986b-4274-8b88-3e90e5bbba25', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('963fdef5-94f9-4baf-b98b-6de44864e094', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', 'd34ea986-3f58-4947-81fa-2a67cc57818f', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('08e0118b-eab4-45de-aaf5-367e98d9adb1', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0cced576-c847-4f6c-a2f9-53c875f951fd', 'cb2c22ac-87de-44e4-9638-35979f6af667', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('41983a6a-4955-4f93-a422-2e31f6ef6e9a', 'ca3040f2-e173-40a5-aab7-6ef15965ce43', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('2ec3f26a-2139-4cd8-b77b-cb6f33490104', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('20bc24aa-34be-4994-b711-772dd1d8911f', 'fcf62145-e196-4777-a201-77f6693810c4', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('73836408-e053-43ce-b761-bec35f113683', '87076e41-40fd-4832-bbbc-1e5211878264', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f87508ee-06bc-494f-abb0-bcfda4a94f81', '853b8f16-20c9-42e9-a04d-daa0237823ca', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('9db18261-b198-4cf6-ab3d-ec1c68742278', '2c4e42ab-be60-439f-95dc-28ccd7c75411', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0b0f1450-5108-49b6-b30b-d8510d3613dd', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('9c0ef287-0070-438d-a624-541d338ef346', 'db95956f-786e-46c7-87c1-ad5ebaacf355', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('acfe5d14-3a7a-43a7-b5c5-7ef071248a70', 'baddeb10-3f99-4843-859c-50cc51659153', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('a04cd9d6-5f22-4849-891f-a9b3450ea8cc', '182709ef-635b-40a4-9ccd-774dd39b380f', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('dd2871a2-d239-49db-85e7-4caf39e7ab85', '2df936cc-f04a-4269-85ca-5dcf8099e184', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('9b0bdc7c-34c4-4240-998f-305ad037fad0', '58b79c83-ba88-430b-a9c9-d549d43b3600', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d8b7d6ac-e4b4-46ee-9f92-3d186d61d231', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('010c5ec1-a193-45d6-8eee-bff298dbf23c', '0bea60a7-9789-42bb-a217-22d142cf3b1b', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('cd134ec1-d0a9-4ab9-ae5a-6d4b17793a96', '097ad133-9434-44d0-ad2f-16db49f0be9c', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('1bb3016c-0937-4e71-bf57-dcd6042a7993', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('a5d72aa6-ff54-454f-9835-5343c943c0e1', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('92d791cd-a405-49e3-b90c-72c5186778e6', 'bfca2841-ee2c-4981-9c74-3ef605fc1c3d', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('aca66376-8f08-4c32-ad5e-7dbd7b67b742', 'a1845f87-cece-4cb0-91c7-7bd68f439063', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0667cff4-a42a-4b28-890f-15489547f218', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('be7c2275-8c58-4d7c-8979-219a7960f66b', 'fff06898-5361-4464-9e75-8b1435e46d15', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('881b4349-aceb-413c-bc80-8ba58fb64e82', 'e1ac8c3c-1c60-4c14-8143-84c3c8c66934', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('a6390dcb-3438-4a3d-8b59-2d5d51157372', '588636d6-7193-4a2b-be5f-cafe112d3bf5', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f809a5b8-bda7-46f5-b7e8-0f3f20d79360', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('c08d1f07-0915-448a-86cc-1998fa772138', '7179898a-c353-4917-8dbd-62e10ea3249e', 'c52c2f4c-b403-47f3-a22c-4c14c4528b9d', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('2f3a912a-3403-44d9-8022-30ff79224d17', '64412e27-169e-44ea-a101-74ebf8cb82d9', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('344c8526-189b-4c04-944a-7be57fbc03c6', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f28ced09-1147-4dff-a788-22f79c0bb504', '87031f89-d9b0-449f-84f4-c9b6dff15a9a', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('e248813a-8cdc-4986-a0a5-9f38adf06728', '853b8f16-20c9-42e9-a04d-daa0237823ca', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('cda44ad2-8459-466f-a6de-6423df6bdba1', '205b0afa-3efa-4bdf-9bc0-3f6449ff5c1a', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('a078df3f-41a5-405a-a2c6-7d909228d31c', 'baddeb10-3f99-4843-859c-50cc51659153', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('4b179023-1859-4767-b28b-bc12e97645db', 'b887e221-2edd-4a37-9b65-209c92b8997d', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('11b1ec82-4059-45c4-9e92-d4b291d23699', '58b79c83-ba88-430b-a9c9-d549d43b3600', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f9648898-4e3f-4539-b360-f21f1de6bff4', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('3941c1bf-a92b-4faa-8ff4-e618ef8a008b', '0bea60a7-9789-42bb-a217-22d142cf3b1b', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('2e8c4bc2-8d28-4735-a976-53df2a0347b5', 'ffed4ce4-53b7-497e-a449-e3dee93aec1d', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('1ec0f851-aaf5-45ec-9feb-9a91e41f29e7', 'ee83822a-75aa-4b08-8772-c2cd40443532', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('3c17e6a5-9229-4be3-be05-eaf9e4c5cb5a', '097ad133-9434-44d0-ad2f-16db49f0be9c', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('831bdebc-4618-491f-b1b4-203d05fbdeb2', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('b0e7fd94-0b14-4159-b1b5-3ab370684779', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('020ab256-632a-4a69-a7df-208ce21e0eaa', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('a8e0b587-dae7-41f5-a5b8-4d514f158b55', 'fff06898-5361-4464-9e75-8b1435e46d15', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('5d5f1e86-dd78-4398-bc6a-bd220f46194a', 'e1ac8c3c-1c60-4c14-8143-84c3c8c66934', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('cce2f358-11d1-4547-8449-954afd0e0b9c', 'e45e5e33-d62e-47cb-9d54-cee790fc6b5f', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d1837a5f-dc39-4a34-8228-863bb9e2e8da', '588636d6-7193-4a2b-be5f-cafe112d3bf5', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('fe27a284-e6f5-4224-91b3-02d58e5a33e6', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('c484e8a4-1fec-4452-87fc-2b10f6cde6de', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', '48a4d599-9cda-4301-8a4c-5b72ca78ee8d', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('88be0322-b156-4dd5-8259-86a05caf1314', '64412e27-169e-44ea-a101-74ebf8cb82d9', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('4c9cbdcd-609c-4994-8762-f2b42e844331', 'cb2c22ac-87de-44e4-9638-35979f6af667', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('4746de93-3420-4848-9963-4030e2ec0375', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ea719bc3-bf6b-4b57-8622-7ce443402522', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('b8be93c2-77c6-4f56-a74b-5107ad719273', '444bbc7d-86f8-4258-9429-e73ce69a9e41', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ba1292e6-f2ee-4b59-9338-b1eece7ce750', 'c2f39b5b-6aeb-4b82-8541-d25920314339', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('6d7a87f6-b409-4ba8-a682-99cc25e6c9d6', '4526d150-cfcf-4b04-ab54-12789b788829', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('617c3a81-345f-49b6-86ed-b2389eeedfd7', '2d5137ae-9d77-4a12-94ea-fda383a8db10', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('246af371-3670-49e9-8b6c-717fc5dce0c5', '205b0afa-3efa-4bdf-9bc0-3f6449ff5c1a', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('2cd58f2f-f2e6-475e-a5bb-f94f01ada7ec', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7cc312ce-29cb-4c5e-a9ab-3cf96d86e74e', 'baddeb10-3f99-4843-859c-50cc51659153', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('44e42834-950a-4880-897c-2e6526c71eb7', '182709ef-635b-40a4-9ccd-774dd39b380f', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('e59717c5-49e5-40e1-920c-aae3ff2d910e', '2df936cc-f04a-4269-85ca-5dcf8099e184', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0d4feaa4-a201-45b2-90e7-6778f8753e7d', '58b79c83-ba88-430b-a9c9-d549d43b3600', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('21940a17-b0c5-4f67-aed5-d83ff23d32c5', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('2ac2ca54-1877-4a88-8653-3fc6e403b9ea', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8dbc9cd0-70f3-43a4-a3cc-5eeb1c9af509', 'fff06898-5361-4464-9e75-8b1435e46d15', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f4049645-1b68-42bb-9db5-44fbe8ab0407', 'e45e5e33-d62e-47cb-9d54-cee790fc6b5f', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('149eaa27-7590-4c98-bb5a-0636f11420f4', '730f379c-986b-4274-8b88-3e90e5bbba25', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('185e8982-5895-4428-ae29-b7e0c7c43d1f', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', '59c2efd4-a0a7-4d95-8fb1-455a7fb413c6', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d914c57a-cad9-48e1-a69c-5a4c7b2dd7e5', '64412e27-169e-44ea-a101-74ebf8cb82d9', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('6be1608b-24d9-4251-bfbe-2ea2ece16bbc', 'cb2c22ac-87de-44e4-9638-35979f6af667', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('2ca25e27-eb20-4b2e-85f7-02807c3d67cc', '2d3c1e66-1835-457f-93e9-265fe483feee', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7756ccc9-d469-4336-a5a7-2f7f100265a0', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('11bd2c9c-f8cb-4e12-b152-2bcd38000e5b', 'ad3c4eb3-8ddb-45a0-9df2-d6ec5d14fbbc', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('81647a0b-607d-4147-a5c0-fe9a60519da5', '444bbc7d-86f8-4258-9429-e73ce69a9e41', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('494d8dca-7179-496f-b81c-2b72a5fa1f10', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('22147c60-db11-4d8c-95cd-8024e1dbf3f7', '2d5137ae-9d77-4a12-94ea-fda383a8db10', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('07d9fbff-fbf4-480a-8ea1-686f0fd1a51a', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('bc1c2f85-0c87-451c-8fe0-506d4ce1dbab', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('463dd0a0-1684-4b0f-876a-bd2a8993c669', '0bea60a7-9789-42bb-a217-22d142cf3b1b', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('5ecaa144-c79c-432e-8235-4845b7271697', 'ffed4ce4-53b7-497e-a449-e3dee93aec1d', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f0e7723a-fc42-493c-b1ce-601a313055aa', '097ad133-9434-44d0-ad2f-16db49f0be9c', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('257a70ea-aed4-4e6c-b99e-86f13522c7c9', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('611a516c-8543-4aa7-b99b-8ca94747b05e', 'e45e5e33-d62e-47cb-9d54-cee790fc6b5f', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('2cb7e91e-61a7-4b52-b09f-2d457cd7aa5c', '730f379c-986b-4274-8b88-3e90e5bbba25', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d4880d17-c95e-4ed2-9680-6f06ccd5aad6', '62973440-0374-4c2c-a49b-b771b7640912', '9cf07484-c7b4-453c-acd7-e763f3ccc98f', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('1c508372-56ed-4141-a562-8937a53792b1', '64412e27-169e-44ea-a101-74ebf8cb82d9', '30fc358d-b78f-40cb-ad67-51ca279e649b', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('b9f046a3-a2d8-4b0a-b8ce-e104b4f145be', 'cb2c22ac-87de-44e4-9638-35979f6af667', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('aab5aed0-1317-48c1-8383-3483928b2b77', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('4801c702-2c23-4e1d-b38d-985907fe5e2c', 'ad3c4eb3-8ddb-45a0-9df2-d6ec5d14fbbc', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f387eac2-9c35-4e09-b72b-010effa69a7c', '444bbc7d-86f8-4258-9429-e73ce69a9e41', '30fc358d-b78f-40cb-ad67-51ca279e649b', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('6f045721-d174-488b-b2a2-b7e3ea099bb1', 'c2f39b5b-6aeb-4b82-8541-d25920314339', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('c1a05c6c-a9fb-41f3-a15f-83610f2d0703', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f5668005-6ec3-46f6-97e1-b15911544fd7', 'fcf62145-e196-4777-a201-77f6693810c4', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8b4cfd58-3591-4d67-be45-85ac038be199', '87076e41-40fd-4832-bbbc-1e5211878264', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('222d6b44-ab9a-4dda-9a4b-b1adbdeb0fd1', '4526d150-cfcf-4b04-ab54-12789b788829', '30fc358d-b78f-40cb-ad67-51ca279e649b', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('2eb3a282-3e74-4223-a954-527235afb87b', '182709ef-635b-40a4-9ccd-774dd39b380f', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0bf61a2e-6ed2-444d-89ce-9c63683392e8', '2df936cc-f04a-4269-85ca-5dcf8099e184', '30fc358d-b78f-40cb-ad67-51ca279e649b', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('043447af-a475-4c4e-ade1-673b892951cc', '4a182d8b-a553-455c-8485-f834da6de4e9', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('007ef5d8-9464-4d26-9e63-54a6fb2f1ff2', 'b887e221-2edd-4a37-9b65-209c92b8997d', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('6353a8be-b2ea-4d7a-bdec-626fa37ae718', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('cb6e1eb8-7518-44da-ae6f-419f6fb14701', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('c375f316-c143-4298-91b8-e88b4c003532', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('1ba02a5c-5824-4a2d-962e-f0652983bde9', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d494cde9-ace2-4e71-a4af-3207913503e7', 'e1ac8c3c-1c60-4c14-8143-84c3c8c66934', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('c003e6d7-9b47-4b89-a4d9-1d443e34e51c', '588636d6-7193-4a2b-be5f-cafe112d3bf5', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('90f78b68-e09b-4846-91d6-68bf60243010', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', '30fc358d-b78f-40cb-ad67-51ca279e649b', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d40689e2-3dd3-4d6d-bc7c-b4a538aa318f', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('9f28a89f-9b69-4ed0-986b-58e0d8f6f4aa', 'cb2c22ac-87de-44e4-9638-35979f6af667', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('20ead2b0-1a68-4671-8eb6-675652f5a9d1', '2d3c1e66-1835-457f-93e9-265fe483feee', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0725147e-ba8b-43a8-86bd-ef52901e4ed5', 'ca3040f2-e173-40a5-aab7-6ef15965ce43', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('3b4a38cd-cdf9-4978-a1a8-6116a0895933', 'c2f39b5b-6aeb-4b82-8541-d25920314339', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8b233e06-de78-42f6-a854-e995284db277', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('fe294dba-60f9-4f74-a2ad-cee75362364f', '87031f89-d9b0-449f-84f4-c9b6dff15a9a', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('4470a560-cff2-4024-a75d-fc97abf1f97d', 'fcf62145-e196-4777-a201-77f6693810c4', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('fba11400-9b07-4f7e-8e0e-e466575e5ea7', '87076e41-40fd-4832-bbbc-1e5211878264', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('b169a793-2a4e-4118-be12-f910bc57c233', 'ee83822a-75aa-4b08-8772-c2cd40443532', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('61c47050-c6c9-4098-8b34-e3d9a79036ac', '097ad133-9434-44d0-ad2f-16db49f0be9c', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('a645f468-95e1-4351-9f97-464dfb0cbfc6', 'a1845f87-cece-4cb0-91c7-7bd68f439063', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('bd8b28d7-bf60-4493-8779-d0b4d93290d1', '588636d6-7193-4a2b-be5f-cafe112d3bf5', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ab8cc9da-ec9d-4f12-b3a2-0c54dbda6bc9', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8e6b9f1e-9a0e-42b5-8f3a-2170ddb9019f', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', 'a388ef91-e5ce-45ec-becb-c6cc54b4e616', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('919f5cea-0e12-4f6e-90b8-0f77b0a7a2be', '64412e27-169e-44ea-a101-74ebf8cb82d9', '4076715f-9263-494e-8dbf-7a9024c9aa30', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ae403152-1a88-4cf7-a703-3f4801614048', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('c3dbf46d-df46-4579-b75b-736c56d187e5', 'c2f39b5b-6aeb-4b82-8541-d25920314339', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('cb86c376-4e79-4435-b3d6-573d5721698f', 'fcf62145-e196-4777-a201-77f6693810c4', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f7f4b998-eca8-4fd6-ab10-525c119593ab', '87076e41-40fd-4832-bbbc-1e5211878264', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f14819ba-47e4-45f5-bd13-327ee0240b71', '4526d150-cfcf-4b04-ab54-12789b788829', '4076715f-9263-494e-8dbf-7a9024c9aa30', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d0d3aa44-be79-4660-9889-93b55ea3d765', '853b8f16-20c9-42e9-a04d-daa0237823ca', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('3714bc98-dd8b-4065-9822-6ab4872a1a0b', '205b0afa-3efa-4bdf-9bc0-3f6449ff5c1a', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('df05b953-ec21-4187-89b0-432c98b817ce', '182709ef-635b-40a4-9ccd-774dd39b380f', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ee343881-743b-43e8-9278-8d5c88b5000c', 'b887e221-2edd-4a37-9b65-209c92b8997d', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('dcb45a60-4b76-40b8-8810-447d6ecc5b1a', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('30ec4093-6c56-441d-b97c-f6967a5001d8', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('007181f4-1ad3-4ced-8591-31875f5545d4', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('432a406f-52b0-4485-a54d-e46387e975c6', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ec277c06-6490-43d4-ba5b-e7ef4cbb20f0', 'fff06898-5361-4464-9e75-8b1435e46d15', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('960cb34f-d92a-4bfc-ab50-6a6802ff0fb7', '588636d6-7193-4a2b-be5f-cafe112d3bf5', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('e6c2631a-077c-403e-8907-dff7b187fedc', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', '4076715f-9263-494e-8dbf-7a9024c9aa30', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('be68d4b6-9d5f-424f-9901-7f6dbb5ae445', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', '4076715f-9263-494e-8dbf-7a9024c9aa30', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('a8a1e92f-da12-49fa-bcd7-fff0cd5c3c99', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'eb71854b-2850-45e0-bece-7728aaecb035', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('efd065f9-abdc-4736-8931-1956af8992e0', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('704d2d0e-42d4-4928-83d8-a50d1efe49a3', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('6109564d-f09e-4543-a9b0-f557013a0949', '87031f89-d9b0-449f-84f4-c9b6dff15a9a', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ee21a429-3f11-41df-8acd-ffc6477598f3', 'fcf62145-e196-4777-a201-77f6693810c4', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('96415fda-e770-4b1e-ae88-1030f21db061', '4526d150-cfcf-4b04-ab54-12789b788829', 'eb71854b-2850-45e0-bece-7728aaecb035', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ad49afcd-6a4b-4d4b-9f8d-594ba76c0be2', '853b8f16-20c9-42e9-a04d-daa0237823ca', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8fe7d2f8-4d58-4d69-bb60-fc0f541b2500', '205b0afa-3efa-4bdf-9bc0-3f6449ff5c1a', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('60e90141-123b-4a5a-95f6-c9fc428ca2fb', 'baddeb10-3f99-4843-859c-50cc51659153', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('223f5a91-a638-4176-8973-6db1da336d46', '2df936cc-f04a-4269-85ca-5dcf8099e184', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('b68d6033-94d4-4216-b63f-ec1aa03f4607', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('30203787-6085-4025-9cc8-6c75ee094f2d', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('75c348d3-e2cc-44bd-a6c2-03155ad9251a', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('c564e36b-6b78-4be9-82cf-256e1ab78311', 'a1845f87-cece-4cb0-91c7-7bd68f439063', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('dfc086a0-7542-4af3-958f-7c62f247c631', '730f379c-986b-4274-8b88-3e90e5bbba25', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d2783ecc-e32d-4bca-9b70-b11dbf20b856', '588636d6-7193-4a2b-be5f-cafe112d3bf5', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('dd6cc6e0-9c41-4a1e-a793-6228f788b6aa', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', 'eb71854b-2850-45e0-bece-7728aaecb035', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('6c1d18d1-319f-40ae-a418-0e36f580a6a9', '62973440-0374-4c2c-a49b-b771b7640912', 'eb71854b-2850-45e0-bece-7728aaecb035', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('9896fa6d-5294-423d-8ad9-7feec60f05af', '64412e27-169e-44ea-a101-74ebf8cb82d9', '0ab93253-b022-4706-8e47-75934c3f084c', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('25f772b0-9f4c-4483-bf61-d441e57091d8', 'cb2c22ac-87de-44e4-9638-35979f6af667', '0ab93253-b022-4706-8e47-75934c3f084c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('1c966eaf-c72d-4867-873e-1bf7583368fc', '9ba179ed-d26d-4828-a0f6-8836c2063992', '0ab93253-b022-4706-8e47-75934c3f084c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('6d1def6d-750c-47f5-9826-80dd8426d75e', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', '0ab93253-b022-4706-8e47-75934c3f084c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f279d0b8-3256-4762-ac34-044ebbdd3784', 'fcf62145-e196-4777-a201-77f6693810c4', '0ab93253-b022-4706-8e47-75934c3f084c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('c9bedffd-163c-48d5-8334-70d2223cfe62', '4526d150-cfcf-4b04-ab54-12789b788829', '0ab93253-b022-4706-8e47-75934c3f084c', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('e4845638-203e-4cc3-874e-4fc08bb4cf4b', '853b8f16-20c9-42e9-a04d-daa0237823ca', '0ab93253-b022-4706-8e47-75934c3f084c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('40d6c5df-b300-4aa2-bf01-4658ea40e267', '2d5137ae-9d77-4a12-94ea-fda383a8db10', '0ab93253-b022-4706-8e47-75934c3f084c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('15547bd4-6c6a-421c-80c6-877690132612', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', '0ab93253-b022-4706-8e47-75934c3f084c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('a6e3e9de-7244-467f-ab9d-dc04aa21657b', 'baddeb10-3f99-4843-859c-50cc51659153', '0ab93253-b022-4706-8e47-75934c3f084c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ee7babc4-47c2-4e82-8c1f-c15cd739bd27', 'b887e221-2edd-4a37-9b65-209c92b8997d', '0ab93253-b022-4706-8e47-75934c3f084c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('9fad2b44-3b23-413f-8151-d790fab22315', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '0ab93253-b022-4706-8e47-75934c3f084c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('1cc276dc-22b6-49af-92ec-c126a1eea289', '097ad133-9434-44d0-ad2f-16db49f0be9c', '0ab93253-b022-4706-8e47-75934c3f084c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('381b6d26-956f-4cb6-ba55-13e51fff8efc', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', '0ab93253-b022-4706-8e47-75934c3f084c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('5be7ba2c-75e2-4744-a28b-ad7bc9009481', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', '0ab93253-b022-4706-8e47-75934c3f084c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0c2bff14-4662-4bcf-9252-b1c7653dc2b9', 'fff06898-5361-4464-9e75-8b1435e46d15', '0ab93253-b022-4706-8e47-75934c3f084c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0909d012-370e-4bde-be4c-7e34490b2de5', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', '0ab93253-b022-4706-8e47-75934c3f084c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ea877c96-60a3-4b33-8e93-ac2213f06e88', '7179898a-c353-4917-8dbd-62e10ea3249e', '0ab93253-b022-4706-8e47-75934c3f084c', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('9271e238-1a66-400d-8f46-6b42181b0874', '64412e27-169e-44ea-a101-74ebf8cb82d9', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0eb8e92a-d0f8-4d83-b4b8-a1eadd25470c', 'cb2c22ac-87de-44e4-9638-35979f6af667', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('26b8a5b8-e26b-4573-970f-fb6976b0c013', '9ba179ed-d26d-4828-a0f6-8836c2063992', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ae218b4b-5930-4c79-af26-66b7892c0379', '444bbc7d-86f8-4258-9429-e73ce69a9e41', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ee464af1-79d1-41c7-b191-cfdb7ba8599a', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('05635029-832b-42ec-9076-05f4d7f8c94b', '87031f89-d9b0-449f-84f4-c9b6dff15a9a', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('60abafcb-fc42-4d7b-9402-6b5e1666ee82', '853b8f16-20c9-42e9-a04d-daa0237823ca', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8b65e8b0-333a-434b-81bd-187da3f1eecf', '2df936cc-f04a-4269-85ca-5dcf8099e184', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('28ece90d-51f2-4b9d-8e84-7cce7a876072', '58b79c83-ba88-430b-a9c9-d549d43b3600', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('560b7560-c057-4841-a221-cd59881d0b96', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('a6edef27-9507-43d9-9e72-0f2b20e289b0', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ced13799-a211-40b9-ad55-e19032478328', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0b87803b-7194-4fdc-ac19-023879c370eb', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('6e1d66f6-ca2d-432a-8abc-d1eaa1712c17', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('b2e8de60-b3e5-4294-8785-05554d556092', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8e1a6cc9-c83c-4ab5-8221-9ca900a96f85', 'fff06898-5361-4464-9e75-8b1435e46d15', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8d3f4eee-29be-4126-b6d5-dd907e194ad6', '588636d6-7193-4a2b-be5f-cafe112d3bf5', '802b5d84-e898-4077-b2d2-45a04d17e4e4', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('cf6ffced-520f-499e-aade-ca9a6b6f9ccc', '64412e27-169e-44ea-a101-74ebf8cb82d9', '28cb6008-bddc-4894-83de-7919a02db956', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('075c947c-ca7a-4ee3-ad50-143ca765f999', 'cb2c22ac-87de-44e4-9638-35979f6af667', '28cb6008-bddc-4894-83de-7919a02db956', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('b5cf1214-4a79-4c1a-b32d-1e577ca5d7af', '2d7ed5a0-fb21-4927-9a25-647c17d29668', '28cb6008-bddc-4894-83de-7919a02db956', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('eaba76d8-eda5-4928-a195-18d180769181', '9ba179ed-d26d-4828-a0f6-8836c2063992', '28cb6008-bddc-4894-83de-7919a02db956', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('e8138628-aa14-42ca-b133-62407c4b3dd3', '444bbc7d-86f8-4258-9429-e73ce69a9e41', '28cb6008-bddc-4894-83de-7919a02db956', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('79060e46-c57d-4ee1-a4e0-1b4a1fb77f0d', 'c2f39b5b-6aeb-4b82-8541-d25920314339', '28cb6008-bddc-4894-83de-7919a02db956', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('dd7cbfe9-00a8-40fe-be49-0a1e62315e12', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', '28cb6008-bddc-4894-83de-7919a02db956', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('95c2f8da-1aed-4521-814f-35cfb66777a7', 'fcf62145-e196-4777-a201-77f6693810c4', '28cb6008-bddc-4894-83de-7919a02db956', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('972d377c-8131-4406-833a-cb7e19a20e90', '87076e41-40fd-4832-bbbc-1e5211878264', '28cb6008-bddc-4894-83de-7919a02db956', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('412a1dd0-41d9-452d-b4c4-04c90bc942d1', '4526d150-cfcf-4b04-ab54-12789b788829', '28cb6008-bddc-4894-83de-7919a02db956', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('388323e1-cff2-4e89-a7c9-24724a0c6759', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', '28cb6008-bddc-4894-83de-7919a02db956', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('be599070-7149-40c6-9c90-128018290dd1', 'baddeb10-3f99-4843-859c-50cc51659153', '28cb6008-bddc-4894-83de-7919a02db956', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8ee1df06-86bf-4337-8d0b-408352696da7', '182709ef-635b-40a4-9ccd-774dd39b380f', '28cb6008-bddc-4894-83de-7919a02db956', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7bd85834-a925-4d9e-9fba-029e07ae6052', 'b887e221-2edd-4a37-9b65-209c92b8997d', '28cb6008-bddc-4894-83de-7919a02db956', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f9c77d16-85d2-4bae-9ff2-298c36b957f7', '58b79c83-ba88-430b-a9c9-d549d43b3600', '28cb6008-bddc-4894-83de-7919a02db956', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('322eebef-efd3-41f4-ae1b-a3817c6e5f35', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', '28cb6008-bddc-4894-83de-7919a02db956', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('5146ab5f-290a-4d68-8226-6b4e7f21b6cd', 'ee83822a-75aa-4b08-8772-c2cd40443532', '28cb6008-bddc-4894-83de-7919a02db956', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('921844c3-7d28-43cd-a617-5bc49a7210fa', 'bfca2841-ee2c-4981-9c74-3ef605fc1c3d', '28cb6008-bddc-4894-83de-7919a02db956', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('c9263fdb-8209-48ea-993d-2806a71ef3d5', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '28cb6008-bddc-4894-83de-7919a02db956', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('aaeefd7f-854a-4ebd-95e7-d5e7929f70e7', 'fff06898-5361-4464-9e75-8b1435e46d15', '28cb6008-bddc-4894-83de-7919a02db956', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('657d3810-8a4d-43b5-b530-9010d39c6605', '730f379c-986b-4274-8b88-3e90e5bbba25', '28cb6008-bddc-4894-83de-7919a02db956', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('fdbc16c0-6a5f-441b-9c89-83be6d0aa759', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', '28cb6008-bddc-4894-83de-7919a02db956', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ac58d0c9-0cfb-4d25-9756-24947532fe5d', '64412e27-169e-44ea-a101-74ebf8cb82d9', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('55b84f7c-ab8f-4d7f-83b8-fd059b1f2d2f', 'cb2c22ac-87de-44e4-9638-35979f6af667', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('88984278-f3c6-4342-b70a-96312b163dac', '2d7ed5a0-fb21-4927-9a25-647c17d29668', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d97ebc9b-a90e-4069-acb5-35f60120ad3d', '9ba179ed-d26d-4828-a0f6-8836c2063992', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('a8273cea-c24f-4a9d-932c-71eaa1052099', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('29e4dede-b2aa-4b03-b22d-12cbad1a4eed', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d1fb6aa3-eb46-4f9e-85f4-1d53f7a043bb', '444bbc7d-86f8-4258-9429-e73ce69a9e41', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('fbd88e3e-b9a2-48b0-a2ff-d5bb79933196', '205b0afa-3efa-4bdf-9bc0-3f6449ff5c1a', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7b9b9aa7-fe55-4f87-954e-47b7712310d2', '2df936cc-f04a-4269-85ca-5dcf8099e184', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0f8c0238-ee42-41fb-a455-4b815d112f8d', 'b887e221-2edd-4a37-9b65-209c92b8997d', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('24bde89b-d5a8-49dd-bf5a-e7529afbce75', '58b79c83-ba88-430b-a9c9-d549d43b3600', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ca5b3d75-caa7-4609-905b-dad1b3576a77', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('54f32c2e-34e1-464c-ad7c-2f89be1efcd7', '0bea60a7-9789-42bb-a217-22d142cf3b1b', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('2bc8a589-def1-484c-98ee-544c1e5d0f4c', 'ee83822a-75aa-4b08-8772-c2cd40443532', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('6eb1583b-14a9-47cf-bb60-5eede398a7d8', '097ad133-9434-44d0-ad2f-16db49f0be9c', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d4cbec5e-7cab-46e7-83ee-b736aa9f4085', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('086b55ea-9a3f-48f5-852c-b9f4d9deeac5', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('396b7228-d9a6-4168-8c29-e239c95737ab', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('a15cfbcd-4128-46d6-bbd5-a18996308cdb', 'e45e5e33-d62e-47cb-9d54-cee790fc6b5f', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('b77457a4-3ccf-4b29-a2f3-7110c8e44df7', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', '2b549267-2f56-4fa1-ba24-bdebc6b7e89c', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('53756ce1-0ece-49b3-abff-a0f9a16443c2', '64412e27-169e-44ea-a101-74ebf8cb82d9', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('5fbb92ea-d56a-44f8-96d2-e61201a1066d', 'cb2c22ac-87de-44e4-9638-35979f6af667', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('5be31ea5-51f9-4a35-96d1-1dcf7dfff3dc', '2d3c1e66-1835-457f-93e9-265fe483feee', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('23d3ff7e-a1f7-4b49-a1ae-37b768799533', '9ba179ed-d26d-4828-a0f6-8836c2063992', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('c0f77e47-6914-41aa-99ef-1e9fa7a66430', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('054a364c-358e-45c6-a30a-9ae914749d1c', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('576d017e-dd72-4e7e-a8d1-0dbc40545b22', '87076e41-40fd-4832-bbbc-1e5211878264', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('fe3c3750-4634-484e-8b10-bc8277580955', '4526d150-cfcf-4b04-ab54-12789b788829', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('3c2959a3-3a21-44b3-b1bf-5e4bda4ca528', '2d5137ae-9d77-4a12-94ea-fda383a8db10', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('02e445a5-aa3a-4345-81ce-ec483b026174', '205b0afa-3efa-4bdf-9bc0-3f6449ff5c1a', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('64e11b7d-3935-476d-9b4a-2f5d707af392', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('2fbcc974-f2c9-4405-af48-47b43ca45cf7', 'db95956f-786e-46c7-87c1-ad5ebaacf355', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7839cb6c-73ee-400a-9d8b-1d6e38184824', '2df936cc-f04a-4269-85ca-5dcf8099e184', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('73902ab8-86ad-47c5-b082-6dc560ce22e8', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('b436102f-13ef-4ddb-984e-6f3cf53ea44d', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8b20ec58-0be2-413a-b96b-71f0a89b225e', 'ffed4ce4-53b7-497e-a449-e3dee93aec1d', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('846482ed-fc3c-4eac-aeb8-0dac6ec773fb', 'ee83822a-75aa-4b08-8772-c2cd40443532', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f75c9df3-5ae2-4bff-b9eb-2ab6c7f49436', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('aae9f601-59c5-4eb1-a204-b8ca8d4d0702', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('3376cbfc-bdf6-461b-b646-f0de8aa9df11', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('cb758758-faae-4735-a126-5107b3dfb9e2', 'e1ac8c3c-1c60-4c14-8143-84c3c8c66934', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('4f8dcddc-9cb9-4c5d-9f67-b71dca2c7963', '730f379c-986b-4274-8b88-3e90e5bbba25', '5aa6ffd0-b35b-41c0-8bdd-9c618c27579e', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('b483fb14-1e38-4f73-b7da-d5e2c4106778', '64412e27-169e-44ea-a101-74ebf8cb82d9', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('00eb0b4e-97eb-430d-8bcd-02425a0e5cf0', 'cb2c22ac-87de-44e4-9638-35979f6af667', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8b0c01d8-4078-467d-9939-e95191a7ed5d', '2d7ed5a0-fb21-4927-9a25-647c17d29668', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('325b8295-5386-4300-8328-34a804bce116', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('9e03896a-a68c-40c5-add0-a3db58360737', 'ad3c4eb3-8ddb-45a0-9df2-d6ec5d14fbbc', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('58367d5d-8f3f-4819-9f34-cb5642f2b043', '87031f89-d9b0-449f-84f4-c9b6dff15a9a', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('be7ec0d3-8a09-46bc-b9f7-a5e7c00698cf', 'fcf62145-e196-4777-a201-77f6693810c4', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7009680c-1a82-48d6-9b7d-553634234bc8', '4526d150-cfcf-4b04-ab54-12789b788829', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('6352368d-a41c-4176-b045-484eb7fb0b02', '205b0afa-3efa-4bdf-9bc0-3f6449ff5c1a', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('10b40c66-45c9-428e-9299-3640244832f2', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('01524478-45ae-47ce-a683-81bd0c44c525', '2df936cc-f04a-4269-85ca-5dcf8099e184', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('2ab45cb4-016e-4737-b5af-9606cf324cc7', 'b887e221-2edd-4a37-9b65-209c92b8997d', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d7f46909-83e9-482a-a723-c7e98315c660', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('07e05f34-2c13-4b2f-b696-5fad2ecdbf59', 'ffed4ce4-53b7-497e-a449-e3dee93aec1d', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7d5ffe6b-0d51-44a4-af41-0632e14deddd', 'ee83822a-75aa-4b08-8772-c2cd40443532', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('38eb4c7c-651c-4640-8e9c-7e1a3ed23b49', '097ad133-9434-44d0-ad2f-16db49f0be9c', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7c1523f5-db95-4346-9ca8-f655114f9915', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('e9fd8a16-aa10-4f95-8897-d0eef02afc8b', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('173365ac-8474-4677-bf01-6a17d07a512a', 'e1ac8c3c-1c60-4c14-8143-84c3c8c66934', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('e42b762a-2b64-4e7f-b752-02e378a33914', '730f379c-986b-4274-8b88-3e90e5bbba25', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ad013830-2219-43af-aa39-1dbfeda6abfe', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', '45b7f477-0ce1-4b46-bccb-5f80b508da35', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('50a44bfd-fedd-44f2-b828-4ec23ec1dc5d', '64412e27-169e-44ea-a101-74ebf8cb82d9', '547b7170-078e-4d3a-a702-178d22490cf9', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('52d7e010-45b8-48d4-9f14-750adc041d82', 'cb2c22ac-87de-44e4-9638-35979f6af667', '547b7170-078e-4d3a-a702-178d22490cf9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('4f5f6455-1eba-4993-9cc0-8b2c53363cc8', '2d7ed5a0-fb21-4927-9a25-647c17d29668', '547b7170-078e-4d3a-a702-178d22490cf9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('febd9996-ad78-466d-82db-c21e52e30b5b', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', '547b7170-078e-4d3a-a702-178d22490cf9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('796c7303-d91d-4750-a302-57212f0b70db', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', '547b7170-078e-4d3a-a702-178d22490cf9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('5afe71bf-1224-44a7-8e8f-11ccbf3cd33d', '853b8f16-20c9-42e9-a04d-daa0237823ca', '547b7170-078e-4d3a-a702-178d22490cf9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('a55edd12-3f8d-49b7-8715-0bd85214590c', '2d5137ae-9d77-4a12-94ea-fda383a8db10', '547b7170-078e-4d3a-a702-178d22490cf9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('40b3ae52-b377-4941-9370-cfc6ea19718f', 'b887e221-2edd-4a37-9b65-209c92b8997d', '547b7170-078e-4d3a-a702-178d22490cf9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('531b2146-0b24-4677-bc92-8c770d9ed06b', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '547b7170-078e-4d3a-a702-178d22490cf9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('73cee4ff-9201-4754-beae-9aa241a0e908', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', '547b7170-078e-4d3a-a702-178d22490cf9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7e93be9b-5d4f-4dfb-9cdb-b1770c6e1020', 'ffed4ce4-53b7-497e-a449-e3dee93aec1d', '547b7170-078e-4d3a-a702-178d22490cf9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('18727629-4c88-4b55-9365-6e93b2c2dfde', 'ee83822a-75aa-4b08-8772-c2cd40443532', '547b7170-078e-4d3a-a702-178d22490cf9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0d998038-7e61-4426-a4a3-981c894e355a', '097ad133-9434-44d0-ad2f-16db49f0be9c', '547b7170-078e-4d3a-a702-178d22490cf9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('fb0f59e4-cfaa-4d1c-8f00-1486e10f30a6', 'bfca2841-ee2c-4981-9c74-3ef605fc1c3d', '547b7170-078e-4d3a-a702-178d22490cf9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('4252d9b1-7b16-424c-b6fb-4280e9b81752', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '547b7170-078e-4d3a-a702-178d22490cf9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7f889713-9cc4-4183-8d9a-928875e34751', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', '547b7170-078e-4d3a-a702-178d22490cf9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('5cdcae70-178b-4a98-98ad-01aa09f3651f', 'fff06898-5361-4464-9e75-8b1435e46d15', '547b7170-078e-4d3a-a702-178d22490cf9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('521da264-e477-4b84-b824-ba0489450e28', 'e45e5e33-d62e-47cb-9d54-cee790fc6b5f', '547b7170-078e-4d3a-a702-178d22490cf9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('e33c126c-1020-44fb-8065-204034336284', '730f379c-986b-4274-8b88-3e90e5bbba25', '547b7170-078e-4d3a-a702-178d22490cf9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('be9f6f6b-4edd-4137-b7ea-cbca75ec6d53', '588636d6-7193-4a2b-be5f-cafe112d3bf5', '547b7170-078e-4d3a-a702-178d22490cf9', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0473558c-af50-4c93-bf80-f4e3da6b636d', '62973440-0374-4c2c-a49b-b771b7640912', '547b7170-078e-4d3a-a702-178d22490cf9', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f43c5d94-ffe7-4c55-a2dd-a9f5bb3bd003', '7179898a-c353-4917-8dbd-62e10ea3249e', '547b7170-078e-4d3a-a702-178d22490cf9', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('185f97dc-dca4-4999-8bdf-9a3f01c2d0d6', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('634dae86-3a9a-4b00-95dc-6cf0f8c43f00', 'cb2c22ac-87de-44e4-9638-35979f6af667', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7e9e7c53-8aac-44ec-aab4-58096d3cc69a', '2d3c1e66-1835-457f-93e9-265fe483feee', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('c9889788-3cbd-4cbf-9fb4-e7ce8525f9db', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('6ffac56d-ceb4-4f31-805d-ecebd5e593d3', 'ca3040f2-e173-40a5-aab7-6ef15965ce43', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('b6e86488-d847-4561-a6dc-2e07e01e1e26', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7063e94b-e39c-4650-8727-f6e55557d19f', 'ad3c4eb3-8ddb-45a0-9df2-d6ec5d14fbbc', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0b11f5ec-c750-4f88-9db4-37166e5eed6d', '205b0afa-3efa-4bdf-9bc0-3f6449ff5c1a', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('fea12d26-654e-483b-903e-7663272ffa1b', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0bf2b480-8a94-445c-8c5c-40a46c919def', 'db95956f-786e-46c7-87c1-ad5ebaacf355', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('5c89f6ef-2ccd-4cc0-a4ba-d4e6ec1e911d', 'baddeb10-3f99-4843-859c-50cc51659153', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('1cd35141-9142-462a-9ece-b74827435a7d', '182709ef-635b-40a4-9ccd-774dd39b380f', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0e6fb9f3-6f10-4b15-aeb2-765745a2d782', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('5b7925d8-4694-4c66-87ac-d8773aff6551', 'a1845f87-cece-4cb0-91c7-7bd68f439063', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('9e73be7d-762d-48af-be1b-cb4af317bd4d', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('500edc65-b0f2-466f-be62-d3b6be4101fe', '62973440-0374-4c2c-a49b-b771b7640912', 'f2c54cc7-41e1-4567-9c2c-47eb5b4ab153', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0cd191ee-455b-4670-af62-351195764282', '64412e27-169e-44ea-a101-74ebf8cb82d9', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('1cf0fa5d-5586-4336-b0f0-ec53ca80513b', '2d7ed5a0-fb21-4927-9a25-647c17d29668', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('928e67d9-fa2f-445a-a2a9-7101474b3f81', '444bbc7d-86f8-4258-9429-e73ce69a9e41', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8ff1b049-1372-494c-aa2f-10114182154c', '87076e41-40fd-4832-bbbc-1e5211878264', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('91defb35-a4f4-4dc1-88bb-dedff87abdb2', '4526d150-cfcf-4b04-ab54-12789b788829', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('e5494928-396f-40e3-972d-477596f4e8bb', '853b8f16-20c9-42e9-a04d-daa0237823ca', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7d324869-2ea6-49bd-91d3-91e6bbf630f4', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0bcacee6-89de-4136-a809-7c73f22df0af', '182709ef-635b-40a4-9ccd-774dd39b380f', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('eeb2bab1-d71f-4641-b69a-c1a08d804a52', '4a182d8b-a553-455c-8485-f834da6de4e9', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('91221e67-53a1-4548-8b63-34fdd7cc6cb5', 'b887e221-2edd-4a37-9b65-209c92b8997d', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('21890728-5b03-45e5-9340-526b742a9152', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('e742e922-9c4a-474e-9058-3bd116a01439', '06ccbc31-e870-41c9-9293-b54aef58de21', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('a4dff2b6-f172-438d-adc4-7c9c1cd59db2', '097ad133-9434-44d0-ad2f-16db49f0be9c', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('211526e9-ef11-4b55-a338-35dea9ccbc1f', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('2f70f19c-9c70-4dbe-a158-c0f7b537dd09', 'bfca2841-ee2c-4981-9c74-3ef605fc1c3d', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('71ba72d5-ebf7-440a-b1c0-bc424af940d3', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('924c2996-7b3f-4383-b201-c07212a8a0db', 'fff06898-5361-4464-9e75-8b1435e46d15', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0454b453-b5b2-4d0d-a301-fbca1abb5230', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', '2478cb4a-0fc7-4bf4-a50c-e8f05c2aaa13', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('5ca40baf-2c43-4c41-84ea-de43880003e8', 'cb2c22ac-87de-44e4-9638-35979f6af667', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8593feeb-1350-4063-a25c-c37c1dfb7183', '8cbf0aa4-f707-4cd3-8258-0c72f8fb4db0', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('291950c0-b740-4e4c-8f31-a02ca7c040f7', 'c2f39b5b-6aeb-4b82-8541-d25920314339', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('64e7f01f-8b4f-4988-be69-5b3837b622ec', '87076e41-40fd-4832-bbbc-1e5211878264', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('4fdce85e-6b63-4245-a1f1-74e918afaffb', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('433d77e3-31bf-4e85-a17b-38f0825c2425', '182709ef-635b-40a4-9ccd-774dd39b380f', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ce129456-04bd-4f3a-a906-8ab91baf2c1d', '06ccbc31-e870-41c9-9293-b54aef58de21', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('914e2574-0dc1-4301-95b8-4cda2cf91b59', '097ad133-9434-44d0-ad2f-16db49f0be9c', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('4cd78118-19de-4357-a847-a2f353a38b20', 'd2befc26-a318-4ae1-a1c6-c71dd7e7d79d', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('a9c5da25-ac01-4dd4-a243-ad150bbd0339', 'bfca2841-ee2c-4981-9c74-3ef605fc1c3d', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('78c06a1f-26c0-4c99-aeb4-9f9ff6cb25a5', 'fff06898-5361-4464-9e75-8b1435e46d15', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d53efb02-248a-4791-a72b-97aa4959e0b8', 'e1ac8c3c-1c60-4c14-8143-84c3c8c66934', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('6958e12c-f3e4-4ea6-8394-bce05cbf6fe1', '730f379c-986b-4274-8b88-3e90e5bbba25', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('58a1ef74-3e11-4781-8d89-4b4e857e107f', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('2c83f469-6aad-492e-9f71-83bdac217045', '62973440-0374-4c2c-a49b-b771b7640912', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('99b75385-fda1-4ad6-b071-3c2b08bc3467', '7179898a-c353-4917-8dbd-62e10ea3249e', 'a7a2fd76-64cf-41e1-be53-0ebc172b605a', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('a9f7701c-405a-44a0-ad3e-d751105ed6b1', '64412e27-169e-44ea-a101-74ebf8cb82d9', '6c1be796-e383-4344-80eb-1d24392eb0a8', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('88051b96-3896-4c8b-9b8e-95cf57e58dfa', 'cb2c22ac-87de-44e4-9638-35979f6af667', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('ac38c444-5b6f-4f58-a441-73b928e4e29f', '2d7ed5a0-fb21-4927-9a25-647c17d29668', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('88bd6ea9-481f-4446-ab5f-f337610175f3', 'a4cd3cac-3b49-4b36-93e7-13fbb14ce76f', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('9b6d64b9-5724-48e1-bf3d-f74d3a6580ad', 'c2f39b5b-6aeb-4b82-8541-d25920314339', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7cc1d28e-1224-4d23-8295-f9f979170ee4', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8e661566-a140-4fec-b693-e5f1b34a575b', '87031f89-d9b0-449f-84f4-c9b6dff15a9a', '6c1be796-e383-4344-80eb-1d24392eb0a8', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('71ab4d60-9b0a-4c23-86b2-3fada1b19036', 'fcf62145-e196-4777-a201-77f6693810c4', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('225439bf-8412-403d-aa51-e21bf754b9ca', '87076e41-40fd-4832-bbbc-1e5211878264', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f584f382-520c-48c5-b73a-7772ca677cda', '4526d150-cfcf-4b04-ab54-12789b788829', '6c1be796-e383-4344-80eb-1d24392eb0a8', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('22699cd2-2f9c-444f-af75-e6b0e8be9e96', 'b887e221-2edd-4a37-9b65-209c92b8997d', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('1bc25880-dbe0-4e96-a651-16c459ecfbb2', 'c2efd8b2-7ab2-45b8-b7c9-425ac7d36b56', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d485d16b-0d4d-4b42-abdd-6e835e276a4f', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0c1e075a-88a4-4dce-ac5e-9997192d622f', 'ee83822a-75aa-4b08-8772-c2cd40443532', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('8c133343-78dc-4d4c-8338-bb0dc99e0889', '097ad133-9434-44d0-ad2f-16db49f0be9c', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('304a6ccd-0e69-4ae7-9b55-3ee77b84024a', 'a1845f87-cece-4cb0-91c7-7bd68f439063', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('c2e75822-0045-4bd7-a89a-ed1dfde242ae', '730f379c-986b-4274-8b88-3e90e5bbba25', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('69d75afd-83fa-4d3b-a783-b0bd4f397c3a', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', '6c1be796-e383-4344-80eb-1d24392eb0a8', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d842c3cc-3b13-4460-a6bf-18d2451f13e9', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', '6c1be796-e383-4344-80eb-1d24392eb0a8', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('db582abe-0edc-4003-b654-2ebf72999373', '64412e27-169e-44ea-a101-74ebf8cb82d9', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('b27af338-00d1-456d-ad70-5b1107465a14', 'cb2c22ac-87de-44e4-9638-35979f6af667', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('571d3e0c-53b4-4110-865f-d5a1e2dda5db', '2d7ed5a0-fb21-4927-9a25-647c17d29668', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('f1b25277-9797-4c4f-9039-93b020616352', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('0b8bd3bc-0401-44c9-93a2-1c3425b09772', '444bbc7d-86f8-4258-9429-e73ce69a9e41', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 3, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('17b4f8dd-d66a-4217-b12f-2ebd9940c131', '994ebe5b-db43-4cd3-a1ee-693c2ef681ef', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('9a39ed20-5039-419e-9d30-107f53946030', '2d5137ae-9d77-4a12-94ea-fda383a8db10', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('91245fdd-34c8-43bd-a1f0-e17afdbf512e', '205b0afa-3efa-4bdf-9bc0-3f6449ff5c1a', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('d21b6259-1723-4822-9564-90f917c5bad7', '9e9e9485-bbad-4aa4-9e2d-f8362dbbbba1', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('c4ead630-7d52-4346-863f-7d18182b8659', 'b887e221-2edd-4a37-9b65-209c92b8997d', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('74ba3705-bc6d-42db-8b9e-226dc0cbc850', 'd7c3523c-d595-44f0-ad72-ddf8ae299cbb', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('a6e51efe-0905-4e0b-ae72-5f50a4203ecf', 'ffed4ce4-53b7-497e-a449-e3dee93aec1d', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7968378f-9061-495b-8fc6-1c52e929e327', '097ad133-9434-44d0-ad2f-16db49f0be9c', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('1ac484fe-0968-471f-a187-163e7522803e', 'dd81de86-7f96-482a-b967-2e8e4cd9d910', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('54075355-3740-447b-9f8f-6f9f4a96ce8f', '6c44fd5e-560d-4b8a-9d61-03c3e66872ef', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('3d359cb3-d4a0-427b-aeab-5c863cc90b40', '588636d6-7193-4a2b-be5f-cafe112d3bf5', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('7089acf6-eda5-480c-8b2f-9ed77205789b', '75dd8ca8-14aa-4dbb-aac0-c16bcb1ef61f', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 5, '2024-08-04 14:14:27.621045+07');
+INSERT INTO "public"."course_user" VALUES ('2851d8be-a407-4a9d-852c-09c2f9a43192', '2c5ab7ea-f37f-4917-bec2-202b20d25ff0', 'e2559476-b848-4bae-bce9-fdcbdf95c2e7', 3, '2024-08-04 14:14:27.621045+07');
 
 INSERT INTO "public"."exam_question" VALUES ('c29ccb3f-2429-4d49-9cbb-ba348164be00', '86600cfb-7b48-4e81-8e05-8fa29d49d7a9', 'b6484e21-6937-489c-b031-b71767994221', 0);
 INSERT INTO "public"."exam_question" VALUES ('c29ccb3f-2429-4d49-9cbb-ba348164be01', '86600cfb-7b48-4e81-8e05-8fa29d49d7a9', 'b6484e21-6937-489c-b031-b71767994736', 0);
@@ -1278,3 +1290,292 @@ INSERT INTO "public"."rubric_user" VALUES ('e15e0a60-6893-48f9-9fbd-0bdb671e1c84
 INSERT INTO "public"."synchronize_state" VALUES ('aa85547e-5938-478b-9c33-b8857a5a9bc1', '8edbc0aa-0b91-480e-a428-23abf2109df9', 'SUCCESS', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'USER', 0, '2024-08-04 14:16:00.495272+07');
 INSERT INTO "public"."synchronize_state" VALUES ('ba395f50-2019-48e6-8aa1-638ca826dda2', '8edbc0aa-0b91-480e-a428-23abf2109df9', 'SUCCESS', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'COURSE', 0, '2024-08-04 14:16:00.580636+07');
 INSERT INTO "public"."synchronize_state" VALUES ('4c7be331-a793-44eb-808f-66e2387296b8', '8edbc0aa-0b91-480e-a428-23abf2109df9', 'SUCCESS', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'RESOURCE', 0, '2024-08-04 14:16:00.586788+07');
+
+
+------------ add question
+INSERT INTO public.question_bank_category
+(id, "name", description, organization_id, is_org_question_bank, created_by, updated_by, created_at, updated_at)
+VALUES('2eb6711f-5759-43e2-ab56-d00d572db220'::uuid, 'Kỹ thuật lập trình', '<p>Kỹ thuật lập trình</p>', '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, true, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:30:40.786', '2024-08-04 23:30:40.786');
+INSERT INTO public.question_bank_category
+(id, "name", description, organization_id, is_org_question_bank, created_by, updated_by, created_at, updated_at)
+VALUES('607e34b1-0af0-435c-85a0-68409acf5834'::uuid, 'Ứng dụng web', '<p>ứng dụng web</p>', '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, true, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:40:33.813', '2024-08-04 23:40:33.813');
+INSERT INTO public.question_bank_category
+(id, "name", description, organization_id, is_org_question_bank, created_by, updated_by, created_at, updated_at)
+VALUES('2ae708a8-3e07-4b53-91ff-32e005bf289c'::uuid, 'Hệ thống thông tin', '<p>Hệ thống thông tin</p>', '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, true, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:48:50.717', '2024-08-04 23:48:50.717');
+
+
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('560c0865-35df-486d-b886-5189c0a5d66f'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Một hàm đệ quy là một hàm tự gọi lại chính nó.', '<p>Một hàm đệ quy là một hàm tự gọi lại chính nó.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:31:36.631', '2024-08-04 23:31:36.631', NULL, false, 'TRUE_FALSE'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('01f3b10a-43b4-4400-863a-bf02fee2c7a7'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Ngôn ngữ lập trình C++ không hỗ trợ lập trình hướng đối tượng.', '<p>Ngôn ngữ lập trình C++ không hỗ trợ lập trình hướng đối tượng.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:31:54.532', '2024-08-04 23:31:54.532', NULL, false, 'TRUE_FALSE'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('c3a2ceac-f0f3-4ed1-8083-a851af7e563a'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Trong lập trình, vòng lặp "for" chỉ có thể sử dụng để lặp lại một khối lệnh với số lần cố định.', '<p>Trong lập trình, vòng lặp "for" chỉ có thể sử dụng để lặp lại một khối lệnh với số lần cố định.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:33:10.884', '2024-08-04 23:33:10.884', NULL, false, 'TRUE_FALSE'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('a267478d-407d-490a-a771-6575db96cf03'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Mảng trong ngôn ngữ lập trình C có thể thay đổi kích thước sau khi được khai báo.', '<p>Mảng trong ngôn ngữ lập trình C có thể thay đổi kích thước sau khi được khai báo.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:33:43.031', '2024-08-04 23:33:43.031', NULL, false, 'TRUE_FALSE'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('1278efc3-479f-4bb8-a839-10cf23e95788'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Phương pháp lập trình mà trong đó các đối tượng tương tác với nhau thông qua các phương thức được gọi là ___.', '<p>Phương pháp lập trình mà trong đó các đối tượng tương tác với nhau thông qua các phương thức được gọi là ___.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:34:35.285', '2024-08-04 23:34:35.285', NULL, false, 'SHORT_ANSWER'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('e99a6172-ef91-4b99-b800-d76b9c74a1d3'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Trong ngôn ngữ lập trình C++, từ khóa dùng để tạo một lớp mới là ___.', '<p>Trong ngôn ngữ lập trình C++, từ khóa dùng để tạo một lớp mới là ___.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:35:01.416', '2024-08-04 23:35:01.416', NULL, false, 'SHORT_ANSWER'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('193a4ec2-af70-4fb7-ae2e-b4bf3e11dbad'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Cấu trúc dữ liệu mà trong đó phần tử cuối cùng được thêm vào sẽ là phần tử đầu tiên được lấy ra được gọi là ___.', '<p>Cấu trúc dữ liệu mà trong đó phần tử cuối cùng được thêm vào sẽ là phần tử đầu tiên được lấy ra được gọi là ___.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:35:31.555', '2024-08-04 23:35:31.555', NULL, false, 'SHORT_ANSWER'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('496b4abe-ee7b-47b4-9553-004729a3587e'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Phương pháp lập trình mà trong đó một hàm gọi lại chính nó được gọi là ___.', '<p>Phương pháp lập trình mà trong đó một hàm gọi lại chính nó được gọi là ___.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:36:09.812', '2024-08-04 23:36:09.812', NULL, false, 'SHORT_ANSWER'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('382f4794-f1c8-4b32-bac5-8654ad46b6e8'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Các ngôn ngữ lập trình nào sau đây là ngôn ngữ lập trình hướng đối tượng?', '<p>Các ngôn ngữ lập trình nào sau đây là ngôn ngữ lập trình hướng đối tượng?</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:37:08.064', '2024-08-04 23:37:08.064', NULL, false, 'MULTIPLE_CHOICE'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('a5d85c32-a968-4f0b-8072-99e652887a9f'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Các cấu trúc dữ liệu nào sau đây được coi là cấu trúc dữ liệu tuyến tính?', '<p>Các cấu trúc dữ liệu nào sau đây được coi là cấu trúc dữ liệu tuyến tính?</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:38:36.487', '2024-08-04 23:38:36.487', NULL, false, 'MULTIPLE_CHOICE'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('0df9d983-e43f-4ee3-b832-51acce5669e7'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Những khái niệm nào sau đây là nguyên tắc cơ bản của lập trình hướng đối tượng?', '<p>Những khái niệm nào sau đây là nguyên tắc cơ bản của lập trình hướng đối tượng?</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:39:40.798', '2024-08-04 23:39:40.798', NULL, false, 'MULTIPLE_CHOICE'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('143b4f9a-2bf2-45e7-9b3d-047414b85226'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'HTML là ngôn ngữ lập trình.', '<p>HTML là ngôn ngữ lập trình.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:41:37.332', '2024-08-04 23:41:37.332', NULL, false, 'TRUE_FALSE'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('83ab4947-2289-4432-9cb4-5a391c7b8f4f'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'CSS được sử dụng để định kiểu cho các thành phần HTML.', '<p>CSS được sử dụng để định kiểu cho các thành phần HTML.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:41:59.414', '2024-08-04 23:41:59.414', NULL, false, 'TRUE_FALSE'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('7c923a3b-aee6-4890-b96f-7f0a812d1021'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Node.js là một môi trường chạy JavaScript trên phía server.', '<p>Node.js là một môi trường chạy JavaScript trên phía server.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:42:11.556', '2024-08-04 23:42:11.556', NULL, false, 'TRUE_FALSE'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('2ec85315-a873-4b65-a4f3-4c86d60d2fb7'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Angular là một framework cho phát triển ứng dụng web front-end.', '<p>Angular là một framework cho phát triển ứng dụng web front-end.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:42:23.546', '2024-08-04 23:42:23.546', NULL, false, 'TRUE_FALSE'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('57fd911a-3ca5-4316-90e3-a582dfc7f3b1'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Ngôn ngữ đánh dấu được sử dụng để tạo cấu trúc của trang web là ___.', '<p>Ngôn ngữ đánh dấu được sử dụng để tạo cấu trúc của trang web là ___.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:42:49.686', '2024-08-04 23:42:49.686', NULL, false, 'SHORT_ANSWER'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('c43ef98c-79bd-4dc2-9877-3a826c641a3f'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Framework JavaScript phổ biến được phát triển bởi Facebook để xây dựng giao diện người dùng là ___.', '<p>Framework JavaScript phổ biến được phát triển bởi Facebook để xây dựng giao diện người dùng là ___.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:43:13.821', '2024-08-04 23:43:13.821', NULL, false, 'SHORT_ANSWER'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('81fb484b-e882-4b97-865c-4b486a3090d6'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Giao thức bảo mật được sử dụng để truyền tải dữ liệu một cách an toàn giữa trình duyệt và server là ___.', '<p>Giao thức bảo mật được sử dụng để truyền tải dữ liệu một cách an toàn giữa trình duyệt và server là ___.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:43:41.978', '2024-08-04 23:43:41.978', NULL, false, 'SHORT_ANSWER'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('ff9e5072-6d48-4e97-a059-54729cbf7526'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Những công nghệ nào sau đây thường được sử dụng trong phát triển ứng dụng web front-end?', '<p>Những công nghệ nào sau đây thường được sử dụng trong phát triển ứng dụng web front-end?</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:45:22.452', '2024-08-04 23:45:22.452', NULL, false, 'MULTIPLE_CHOICE'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('6335b900-459f-4ded-a78d-d3e9d84ce78b'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Những framework nào sau đây là framework phổ biến cho phát triển ứng dụng web back-end?', '<p>Những framework nào sau đây là framework phổ biến cho phát triển ứng dụng web back-end?</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:46:18.751', '2024-08-04 23:46:18.751', NULL, false, 'MULTIPLE_CHOICE'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('bd5963e5-a5a9-4a9b-8f30-061dcea3988a'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Những phương pháp nào sau đây có thể giúp tối ưu hóa hiệu suất của trang web?', '<p>Những phương pháp nào sau đây có thể giúp tối ưu hóa hiệu suất của trang web?</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:47:37.194', '2024-08-04 23:47:37.194', NULL, false, 'MULTIPLE_CHOICE'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('38ad9c73-9f87-4106-879a-6c7b6352453c'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Những thành phần nào sau đây là thành phần cơ bản của hệ thống thông tin?', '<p>Những thành phần nào sau đây là thành phần cơ bản của hệ thống thông tin?</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:49:47.807', '2024-08-04 23:49:47.807', NULL, false, 'MULTIPLE_CHOICE'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('54252d90-a401-4a28-88a0-1d9f53d0f7d6'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Những loại hệ thống thông tin nào sau đây thường được sử dụng trong các tổ chức?', '<p>Những loại hệ thống thông tin nào sau đây thường được sử dụng trong các tổ chức?</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:51:08.162', '2024-08-04 23:51:08.162', NULL, false, 'MULTIPLE_CHOICE'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('a498bde0-a531-4dc4-a11f-61a685f03d58'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Những yếu tố nào sau đây có thể ảnh hưởng đến hiệu quả của hệ thống thông tin?', '<p>Những yếu tố nào sau đây có thể ảnh hưởng đến hiệu quả của hệ thống thông tin?</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:52:36.583', '2024-08-04 23:52:36.583', NULL, false, 'MULTIPLE_CHOICE'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('f324a283-eb75-44ee-a87d-95c8557e3afe'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Hệ thống thông tin có khả năng hỗ trợ các quyết định bán cấu trúc và không cấu trúc thường được gọi là ___.', '<p>Hệ thống thông tin có khả năng hỗ trợ các quyết định bán cấu trúc và không cấu trúc thường được gọi là ___.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:53:04.731', '2024-08-04 23:53:04.731', NULL, false, 'SHORT_ANSWER'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('4817c348-c195-4cb5-aa9a-1605d0bf85cb'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Quá trình thu thập, xử lý, lưu trữ và phân phối thông tin để hỗ trợ các quyết định và kiểm soát trong một tổ chức được gọi là ___.', '<p>Quá trình thu thập, xử lý, lưu trữ và phân phối thông tin để hỗ trợ các quyết định và kiểm soát trong một tổ chức được gọi là ___.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:53:26.828', '2024-08-04 23:53:26.828', NULL, false, 'SHORT_ANSWER'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('887dc519-25fd-4756-a1bb-282d51c3c1c0'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Một phần mềm được sử dụng để quản lý và tương tác với cơ sở dữ liệu là ___.', '<p>Một phần mềm được sử dụng để quản lý và tương tác với cơ sở dữ liệu là ___.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:53:50.944', '2024-08-04 23:53:50.944', NULL, false, 'SHORT_ANSWER'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('a83546aa-471e-4e6a-9b60-72a8bb18e768'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Hệ thống thông tin tích hợp các chức năng quản lý tài chính, nhân sự, sản xuất và các chức năng kinh doanh khác vào một hệ thống duy nhất là ___.', '<p>Hệ thống thông tin tích hợp các chức năng quản lý tài chính, nhân sự, sản xuất và các chức năng kinh doanh khác vào một hệ thống duy nhất là ___.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:54:17.067', '2024-08-04 23:54:17.067', NULL, false, 'SHORT_ANSWER'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('777eacb8-9d55-4192-9c16-6f2eddca0c7d'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Hệ thống thông tin chỉ bao gồm phần cứng và phần mềm.', '<p>Hệ thống thông tin chỉ bao gồm phần cứng và phần mềm.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:54:33.134', '2024-08-04 23:54:33.134', NULL, false, 'TRUE_FALSE'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('2ab7f04f-0c51-46dc-a492-50af3a21945a'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Hệ thống thông tin quản lý (MIS) thường được sử dụng để hỗ trợ các quyết định chiến lược trong một tổ chức.', '<p>Hệ thống thông tin quản lý (MIS) thường được sử dụng để hỗ trợ các quyết định chiến lược trong một tổ chức.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:54:45.202', '2024-08-04 23:54:45.202', NULL, false, 'TRUE_FALSE'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('f5b1e99a-9c1a-4f1d-b469-2a6aa6f1fe14'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'Dữ liệu trong hệ thống thông tin luôn phải được mã hóa để đảm bảo an toàn.', '<p>Dữ liệu trong hệ thống thông tin luôn phải được mã hóa để đảm bảo an toàn.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:55:07.289', '2024-08-04 23:55:07.289', NULL, false, 'TRUE_FALSE'::public."qtype", 'EASY'::public."difficulty");
+INSERT INTO public.question
+(id, org_id, "name", question_text, general_feedback, default_mark, created_by, updated_by, created_at, updated_at, question_bank_category_id, is_org_question_bank, "qtype", "difficulty")
+VALUES('f16a9095-5c9b-4bc3-a82c-eeb9227842d0'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'ERP (Enterprise Resource Planning) là một loại hệ thống thông tin tích hợp nhiều chức năng kinh doanh khác nhau vào một hệ thống duy nhất.', '<p>ERP (Enterprise Resource Planning) là một loại hệ thống thông tin tích hợp nhiều chức năng kinh doanh khác nhau vào một hệ thống duy nhất.</p>', '', 1.0, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-08-04 23:55:21.377', '2024-08-04 23:55:21.377', NULL, false, 'TRUE_FALSE'::public."qtype", 'EASY'::public."difficulty");
+
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('7ba6c701-ea50-4350-854f-804904f04d21'::uuid, '560c0865-35df-486d-b886-5189c0a5d66f'::uuid, 'Correct', 'true', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('846462a1-729d-4c14-a533-0d61268e503a'::uuid, '01f3b10a-43b4-4400-863a-bf02fee2c7a7'::uuid, 'Correct', 'false', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('aaf4f04a-57d8-4477-8133-c1914f88bf2c'::uuid, 'c3a2ceac-f0f3-4ed1-8083-a851af7e563a'::uuid, 'Correct', 'false', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('8d3badbf-cc9d-4d5e-9a94-4f1d7d740efa'::uuid, 'a267478d-407d-490a-a771-6575db96cf03'::uuid, 'Correct', 'false', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('ab1849cc-766a-4a8c-8d4b-f16a6c68ece6'::uuid, '1278efc3-479f-4bb8-a839-10cf23e95788'::uuid, '<p>lập trình hướng đối tượng</p>', 'lập trình hướng đối tượng', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('524d7eed-b802-482b-8a8c-0cb964453657'::uuid, 'e99a6172-ef91-4b99-b800-d76b9c74a1d3'::uuid, '<p>class</p>', 'class', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('5f72a734-e87b-46b6-a5b4-85d7348b9fe9'::uuid, '193a4ec2-af70-4fb7-ae2e-b4bf3e11dbad'::uuid, '<p>stack</p>', 'stack', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('0a0bea20-0f9f-464a-9b91-7164ec93a212'::uuid, '496b4abe-ee7b-47b4-9553-004729a3587e'::uuid, '<p>đệ quy</p>', 'đệ quy', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('9fce4acb-b806-41f4-9cf1-4894df7f9542'::uuid, '382f4794-f1c8-4b32-bac5-8654ad46b6e8'::uuid, '<p>Python</p>', '<p>Python</p>', 0.50);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('e2e47065-bb4b-4350-8061-96d7b83eda32'::uuid, '382f4794-f1c8-4b32-bac5-8654ad46b6e8'::uuid, '<p>C</p>', '<p>C</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('eb739ec0-aa6e-4873-b60d-ea2c02f98395'::uuid, '382f4794-f1c8-4b32-bac5-8654ad46b6e8'::uuid, '<p>Java</p>', '<p>Java</p>', 0.50);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('9ad9737d-867f-47a8-b638-bfa0d16991f6'::uuid, '382f4794-f1c8-4b32-bac5-8654ad46b6e8'::uuid, '<p>HTML</p>', '<p>HTML</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('2d2a055d-554c-4302-9042-05f807f5f974'::uuid, 'a5d85c32-a968-4f0b-8072-99e652887a9f'::uuid, '<p>Danh sách liên kết</p>', '<p>Danh sách liên kết</p>', 0.50);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('f3e5baa7-f80c-4f15-a46c-5c1f6e0ff5e5'::uuid, 'a5d85c32-a968-4f0b-8072-99e652887a9f'::uuid, '<p>Cây nhị phân</p>', '<p>Cây nhị phân</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('910e49f0-8784-4ecf-bf57-e17b0b533335'::uuid, 'a5d85c32-a968-4f0b-8072-99e652887a9f'::uuid, '<p>Ngăn xếp</p>', '<p>Ngăn xếp</p>', 0.50);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('11bb7b97-1eb9-46d8-a795-1a8dd0de4616'::uuid, 'a5d85c32-a968-4f0b-8072-99e652887a9f'::uuid, '<p>Đồ thị</p>', '<p>Đồ thị</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('6c4b8f8d-34ef-47c7-a601-39471c343235'::uuid, '0df9d983-e43f-4ee3-b832-51acce5669e7'::uuid, '<p>Đóng gói</p>', '<p>Đóng gói</p>', 0.50);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('98cc1506-97ed-438d-9a14-f53290296eff'::uuid, '0df9d983-e43f-4ee3-b832-51acce5669e7'::uuid, '<p>Hàm đệ quy</p>', '<p>Hàm đệ quy</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('37853f30-ae7b-4367-9c05-3d168cfb8541'::uuid, '0df9d983-e43f-4ee3-b832-51acce5669e7'::uuid, '<p>Kế thừa</p>', '<p>Kế thừa</p>', 0.50);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('6555aaba-4f72-45ba-be99-dc8beaa266a1'::uuid, '0df9d983-e43f-4ee3-b832-51acce5669e7'::uuid, '<p>Phân tích dữ liệu</p>', '<p>Phân tích dữ liệu</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('126f915b-eaf1-45b6-bcd7-b0f470aeb92d'::uuid, '143b4f9a-2bf2-45e7-9b3d-047414b85226'::uuid, 'Correct', 'false', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('1aa00b7e-f048-4fa2-b09f-713a7dc627ce'::uuid, '83ab4947-2289-4432-9cb4-5a391c7b8f4f'::uuid, 'Correct', 'true', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('67c48f30-b05a-4c47-9a12-a7cf175fa90c'::uuid, '7c923a3b-aee6-4890-b96f-7f0a812d1021'::uuid, 'Correct', 'true', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('658ba633-baf2-4332-a567-90fdedcf1830'::uuid, '2ec85315-a873-4b65-a4f3-4c86d60d2fb7'::uuid, 'Correct', 'true', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('4615bf88-b9cf-4217-943b-ba2654ac3669'::uuid, '57fd911a-3ca5-4316-90e3-a582dfc7f3b1'::uuid, '<p>HTML</p>', 'HTML', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('6691a1ca-a4b8-4b6c-b0a1-7b1dc818651c'::uuid, 'c43ef98c-79bd-4dc2-9877-3a826c641a3f'::uuid, '<p>React</p>', 'React', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('b385ca6c-6e92-4cf8-a67a-3e02e3609458'::uuid, '81fb484b-e882-4b97-865c-4b486a3090d6'::uuid, '<p>HTTPS</p>', 'HTTPS', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('41ac4267-5cef-478c-9d78-b60538484c66'::uuid, 'ff9e5072-6d48-4e97-a059-54729cbf7526'::uuid, '<p>HTML</p>', '<p>HTML</p>', 0.50);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('3f203216-22fd-4f15-8146-ef343e9adcfa'::uuid, 'ff9e5072-6d48-4e97-a059-54729cbf7526'::uuid, '<p>CSS</p>', '<p>CSS</p>', 0.50);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('9daa71b2-353d-4290-ab08-51cfa8910964'::uuid, 'ff9e5072-6d48-4e97-a059-54729cbf7526'::uuid, '<p>Java</p>', '<p>Java</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('132e1fcf-f86c-450a-b202-18156a5987e6'::uuid, 'ff9e5072-6d48-4e97-a059-54729cbf7526'::uuid, '<p>Node.js</p>', '<p>Node.js</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('43345703-f725-4411-b1f1-d80b1bc49b73'::uuid, '6335b900-459f-4ded-a78d-d3e9d84ce78b'::uuid, '<p>React</p>', '<p>React</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('16fa6bd0-ea1a-43ad-9142-0a2f2beb3461'::uuid, '6335b900-459f-4ded-a78d-d3e9d84ce78b'::uuid, '<p>Django</p>', '<p>Django</p>', 0.50);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('96d5db66-74b5-4d96-94f0-8c04b0df3469'::uuid, '6335b900-459f-4ded-a78d-d3e9d84ce78b'::uuid, '<p>Laravel</p>', '<p>Laravel</p>', 0.50);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('b4c83d5d-3033-45e0-bc95-82f9c1a3da28'::uuid, '6335b900-459f-4ded-a78d-d3e9d84ce78b'::uuid, '<p>Angular</p>', '<p>Angular</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('664657dc-6d9b-4c4e-b4b3-3892d0d29152'::uuid, 'bd5963e5-a5a9-4a9b-8f30-061dcea3988a'::uuid, '<p>Sử dụng bộ nhớ đệm (caching)</p>', '<p>Sử dụng bộ nhớ đệm (caching)</p>', 0.30);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('9455b8a7-063a-481a-848a-d668455a49ec'::uuid, 'bd5963e5-a5a9-4a9b-8f30-061dcea3988a'::uuid, '<p>Tối ưu hóa hình ảnh</p>', '<p>Tối ưu hóa hình ảnh</p>', 0.30);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('9be1affd-9f8f-474a-810a-093814d1fc2a'::uuid, 'bd5963e5-a5a9-4a9b-8f30-061dcea3988a'::uuid, '<p>Sử dụng nhiều font chữ</p>', '<p>Sử dụng nhiều font chữ</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('3ebcbb0c-4915-4bde-8b8f-9735bdf2402b'::uuid, 'bd5963e5-a5a9-4a9b-8f30-061dcea3988a'::uuid, '<p>Giảm thiểu số lượng yêu cầu HTTP</p>', '<p>Giảm thiểu số lượng yêu cầu HTTP</p>', 0.40);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('4b22022f-f3c4-4080-8e86-ee8e04705c4e'::uuid, '38ad9c73-9f87-4106-879a-6c7b6352453c'::uuid, '<p>Phần cứng</p>', '<p>Phần cứng</p>', 0.25);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('279e01a8-8cbd-4a19-b35f-1b6d6d599ee1'::uuid, '38ad9c73-9f87-4106-879a-6c7b6352453c'::uuid, '<p>Phần mềm</p>', '<p>Phần mềm</p>', 0.25);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('4984e0d6-9254-4c96-870d-cb4a4d90db71'::uuid, '38ad9c73-9f87-4106-879a-6c7b6352453c'::uuid, '<p>Dữ liệu</p>', '<p>Dữ liệu</p>', 0.25);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('86a989e4-d74c-4a2d-850f-61797ed0e8d9'::uuid, '38ad9c73-9f87-4106-879a-6c7b6352453c'::uuid, '<p>Người sử dụng</p>', '<p>Người sử dụng</p>', 0.25);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('351facaa-52fc-4dab-ac90-501cd42ab2a3'::uuid, '54252d90-a401-4a28-88a0-1d9f53d0f7d6'::uuid, '<p>Hệ thống xử lý giao dịch (TPS)</p>', '<p>Hệ thống xử lý giao dịch (TPS)</p>', 0.30);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('8b7080d1-dafe-4697-b585-32b66dbc7c59'::uuid, '54252d90-a401-4a28-88a0-1d9f53d0f7d6'::uuid, '<p>Hệ thống hỗ trợ quyết định (DSS)</p>', '<p>Hệ thống hỗ trợ quyết định (DSS)</p>', 0.30);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('3edb6097-4caf-4b82-b907-b57a82d4a9ee'::uuid, '54252d90-a401-4a28-88a0-1d9f53d0f7d6'::uuid, '<p>Hệ thống thông tin điều hành (EIS)</p>', '<p>Hệ thống thông tin điều hành (EIS)</p>', 0.40);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('acac9865-8066-4efe-b6ef-a5486d168fc7'::uuid, '54252d90-a401-4a28-88a0-1d9f53d0f7d6'::uuid, '<p>Hệ thống quản lý cơ sở dữ liệu (DBMS)</p>', '<p>Hệ thống quản lý cơ sở dữ liệu (DBMS)</p>', 0.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('4c3eb786-3c24-4b0f-ad3d-11ba2420fbf9'::uuid, 'a498bde0-a531-4dc4-a11f-61a685f03d58'::uuid, '<p>Công nghệ</p>', '<p>Công nghệ</p>', 0.25);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('4c23e2fc-cf00-45b9-820a-0b9b5d156f21'::uuid, 'a498bde0-a531-4dc4-a11f-61a685f03d58'::uuid, '<p>Quản lý</p>', '<p>Quản lý</p>', 0.25);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('934a4f13-3402-4616-bbb9-d59fd2b2992c'::uuid, 'a498bde0-a531-4dc4-a11f-61a685f03d58'::uuid, '<p>Người sử dụng</p>', '<p>Người sử dụng</p>', 0.25);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('ba617f29-f2f7-4eab-95c8-ba12cc2aeb04'::uuid, 'a498bde0-a531-4dc4-a11f-61a685f03d58'::uuid, '<p>Chính sách công ty</p>', '<p>Chính sách công ty</p>', 0.25);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('7936790c-2f00-41c3-a7bd-e20a10e365da'::uuid, 'f324a283-eb75-44ee-a87d-95c8557e3afe'::uuid, '<p>hệ thống hỗ trợ quyết định (DSS)</p>', 'hệ thống hỗ trợ quyết định (DSS)', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('72f1589a-ceb8-40fc-8ab8-13ad1ce2d751'::uuid, '4817c348-c195-4cb5-aa9a-1605d0bf85cb'::uuid, '<p>hệ thống thông tin quản lý (MIS)</p>', 'hệ thống thông tin quản lý (MIS)', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('671f458f-ca6c-473c-ace4-ac7a59311cfb'::uuid, '887dc519-25fd-4756-a1bb-282d51c3c1c0'::uuid, '<p>hệ thống quản lý cơ sở dữ liệu (DBMS)</p>', 'hệ thống quản lý cơ sở dữ liệu (DBMS)', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('7e3aed82-27ab-4e97-a8c9-6d23a0a7b889'::uuid, 'a83546aa-471e-4e6a-9b60-72a8bb18e768'::uuid, '<p>hệ thống hoạch định nguồn lực doanh nghiệp (ERP)</p>', 'hệ thống hoạch định nguồn lực doanh nghiệp (ERP)', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('76459464-0cad-4d40-9344-502742ba4403'::uuid, '777eacb8-9d55-4192-9c16-6f2eddca0c7d'::uuid, 'Correct', 'false', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('8c6a2ff9-7f6c-4023-aa19-d613e148ef96'::uuid, '2ab7f04f-0c51-46dc-a492-50af3a21945a'::uuid, 'Correct', 'true', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('41fbe710-cfd6-4043-bbc1-2b78ca1896db'::uuid, 'f5b1e99a-9c1a-4f1d-b469-2a6aa6f1fe14'::uuid, 'Correct', 'false', 1.00);
+INSERT INTO public.answer_of_question
+(id, question_id, feedback, answer, fraction)
+VALUES('416d1b89-d3fb-430e-8024-89f33548fe46'::uuid, 'f16a9095-5c9b-4bc3-a82c-eeb9227842d0'::uuid, 'Correct', 'true', 1.00);
+---------------

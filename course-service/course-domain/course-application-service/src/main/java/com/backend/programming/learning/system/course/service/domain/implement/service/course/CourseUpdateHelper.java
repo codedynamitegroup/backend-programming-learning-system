@@ -63,7 +63,9 @@ public class CourseUpdateHelper {
 
     @Transactional
     public Course updateCourse(WebhookMessage webhookMessage,Organization organization) {
-        CourseModel courseModel = moodleCommandHandler.getCourse(webhookMessage.getCourseId());
+        String apiKey = organization.getApiKey();
+        String moodleUrl = organization.getMoodleUrl();
+        CourseModel courseModel = moodleCommandHandler.getCourse(webhookMessage.getCourseId(), apiKey, moodleUrl);
         User user = getUser(Integer.valueOf(webhookMessage.getUserId()),organization.getId().getValue());
         CourseType courseType = findCourseType(courseModel.getCategoryid(),organization.getId().getValue());
 

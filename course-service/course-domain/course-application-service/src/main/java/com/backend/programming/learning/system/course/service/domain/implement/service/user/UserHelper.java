@@ -39,7 +39,9 @@ public class UserHelper {
 
     @Transactional
     public void createUser(WebhookMessage webhookMessage, Organization organization) {
-        UserModel userModel = moodleCommandHandler.getUser(webhookMessage.getRelatedUserId());
+        String apiKey = organization.getApiKey();
+        String moodleUrl = organization.getMoodleUrl();
+        UserModel userModel = moodleCommandHandler.getUser(webhookMessage.getRelatedUserId(), apiKey, moodleUrl);
         User user = userDataMapper.userModelToUser(userModel, organization);
 
         UserCreatedEvent userCreatedEvent =  courseDomainService.createUser(user);
@@ -56,7 +58,9 @@ public class UserHelper {
 
     @Transactional
     public void updateUser(WebhookMessage webhookMessage, Organization organization) {
-        UserModel userModel = moodleCommandHandler.getUser(webhookMessage.getRelatedUserId());
+        String apiKey = organization.getApiKey();
+        String moodleUrl = organization.getMoodleUrl();
+        UserModel userModel = moodleCommandHandler.getUser(webhookMessage.getRelatedUserId(), apiKey, moodleUrl);
         User prevUser = getUser(Integer.valueOf(webhookMessage.getRelatedUserId()),organization.getId().getValue());
         User user = userDataMapper.setUserWithOtherPayload(userModel, prevUser);
 

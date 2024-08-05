@@ -10,5 +10,4 @@ public interface MoodleApplicationService {
 
     String syncResource(UUID organizationId);
 
-    String syncCourseExam();
 }
