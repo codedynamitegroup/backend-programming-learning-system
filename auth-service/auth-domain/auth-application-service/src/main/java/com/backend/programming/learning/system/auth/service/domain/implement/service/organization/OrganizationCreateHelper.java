@@ -46,6 +46,10 @@ public class OrganizationCreateHelper {
     @Transactional
     public OrganizationCreatedEvent persistOrganization(CreateOrganizationCommand createOrganizationCommand) {
         User createdBy = getUserById(createOrganizationCommand.getCreatedBy());
+        if (createdBy.getOrganization() != null) {
+            log.error("User with userId: {} already has organization!", createdBy.getId().getValue());
+            throw new AuthDomainException("User with userId: " + createdBy.getId().getValue() + " already has organization!");
+        }
         Organization organization = organizationDataMapper.createOrganizationCommandToOrganization(createOrganizationCommand);
         organization.setCreatedBy(createdBy);
         organization.setUpdatedBy(createdBy);
