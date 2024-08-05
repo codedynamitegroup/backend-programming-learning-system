@@ -42,30 +42,55 @@ public class UserRefreshTokenHelper {
 //            log.error("Refresh token is not matching with the user's refresh token");
 //            throw new UnAuthorizedServiceException("Refresh token is not matching with the user's refresh token");
 //        }
+            if (user.getLinkedWithMicrosoft().equals(Boolean.TRUE) || user.getLinkedWithGoogle().equals(Boolean.TRUE)) {
+                WebClient client = WebClient.create(keycloakConfigData.getUrls());
 
-            WebClient client = WebClient.create(keycloakConfigData.getUrls());
+                ResponseLoginAndRefreshUser result = client.post()
+                        .uri("realms/" + keycloakConfigData.getRealm() + "/protocol/openid-connect/token")
+                        .accept(MediaType.APPLICATION_FORM_URLENCODED)
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .body(BodyInserters.fromFormData(refreshTokenUserCommandToRequestBodySSO(user.getRefreshToken())))
+                        .retrieve()
+                        .bodyToMono(ResponseLoginAndRefreshUser.class)
+                        .block();
+                if (result == null) {
+                    log.error("Refresh token failed");
+                    throw new UnAuthorizedServiceException("Refresh token failed");
+                }
 
-            ResponseLoginAndRefreshUser result = client.post()
-                    .uri("realms/" + keycloakConfigData.getRealm() + "/protocol/openid-connect/token")
-                    .accept(MediaType.APPLICATION_FORM_URLENCODED)
-                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                    .body(BodyInserters.fromFormData(refreshTokenUserCommandToRequestBody(user.getRefreshToken())))
-                    .retrieve()
-                    .bodyToMono(ResponseLoginAndRefreshUser.class)
-                    .block();
-            if (result == null) {
-                log.error("Refresh token failed");
-                throw new UnAuthorizedServiceException("Refresh token failed");
+                user.setRefreshToken(result.getRefresh_token());
+                user.setLastLogin(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
+                saveUser(user);
+
+                return RefreshTokenUserResponse.builder()
+                        .accessToken(result.getAccess_token())
+                        .refreshToken(result.getRefresh_token())
+                        .build();
+            } else {
+                WebClient client = WebClient.create(keycloakConfigData.getUrls());
+
+                ResponseLoginAndRefreshUser result = client.post()
+                        .uri("realms/" + keycloakConfigData.getRealm() + "/protocol/openid-connect/token")
+                        .accept(MediaType.APPLICATION_FORM_URLENCODED)
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .body(BodyInserters.fromFormData(refreshTokenUserCommandToRequestBody(user.getRefreshToken())))
+                        .retrieve()
+                        .bodyToMono(ResponseLoginAndRefreshUser.class)
+                        .block();
+                if (result == null) {
+                    log.error("Refresh token failed");
+                    throw new UnAuthorizedServiceException("Refresh token failed");
+                }
+
+                user.setRefreshToken(result.getRefresh_token());
+                user.setLastLogin(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
+                saveUser(user);
+
+                return RefreshTokenUserResponse.builder()
+                        .accessToken(result.getAccess_token())
+                        .refreshToken(result.getRefresh_token())
+                        .build();
             }
-
-            user.setRefreshToken(result.getRefresh_token());
-            user.setLastLogin(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
-            saveUser(user);
-
-            return RefreshTokenUserResponse.builder()
-                    .accessToken(result.getAccess_token())
-                    .refreshToken(result.getRefresh_token())
-                    .build();
         } catch (Exception e) {
             log.error("Refresh token failed");
             throw new UnAuthorizedServiceException("Refresh token failed");
@@ -81,6 +106,15 @@ public class UserRefreshTokenHelper {
         formData.add("grant_type", "refresh_token");
         return formData;
     }
+
+    private MultiValueMap<String, String> refreshTokenUserCommandToRequestBodySSO(String refreshToken) {
+        MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
+        formData.add("client_id", keycloakConfigData.getAuthenticationClientId());
+        formData.add("refresh_token", refreshToken);
+        formData.add("grant_type", "refresh_token");
+        return formData;
+    }
+
 
     private User findUserByEmail(String email) {
         Optional<User> userResult =
