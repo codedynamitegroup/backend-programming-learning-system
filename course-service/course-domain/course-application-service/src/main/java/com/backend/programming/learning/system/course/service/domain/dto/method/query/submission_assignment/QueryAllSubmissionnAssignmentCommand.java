@@ -11,6 +11,8 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class QueryAllSubmissionnAssignmentCommand {
+
+    private final UUID courseId;
     @NotNull
     private final UUID assignmentId;
 

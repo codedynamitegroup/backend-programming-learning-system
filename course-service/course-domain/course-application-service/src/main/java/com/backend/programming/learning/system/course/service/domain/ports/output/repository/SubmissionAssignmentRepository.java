@@ -31,5 +31,5 @@ public interface SubmissionAssignmentRepository {
     List<SubmissionAssignment> findAllByAssignmentId(UUID assignmentId);
 
 
-    Page<AllSubmissionAssignmentResponse> findAllSubmissionAssignment(UUID assignmentId,String search,Boolean isGraded, Integer page, Integer size);
+    Page<AllSubmissionAssignmentResponse> findAllSubmissionAssignment(UUID courseId,UUID assignmentId,String search,Boolean isGraded, Integer page, Integer size);
 }

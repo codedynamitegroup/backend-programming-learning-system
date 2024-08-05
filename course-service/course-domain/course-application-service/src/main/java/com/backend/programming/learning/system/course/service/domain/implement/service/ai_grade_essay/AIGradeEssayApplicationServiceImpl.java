@@ -281,7 +281,7 @@ II. SYSTEM_INSTRUCTIONS:
         QueryAllSubmissionAssignmentAIGradeEssayResponse queryAllSubmissionAssignmentResponse =
                 submissionAssignmentDataMapper.queryAllSubmissionAssignmentResponseToQueryAllSubmissionAssignmentAIGradeEssayResponse(
                         submissionAssignmentApplicationService
-                                .queryAllByAssignmentId(new QueryAllSubmissionnAssignmentCommand(assignmentId, 0, 9999, "", false))
+                                .queryAllByAssignmentId(new QueryAllSubmissionnAssignmentCommand(null,assignmentId, 0, 9999, "", false))
                 );
         QueryAssignmentAIGradeResponse queryAssignmentAIGradeResponse = assignmentDataMapper.queryAssignmentResponseToQueryAssignmentAIGradeResponse(
                 assignmentApplicationService.queryAssignment(new QueryAssignmentCommand(assignmentId))

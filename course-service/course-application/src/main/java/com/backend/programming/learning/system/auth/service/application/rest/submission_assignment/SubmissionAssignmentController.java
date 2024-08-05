@@ -76,6 +76,7 @@ public class SubmissionAssignmentController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllSubmissionAssignmentResponse> queryAllByAssignmentId(
+            @RequestParam UUID courseId,
             @RequestParam UUID assignmentId,
             @RequestParam(defaultValue = "") String searchName,
             @RequestParam(required = false) Boolean isGraded,
@@ -84,7 +85,7 @@ public class SubmissionAssignmentController {
     ) {
         log.info("Querying all submission assignment by assignment id");
         QueryAllSubmissionAssignmentResponse response = submissionAssignmentApplicationService
-                .queryAllByAssignmentId(new QueryAllSubmissionnAssignmentCommand(assignmentId, pageNo, pageSize, searchName, isGraded));
+                .queryAllByAssignmentId(new QueryAllSubmissionnAssignmentCommand(courseId,assignmentId, pageNo, pageSize, searchName, isGraded));
         return ResponseEntity.ok(response);
     }
 
@@ -192,6 +193,7 @@ public class SubmissionAssignmentController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllUserSubmissionAssignmentResponse> queryAllSubmissionAssignment(
+            @RequestParam UUID courseId,
             @RequestParam UUID assignmentId,
             @RequestParam(defaultValue = "") String searchName,
             @RequestParam(required = false) Boolean isGraded,
@@ -200,7 +202,7 @@ public class SubmissionAssignmentController {
     ) {
         log.info("Querying all submission assignment by assignment id");
         QueryAllUserSubmissionAssignmentResponse response = submissionAssignmentApplicationService
-                .queryAllSubmissionAssignment(new QueryAllSubmissionnAssignmentCommand(assignmentId, pageNo, pageSize, searchName, isGraded));
+                .queryAllSubmissionAssignment(new QueryAllSubmissionnAssignmentCommand(courseId,assignmentId, pageNo, pageSize, searchName, isGraded));
         return ResponseEntity.ok(response);
     }
 

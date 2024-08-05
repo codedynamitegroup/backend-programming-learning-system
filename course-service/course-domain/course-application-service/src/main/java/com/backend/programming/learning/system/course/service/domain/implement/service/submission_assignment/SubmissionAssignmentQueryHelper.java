@@ -68,7 +68,9 @@ public class SubmissionAssignmentQueryHelper {
 
     @Transactional(readOnly=true)
     public Page<AllSubmissionAssignmentResponse> queryAllSubmissionAssignment(QueryAllSubmissionnAssignmentCommand queryAllSubmissionnAssignmentCommand) {
-        Page<AllSubmissionAssignmentResponse> submissionAssignments = submissionAssignmentRepository.findAllSubmissionAssignment(queryAllSubmissionnAssignmentCommand.getAssignmentId(),
+        Page<AllSubmissionAssignmentResponse> submissionAssignments = submissionAssignmentRepository.findAllSubmissionAssignment(
+                queryAllSubmissionnAssignmentCommand.getCourseId(),
+                queryAllSubmissionnAssignmentCommand.getAssignmentId(),
                 queryAllSubmissionnAssignmentCommand.getSearchName(),
                 queryAllSubmissionnAssignmentCommand.getIsGraded(),
                 queryAllSubmissionnAssignmentCommand.getPageNo(),

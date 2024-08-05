@@ -84,12 +84,13 @@ public class SubmissionAssignmentRepositoryImpl implements SubmissionAssignmentR
     }
 
     @Override
-    public Page<AllSubmissionAssignmentResponse> findAllSubmissionAssignment(UUID assignmentId,String search, Boolean isGraded, Integer page, Integer size) {
-        PageRequest pageRequest = PageRequest.of(page, size);
-        return submissionAssignmentJpaRepository.
-                findAllSubmissionAssignment(assignmentId,search,isGraded, pageRequest).
-                map(submissionAssignmentDataAccessMapper::allSubmissionAssignmentProjectionToAllSubmissionAssignmentResponse);
+    public Page<AllSubmissionAssignmentResponse> findAllSubmissionAssignment(UUID courseId, UUID assignmentId, String search, Boolean isGraded, Integer page, Integer size) {
+        return
+                submissionAssignmentJpaRepository.
+                        findAllSubmissionAssignment(courseId, assignmentId, search, isGraded, PageRequest.of(page, size)).
+                        map(submissionAssignmentDataAccessMapper::allSubmissionAssignmentProjectionToAllSubmissionAssignmentResponse);
     }
+
 
 
 }

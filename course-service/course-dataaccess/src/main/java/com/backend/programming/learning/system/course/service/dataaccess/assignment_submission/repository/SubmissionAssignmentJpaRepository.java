@@ -57,18 +57,21 @@ public interface SubmissionAssignmentJpaRepository extends JpaRepository<Submiss
     JOIN CourseUserEntity cu ON cu.user.id = u.id AND cu.roleMoodle.id = 5
     JOIN CourseEntity c ON cu.course.id = c.id
     LEFT JOIN SubmissionAssignmentEntity sa ON sa.user.id = u.id AND sa.assignment.id = :assignmentId
-    WHERE (UPPER(u.email) LIKE UPPER(CONCAT('%', :search, '%'))
+    WHERE c.id = :courseId
+      AND (UPPER(u.email) LIKE UPPER(CONCAT('%', :search, '%'))
            OR UPPER(u.firstName) LIKE UPPER(CONCAT('%', :search, '%'))
            OR UPPER(u.lastName) LIKE UPPER(CONCAT('%', :search, '%')))
       AND (:isGraded IS NULL OR sa.isGraded = :isGraded)
     GROUP BY u.id, u.firstName, u.lastName, u.email, sa.isGraded
 """)
     Page<AllSubmissionAssignmentProjection> findAllSubmissionAssignment(
+            UUID courseId,
             UUID assignmentId,
             String search,
             Boolean isGraded,
             Pageable pageable
     );
+
 
 
 
