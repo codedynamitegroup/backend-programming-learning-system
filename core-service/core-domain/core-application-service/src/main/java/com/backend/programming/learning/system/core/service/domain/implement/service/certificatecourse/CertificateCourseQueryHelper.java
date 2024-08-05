@@ -25,10 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Slf4j
 @Component
@@ -398,7 +395,12 @@ public class CertificateCourseQueryHelper {
 
         // TODO: implement completed course (use 2 methods and calculate the average, if its > 85 --> pass)
         long completedCourses = certificateCourseUserList.stream().filter(CertificateCourseUser::getCompleted).count();
-        double averageRating = certificateCourseList.stream().mapToDouble(CertificateCourse::getAvgRating).average().orElse(0.0);
+        double averageRating = certificateCourseList
+                .stream()
+                .filter(certificateCourse -> Objects.nonNull(certificateCourse.getAvgRating()))
+                .mapToDouble(CertificateCourse::getAvgRating)
+                .average()
+                .orElse(0.0);
 
         return QueryGeneralCertificateCourseStatisticsResponse.builder()
                 .totalCertificateCourse(certificateCourseList.size())
