@@ -8,7 +8,7 @@ INSERT INTO "public"."organization" VALUES ('08b65a39-394f-4977-a5fa-3fe145b620f
 INSERT INTO "public"."role_moodle" VALUES (1, 'Quản lý');
 INSERT INTO "public"."role_moodle" VALUES (2, 'Người tạo khóa học');
 INSERT INTO "public"."role_moodle" VALUES (3, 'Giảng viên');
-INSERT INTO "public"."role_moodle" VALUES (4, 'Giảng viên');
+INSERT INTO "public"."role_moodle" VALUES (4, 'Giảng viên không được chỉnh sửa');
 INSERT INTO "public"."role_moodle" VALUES (5, 'Học sinh');
 INSERT INTO "public"."role_moodle" VALUES (6, 'Guest');
 
