@@ -24,6 +24,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.UserModel;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
+import com.backend.programming.learning.system.course.service.domain.exception.CourseDomainException;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.user.UserApplicationService;
 import com.backend.programming.learning.system.course.service.domain.mapper.moodle.MoodleDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.*;
@@ -586,15 +587,19 @@ public class MoodleCommandHandler {
             for (UserModel userModel : allUser) {
                 Optional<User> userResult = userRepository.findUserByEmail(userModel.getEmail());
                 if (userResult.isEmpty()) {
+                    log.error("Sync user hasn't done !!");
+                    throw new CourseDomainException("Sync user hasn't done !!");
+                }
+                Optional<RoleMoodle> roleMoodle = roleMoodleRepository.findById(userModel.getRoles().get(0).getRoleid());
+                if (roleMoodle.isEmpty()) {
                     continue;
                 }
-                RoleMoodle roleMoodle = roleMoodleRepository.findById(userModel.getRoles().get(0).getRoleid()).get();
                 Optional<CourseUser> checkCourseUser =courseUserRepository.findByCourseIdAndUserId(course.getId().getValue(), userResult.get().getId().getValue());
                 if(checkCourseUser.isPresent())
                 {
                     continue;
                 }
-                CourseUser courseUser = moodleDataMapper.createCourseUser(course, userResult.get(), roleMoodle);
+                CourseUser courseUser = moodleDataMapper.createCourseUser(course, userResult.get(), roleMoodle.get());
                 courseUserRepository.saveCourseUser(courseUser);
             }
         }
