@@ -27,7 +27,8 @@ public class QuestionDataAccessMapper {
     private final QuestionBankCategoryDataAccessMapper questionBankCategoryDataAccessMapper;
 
     public QuestionEntity questionToQuestionEntity(Question question) {
-        OrganizationEntity organizationEntity = organizationDataAccessMapper.organizationToOrganizationEntity(question.getOrganization());
+        OrganizationEntity organizationEntity = question.getOrganization() != null ? organizationDataAccessMapper.organizationToOrganizationEntity(question.getOrganization()) :
+                null;
         UserEntity createdBy = userDataAccessMapper.userToUserEntity(question.getCreatedBy());
         QuestionBankCategoryId questionBankCategoryId = question.getQuestionBankCategory() != null ?
                new QuestionBankCategoryId(questionBankCategoryDataAccessMapper
@@ -50,9 +51,16 @@ public class QuestionDataAccessMapper {
     }
 
     public Question questionEntityToQuestion(QuestionEntity questionEntity) {
-        Organization organization = organizationDataAccessMapper.organizationEntityToOrganization(questionEntity.getOrganization());
+        if(Objects.isNull(questionEntity)) {
+            return null;
+        }
+        Organization organization =  null;
+        if(!Objects.isNull(questionEntity.getOrganization())) {
+            organization =  organizationDataAccessMapper.organizationEntityToOrganization(questionEntity.getOrganization());
+        }
         User createdBy = userDataAccessMapper.userEntityToUser(questionEntity.getCreatedBy());
         User updatedBy = userDataAccessMapper.userEntityToUser(questionEntity.getUpdatedBy());
+
         Question response = Question.builder()
                 .name(questionEntity.getName())
                 .questionText(questionEntity.getQuestionText())
