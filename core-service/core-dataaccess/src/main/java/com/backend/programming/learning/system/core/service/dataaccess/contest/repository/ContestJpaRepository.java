@@ -63,15 +63,34 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
                 count(cu.id) as numOfParticipants
    from contest c
    left join contest_user cu on cu.contest_id = c.id
-    where c.start_time >= ?1
-    and (cast(?2 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?2 as text), '%')))
-    and ((?3 = TRUE and c.org_id is null) or (?3 = FALSE and ?5 = FALSE and c.is_public = true) or (?5 = TRUE and ?4 is not null and c.org_id = ?4))
+    where (cast(?3 as text) IS NULL or 
+            c.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
+            c.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) ) or
+            (cast(?1 as text) is not null and UPPER(c.name) like UPPER(concat('%', cast(?1 as text), '%')))
+            )
+    and c.start_time >= ?4
+    and ((?5 = TRUE and c.org_id is null) or (?5 = FALSE and ?7 = FALSE and c.is_public = true) or (?7 = TRUE and ?6 is not null and c.org_id = ?6))
     group by c.id
-    order by c.start_time desc
+    order by 
+         ts_rank(c.fts_document, 
+            case
+                when cast(?3 as text) is null then to_tsquery('')
+                else (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'')) )
+            end
+        ) desc,
+        ts_rank(c.fts_document,
+            case
+                when cast(?3 as text) is null then to_tsquery('')
+                else (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,''))))
+            end
+        ) desc,
+        c.start_time desc
 """, nativeQuery = true)
     Page<ContestProjection> findAllUpcomingContestsContainsSearchName(
-            ZonedDateTime now,
             String searchValue,
+            String searchExcludeFinalWord,
+            String searchFinalWord,
+            ZonedDateTime now,
             Boolean isAdmin,
             UUID orgId,
             Boolean isOrgAdmin,
@@ -98,15 +117,34 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
                 count(cu.id) as numOfParticipants
             from contest c
             left join contest_user cu on cu.contest_id = c.id
-            where c.start_time <= ?1 and (c.end_time is null or (c.end_time is not null and c.end_time >= ?1))
-            and (cast(?2 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?2 as text), '%')))
-            and ((?3 = TRUE and c.org_id is null) or (?3 = FALSE and ?5 = FALSE and c.is_public = true) or (?5 = TRUE and ?4 is not null and c.org_id = ?4))
+            where (cast(?3 as text) IS NULL or 
+            c.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
+            c.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) ) or
+            (cast(?1 as text) is not null and UPPER(c.name) like UPPER(concat('%', cast(?1 as text), '%')))
+            )
+            and c.start_time <= ?4 and (c.end_time is null or (c.end_time is not null and c.end_time >= ?4))
+            and ((?5 = TRUE and c.org_id is null) or (?5 = FALSE and ?7 = FALSE and c.is_public = true) or (?7 = TRUE and ?6 is not null and c.org_id = ?6))
             group by c.id
-            order by c.start_time desc
+            order by 
+                 ts_rank(c.fts_document, 
+                    case
+                        when cast(?3 as text) is null then to_tsquery('')
+                        else (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'')) )
+                    end
+                ) desc,
+                ts_rank(c.fts_document,
+                    case
+                        when cast(?3 as text) is null then to_tsquery('')
+                        else (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,''))))
+                    end
+                ) desc,
+                c.start_time desc
             """, nativeQuery = true)
     Page<ContestProjection> findAllHappeningContestsContainsSearchName(
-            ZonedDateTime now,
             String searchValue,
+            String searchExcludeFinalWord,
+            String searchFinalWord,
+            ZonedDateTime now,
             Boolean isAdmin,
             UUID orgId,
             Boolean isOrgAdmin,
@@ -133,15 +171,34 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
                 count(cu.id) as numOfParticipants
             from contest c
             left join contest_user cu on cu.contest_id = c.id
-            where c.end_time is not null and c.end_time < ?1
-            and (cast(?2 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?2 as text), '%')))
-            and ((?3 = TRUE and c.org_id is null) or (?3 = FALSE and ?5 = FALSE and c.is_public = true) or (?5 = TRUE and ?4 is not null and c.org_id = ?4))
+            where (cast(?3 as text) IS NULL or 
+            c.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
+            c.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) ) or
+            (cast(?1 as text) is not null and UPPER(c.name) like UPPER(concat('%', cast(?1 as text), '%')))
+            )
+            and c.end_time is not null and c.end_time < ?4
+            and ((?5 = TRUE and c.org_id is null) or (?5 = FALSE and ?7 = FALSE and c.is_public = true) or (?7 = TRUE and ?6 is not null and c.org_id = ?6))
             group by c.id
-            order by c.start_time desc
+            order by 
+                 ts_rank(c.fts_document, 
+                    case
+                        when cast(?3 as text) is null then to_tsquery('')
+                        else (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'')) )
+                    end
+                ) desc,
+                ts_rank(c.fts_document,
+                    case
+                        when cast(?3 as text) is null then to_tsquery('')
+                        else (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,''))))
+                    end
+                ) desc,
+                c.start_time desc
             """, nativeQuery = true)
     Page<ContestProjection> findAllEndedContestsContainsSearchName(
-            ZonedDateTime now,
             String searchValue,
+            String searchExcludeFinalWord,
+            String searchFinalWord,
+            ZonedDateTime now,
             Boolean isAdmin,
             UUID orgId,
             Boolean isOrgAdmin,
@@ -168,13 +225,34 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
                 count(cu.id) as numOfParticipants
     from contest c
     left join contest_user cu on cu.contest_id = c.id
-    where (cast(?1 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?1 as text), '%')))
-      and ((?2 = TRUE and c.org_id is null) or (?2 = FALSE and ?4 = FALSE and c.is_public = true) or (?4 = TRUE and ?3 is not null and c.org_id = ?3))
+    where  (cast(?3 as text) IS NULL or 
+            c.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
+            c.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) ) or
+            (cast(?1 as text) is not null and UPPER(c.name) like UPPER(concat('%', cast(?1 as text), '%')))
+            )
+      and ((?4 = TRUE and c.org_id is null) 
+               or (?4 = FALSE and ?6 = FALSE and c.is_public = true) 
+               or (?6 = TRUE and ?5 is not null and c.org_id = ?5))
     group by c.id
-    order by c.start_time desc
+    order by 
+         ts_rank(c.fts_document, 
+            case
+                when cast(?3 as text) is null then to_tsquery('')
+                else (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'')) )
+            end
+        ) desc,
+        ts_rank(c.fts_document,
+            case
+                when cast(?3 as text) is null then to_tsquery('')
+                else (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,''))))
+            end
+        ) desc,
+        c.start_time desc
 """, nativeQuery = true)
     Page<ContestProjection> findAllContainsSearchName(
             String searchValue,
+            String searchExcludeFinalWord,
+            String searchFinalWord,
             Boolean isAdmin,
             UUID orgId,
             Boolean isOrgAdmin,
@@ -229,12 +307,34 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
                 count(cu.id) as numOfParticipants
     from contest c
     left join contest_user cu on cu.contest_id = c.id
-    where cu.user_id = ?1
-    and (cast(?2 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?2 as text), '%')))
+    where (cast(?3 as text) IS NULL or 
+            c.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
+            c.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) ) or
+            (cast(?1 as text) is not null and UPPER(c.name) like UPPER(concat('%', cast(?1 as text), '%')))
+            )
+    and cu.user_id = ?4
     group by c.id
-    order by c.start_time desc
+    order by 
+         ts_rank(c.fts_document, 
+            case
+                when cast(?3 as text) is null then to_tsquery('')
+                else (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'')) )
+            end
+        ) desc,
+        ts_rank(c.fts_document,
+            case
+                when cast(?3 as text) is null then to_tsquery('')
+                else (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,''))))
+            end
+        ) desc,
+        c.start_time desc
 """, nativeQuery = true)
-    Page<ContestProjection> findAllMyContestsContainsSearchName(UUID userId, String searchValue, Pageable pageable);
+    Page<ContestProjection> findAllMyContestsContainsSearchName(
+            String searchValue,
+            String searchExcludeFinalWord,
+            String searchFinalWord,
+            UUID userId,
+            Pageable pageable);
 
     @Query("select count(c.id) from ContestEntity c")
     int countAllContests();

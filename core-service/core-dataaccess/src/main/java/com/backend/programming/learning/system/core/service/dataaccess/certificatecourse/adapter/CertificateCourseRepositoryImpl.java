@@ -53,8 +53,18 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
             String courseName,
             UUID filterTopicId
     ) {
+        List<String> splitedSearch = certificateCourseDataAccessMapper.splitWords(courseName);
+
+        String searchFinalWord = splitedSearch != null && !splitedSearch.isEmpty()? splitedSearch.get(splitedSearch.size() - 1): null;
+
+        if(splitedSearch != null && !splitedSearch.isEmpty())
+            splitedSearch.remove(splitedSearch.size() - 1);
+
+        String searchExcludeFinalWord =  splitedSearch != null && !splitedSearch.isEmpty()? String.join(" ", splitedSearch) : null;
         return certificateCourseJpaRepository.findAllByCourseNameAndByTopicId(
                         courseName,
+                        searchExcludeFinalWord,
+                        searchFinalWord,
                         filterTopicId)
                 .stream()
                 .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
@@ -66,9 +76,20 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
                                                                            UUID filterTopicId,
                                                                            boolean isRegistered,
                                                                            UUID userId) {
+        List<String> splitedSearch = certificateCourseDataAccessMapper.splitWords(courseName);
+
+        String searchFinalWord = splitedSearch != null && !splitedSearch.isEmpty()? splitedSearch.get(splitedSearch.size() - 1): null;
+
+        if(splitedSearch != null && !splitedSearch.isEmpty())
+            splitedSearch.remove(splitedSearch.size() - 1);
+
+        String searchExcludeFinalWord =  splitedSearch != null && !splitedSearch.isEmpty()? String.join(" ", splitedSearch) : null;
+
         if (isRegistered) {
             return certificateCourseJpaRepository.findAllByCourseNameAndByFilterTopicIdsAndRegisteredBy(
                             courseName,
+                            searchExcludeFinalWord,
+                            searchFinalWord,
                             filterTopicId,
                             userId)
                     .stream()
@@ -77,6 +98,8 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
         } else {
             return certificateCourseJpaRepository.findAllByCourseNameAndByFilterTopicIdsAndNotRegisteredBy(
                             courseName,
+                            searchExcludeFinalWord,
+                            searchFinalWord,
                             filterTopicId,
                             userId)
                     .stream()
