@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 @Slf4j
@@ -50,6 +51,13 @@ public class FileController {
         headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + downloadedFile.getFileName() + "\"");
         headers.add(HttpHeaders.CONTENT_TYPE, downloadedFile.getFileType());
 
+        headers.setAccessControlExposeHeaders(
+                Arrays.asList(
+                        HttpHeaders.CONTENT_DISPOSITION,
+                        HttpHeaders.CONTENT_TYPE
+                )
+        );
+
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .headers(headers)
@@ -76,6 +84,13 @@ public class FileController {
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + "course_grade_" + currentDateTime + "\"");
         headers.add(HttpHeaders.CONTENT_TYPE, exportedGradeFile.getFileType());
+
+        headers.setAccessControlExposeHeaders(
+                Arrays.asList(
+                        HttpHeaders.CONTENT_DISPOSITION,
+                        HttpHeaders.CONTENT_TYPE
+                )
+        );
 
         return ResponseEntity
                 .status(HttpStatus.OK)
