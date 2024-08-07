@@ -21,42 +21,100 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
         select cc.*
         from certificate_course cc
         left join certificate_course_user ccu on cc.id = ccu.certificate_course_id
-        where cast(?1 as text) IS NULL or UPPER(cc.name) like UPPER(concat('%', cast(?1 as text), '%'))
-         and (cast(?2 as uuid) is null or cc.topic_id = ?2)
-         and ccu.user_id = ?3
-        order by cc.name
+       -- where cast(?1 as text) IS NULL or UPPER(cc.name) like UPPER(concat('%', cast(?1 as text), '%'))
+       where (cast(?3 as text) IS NULL or 
+                cc.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
+                cc.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) ) or
+                (cast(?1 as text) is not null and UPPER(cc.name) like UPPER(concat('%', cast(?1 as text), '%')))
+            )
+         and (cast(?4 as uuid) is null or cc.topic_id = ?4)
+         and ccu.user_id = ?5
+          order by
+            ts_rank(cc.fts_document, 
+                case
+                    when cast(?3 as text) is null then to_tsquery('')
+                    else (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'')) )
+                end
+            ) desc,
+            ts_rank(cc.fts_document,
+                case
+                    when cast(?3 as text) is null then to_tsquery('')
+                    else (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,''))))
+                end
+            ) desc,
+            cc.name
 """, nativeQuery = true)
     List<CertificateCourseEntity> findAllByCourseNameAndByFilterTopicIdsAndRegisteredBy(
             String searchValue,
+            String searchExcludeFinalWord,
+            String searchFinalWord,
             UUID topicId,
             UUID registeredBy);
 
     @Query(value = """
         select cc.*
         from certificate_course cc
-        where cast(?1 as text) IS NULL or UPPER(cc.name) like UPPER(concat('%', cast(?1 as text), '%'))
-         and (cast(?2 as uuid) is null or cc.topic_id = ?2)
+        where (cast(?3 as text) IS NULL or 
+                cc.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
+                cc.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) ) or
+                (cast(?1 as text) is not null and UPPER(cc.name) like UPPER(concat('%', cast(?1 as text), '%')))
+            )
+         and (cast(?4 as uuid) is null or cc.topic_id = ?4)
          and cc.id not in (
             select ccu.certificate_course_id
             from certificate_course_user ccu2
-            where ccu2.user_id = ?3
+            where ccu2.user_id = ?5
          )
-        order by cc.name
+        order by  
+            ts_rank(cc.fts_document, 
+                case
+                    when cast(?3 as text) is null then to_tsquery('')
+                    else (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'')) )
+                end
+            ) desc,
+            ts_rank(cc.fts_document,
+                case
+                    when cast(?3 as text) is null then to_tsquery('')
+                    else (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,''))))
+                end
+            ) desc,
+            cc.name
 """, nativeQuery = true)
     List<CertificateCourseEntity> findAllByCourseNameAndByFilterTopicIdsAndNotRegisteredBy(
             String searchValue,
+            String searchExcludeFinalWord,
+            String searchFinalWord,
             UUID topicId,
             UUID registeredBy);
 
     @Query(value = """
         select cc.*
         from certificate_course cc
-        where cast(?1 as text) IS NULL or UPPER(cc.name) like UPPER(concat('%', cast(?1 as text), '%'))
-        and (cast(?2 as uuid) is null or cc.topic_id = ?2)
-        order by cc.name
+        where  (cast(?3 as text) IS NULL or 
+                cc.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
+                cc.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) ) or
+                (cast(?1 as text) is not null and UPPER(cc.name) like UPPER(concat('%', cast(?1 as text), '%')))
+            )
+        and (cast(?4 as uuid) is null or cc.topic_id = ?4)
+        order by  
+            ts_rank(cc.fts_document, 
+                case
+                    when cast(?3 as text) is null then to_tsquery('')
+                    else (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'')) )
+                end
+            ) desc,
+            ts_rank(cc.fts_document,
+                case
+                    when cast(?3 as text) is null then to_tsquery('')
+                    else (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,''))))
+                end
+            ) desc,
+            cc.name
 """,nativeQuery = true)
     List<CertificateCourseEntity> findAllByCourseNameAndByTopicId(
             String searchValue,
+            String searchExcludeFinalWord,
+            String searchFinalWord,
             UUID topicId);
 
     @Query(value="""

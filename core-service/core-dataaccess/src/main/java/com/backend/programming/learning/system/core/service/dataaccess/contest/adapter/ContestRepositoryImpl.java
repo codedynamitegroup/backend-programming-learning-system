@@ -55,11 +55,23 @@ public class ContestRepositoryImpl implements ContestRepository {
         Pageable paging = PageRequest.of(page, size);
 
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"));
+
+        List<String> splitedSearch = contestDataAccessMapper.splitWords(searchName);
+
+        String searchFinalWord = splitedSearch != null && !splitedSearch.isEmpty()? splitedSearch.get(splitedSearch.size() - 1): null;
+
+        if(splitedSearch != null && !splitedSearch.isEmpty())
+            splitedSearch.remove(splitedSearch.size() - 1);
+
+        String searchExcludeFinalWord =  splitedSearch != null && !splitedSearch.isEmpty()? String.join(" ", splitedSearch) : null;
+
         switch (ContestStartTimeFilter.valueOf(startTimeFilter)) {
             case UPCOMING -> {
                 return contestJpaRepository.findAllUpcomingContestsContainsSearchName(
-                                now,
                                 searchName,
+                                searchExcludeFinalWord,
+                                searchFinalWord,
+                                now,
                                 isAdmin,
                                 orgId,
                                 isOrgAdmin,
@@ -68,8 +80,10 @@ public class ContestRepositoryImpl implements ContestRepository {
             }
             case HAPPENING -> {
                 return contestJpaRepository.findAllHappeningContestsContainsSearchName(
-                                now,
                                 searchName,
+                                searchExcludeFinalWord,
+                                searchFinalWord,
+                                now,
                                 isAdmin,
                                 orgId,
                                 isOrgAdmin,
@@ -78,8 +92,10 @@ public class ContestRepositoryImpl implements ContestRepository {
             }
             case ENDED -> {
                 return contestJpaRepository.findAllEndedContestsContainsSearchName(
-                                now,
                                 searchName,
+                                searchExcludeFinalWord,
+                                searchFinalWord,
+                                now,
                                 isAdmin,
                                 orgId,
                                 isOrgAdmin,
@@ -89,6 +105,8 @@ public class ContestRepositoryImpl implements ContestRepository {
             default -> {
                 return contestJpaRepository.findAllContainsSearchName(
                                searchName,
+                                searchExcludeFinalWord,
+                                searchFinalWord,
                                 isAdmin,
                                 orgId,
                                 isOrgAdmin,
@@ -102,8 +120,22 @@ public class ContestRepositoryImpl implements ContestRepository {
     @Override
     public Page<Contest> findAllMyContests(String searchName, UUID userId, Integer page, Integer size) {
         Pageable paging = PageRequest.of(page, size);
+
+        List<String> splitedSearch = contestDataAccessMapper.splitWords(searchName);
+
+        String searchFinalWord = splitedSearch != null && !splitedSearch.isEmpty()? splitedSearch.get(splitedSearch.size() - 1): null;
+
+        if(splitedSearch != null && !splitedSearch.isEmpty())
+            splitedSearch.remove(splitedSearch.size() - 1);
+
+        String searchExcludeFinalWord =  splitedSearch != null && !splitedSearch.isEmpty()? String.join(" ", splitedSearch) : null;
+
         return contestJpaRepository.findAllMyContestsContainsSearchName(
-                        userId, searchName, paging)
+                        searchName,
+                        searchExcludeFinalWord,
+                        searchFinalWord,
+                        userId,
+                        paging)
                 .map(contestDataAccessMapper::contestProjectionToContest);
     }
 
