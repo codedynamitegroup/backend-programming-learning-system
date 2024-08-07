@@ -32,6 +32,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // file
                         .requestMatchers(HttpMethod.GET, "/course/file/download").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
+                        .requestMatchers(HttpMethod.GET, "/course/file/export/grade").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE)
 
                         //course type
                         .requestMatchers(HttpMethod.GET, "/course/course-type").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
@@ -126,18 +127,18 @@ public class WebSecurityConfig {
         };
     }
 
-//    @Bean
-//    public WebMvcConfigurer corsConfigurer() {
-//        return new WebMvcConfigurer() {
-//
-//            @Override
-//            public void addCorsMappings(CorsRegistry registry) {
-//                registry
-//                        .addMapping("/**")
-//                        .allowedOrigins("*")
-//                        .allowedHeaders("*")
-//                        .allowedMethods("*");
-//            }
-//        };
-//    }
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry
+                        .addMapping("/**")
+                        .allowedOrigins("*")
+                        .allowedHeaders("*")
+                        .allowedMethods("*");
+            }
+        };
+    }
 }

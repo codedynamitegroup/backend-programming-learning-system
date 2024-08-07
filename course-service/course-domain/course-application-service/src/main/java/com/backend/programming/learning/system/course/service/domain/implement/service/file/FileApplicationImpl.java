@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.download.DownloadFileResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.file.FileApplicationService;
+import com.backend.programming.learning.system.domain.valueobject.FileType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,5 +18,10 @@ public class FileApplicationImpl implements FileApplicationService {
     @Override
     public DownloadFileResponse downloadFile(String fileId, String token) {
         return fileCommandHandler.downloadFile(fileId, token);
+    }
+
+    @Override
+    public DownloadFileResponse exportGrade(String courseId, FileType fileType) {
+        return fileCommandHandler.exportGrade(courseId, fileType);
     }
 }

@@ -82,19 +82,19 @@ public class WebSecurityConfig {
 
         };
     }
-//    @Bean
-//    public WebMvcConfigurer corsConfigurer() {
-//        return new WebMvcConfigurer() {
-//
-//            @Override
-//            public void addCorsMappings(CorsRegistry registry) {
-//                registry
-//                        .addMapping("/**")
-//                        .allowedOrigins("http://localhost:3000", "https://codedynamite.site", "https://*.codedynamite.site")
-//                        .allowCredentials(true)
-//                        .allowedHeaders("*")
-//                        .allowedMethods("*");
-//            }
-//        };
-//    }
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry
+                        .addMapping("/**")
+                        .allowedOrigins("http://localhost:3000", "https://codedynamite.site", "https://*.codedynamite.site")
+                        .allowCredentials(true)
+                        .allowedHeaders("*")
+                        .allowedMethods("*");
+            }
+        };
+    }
 }
