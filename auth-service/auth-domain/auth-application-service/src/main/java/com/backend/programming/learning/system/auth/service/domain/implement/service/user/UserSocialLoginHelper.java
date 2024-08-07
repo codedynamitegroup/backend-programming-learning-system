@@ -9,11 +9,17 @@ import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.exception.UnAuthorizedServiceException;
+import com.backend.programming.learning.system.auth.service.domain.implement.saga.user.UserUpdateSagaHelper;
 import com.backend.programming.learning.system.auth.service.domain.implement.service.role.RoleQueryHelper;
 import com.backend.programming.learning.system.auth.service.domain.implement.service.user_role.UserRoleCreateHelper;
+import com.backend.programming.learning.system.auth.service.domain.mapper.UserDataMapper;
+import com.backend.programming.learning.system.auth.service.domain.outbox.scheduler.user.UserOutboxHelper;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserKeycloakApplicationService;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.DomainConstants;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
+import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -27,6 +33,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Optional;
+import java.util.UUID;
+
+import static com.backend.programming.learning.system.saga.user.SagaConstants.AUTH_TO_ANY_SERVICES_USER_SAGA_NAME;
 
 @Slf4j
 @Component
@@ -39,6 +48,9 @@ public class UserSocialLoginHelper {
     private final String ROLE_NAME_USER = "user";
     private final RoleQueryHelper roleQueryHelper;
     private final UserRoleCreateHelper userRoleCreateHelper;
+    private final UserOutboxHelper userOutboxHelper;
+    private final UserUpdateSagaHelper userSagaHelper;
+    private final UserDataMapper userDataMapper;
 
     @Transactional
     public LoginUserResponse socialLoginUser(SocialLoginUserCommand socialLoginUserCommand) {
@@ -68,6 +80,33 @@ public class UserSocialLoginHelper {
                 User user = userCreatedEvent.getUser();
                 user.setRefreshToken(keycloakLoggedResult1.getRefresh_token());
                 userRepository.save(user);
+
+                userOutboxHelper.saveUserOutboxMessage(
+                        AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                        userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
+                        ServiceName.CORE_SERVICE,
+                        CopyState.CREATING,
+                        OutboxStatus.STARTED,
+                        userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                        UUID.randomUUID());
+
+                userOutboxHelper.saveUserOutboxMessage(
+                        AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                        userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
+                        ServiceName.COURSE_SERVICE,
+                        CopyState.CREATING,
+                        OutboxStatus.STARTED,
+                        userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                        UUID.randomUUID());
+
+                userOutboxHelper.saveUserOutboxMessage(
+                        AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                        userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
+                        ServiceName.CODE_ASSESSMENT_SERVICE,
+                        CopyState.CREATING,
+                        OutboxStatus.STARTED,
+                        userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                        UUID.randomUUID());
 
                 return LoginUserResponse.builder()
                         .accessToken(keycloakLoggedResult1.getAccess_token())
@@ -129,6 +168,33 @@ public class UserSocialLoginHelper {
                 User user = userCreatedEvent.getUser();
                 user.setRefreshToken(keycloakLoggedResult1.getRefresh_token());
                 userRepository.save(user);
+
+                userOutboxHelper.saveUserOutboxMessage(
+                        AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                        userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
+                        ServiceName.CORE_SERVICE,
+                        CopyState.CREATING,
+                        OutboxStatus.STARTED,
+                        userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                        UUID.randomUUID());
+
+                userOutboxHelper.saveUserOutboxMessage(
+                        AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                        userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
+                        ServiceName.COURSE_SERVICE,
+                        CopyState.CREATING,
+                        OutboxStatus.STARTED,
+                        userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                        UUID.randomUUID());
+
+                userOutboxHelper.saveUserOutboxMessage(
+                        AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                        userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
+                        ServiceName.CODE_ASSESSMENT_SERVICE,
+                        CopyState.CREATING,
+                        OutboxStatus.STARTED,
+                        userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                        UUID.randomUUID());
 
                 return LoginUserResponse.builder()
                         .accessToken(keycloakLoggedResult1.getAccess_token())
