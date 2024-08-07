@@ -61,7 +61,7 @@ public interface CodeQuestionJpaRepository extends JpaRepository<CodeQuestionEnt
                                 ))
                 )
                 AND cqe.is_public = ?7
-                
+                AND (cqe.org_id is null)
                 order by
                 ts_rank(cqe.fts_document, 
                     case
