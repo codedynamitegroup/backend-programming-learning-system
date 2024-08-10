@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.dataaccess.course.adapter;
 
+import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.course.mapper.CourseDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.course.repository.CourseJpaRepository;
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
@@ -25,9 +26,9 @@ public class CourseRepositoryImpl implements CourseRepository {
     @Override
     public Course save(Course course) {
         try {
-            return courseDataAccessMapper.courseEntityToCourse(courseJpaRepository
-                    .save(courseDataAccessMapper
-                            .courseToCourseEntity(course)));
+            CourseEntity courseEntity = courseDataAccessMapper.courseToCourseEntity(course);
+            CourseEntity courseResult=courseJpaRepository.save(courseEntity);
+            return courseDataAccessMapper.courseEntityToCourse(courseResult);
         } catch (Exception e) {
             log.error("Error while saving course: {}", e.getMessage());
             throw new RuntimeException("Error while saving course");

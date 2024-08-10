@@ -10,6 +10,7 @@ import com.backend.programming.learning.system.course.service.domain.implement.s
 import com.backend.programming.learning.system.course.service.domain.implement.service.course_user.CourseUserCreateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.course_user.CourseUserDeleteHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.module.ModuleCreateHelper;
+import com.backend.programming.learning.system.course.service.domain.implement.service.module.ModuleDeleteHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.module.ModuleUpdateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.section.SectionDeleteHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.section.SectionCreateHelper;
@@ -29,7 +30,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -53,6 +53,8 @@ public class WebhookHelper {
     private final SectionDeleteHelper sectionDeleteHelper;
     private final ModuleCreateHelper moduleCreateHelper;
     private final ModuleUpdateHelper moduleUpdateHelper;
+
+    private final ModuleDeleteHelper moduleDeleteHelper;
     private final SubmissionAssignmentCreateHelper submissionAssignmentCreateHelper;
 
     public WebhookHelper(
@@ -71,7 +73,7 @@ public class WebhookHelper {
             SectionDeleteHelper sectionDeleteHelper,
             ModuleCreateHelper moduleCreateHelper,
             ModuleUpdateHelper moduleUpdateHelper,
-            SubmissionAssignmentCreateHelper submissionAssignmentCreateHelper
+            ModuleDeleteHelper moduleDeleteHelper, SubmissionAssignmentCreateHelper submissionAssignmentCreateHelper
     ) {
         this.webhookDataMapper = webhookDataMapper;
         this.organizationRepository = organizationRepository;
@@ -88,6 +90,7 @@ public class WebhookHelper {
         this.sectionDeleteHelper = sectionDeleteHelper;
         this.moduleCreateHelper = moduleCreateHelper;
         this.moduleUpdateHelper = moduleUpdateHelper;
+        this.moduleDeleteHelper = moduleDeleteHelper;
         this.submissionAssignmentCreateHelper = submissionAssignmentCreateHelper;
     }
 
@@ -107,6 +110,7 @@ public class WebhookHelper {
             case COURSE_SECTION_DELETED -> deleteSection(webhookMessage, getCourseIdByMoodleId(webhookMessage, organization));
             case COURSE_MODULE_CREATED -> createSynchronizeStateDetail(webhookMessage, organization, TypeSynchronize.MODULE);
             case COURSE_MODULE_UPDATED -> updateModule(webhookMessage, organization);
+            case COURSE_MODULE_DELETED -> deleteModule(webhookMessage, organization);
             case ASSIGN_SUBMISSION_FILE_CREATED, ASSIGN_SUBMISSION_FILE_UPDATED, ASSIGN_SUBMISSION_ONLINETEXT_CREATED, ASSIGN_SUBMISSION_ONLINETEXT_UPDATED -> createSubmissionAssignment(webhookMessage, organization, findCourse(Integer.valueOf(webhookMessage.getCourseId()), organization.getId().getValue()));
             case USER_ENROLLMENT_CREATED -> enrollUserToCourse(webhookMessage, organization);
             case USER_ENROLLMENT_DELETED -> unenrollUserToCourse(webhookMessage, organization);
@@ -137,6 +141,10 @@ public class WebhookHelper {
 
     private void updateModule(WebhookMessage webhookMessage, Organization organization) {
         moduleUpdateHelper.updateModule(webhookMessage, organization);
+    }
+
+    private void deleteModule(WebhookMessage webhookMessage, Organization organization) {
+        moduleDeleteHelper.deleteModule(webhookMessage, organization);
     }
 
     private void createSubmissionAssignment(WebhookMessage webhookMessage, Organization organization,Course course) {

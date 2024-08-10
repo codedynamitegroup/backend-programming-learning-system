@@ -211,6 +211,8 @@ public class UserDataMapper {
                 .build();
     }
 
+
+
     public UserEventPayload userToUserEventPayload(User user, CopyState copyState) {
         return UserEventPayload.builder()
                 .userId(user.getId().getValue().toString())
